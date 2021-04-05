@@ -1,9 +1,8 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
 const app = express();
-var path = require("path");
 
-const port = 3000;
+const port = process.env.PORT || 4000;
 
 app.engine(
   "hbs",
@@ -16,7 +15,6 @@ app.engine(
 app.set("view engine", "hbs");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", (req, res) => {
   res.render("home");
@@ -33,5 +31,5 @@ app.get("*", (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log("The Snacks in a Van app is listening on port 3000!");
+  console.log(`The Snacks in a Van app is listening on port ${port}!`);
 });

@@ -1,7 +1,10 @@
 **The University of Melbourne**
 # INFO30005 – Web Information Technologies
 
-# Group Project Repository
+## Links
+[The Heroku App](https://web-info-tech-group-3.herokuapp.com/)
+
+# Group 3 Project Repository
 
 Welcome!
 
@@ -26,9 +29,11 @@ Remember that _"this document"_ can use `different formats` to **highlight** imp
 
 | Name | Task | State |
 | :---         |     :---:      |          ---: |
-| Student Name 1  | Back End     |  Done |
-| Student Name 2    | Front End      |  Testing |
-| Student Name 3    | README Format      |  Amazing! |
+| Caroline Voo | -     |  - |
+| Chai Seng Loi   | -     |  - |
+| Jin Yuan Hee (Kane)    | -      |  - |
+| Sam Nee    | -      |  - |
+| Yuchen Cai (Cynthia)   | -      |  - |
 
 ## General info
 This is project ...
@@ -37,8 +42,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 ## Technologies
 Project is created with:
 * NodeJs 14.16.X
-* Ipsum version: 2.33
-* Ament library version: 999
+* Heroku
+* MongoDB
 
 ## Code Implementation
 

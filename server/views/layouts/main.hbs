@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Snacks in a Van</title>
+</head>
+
+<body>
+  <h1>This is the server</h1>
+  <div class="links">
+    <div style="margin-top: 50px; display: flex; flex-direction: column;">
+      <p>Vendor routes</p>
+      <p>GET</p>
+      <div style="display: flex; align-items:center">
+        <a style="margin-right:20px;" href="/vendors"><button>Vendor
+            Data</button></a>
+        <p>/vendors/</p>
+      </div>
+      <div style="display: flex; align-items:center">
+        <a style="margin-right:20px;" href="/vendors/Vendor 1"><button>Vendor 1
+            Data</button></a>
+        <p>/vendors/:name</p>
+      </div>
+      <p>POST</p>
+      <div style="display: flex; align-items:center">
+        <p style="margin-right:20px;">Add new vendor:</p>
+        <p>/vendors/addVendor</p>
+        <p>----pass values in req.body</p>
+      </div>
+      <p>PUT</p>
+      <div style="display: flex; align-items:center">
+        <p style="margin-right:20px;">Set van location and status:</p>
+        <p>/vendors/:id/setVendorActive</p>
+        <p>----set id to email in url and pass longitude and latitude values</p>
+      </div>
+    </div>
+  </div>
+  <div class="main">{{{body}}}</div>
+</body>
+
+</html>

@@ -1,11 +1,30 @@
+// MongoDB
+const mongoose = require("mongoose");
+mongoose.set("debug", true);
+
+let CONNECTION_URI =
+  "mongodb+srv://admin:g_3_pass@cluster0.nvrgb.mongodb.net/snacks?retryWrites=true&w=majority";
+
+mongoose
+  .connect(CONNECTION_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true, // for uniqueness constraints on fields
+    dbName: "snacks",
+  })
+  .then(() => console.log("MongoDB Connected..."))
+  .catch((err) => console.log(err));
+
+const db = mongoose.connection;
+db.on("error", console.error.bind(console, "MongoDB connection error:"));
+
+// Express
 const express = require("express");
 const path = require("path");
 const exphbs = require("express-handlebars");
 const app = express();
 
-const port = process.env.PORT || 4000;
-
-app.set("views", path.join(__dirname, "../client/views"));
+app.set("views", path.join(__dirname, "./views"));
 app.engine(
   "hbs",
   exphbs({
@@ -14,30 +33,20 @@ app.engine(
   })
 );
 app.set("view engine", "hbs");
-
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 
-app.get("/", (req, res) => {
-  res.render("home");
-});
-app.get("/menu", (req, res) => {
-  res.render("menu");
-});
-app.get("/food/:id", (req, res) => {
-  res.render("showFood", { id: req.params.id });
-});
-
-// will need to do something like this
-// const customerRouter = require("./data/customer/routes/customer-router");
-// app.use("/customer", customerRouter)
-// and same for the vendor routes
-// and then make routes off /customer.. and /vendor..
+// Routes
+// const customerRouter = require("./customer/routes/customer-router");
+// app.use("/customers", customerRouter);
+const vendorRouter = require("./vendor/routes/vendor-router");
+app.use("/vendors", vendorRouter);
 
 app.get("*", (req, res) => {
   res.render("home");
 });
 
+const port = process.env.PORT || 4000;
 app.listen(port, () => {
-  console.log(`The Snacks in a Van app is listening on port ${port}!`);
+  console.log(`The Snacks in a Van server is listening on port ${port}!`);
 });

@@ -10,33 +10,32 @@
   <h1>This is the server</h1>
   <div class="links">
     <div style="margin-top: 50px; display: flex; flex-direction: column;">
-      <p>Vendor routes</p>
+      <h2 style="font-weight:bold;">Vendor routes</h2>
       <p>GET</p>
       <div style="display: flex; align-items:center">
         <a style="margin-right:20px;" href="/vendors"><button>Vendor
             Data</button></a>
-        <p>/vendors/</p>
+        <p>/vendors</p>
       </div>
       <div style="display: flex; align-items:center">
-        <a style="margin-right:20px;" href="/vendors/Vendor 1"><button>Vendor 1
-            Data</button></a>
-        <p>/vendors/:name</p>
+        <a style="margin-right:20px;" href="/vendors/607c1f3c24b5d615b324ee38"><button>Vendor by object id</button></a>
+        <p>/vendors/:id</p>
       </div>
       <p>POST</p>
       <div style="display: flex; align-items:center">
         <p style="margin-right:20px;">Add new vendor:</p>
         <p>/vendors/addVendor</p>
-        <p>----pass values in req.body</p>
+        <p>----pass name, email and password values in req.body</p>
       </div>
       <p>PUT</p>
       <div style="display: flex; align-items:center">
+        <h2 style="margin-right: 20px;">1)</h2>
         <p style="margin-right:20px;">Set van location and status:</p>
         <p>/vendors/:id/setVendorActive</p>
-        <p>----set id to email in url and pass longitude and latitude values</p>
+        <p>---- pass vendorId in url params, longitude and latitude values in req.body</p>
       </div>
     </div>
-  </div>
-  <div class="main">{{{body}}}</div>
+    <div class="main">{{{body}}}</div>
 </body>
 
 </html>

@@ -10,8 +10,50 @@
   <h1>This is the server</h1>
   <div class="links">
     <div style="margin-top: 50px; display: flex; flex-direction: column;">
+      <h2 style="font-weight:bold;">Customer routes</h2>
+      <div style="display: flex; align-items:center">
+        <h2 style="margin-right: 20px;">1)</h2>
+      </div>
+      <div style="display: flex; align-items:center">
+        <h2 style="margin-right: 20px;">2)</h2>
+      </div>
+      <div style="display: flex; align-items:center">
+        <h2 style="margin-right: 20px;">3)</h2>
+        <p style="margin-right:20px;">Start new order:</p>
+        <p>POST /orders/createNewOrder</p>
+        <p>----pass menu item id, quantity, price, customer id, vendor id
+        </p>
+      </div>
+    </div>
+    <div style="margin-top: 50px; display: flex; flex-direction: column;">
       <h2 style="font-weight:bold;">Vendor routes</h2>
+      <div style="display: flex; align-items:center">
+        <h2 style="margin-right: 20px;">1)</h2>
+        <p style="margin-right:20px;">Set van location and status:</p>
+        <p>PUT /vendors/:id/setVendorActive</p>
+        <p>---- pass vendorId in url params, longitude and latitude values in req.body</p>
+      </div>
+      <div style="display: flex; align-items:center">
+        <h2 style="margin-right: 20px;">2)</h2>
+      </div>
+      <div style="display: flex; align-items:center">
+        <h2 style="margin-right: 20px;">3)</h2>
+      </div>
+    </div>
+    <div style="margin-top: 50px; display: flex; flex-direction: column;">
+      <h2 style="font-weight:bold;">Other</h2>
       <p>GET</p>
+      <div style="display: flex; align-items:center">
+        <a style="margin-right:20px;" href="/orders"><button>
+            Order Data
+          </button></a>
+        <p>/orders</p>
+      </div>
+      <div style="display: flex; align-items:center">
+        <a style="margin-right:20px;" href="/orders/607b912c24b5d615b324ee2b"><button>Order by object
+            id</button></a>
+        <p>/orders/:id pass order object id</p>
+      </div>
       <div style="display: flex; align-items:center">
         <a style="margin-right:20px;" href="/vendors"><button>Vendor
             Data</button></a>
@@ -26,13 +68,6 @@
         <p style="margin-right:20px;">Add new vendor:</p>
         <p>/vendors/addVendor</p>
         <p>----pass name, email and password values in req.body</p>
-      </div>
-      <p>PUT</p>
-      <div style="display: flex; align-items:center">
-        <h2 style="margin-right: 20px;">1)</h2>
-        <p style="margin-right:20px;">Set van location and status:</p>
-        <p>/vendors/:id/setVendorActive</p>
-        <p>---- pass vendorId in url params, longitude and latitude values in req.body</p>
       </div>
     </div>
     <div class="main">{{{body}}}</div>

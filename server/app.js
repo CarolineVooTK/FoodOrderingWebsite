@@ -10,6 +10,7 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true, // for uniqueness constraints on fields
+    useFindAndModify: false,
     dbName: "snacks",
   })
   .then(() => console.log("MongoDB Connected..."))
@@ -41,6 +42,10 @@ app.use(express.urlencoded({ extended: false }));
 // app.use("/customers", customerRouter);
 const vendorRouter = require("./vendor/routes/vendor-router");
 app.use("/vendors", vendorRouter);
+// const menuRouter = require("./menu/routes/menu-router");
+// app.use("/menu", menuRouter);
+// const orderRouter = require("./order/routes/order-router");
+// app.use("/orders", orderRouter);
 
 app.get("*", (req, res) => {
   res.render("home");

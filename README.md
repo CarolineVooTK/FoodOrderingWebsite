@@ -4,6 +4,8 @@
 ## Links
 [The Heroku App](https://web-info-tech-group-3.herokuapp.com/)
 
+[The Mongodb](mongodb+srv://admin:g_3_pass@cluster0.nvrgb.mongodb.net/snacks?retryWrites=true&w=majority)
+
 # Group 3 Project Repository
 
 Welcome!

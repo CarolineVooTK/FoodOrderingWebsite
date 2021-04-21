@@ -143,8 +143,31 @@ const createNewOrder = async (req, res) => {
     });
 };
 
+const setOrdersFulfilled = async(req, res) => {
+  await orders
+    .findOneAndUpdate(
+      { _id: req.params.id },
+      { status : 'Fulfilled' },
+      { returnNewDocument: true }
+    )
+    .then((data) => {
+      if (!data) {
+        return res.status(404).json({
+          message: "Orders cannot be Fulfilled.",
+        });
+      }
+      res.status(200).json(data);
+    })
+    .catch((error) => {
+      res.status(500).json({
+        error: error,
+      });
+    });
+};
+
 module.exports = {
   getAll,
   getOrderById,
   createNewOrder,
+  setOrdersFulfilled
 };

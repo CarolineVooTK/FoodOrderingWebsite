@@ -146,8 +146,6 @@ const setVendorActive = async (req, res) => {
     });
 };
 
-
-
 const getOutstandingOrders = async (req, res) => {
   await vendors
   .aggregate([

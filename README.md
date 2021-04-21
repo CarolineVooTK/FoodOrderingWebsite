@@ -65,8 +65,7 @@ Project is created with:
 | :---         |     :---     |     :---     |        :--- |
 | Setting van status (vendor sends location, marks van as ready-for-orders) | PUT  | /vendors/:vendorId/setVendorActive | **req.params** (vendorId) = Object ID of the vendor<br>**req.body** = longitude, latitude, textlocation |
 | Show list of all outstanding orders  | -     |  - |
-| Mark an order as "fulfilled" (ready to be picked up by customer)    | PUT      | /orders/:orderId/setOrdersFulfilled  |
-**req.params** (orderId) = Object ID of of an order<br>**req.body** = status of orders<br>**Result** = Status of the order will become Fulfilled.|
+| Mark an order as "fulfilled" (ready to be picked up by customer)    | PUT      | /orders/:orderId/setOrdersFulfilled  | **req.params** (orderId) = Object ID of of an order<br>**req.body** = status of orders<br>**Result** = Status of the order will become Fulfilled. |
 
 ```HTML
 <!--

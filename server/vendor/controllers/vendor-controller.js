@@ -146,9 +146,18 @@ const setVendorActive = async (req, res) => {
     });
 };
 
+
+
+const getOutstandingOrder = async (req, res) => {
+  outstandingOrder = await vendors.findOne({_id: req.params.id},{name:true, location:true,order:true})
+  res.send(outstandingOrder)
+
+}   
+
 module.exports = {
   getAll,
   getVendorById,
   addNewVendor,
   setVendorActive,
+  getOutstandingOrder
 };

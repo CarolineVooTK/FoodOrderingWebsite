@@ -6,5 +6,6 @@ router.get("/", vendorController.getAll);
 router.get("/:id", vendorController.getVendorById);
 router.post("/addVendor", vendorController.addNewVendor);
 router.put("/:id/setVendorActive", vendorController.setVendorActive);
+router.get("/:id/getOutstandingOrder", vendorController.getOutstandingOrder)
 
 module.exports = router;

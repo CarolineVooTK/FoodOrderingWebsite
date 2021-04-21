@@ -25,7 +25,7 @@ Welcome!
 | Chai Seng Loi   | -     |
 | Jin Yuan Hee (Kane)    | Vendor Route 3      |
 | Sam Nee    | Vendor Route 1, Customer Route 3     |
-| Yuchen Cai (Cynthia)   | -      |
+| Yuchen Cai (Cynthia)   | Customer Route 1     |
 
 ## General info
 In this Project, we are creating an web-based application for a food van franchise 'Snacks in a Van'.

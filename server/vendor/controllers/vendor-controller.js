@@ -124,11 +124,15 @@ const addNewVendor = async (req, res) => {
 };
 
 const setVendorActive = async (req, res) => {
-  const { longitude, latitude } = req.body;
+  const { longitude, latitude, textlocation } = req.body;
   await vendors
     .findOneAndUpdate(
       { _id: req.params.id },
-      { active: true, location: new point({ type: "Point", coordinates: [longitude, latitude] }) },
+      {
+        active: true,
+        location: new point({ type: "Point", coordinates: [longitude, latitude] }),
+        textlocation: textlocation,
+      },
       { returnNewDocument: true }
     )
     .then((data) => {
@@ -146,59 +150,58 @@ const setVendorActive = async (req, res) => {
     });
 };
 
-
-
 const getOutstandingOrders = async (req, res) => {
   await vendors
-  .aggregate([
-    { $match: { _id: new ObjectId(`${req.params.id}`) } },
-    {
-      $lookup: {
-        from: "orders",
-        localField: "orders",
-        foreignField: "_id",
-        as: "orders",
+    .aggregate([
+      { $match: { _id: new ObjectId(`${req.params.id}`) } },
+      {
+        $lookup: {
+          from: "orders",
+          localField: "orders",
+          foreignField: "_id",
+          as: "orders",
+        },
+        // $lookup: {
+        //     from: "orders",
+        //     let:{orders = mongoose},
+        //     pipeline: [
+        //       { $match: {
+        //           $expr: { $and: [
+        //               { $eq: [ "pending", "$status" ] },
+        //               { $eq: [ "$_id", "$$orders" ] }
+        //           ] }
+        //       } }
+        //     ],
+        //     as: "orders",
+        //   },
       },
-      // $lookup: {
-      //     from: "orders",
-      //     let:{orders = mongoose},
-      //     pipeline: [
-      //       { $match: {
-      //           $expr: { $and: [
-      //               { $eq: [ "pending", "$status" ] },
-      //               { $eq: [ "$_id", "$$orders" ] }
-      //           ] }
-      //       } }
-      //     ],
-      //     as: "orders",
-      //   },
-    },
-    {$match: {"orders.status":"pending"}},
-    {
-      $project: {
-        name: 1,
-        orders: 1
+      { $match: { "orders.status": "pending" } },
+      {
+        $project: {
+          name: 1,
+          orders: 1,
+        },
       },
-    },
-  ])
-  .then((data) => {
-    if(!data){
-      return(res.status(200)).json({
-        message: "vendor has no outstanding orders",
-      })
-    }res.status(200).json(data);
-  })
-  .catch((error) => {
-    res.status(500).json({
-      error: error,
+    ])
+    .then((data) => {
+      if (!data) {
+        return res.status(200).json({
+          message: "vendor has no outstanding orders",
+        });
+      }
+      res.status(200).json(data);
     })
-  })
-}
+    .catch((error) => {
+      res.status(500).json({
+        error: error,
+      });
+    });
+};
 
 module.exports = {
   getAll,
   getVendorById,
   addNewVendor,
   setVendorActive,
-  getOutstandingOrders
+  getOutstandingOrders,
 };

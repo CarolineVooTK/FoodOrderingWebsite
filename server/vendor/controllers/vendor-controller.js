@@ -159,7 +159,21 @@ const getOutstandingOrders = async (req, res) => {
         foreignField: "_id",
         as: "orders",
       },
+      // $lookup: {
+      //     from: "orders",
+      //     let:{orders = mongoose},
+      //     pipeline: [
+      //       { $match: {
+      //           $expr: { $and: [
+      //               { $eq: [ "pending", "$status" ] },
+      //               { $eq: [ "$_id", "$$orders" ] }
+      //           ] }
+      //       } }
+      //     ],
+      //     as: "orders",
+      //   },
     },
+    {$match: {"orders.status":"pending"}},
     {
       $project: {
         name: 1,
@@ -179,8 +193,6 @@ const getOutstandingOrders = async (req, res) => {
       error: error,
     })
   })
-  // result = await vendors.findOne({_id:req.params.id})
-  // res.send(result)
 }
 
 module.exports = {

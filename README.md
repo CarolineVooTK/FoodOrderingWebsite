@@ -4,7 +4,7 @@
 ## Links
 [The Heroku App](https://web-info-tech-group-3.herokuapp.com/)
 
-[The Mongodb](mongodb+srv://admin:g_3_pass@cluster0.nvrgb.mongodb.net/snacks?retryWrites=true&w=majority)
+MongoDB Link = "mongodb+srv://admin:g_3_pass@cluster0.nvrgb.mongodb.net/snacks?retryWrites=true&w=majority"
 
 # Group 3 Project Repository
 
@@ -20,26 +20,28 @@ We have added to this repository a `README.md`, `.gitignore`, and `.gitattribute
 
 Remember that _"this document"_ can use `different formats` to **highlight** important information. This is just an example of different formating tools available for you. For help with the format you can find a guide [here](https://docs.github.com/en/github/writing-on-github).
 
+## Team Members
+
 ## Table of contents
 * [Team Members](#team-members)
 * [General Info](#general-info)
 * [Technologies](#technologies)
 * [Code Implementation](#code-implementation)
+* [Server](#Server)
 * [Adding Images](#adding-images)
 
 ## Team Members
 
-| Name | Task | State |
+| Name | Tasks | State |
 | :---         |     :---:      |          ---: |
 | Caroline Voo | -     |  - |
 | Chai Seng Loi   | -     |  - |
 | Jin Yuan Hee (Kane)    | -      |  - |
-| Sam Nee    | -      |  - |
+| Sam Nee    | Vendor Route 1, Customer Route 3     |  - |
 | Yuchen Cai (Cynthia)   | -      |  - |
 
 ## General info
-This is project ...
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+In this Project, we are creating an web-based application for a food van franchise 'Snacks in a Van'.
 
 ## Technologies
 Project is created with:
@@ -49,7 +51,23 @@ Project is created with:
 
 ## Code Implementation
 
-You can include a code snippet here.
+### Server
+
+#### Customer Routes
+
+| Purpose | Type | Path | How to use: |
+| :---         |     :---      |       :---      |         :--- |
+| View menu of snacks (including pictures and prices) | -     |  - |
+| View details of a snack  | -     |  - |
+| Customer starts a new order by requesting a snack   | POST | /orders/createNewOrder | **req.body** = menuitem: menu item object id, quantity, price, customerId: customer object id, vendorId: vendor object id |
+
+#### Vendor Routes
+
+| Purpose | Type | Path | How to use: |
+| :---         |     :---     |     :---     |        :--- |
+| Setting van status (vendor sends location, marks van as ready-for-orders) | PUT  | /vendors/:vendorId/setVendorActive | **req.params** (vendorId) = Object ID of the vendor<br>**req.body** = longitude, latitude, textlocation |
+| Show list of all outstanding orders  | -     |  - |
+| Mark an order as "fulfilled" (ready to be picked up by customer)    | -      |  - |
 
 ```HTML
 <!--

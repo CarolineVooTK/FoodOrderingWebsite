@@ -20,8 +20,6 @@ We have added to this repository a `README.md`, `.gitignore`, and `.gitattribute
 
 Remember that _"this document"_ can use `different formats` to **highlight** important information. This is just an example of different formating tools available for you. For help with the format you can find a guide [here](https://docs.github.com/en/github/writing-on-github).
 
-## Team Members
-
 ## Table of contents
 * [Team Members](#team-members)
 * [General Info](#general-info)
@@ -36,7 +34,7 @@ Remember that _"this document"_ can use `different formats` to **highlight** imp
 | :---         |     :---:      |          ---: |
 | Caroline Voo | -     |  - |
 | Chai Seng Loi   | -     |  - |
-| Jin Yuan Hee (Kane)    | -      |  - |
+| Jin Yuan Hee (Kane)    | Vendor Route 3    |  - |
 | Sam Nee    | Vendor Route 1, Customer Route 3     |  - |
 | Yuchen Cai (Cynthia)   | -      |  - |
 
@@ -67,7 +65,8 @@ Project is created with:
 | :---         |     :---     |     :---     |        :--- |
 | Setting van status (vendor sends location, marks van as ready-for-orders) | PUT  | /vendors/:vendorId/setVendorActive | **req.params** (vendorId) = Object ID of the vendor<br>**req.body** = longitude, latitude, textlocation |
 | Show list of all outstanding orders  | -     |  - |
-| Mark an order as "fulfilled" (ready to be picked up by customer)    | -      |  - |
+| Mark an order as "fulfilled" (ready to be picked up by customer)    | PUT      | /orders/:orderId/setOrdersFulfilled  |
+**req.params** (orderId) = Object ID of of an order<br>**req.body** = status of orders<br>**Result** = Status of the order will become Fulfilled.|
 
 ```HTML
 <!--

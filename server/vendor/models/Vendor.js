@@ -37,6 +37,7 @@ const VendorSchema = new mongoose.Schema(
     email: { type: String, required: true },
     password: { type: String, required: true },
     location: { type: pointSchema, required: false },
+    textlocation: { type: String, required: false },
     active: { type: Boolean, required: false },
     description: { type: String, required: false },
     rating: { type: Number, required: false },

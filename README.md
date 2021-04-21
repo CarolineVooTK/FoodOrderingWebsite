@@ -71,7 +71,7 @@ Project is created with:
 #### Vendor Routes
 
 | Purpose | Type | Path | How to use: |
-| :---         |     :---:      |          ---: |
+| :---         |     :---:      | s    :---:      |        ---: |
 | Setting van status (vendor sends location, marks van as ready-for-orders) | PUT  | /vendors/:vendorId/setVendorActive | req.params (vendorId) = Object ID of the vendor, req.body = longitude, latitude, textlocation |
 | Show list of all outstanding orders  | -     |  - |
 | Mark an order as "fulfilled" (ready to be picked up by customer)    | -      |  - |

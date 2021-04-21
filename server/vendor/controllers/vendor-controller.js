@@ -148,16 +148,45 @@ const setVendorActive = async (req, res) => {
 
 
 
-const getOutstandingOrder = async (req, res) => {
-  outstandingOrder = await vendors.findOne({_id: req.params.id},{name:true, location:true,order:true})
-  res.send(outstandingOrder)
-
-}   
+const getOutstandingOrders = async (req, res) => {
+  await vendors
+  .aggregate([
+    { $match: { _id: new ObjectId(`${req.params.id}`) } },
+    {
+      $lookup: {
+        from: "orders",
+        localField: "orders",
+        foreignField: "_id",
+        as: "orders",
+      },
+    },
+    {
+      $project: {
+        name: 1,
+        orders: 1
+      },
+    },
+  ])
+  .then((data) => {
+    if(!data){
+      return(res.status(200)).json({
+        message: "vendor has no outstanding orders",
+      })
+    }res.status(200).json(data);
+  })
+  .catch((error) => {
+    res.status(500).json({
+      error: error,
+    })
+  })
+  // result = await vendors.findOne({_id:req.params.id})
+  // res.send(result)
+}
 
 module.exports = {
   getAll,
   getVendorById,
   addNewVendor,
   setVendorActive,
-  getOutstandingOrder
+  getOutstandingOrders
 };

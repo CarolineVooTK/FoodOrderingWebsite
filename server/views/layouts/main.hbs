@@ -13,9 +13,20 @@
       <h2 style="font-weight:bold;">Customer routes</h2>
       <div style="display: flex; align-items:center">
         <h2 style="margin-right: 20px;">1)</h2>
+        <a style="margin-right:20px;" href="/menu"><button>
+            Menu
+          </button></a>
+        <p style="margin-right:20px;">View Menu of snacks</p>
+        <p>GET /menu</p>
       </div>
       <div style="display: flex; align-items:center">
         <h2 style="margin-right: 20px;">2)</h2>
+        <a style="margin-right:20px;" href="/menu/607b75ab24b5d615b324ee27"><button>
+            Snack
+          </button></a>
+        <p style="margin-right:20px;">View details of a snack</p>
+        <p>GET /menu/:snackId</p>
+        <p>----pass menu item id in url params
       </div>
       <div style="display: flex; align-items:center">
         <h2 style="margin-right: 20px;">3)</h2>
@@ -41,6 +52,9 @@
       </div>
       <div style="display: flex; align-items:center">
         <h2 style="margin-right: 20px;">3)</h2>
+        <p style="margin-right:20px;">Set orders status as Fulfilled:</p>
+        <p>PUT /orders/:id/setOrdersFulfilled</p>
+        <p>---- pass ordersId in url params, the status of the specific order will become Fulfilled</p>
       </div>
     </div>
     <div style="margin-top: 50px; display: flex; flex-direction: column;">

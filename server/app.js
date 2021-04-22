@@ -42,8 +42,8 @@ app.use(express.urlencoded({ extended: false }));
 // app.use("/customers", customerRouter);
 const vendorRouter = require("./vendor/routes/vendor-router");
 app.use("/vendors", vendorRouter);
-// const menuRouter = require("./menu/routes/menu-router");
-// app.use("/menu", menuRouter);
+const menuRouter = require("./menu/routes/menu-router");
+app.use("/menu", menuRouter);
 const orderRouter = require("./order/routes/order-router");
 app.use("/orders", orderRouter);
 

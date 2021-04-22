@@ -50,8 +50,8 @@ Our Node server is hosted by Heroku and connects to a MongoDB cloud cluster whic
 
 | Purpose | Type | Path | How to use: |
 | :---         |     :---      |       :---      |         :--- |
-| View menu of snacks (including pictures and prices) | -     |  - |
-| View details of a snack  | -     |  - |
+| View menu of snacks (including pictures and prices) | GET    |  /menu | n/a |
+| View details of a snack  | GET    | /menu/:snackId | **req.params** = snackId: object ID String |
 | Customer starts a new order by requesting a snack   | POST | /orders/createNewOrder/ | **req.body** = menuitem: object ID String, quantity: Int, price: Decimal, customerId: object ID String, vendorId: object ID String |
 
 #### Vendor Routes

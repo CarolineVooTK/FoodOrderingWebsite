@@ -41,6 +41,7 @@ const getAll = async (req, res) => {
         $project: {
           root: 0,
           password: 0,
+          email: 0,
         },
       },
     ])
@@ -82,6 +83,7 @@ const getVendorById = async (req, res) => {
       {
         $project: {
           password: 0,
+          email: 0,
         },
       },
     ])
@@ -152,51 +154,52 @@ const setVendorActive = async (req, res) => {
 
 const getOutstandingOrders = async (req, res) => {
   await vendors
-  .aggregate([
-    { $match: { _id: new ObjectId(`${req.params.id}`) } },
-    {
-      $lookup: {
-        from: "orders",
-        localField: "orders",
-        foreignField: "_id",
-        as: "orders",
+    .aggregate([
+      { $match: { _id: new ObjectId(`${req.params.id}`) } },
+      {
+        $lookup: {
+          from: "orders",
+          localField: "orders",
+          foreignField: "_id",
+          as: "orders",
+        },
       },
-    },
-    {$match: {"orders.status":"pending"}},
-    {
-      $lookup:{
-        from: "customers",
-        localField: "orders.customerId",
-        foreignField: "_id",
-        as: "customer",
+      { $match: { "orders.status": "pending" } },
+      {
+        $lookup: {
+          from: "customers",
+          localField: "orders.customerId",
+          foreignField: "_id",
+          as: "customer",
+        },
       },
-    },
-    {
-      $project: {
-        name: 1,
-        "orders._id": 1,
-        "orders.status": 1,
-        "orders.time": 1,
-        "orders.price": 1,
-        "orders.orderitems": 1,
-        "customer.name": 1,
-        "customer.id": 1
+      {
+        $project: {
+          name: 1,
+          "orders._id": 1,
+          "orders.status": 1,
+          "orders.time": 1,
+          "orders.price": 1,
+          "orders.orderitems": 1,
+          "customer.name": 1,
+          "customer.id": 1,
+        },
       },
-    },
-  ])
-  .then((data) => {
-    if(!data){
-      return(res.status(200)).json({
-        message: "vendor has no outstanding orders",
-      })
-    }res.status(200).json(data);
-  })
-  .catch((error) => {
-    res.status(500).json({
-      error: error,
+    ])
+    .then((data) => {
+      if (!data) {
+        return res.status(200).json({
+          message: "vendor has no outstanding orders",
+        });
+      }
+      res.status(200).json(data);
     })
-  })
-}
+    .catch((error) => {
+      res.status(500).json({
+        error: error,
+      });
+    });
+};
 
 module.exports = {
   getAll,

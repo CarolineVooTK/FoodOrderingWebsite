@@ -21,14 +21,14 @@ Welcome!
 
 | Name | Server Routes |
 | :---         |     :---     |
-| Caroline Voo | -     | 
-| Chai Seng Loi   | -     |
+| Caroline Voo | Customer Route 2    | 
+| Chai Seng Loi   | Vendor Route 2    |
 | Jin Yuan Hee (Kane)    | Vendor Route 3      |
-| Sam Nee    | Vendor Route 1, Customer Route 3     |
-| Yuchen Cai (Cynthia)   | -      |
+| Sam Nee    | Customer Route 3, Vendor Route 1    |
+| Yuchen Cai (Cynthia)   | Customer Route 1     |
 
 ## General info
-In this Project, we are creating an web-based application for a food van franchise 'Snacks in a Van'.
+In this Project, we are creating a web-based application for a food van franchise 'Snacks in a Van' which allows Vendors to share their location and menu to Customers who can browse different foods and make orders online.
 
 ## Technologies
 Project is created with:
@@ -43,21 +43,24 @@ Project is created with:
 
 ### Server
 
+#### How our routes work:
+Our Node server is hosted by Heroku and connects to a MongoDB cloud cluster which contains our database.  To get or submit data to our database, several REST requests can be made to various routes, the details of which are outlined below.
+
 #### Customer Routes
 
 | Purpose | Type | Path | How to use: |
 | :---         |     :---      |       :---      |         :--- |
 | View menu of snacks (including pictures and prices) | -     |  - |
 | View details of a snack  | -     |  - |
-| Customer starts a new order by requesting a snack   | POST | /orders/createNewOrder | **req.body** = menuitem: menu item object id, quantity, price, customerId: customer object id, vendorId: vendor object id |
+| Customer starts a new order by requesting a snack   | POST | /orders/createNewOrder/ | **req.body** = menuitem: object ID String, quantity: Int, price: Decimal, customerId: object ID String, vendorId: object ID String |
 
 #### Vendor Routes
 
 | Purpose | Type | Path | How to use: |
 | :---         |     :---     |     :---     |        :--- |
-| Setting van status (vendor sends location, marks van as ready-for-orders) | PUT  | /vendors/:vendorId/setVendorActive | **req.params** (vendorId) = Object ID of the vendor<br>**req.body** = longitude, latitude, textlocation |
+| Setting van status (vendor sends location, marks van as ready-for-orders) | PUT  | /vendors/:vendorId/setVendorActive | **req.params** = vendorId: object ID String<br>**req.body** = longitude: Decimal, latitude: Decimal, textlocation: String |
 | Show list of all outstanding orders  | -     |  - |
-| Mark an order as "fulfilled" (ready to be picked up by customer)    | PUT      | /orders/:orderId/setOrdersFulfilled  | **req.params** (orderId) = Object ID of of an order<br>**req.body** = status of orders<br>**Result** = Status of the order will become Fulfilled. |
+| Mark an order as "fulfilled" (ready to be picked up by customer)    | PUT      | /orders/:orderId/setOrdersFulfilled  | **req.params** = orderId: Object ID of of an order<br>**req.body** = status of orders<br>**Result** = Status of the order will become Fulfilled. |
 
 **Our Progress:**
 

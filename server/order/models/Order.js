@@ -20,6 +20,7 @@ const OrderSchema = new mongoose.Schema(
     customerRating: { type: Number, required: false, default: 0 },
     discountApplied: { type: Boolean, required: false },
     cancelDescription: { type: String, required: false },
+    orderNumber: { type: Number, required: true, default: 0 },
   },
   { versionKey: false }
 );

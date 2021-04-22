@@ -37,6 +37,7 @@ const getAll = async (req, res) => {
           "customer.password": 0,
           "vendor.password": 0,
           "customer.location": 0,
+          "customer.familyName": 0,
           "vendor.orders": 0,
           "vendor.menu": 0,
           "vendor._id": 0,
@@ -93,6 +94,7 @@ const getOrderById = async (req, res) => {
         $project: {
           "customer._id": 0,
           "customer.password": 0,
+          "customer.familyName": 0,
           "vendor.password": 0,
           "customer.location": 0,
           "vendor.orders": 0,

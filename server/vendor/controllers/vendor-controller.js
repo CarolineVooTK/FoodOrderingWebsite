@@ -186,7 +186,7 @@ const getOutstandingOrders = async (req, res) => {
           "orders.time": 1,
           "orders.price": 1,
           "orders.orderitems": 1,
-          "customer.name": 1,
+          "customer.givenName": 1,
           "customer.id": 1,
         },
       },

@@ -6,9 +6,9 @@ const menuRouter = express.Router();
 const menuController = require("../controllers/menu-controller");
 
 //handle the GET request to get all snacks from menu
-menuRouter.get("/", (req,res)=>menuController.getAllSnacks(req,res));
+menuRouter.get("/", (req, res) => menuController.getAllSnacks(req, res));
 
 //handle the GET request to get one snack
-menuRouter.get('/:snackId',(req,res)=> menuController.getOneSnack(req,res))
+menuRouter.get("/:snackId", (req, res) => menuController.getOneSnack(req, res));
 
-module.exports = router;
+module.exports = menuRouter;

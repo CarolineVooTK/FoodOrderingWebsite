@@ -101,62 +101,7 @@
 							]
 						}
 					},
-					"response": [
-						{
-							"name": "View menu of snacks",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:4000/menu/607a431a24b5d615b324ee1e",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "4000",
-									"path": [
-										"menu",
-										"607a431a24b5d615b324ee1e"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "X-Powered-By",
-									"value": "Express"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Content-Length",
-									"value": "305"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"131-nmmN+yP5JJKgPjWEonzG8mVzlZU\""
-								},
-								{
-									"key": "Date",
-									"value": "Thu, 22 Apr 2021 11:06:55 GMT"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"ingredients\": [\n        \"Milk\",\n        \"Coffee\",\n        \"Water\"\n    ],\n    \"_id\": \"607a431a24b5d615b324ee1e\",\n    \"name\": \"Cappuccino\",\n    \"photo\": \"https://images.unsplash.com/photo-1526401281623-279b498f10f4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80\",\n    \"price\": 4.5,\n    \"description\": \"A nice coffee\"\n}"
-						}
-					]
+					"response": []
 				},
 				{
 					"name": "Customer starts a new order by requesting a snack",
@@ -414,7 +359,7 @@
 								},
 								{
 									"key": "Date",
-									"value": "Thu, 22 Apr 2021 11:44:20 GMT"
+									"value": "Thu, 22 Apr 2021 12:02:16 GMT"
 								},
 								{
 									"key": "Connection",
@@ -501,15 +446,15 @@
 								},
 								{
 									"key": "Content-Length",
-									"value": "262"
+									"value": "280"
 								},
 								{
 									"key": "ETag",
-									"value": "W/\"106-wrNzViSzg8ZsiMK3yPauNzf6JHY\""
+									"value": "W/\"118-GfCi2E4YetSgOclUWUrs1jNefe4\""
 								},
 								{
 									"key": "Date",
-									"value": "Thu, 22 Apr 2021 11:47:35 GMT"
+									"value": "Thu, 22 Apr 2021 12:02:28 GMT"
 								},
 								{
 									"key": "Connection",
@@ -521,7 +466,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"status\": \"pending\",\n    \"customerRating\": 0,\n    \"_id\": \"60815e5cd4360944383973c5\",\n    \"orderitems\": [\n        {\n            \"menuitem\": \"607a431a24b5d615b324ee1e\",\n            \"quantity\": 2\n        }\n    ],\n    \"customerId\": \"607c1cea24b5d615b324ee34\",\n    \"vendorId\": \"6075878024b5d615b324ee1d\",\n    \"time\": \"2021-04-22T11:30:36.796Z\",\n    \"price\": 9\n}"
+							"body": "{\n    \"status\": \"Fulfilled\",\n    \"customerRating\": 0,\n    \"orderNumber\": 0,\n    \"_id\": \"60815e5cd4360944383973c5\",\n    \"orderitems\": [\n        {\n            \"menuitem\": \"607a431a24b5d615b324ee1e\",\n            \"quantity\": 2\n        }\n    ],\n    \"customerId\": \"607c1cea24b5d615b324ee34\",\n    \"vendorId\": \"6075878024b5d615b324ee1d\",\n    \"time\": \"2021-04-22T11:30:36.796Z\",\n    \"price\": 9\n}"
 						}
 					]
 				}

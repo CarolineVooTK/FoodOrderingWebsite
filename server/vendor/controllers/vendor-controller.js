@@ -3,6 +3,7 @@ const vendors = VendorModel.vendors;
 const point = VendorModel.point;
 let ObjectId = require("mongoose").Types.ObjectId;
 
+// gets all vendors from the database
 const getAll = async (req, res) => {
   await vendors
     .aggregate([
@@ -60,6 +61,7 @@ const getAll = async (req, res) => {
     });
 };
 
+// gets a single vendor from the database by matching its id
 const getVendorById = async (req, res) => {
   await vendors
     .aggregate([
@@ -125,6 +127,8 @@ const addNewVendor = async (req, res) => {
     });
 };
 
+// sets a single vendor from the database to active, and
+// updates its latitude, longitude and text location
 const setVendorActive = async (req, res) => {
   const { longitude, latitude, textlocation } = req.body;
   await vendors
@@ -152,6 +156,7 @@ const setVendorActive = async (req, res) => {
     });
 };
 
+// gets all outstanding orders from the database
 const getOutstandingOrders = async (req, res) => {
   await vendors
     .aggregate([

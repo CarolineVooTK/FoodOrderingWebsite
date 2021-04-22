@@ -3,6 +3,7 @@ const orders = OrderModel.orders;
 const orderItems = OrderModel.orderItems;
 let ObjectId = require("mongoose").Types.ObjectId;
 
+// gets all orders from the database
 const getAll = async (req, res) => {
   await orders
     .aggregate([
@@ -59,6 +60,7 @@ const getAll = async (req, res) => {
     });
 };
 
+// gets a single order from the database by matching its id
 const getOrderById = async (req, res) => {
   await orders
     .aggregate([
@@ -116,6 +118,8 @@ const getOrderById = async (req, res) => {
     });
 };
 
+// creates a new order and saves it to the database when
+// passed the required values in req.body
 const createNewOrder = async (req, res) => {
   const { menuItemId, quantity, customerId, vendorId, price } = req.body;
   let order = new orders({
@@ -143,13 +147,10 @@ const createNewOrder = async (req, res) => {
     });
 };
 
-const setOrdersFulfilled = async(req, res) => {
+// sets a single order's status to fulfilled by matching its id to the req.params id value
+const setOrdersFulfilled = async (req, res) => {
   await orders
-    .findOneAndUpdate(
-      { _id: req.params.id },
-      { status : 'Fulfilled' },
-      { returnNewDocument: true }
-    )
+    .findOneAndUpdate({ _id: req.params.id }, { status: "Fulfilled" }, { returnNewDocument: true })
     .then((data) => {
       if (!data) {
         return res.status(404).json({
@@ -169,5 +170,5 @@ module.exports = {
   getAll,
   getOrderById,
   createNewOrder,
-  setOrdersFulfilled
+  setOrdersFulfilled,
 };

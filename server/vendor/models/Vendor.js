@@ -30,7 +30,7 @@ const menuItemsSchema = new mongoose.Schema(
   { _id: false }
 );
 
-// schema
+// Vendor schema
 const VendorSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },

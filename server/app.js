@@ -1,4 +1,4 @@
-// MongoDB
+// MongoDB connection
 const mongoose = require("mongoose");
 mongoose.set("debug", true);
 
@@ -38,8 +38,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // Routes
-// const customerRouter = require("./customer/routes/customer-router");
-// app.use("/customers", customerRouter);
 const vendorRouter = require("./vendor/routes/vendor-router");
 app.use("/vendors", vendorRouter);
 const menuRouter = require("./menu/routes/menu-router");

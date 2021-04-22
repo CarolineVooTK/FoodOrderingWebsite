@@ -59,7 +59,7 @@ Our Node server is hosted by Heroku and connects to a MongoDB cloud cluster whic
 | Purpose | Type | Path | How to use: |
 | :---         |     :---     |     :---     |        :--- |
 | Setting van status (vendor sends location, marks van as ready-for-orders) | PUT  | /vendors/:vendorId/setVendorActive | **req.params** = vendorId: object ID String<br>**req.body** = longitude: Decimal, latitude: Decimal, textlocation: String |
-| Show list of all outstanding orders  | -     |  - |
+| Show list of all outstanding orders  | GET   | /:vendorId/outstandingOrders | **req.params** = vendorId: object ID String|
 | Mark an order as "fulfilled" (ready to be picked up by customer)    | PUT      | /orders/:orderId/setOrdersFulfilled  | **req.params** = orderId: Object ID of of an order<br>**req.body** = status of orders<br>**Result** = Status of the order will become Fulfilled. |
 
 **Our Progress:**

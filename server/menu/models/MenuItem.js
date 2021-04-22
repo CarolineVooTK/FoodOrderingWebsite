@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+// Menu item schema
 const MenuItemSchema = new mongoose.Schema({
   name: { type: String, required: true },
   photo: { type: String, required: true },

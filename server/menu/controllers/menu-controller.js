@@ -7,15 +7,8 @@ let ObjectId = require("mongoose").Types.ObjectId;
 // get all snacks
 const getAllSnacks = async (req, res) => {
   try {
-    await menuitems
-      .find({})
-      .then((data) => {
-        res.json(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    // return res.json(snacks);
+    const snacks = await menuitems.find({});
+    return res.send(snacks);
   } catch (err) {
     res.status(400);
     return res.send("Database query failed");
@@ -39,7 +32,7 @@ const getOneSnack = async (req, res) => {
   }
 };
 
-// remember to export the functions
+// export the functions
 module.exports = {
   getAllSnacks,
   getOneSnack,

@@ -8,6 +8,7 @@ const OrderItemSchema = new mongoose.Schema(
   { _id: false }
 );
 
+// Order schema
 const OrderSchema = new mongoose.Schema(
   {
     customerId: { type: mongoose.Schema.Types.ObjectId, required: true },

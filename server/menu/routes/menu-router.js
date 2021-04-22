@@ -1,7 +1,14 @@
 const express = require("express");
-const router = express.Router();
-const MenuController = require("../controllers/menu-controller");
+// add our router
+const menuRouter = express.Router();
 
-router.get("/", MenuController.getAll);
+//require the menu controller
+const menuController = require("../controllers/menu-controller");
+
+//handle the GET request to get all snacks from menu
+menuRouter.get("/", (req,res)=>menuController.getAllSnacks(req,res));
+
+//handle the GET request to get one snack
+menuRouter.get('/:snackId',(req,res)=> menuController.getOneSnack(req,res))
 
 module.exports = router;

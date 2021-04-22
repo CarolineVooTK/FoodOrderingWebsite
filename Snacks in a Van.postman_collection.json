@@ -1,0 +1,531 @@
+{
+	"info": {
+		"_postman_id": "983a0a76-e18b-457b-853e-89dea4878610",
+		"name": "Snacks in a Van",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Customer Features",
+			"item": [
+				{
+					"name": "View menu of snacks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/menu/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"menu",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "View menu of snacks",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:4000/menu/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"menu",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2139"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"85b-wtGRF5E8g31RSqbD0rCTBpzxIWE\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 22 Apr 2021 11:55:31 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"_id\": \"607a431a24b5d615b324ee1e\",\n        \"name\": \"Cappuccino\",\n        \"photo\": \"https://images.unsplash.com/photo-1526401281623-279b498f10f4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80\",\n        \"price\": 4.5,\n        \"description\": \"A nice coffee\"\n    },\n    {\n        \"_id\": \"607b75ab24b5d615b324ee27\",\n        \"name\": \"Fancy Biscuit\",\n        \"photo\": \"https://images.unsplash.com/photo-1590080874088-eec64895b423?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1024&q=80\",\n        \"price\": 2.5,\n        \"description\": \"A fancy biscuit\"\n    },\n    {\n        \"_id\": \"60815f9824b5d615b324ee3c\",\n        \"name\": \"Latte\",\n        \"price\": 3.5,\n        \"photo\": \"https://images.unsplash.com/photo-1587491439149-bd2ff295d450?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80\",\n        \"description\": \"a Latte\"\n    },\n    {\n        \"_id\": \"60815ff324b5d615b324ee3d\",\n        \"name\": \"Flat White\",\n        \"price\": 3.75,\n        \"photo\": \"https://images.unsplash.com/flagged/photo-1580290336469-244d48c5f178?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1002&q=80\",\n        \"description\": \"A flat white coffee\"\n    },\n    {\n        \"_id\": \"6081605b24b5d615b324ee3e\",\n        \"name\": \"Long Black\",\n        \"price\": 4,\n        \"photo\": \"https://images.unsplash.com/photo-1588012841523-08163e2b0c26?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80\",\n        \"description\": \"A long black coffee\"\n    },\n    {\n        \"_id\": \"608160c024b5d615b324ee3f\",\n        \"name\": \"Plain Biscuit\",\n        \"price\": 2,\n        \"photo\": \"https://images.unsplash.com/photo-1585330069634-1ec6a705c6e1?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1086&q=80\",\n        \"description\": \"A plain biscuit\"\n    },\n    {\n        \"_id\": \"6081614c24b5d615b324ee40\",\n        \"name\": \"Small Cake\",\n        \"price\": 3.5,\n        \"photo\": \"https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80\",\n        \"description\": \"A small cake\"\n    },\n    {\n        \"_id\": \"608161df24b5d615b324ee41\",\n        \"name\": \"Big Cake\",\n        \"price\": 5.5,\n        \"photo\": \"https://images.unsplash.com/photo-1590563139809-7f7ed0d27b5c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80\",\n        \"description\": \"A big cake\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "View details of a snack",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/menu/607a431a24b5d615b324ee1e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"menu",
+								"607a431a24b5d615b324ee1e"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "View menu of snacks",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:4000/menu/607a431a24b5d615b324ee1e",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"menu",
+										"607a431a24b5d615b324ee1e"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "305"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"131-nmmN+yP5JJKgPjWEonzG8mVzlZU\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 22 Apr 2021 11:06:55 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"ingredients\": [\n        \"Milk\",\n        \"Coffee\",\n        \"Water\"\n    ],\n    \"_id\": \"607a431a24b5d615b324ee1e\",\n    \"name\": \"Cappuccino\",\n    \"photo\": \"https://images.unsplash.com/photo-1526401281623-279b498f10f4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80\",\n    \"price\": 4.5,\n    \"description\": \"A nice coffee\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Customer starts a new order by requesting a snack",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"menuItemId\": \"607a431a24b5d615b324ee1e\", \r\n    \"quantity\": \"2\", \r\n    \"customerId\": \"607c1cea24b5d615b324ee34\", \r\n    \"vendorId\": \"6075878024b5d615b324ee1d\",\r\n    \"price\": \"9.0\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/orders/createNewOrder/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"orders",
+								"createNewOrder",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Customer starts a new order by requesting a snack",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"menuItemId\": \"607a431a24b5d615b324ee1e\", \r\n    \"quantity\": \"2\", \r\n    \"customerId\": \"607c1cea24b5d615b324ee34\", \r\n    \"vendorId\": \"6075878024b5d615b324ee1d\",\r\n    \"price\": \"9.0\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4000/orders/createNewOrder/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"orders",
+										"createNewOrder",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "262"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"106-wrNzViSzg8ZsiMK3yPauNzf6JHY\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 22 Apr 2021 11:30:37 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"pending\",\n    \"customerRating\": 0,\n    \"_id\": \"60815e5cd4360944383973c5\",\n    \"orderitems\": [\n        {\n            \"menuitem\": \"607a431a24b5d615b324ee1e\",\n            \"quantity\": 2\n        }\n    ],\n    \"customerId\": \"607c1cea24b5d615b324ee34\",\n    \"vendorId\": \"6075878024b5d615b324ee1d\",\n    \"time\": \"2021-04-22T11:30:36.796Z\",\n    \"price\": 9\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Vendors Features",
+			"item": [
+				{
+					"name": "Setting van status (vendor sends location, marks van as ready-for-orders)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"longitude\": \"-37.8\",\r\n    \"latitude\": \"144.9\",\r\n    \"textlocation\": \"Victoria Market\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/vendors/60815fb5fe5b8a7ee5b17ea7/setVendorActive",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"vendors",
+								"60815fb5fe5b8a7ee5b17ea7",
+								"setVendorActive"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Setting van status (vendor sends location, marks van as ready-for-orders)",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"longitude\": \"-37.8\",\r\n    \"latitude\": \"144.9\",\r\n    \"textlocation\": \"Victoria Market\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4000/vendors/60815fb5fe5b8a7ee5b17ea7/setVendorActive",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"vendors",
+										"60815fb5fe5b8a7ee5b17ea7",
+										"setVendorActive"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "121"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"79-A/5JPI51TxFWr3WXIG+QJ/JOfww\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 22 Apr 2021 11:39:54 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"orders\": [],\n    \"_id\": \"60815fb5fe5b8a7ee5b17ea7\",\n    \"name\": \"Vendor 3\",\n    \"email\": \"vendor3@test.com\",\n    \"password\": \"234567\",\n    \"menu\": []\n}"
+						}
+					]
+				},
+				{
+					"name": "Show list of all outstanding orders",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/vendors/607c1f3c24b5d615b324ee38/outstandingOrders",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"vendors",
+								"607c1f3c24b5d615b324ee38",
+								"outstandingOrders"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Show list of all outstanding orders",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:4000/vendors/607c1f3c24b5d615b324ee38/outstandingOrders",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"vendors",
+										"607c1f3c24b5d615b324ee38",
+										"outstandingOrders"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "302"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"12e-fOJTvYqRA9j314bIRQiAzcT2hkc\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 22 Apr 2021 11:44:20 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"_id\": \"607c1f3c24b5d615b324ee38\",\n        \"name\": \"Vendor 2\",\n        \"orders\": [\n            {\n                \"_id\": \"607c1d6e24b5d615b324ee35\",\n                \"price\": 22.5,\n                \"status\": \"pending\",\n                \"time\": \"2021-04-18T05:35:54.236Z\",\n                \"orderitems\": [\n                    {\n                        \"menuitem\": \"607a431a24b5d615b324ee1e\",\n                        \"quantity\": 5\n                    }\n                ]\n            }\n        ],\n        \"customer\": [\n            {\n                \"_id\": \"607c1cea24b5d615b324ee34\",\n                \"givenName\": \"Sally\"\n            }\n        ]\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Mark an order as \"fulfilled\" (ready to be picked up by customer)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"status\":\"Fulfilled\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/orders/60815e5cd4360944383973c5/setOrdersFulfilled",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"orders",
+								"60815e5cd4360944383973c5",
+								"setOrdersFulfilled"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Mark an order as \"fulfilled\" (ready to be picked up by customer)",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"status\":\"Fulfilled\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4000/orders/60815e5cd4360944383973c5/setOrdersFulfilled",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"orders",
+										"60815e5cd4360944383973c5",
+										"setOrdersFulfilled"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "262"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"106-wrNzViSzg8ZsiMK3yPauNzf6JHY\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 22 Apr 2021 11:47:35 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"pending\",\n    \"customerRating\": 0,\n    \"_id\": \"60815e5cd4360944383973c5\",\n    \"orderitems\": [\n        {\n            \"menuitem\": \"607a431a24b5d615b324ee1e\",\n            \"quantity\": 2\n        }\n    ],\n    \"customerId\": \"607c1cea24b5d615b324ee34\",\n    \"vendorId\": \"6075878024b5d615b324ee1d\",\n    \"time\": \"2021-04-22T11:30:36.796Z\",\n    \"price\": 9\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}

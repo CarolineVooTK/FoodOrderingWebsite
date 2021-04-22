@@ -11,6 +11,6 @@ const MenuItemSchema = new mongoose.Schema(
   { _id: false }
 );
 
-module.exports = {
-  menuitems: mongoose.model("menuitems", MenuItemSchema),
-};
+const menuitems = mongoose.model("menuitems", MenuItemSchema)
+module.exports = menuitems
+

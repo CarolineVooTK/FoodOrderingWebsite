@@ -11,8 +11,10 @@ app.engine(
   exphbs({
     extname: "hbs",
     defaultLayout: "main",
+    helpers: require(__dirname + "/public/js/helpers.js").helpers,
   })
 );
+
 app.set("view engine", "hbs");
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -22,12 +24,11 @@ app.use(cors());
 // Routes
 const vendorRouter = require("./routes/vendorRouter");
 app.use("/vendors", vendorRouter);
+const menuRouter = require("./routes/menuRouter");
+app.use("/menu", menuRouter);
 
 app.get("/login", (req, res) => {
   res.render("login");
-});
-app.get("/menu", (req, res) => {
-  res.render("menu");
 });
 
 app.get("*", (req, res) => {

@@ -1,0 +1,96 @@
+#vendors {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px;
+}
+#vendorList {
+  width: 50%;
+  margin-right: 20px;
+}
+#vendorMap {
+  width: 50%;
+  background: grey;
+  height: 500px;
+  margin: 20px;
+  color: white;
+}
+.vendor {
+  background: var(--color-dark);
+  margin-top: 10px;
+  padding: 20px 10px 20px 20px;
+  width: 100%;
+  color: white;
+}
+.vendor button {
+  background: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  color: black;
+  width: 150px;
+}
+.vendor button:hover {
+  background: lightgrey;
+  color: white;
+}
+.vendor button a {
+  text-decoration: none;
+  color: black;
+  text-transform: uppercase;
+}
+.vendor h2 {
+  text-transform: uppercase;
+  margin: 0;
+  color: var(--color-light);
+}
+.rating {
+  width: 175px;
+  color: gold;
+}
+
+/* single vendor page */
+#singleVendor {
+  width: 100%;
+  max-width: 1200px;
+  padding: 20px;
+}
+.vendorDisplay {
+  width: 100%;
+  min-height: 500px;
+}
+.vendorDisplay .menu {
+  width: 70%;
+  background: lightgrey;
+}
+.vendorDisplay .order {
+  width: 30%;
+  background: rgb(218, 218, 218);
+}
+#singleVendor button {
+  background: var(--color-dark);
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  color: white;
+  width: 150px;
+  height: 50px;
+}
+#singleVendor button a {
+  text-decoration: none;
+  color: white;
+  text-transform: uppercase;
+}
+#singleVendor button:hover {
+  background: lightgrey;
+  color: black !important;
+}
+#singleVendor h1 {
+  margin: 0;
+  margin-left: 40px;
+}
+
+.rate p {
+  margin: 0;
+  color: lightgray;
+}

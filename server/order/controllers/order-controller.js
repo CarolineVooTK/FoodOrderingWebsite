@@ -120,6 +120,35 @@ const getOrderById = async (req, res) => {
     });
 };
 
+// gets the rating for a vendor by checking the rating of all the vendors orders
+const getVendorRating = async (req, res) => {
+  await orders
+    .aggregate([
+      { $match: { vendorId: new ObjectId(`${req.params.vendorId}`) } },
+      {
+        $group: {
+          _id: null,
+          rating: { $sum: "$customerRating" },
+          count: { $sum: 1 },
+        },
+      },
+    ])
+    .then((data) => {
+      if (data.length === 0) {
+        return [{ rating: 0, count: 0 }];
+      }
+      return data;
+    })
+    .then((data) => {
+      res.status(200).json(data);
+    })
+    .catch((error) => {
+      res.status(500).json({
+        error: error,
+      });
+    });
+};
+
 // creates a new order and saves it to the database when
 // passed the required values in req.body
 const createNewOrder = async (req, res) => {
@@ -173,4 +202,5 @@ module.exports = {
   getOrderById,
   createNewOrder,
   setOrdersFulfilled,
+  getVendorRating,
 };

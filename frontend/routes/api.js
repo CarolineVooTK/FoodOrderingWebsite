@@ -4,11 +4,59 @@ const axios = require("axios");
 // const BASE_URL = "https://web-info-tech-group-3.herokuapp.com";
 const BASE_URL = "http://localhost:4000";
 
-// get one vendor by object id
-const getSingleVendor = async () => {
+// get all vendors
+const getAllVendors = async () => {
   let data = null;
   data = await axios
-    .get(BASE_URL + "/vendors" + "/6075878024b5d615b324ee1d")
+    .get(BASE_URL + "/vendors")
+    .then((data) => {
+      if (data.data) {
+        return data.data;
+      }
+      return [];
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  return data;
+};
+// get one vendor by object id
+const getSingleVendor = async (vendor) => {
+  let data = null;
+  data = await axios
+    .get(BASE_URL + `/vendors/${vendor.id}`)
+    .then((data) => {
+      if (data.data) {
+        return data.data;
+      }
+      return [];
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  return data;
+};
+// get vendor rating
+const getVendorRating = async (vendor) => {
+  let data = null;
+  data = await axios
+    .get(BASE_URL + `/orders/${vendor.vendorId}/rating`)
+    .then((data) => {
+      if (data.data) {
+        return data.data;
+      }
+      return [{ rating: 0, count: 0 }];
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  return data;
+};
+
+const getMenu = async () => {
+  let data = null;
+  data = await axios
+    .get(BASE_URL + "/menu")
     .then((data) => {
       if (data.data) {
         return data.data;
@@ -21,4 +69,20 @@ const getSingleVendor = async () => {
   return data;
 };
 
-module.exports = { getSingleVendor };
+const getVendorMenu = async (vendorId) => {
+  let data = null;
+  data = await axios
+    .get(BASE_URL + `/menu/${vendorId}`)
+    .then((data) => {
+      if (data.data) {
+        return data.data;
+      }
+      return [];
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  return data;
+};
+
+module.exports = { getSingleVendor, getMenu, getVendorMenu, getAllVendors, getVendorRating };

@@ -1,7 +1,6 @@
 <section id="vendors" class="flexAround">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script type="text/javascript">
-        let rating_template = Handlebars.templates.vendor_rating_template;
         async function load_rating(vendorId) {
             let data = null;
             data = await axios
@@ -37,6 +36,9 @@
             ratingDisplay += `</div>`;
             document.getElementById(vendorId).innerHTML = ratingDisplay;
         }
+        function latLongStr(val) {
+            return val.toString().split(",");
+        }
     </script>
 
     <div id="vendorList" class="col">
@@ -47,7 +49,7 @@
             <div class="col">
 
                 <h2>{{this.name}}</h2>
-                <p>{{this.textlocation}} ({{this.location.coordinates}})</p>
+                <p>{{this.textlocation}}</p>
                 <button><a href="/vendors/{{this._id}}">Go to Vendor</a></button>
             </div>
             <div class="rating colMiddle">
@@ -72,6 +74,34 @@
         </div> --}}
     </div>
     <div id="vendorMap" class="flexMiddle">
-        <p>map will go here</p>
+        <div id="mapid"></div>
+        <script type="text/javascript">
+            let map = L.map('mapid', {
+                center: [-37.81, 144.96],
+                zoom: 13
+            });
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+        </script>
+        {{#each vendors }}
+        {{#if this.active}}
+        {{#with location}}
+        {{#with coordinates}}
+        <script type="text/javascript">
+            console.log('{{this}}');
+            L.marker(latLongStr('{{this}}')).addTo(map)
+                .bindPopup(`<div class="popup">
+                    <p>{{../../this.textlocation}}</p>
+                    <button>
+                        <a href="vendors/{{../../this._id}}">View</a>
+                    </button>
+                    </div>`)
+                .openPopup();
+        </script>
+        {{/with}}
+        {{/with}}
+        {{/if}}
+        {{/each}}
     </div>
 </section>

@@ -46,6 +46,8 @@ const menuRouter = require("./menu/routes/menu-router");
 app.use("/menu", menuRouter);
 const orderRouter = require("./order/routes/order-router");
 app.use("/orders", orderRouter);
+const customerRouter = require("./customer/routes/customer-router")
+app.use("/customer", customerRouter);
 
 app.get("*", (req, res) => {
   res.render("home");

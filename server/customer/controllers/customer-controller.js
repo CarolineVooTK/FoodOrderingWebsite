@@ -22,6 +22,7 @@ const getCustomerByEmail = async (req, res) => {
 
 
 const customerAuth = async (req, res) => {
+  console.log("cusAuth in server: req.body = ",req.body)
     let cust = await customer.findOne({email: req.body.email}).lean()
       .then((data) => {
         if (!data) {

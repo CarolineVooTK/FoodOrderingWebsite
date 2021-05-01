@@ -4,6 +4,11 @@ const axios = require("axios");
 // const BASE_URL = "https://web-info-tech-group-3.herokuapp.com";
 const BASE_URL = "http://localhost:4000";
 
+
+
+
+
+
 // get all vendors
 const getAllVendors = async () => {
   let data = null;
@@ -84,5 +89,7 @@ const getVendorMenu = async (vendorId) => {
     });
   return data;
 };
+
+
 
 module.exports = { getSingleVendor, getMenu, getVendorMenu, getAllVendors, getVendorRating };

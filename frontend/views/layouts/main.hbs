@@ -33,8 +33,14 @@
         </div>
         <h1><a href="/">Snacks in a Van</a></h1>
         <div class="navlinks">
-            <a href="/login">login</a>
-            <a href="/register">register</a>
+            {{#if success}}
+            <p>Hi, {{customer_name}}</p>
+            <a href="/customer/logout">logout</a>
+            {{else}}
+            <a href="/customer/login">login</a>
+            <a href="/customer/register">register</a>
+            {{/if}}
+            
         </div>
     </header>
 

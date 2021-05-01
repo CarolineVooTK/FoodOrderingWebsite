@@ -19,7 +19,6 @@
     "express-session": "^1.17.1",
     "handlebars": "^4.7.7",
     "leaflet": "^1.7.1",
-    "method-override": "^3.0.0",
     "morgan": "^1.10.0",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",

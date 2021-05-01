@@ -3,15 +3,14 @@ const express = require("express");
 const path = require("path");
 const exphbs = require("express-handlebars");
 const app = express();
-const logger = require('morgan');
+// const logger = require('morgan');
 const session = require('express-session');
 const passport = require('passport');
 const cors = require("cors");
 const LocalStrategy = require('passport-local').Strategy;
-const myapi = require("./routes/api.js");
 const cookieParser = require('cookie-parser');
 const flash = require('connect-flash');
-const methodOverride = require('method-override');
+
 
 app.set("views", path.join(__dirname, "./views"));
 app.engine(
@@ -28,7 +27,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static("public"));
 app.use(cors());
-app.use(logger('dev'));
+// app.use(logger('dev'));
 app.use(cookieParser());
 app.use(flash());
 app.use(session({
@@ -39,76 +38,23 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-// passport.use('local-signin', new LocalStrategy(
-//   {passReqToCallback : true}, //allows us to pass back the request to the callback
-//   function(req, username, password, done) {
-//   myapi.customerAuth(req,res)
-//   .then(function (user) {
-//       console.log("user = ",user)
-//       if (user) {
-//       console.log("LOGGED IN AS: " + user.email);
-//       req.session.success = 'You are successfully logged in ' + user.email + '!';
-//       done(null, user);
-//       }
-//       if (!user) {
-//       console.log("COULD NOT LOG IN");
-//       req.session.error = 'Could not log user in. Please try again.'; //inform user could not log them in
-//       done(null, user);
-//       }
-//   })
-//   .fail(function (err){
-//       console.log(err.body);
-//   });
-//   }
-// ));
-
 
 
 app.use(function(req, res, next) {
   // console.log("app.js, app.use, flash")
   res.locals.success = req.flash('success');
+  if (req.session.passport){
+    res.locals.customer_name = req.session.passport.user.givenName
+  }
+  // console.log("res local cus = ", req.session.passport)
+  res.locals.customer_id = req.session
+  // console.log("res.locals= ",res.locals)
   res.locals.error = req.flash('error');
   next();
 })
 
-// app.use(function(req, res, next){
-//   var err = req.session.error,
-//       msg = req.session.notice,
-//       success = req.session.success;
 
-//   delete req.session.error;
-//   delete req.session.success;
-//   delete req.session.notice;
 
-//   if (err) res.locals.error = err;
-//   if (msg) res.locals.notice = msg;
-//   if (success) res.locals.success = success;
-
-//   next();
-// });
-
-// passport.use('local-signin', new LocalStrategy(
-//   {passReqToCallback : true}, //allows us to pass back the request to the callback
-//   function(req, username, password, done) {
-//   myapi.customerAuth(req,res)
-//   .then(function (user) {
-//       console.log("user = ",user)
-//       if (user) {
-//       console.log("LOGGED IN AS: " + user.email);
-//       req.session.success = 'You are successfully logged in ' + user.email + '!';
-//       done(null, user);
-//       }
-//       if (!user) {
-//       console.log("COULD NOT LOG IN");
-//       req.session.error = 'Could not log user in. Please try again.'; //inform user could not log them in
-//       done(null, user);
-//       }
-//   })
-//   .fail(function (err){
-//       console.log(err.body);
-//   });
-//   }
-// ));
 // Routes
 const vendorRouter = require("./routes/vendorRouter");
 app.use("/vendors", vendorRouter);
@@ -117,17 +63,14 @@ app.use("/menu", menuRouter);
 const customerRouter = require("./routes/customerRouter");
 app.use("/customer", customerRouter);
 
-app.get("/login", (req, res,next) => {
-  res.render("login");
-});
+// app.get("/login", (req, res,next) => {
+//   console.log(req.session.passport)
+//   res.render("login");
+// });
 
 app.get("/", (req, res,next) => {
   res.render("home");
 });
-
-// app.get("*", (req, res, next) => {
-//   res.render("home");
-// });
 
 app.get('*', function(req, res, next) {
   res.locals.user = req.user || null

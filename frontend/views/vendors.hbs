@@ -1,5 +1,77 @@
-<div class="col">
-    <h1>Vendors</h1>
-    <p>example first vendor connection:</p>
-    <p>name: {{vendor.name}}</p>
-</div>
+<section id="vendors" class="flexAround">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript">
+        let rating_template = Handlebars.templates.vendor_rating_template;
+        async function load_rating(vendorId) {
+            let data = null;
+            data = await axios
+                .get(`http://localhost:4000/orders/${vendorId}/rating`)
+                .then((data) => {
+
+                    if (data.data) {
+                        return data.data;
+                    }
+                    return [{ rating: 0, count: 0 }];
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+            rating = data[0].rating;
+            count = data[0].count;
+            if (count > 1) {
+                rating = Math.round(rating / count);
+            }
+            let ratingDisplay = `<div class="flex">`;
+            if (rating > 0) {
+                for (let i = 0; i < rating; i++) {
+                    ratingDisplay += `<i class="fas fa-star"></i>`;
+                }
+                if (rating < 5) {
+                    for (let j = 0; j < 5 - rating; j++) {
+                        ratingDisplay += `<i class="far fa-star"></i>`;
+                    }
+                }
+            } else {
+                ratingDisplay += `<p>not available</p>`;
+            }
+            ratingDisplay += `</div>`;
+            document.getElementById(vendorId).innerHTML = ratingDisplay;
+        }
+    </script>
+
+    <div id="vendorList" class="col">
+        <h1>Vendors Near You</h1>
+        {{#each vendors}}
+        {{#if this.active}}
+        <div class="vendor flexBetween">
+            <div class="col">
+
+                <h2>{{this.name}}</h2>
+                <p>{{this.textlocation}} ({{this.location.coordinates}})</p>
+                <button><a href="/vendors/{{this._id}}">Go to Vendor</a></button>
+            </div>
+            <div class="rating colMiddle">
+                <p>RATING</p>
+                <script type="text/javascript">
+                    load_rating('{{this._id}}');
+                </script>
+                <div id="{{this._id}}" class="rate"></div>
+                {{!-- {{#vendorRating this._id}}{{/vendorRating}} onload="load_rating('{{this._id}}')" --}}
+            </div>
+        </div>
+        {{/if}}
+        {{/each}}
+        {{!-- <h1>Inactive Vendors</h1>
+        <div>
+            {{#each vendors}}
+            {{#unless this.active}}
+            <p>{{this.name}}</p>
+            <button><a href="/vendors/{{this._id}}">View Vendor {{this.name}}</a></button>
+            {{/unless}}
+            {{/each}}
+        </div> --}}
+    </div>
+    <div id="vendorMap" class="flexMiddle">
+        <p>map will go here</p>
+    </div>
+</section>

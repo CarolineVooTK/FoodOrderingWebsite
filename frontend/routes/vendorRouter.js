@@ -5,9 +5,20 @@ const myapi = require("./api");
 
 vendorRouter.get("/", async (req, res) => {
   await myapi
-    .getSingleVendor()
+    .getAllVendors()
     .then((data) => {
-      res.render("vendors", { vendor: data[0] });
+      res.render("vendors", { vendors: data });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
+vendorRouter.get("/:vendorId", async (req, res) => {
+  await myapi
+    .getSingleVendor({ id: req.params.vendorId })
+    .then((data) => {
+      res.render("vendor", { vendor: data[0] });
     })
     .catch((err) => {
       console.log(err);

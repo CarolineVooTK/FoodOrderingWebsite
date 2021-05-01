@@ -5,9 +5,9 @@
   --text-small: 16px;
   --font-body: "Lexend Mega", sans-serif;
   --font-heading: "Rammetto One", cursive;
-  --color-dark: #05386b;
-  --color-medium: #f8b5a5;
-  --color-light: #f8edec;
+  --color-dark: #003153;
+  --color-medium: #f5a201;
+  --color-light: #3df2ff;
   --color-grey: #eeeeee;
 }
 
@@ -17,6 +17,7 @@ body,
   width: 100%;
   height: 100%;
   margin: 0;
+  font-family: "Roboto", sans-serif;
 }
 .main {
   display: flex;
@@ -51,7 +52,36 @@ footer {
   margin: 0 10px;
   text-transform: uppercase;
 }
-col {
+.col {
   display: flex;
   flex-direction: column;
+}
+.colMiddle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex {
+  display: flex;
+}
+.flexAround {
+  display: flex;
+  justify-content: space-around;
+}
+.flexBetween {
+  display: flex;
+  justify-content: space-between;
+}
+.flexMiddle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.p10 {
+  padding: 10px;
+}
+.alignMiddle {
+  align-items: center;
 }

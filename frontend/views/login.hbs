@@ -1,18 +1,28 @@
 <section id="loginform">
-    <form method="post" action="/login">
+  <div class = "loginform-login">
+    <form method="post" action="/customer/login">
         <label> Email
                 <input
-                  placeholder="username"
+                  placeholder="username", name= "email"
                 />
               </label>
               <label>
                 Password
                 <input                  
                   placeholder="***************"
-                  type="password"
+                  type="password", name = "password"
                 />
               </label>
               <input type="submit" value="login">
     </form>
+  </div>
+  {{#if fail}}
+  <div class = "login_fail">
+    <h1 style ="color:tomato;"> invalid username or password </h1>
+  </div>
+  {{/if}}
+  <p>For Testing Purpose:</p>
+  <p>customer@test.com : password</p>
+  <p>customer2@test.com : password</p>
 
 </section>

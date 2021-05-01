@@ -5,6 +5,26 @@ const axios = require("axios");
 const BASE_URL = "http://localhost:4000";
 
 
+// checkauthentication
+
+const customerAuth = async (req, res) => {
+  // console.log("cusAuth")
+  let data = null;
+  // console.log(req.body.password)
+  data = await axios
+    .post(BASE_URL + "/customer/custAuth",{email: req.body.email, password: req.body.password})
+    .then((data) => {
+      // console.log("data = ", data)
+      if (data.status == 200){
+        console.log("data.status = 200")
+      }
+      return data;
+    })
+    .catch((err) => {
+      // console.log(err);
+    });
+  return data;
+};
 
 
 
@@ -92,4 +112,4 @@ const getVendorMenu = async (vendorId) => {
 
 
 
-module.exports = { getSingleVendor, getMenu, getVendorMenu, getAllVendors, getVendorRating };
+module.exports = { getSingleVendor, getMenu, getVendorMenu, getAllVendors, getVendorRating, customerAuth};

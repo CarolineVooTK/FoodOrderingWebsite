@@ -31,6 +31,8 @@ const vendorRouter = require("./routes/vendorRouter");
 app.use("/vendors", vendorRouter);
 const menuRouter = require("./routes/menuRouter");
 app.use("/menu", menuRouter);
+const customerRouter = require("./routes/customerRouter");
+app.use("/customer", customerRouter);
 
 app.use(function(req, res, next){
   var err = req.session.error,
@@ -52,9 +54,40 @@ app.get("/login", (req, res) => {
   res.render("login");
 });
 
+// app.post('/login', passport.authenticate('local-signin', {
+//   successRedirect: '/',
+//   failureRedirect: '/login'
+//   })
+// );
+
 app.get("*", (req, res) => {
   res.render("home");
 });
+
+
+
+// passport strategy
+// passport.use('local-signin', new LocalStrategy(
+//   {passReqToCallback : true}, //allows us to pass back the request to the callback
+//   function(req, username, password, done) {
+//     routes.localAuth(username, password)
+//     .then(function (user) {
+//       if (user) {
+//         console.log("LOGGED IN AS: " + user.username);
+//         req.session.success = 'You are successfully logged in ' + user.username + '!';
+//         done(null, user);
+//       }
+//       if (!user) {
+//         console.log("COULD NOT LOG IN");
+//         req.session.error = 'Could not log user in. Please try again.'; //inform user could not log them in
+//         done(null, user);
+//       }
+//     })
+//     .fail(function (err){
+//       console.log(err.body);
+//     });
+//   }
+// ));
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {

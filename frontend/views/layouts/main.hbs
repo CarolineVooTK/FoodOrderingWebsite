@@ -31,21 +31,22 @@
 </head>
 
 <body>
-    <header class="flexMiddle">
-        <div class="navlinks">
-            <a href="/menu">menu</a>
-            <a href="/vendors">vendors</a>
-        </div>
-        <h1><a href="/">Snacks in a Van</a></h1>
-        <div class="navlinks">
-            {{#if customer_name}}
-            <a href="/customer/profile">Hi, {{customer_name}}</a>
-            <a href="/customer/logout">logout</a>
-            {{else}}
-            <a href="/customer/login">login</a>
-            <a href="/customer/register">register</a>
-            {{/if}}
-
+    <header>
+        <div class="flexBetween container">
+            <div class="navlinks">
+                <a href="/menu">menu</a>
+                <a href="/vendors">vendors</a>
+            </div>
+            <h1><a href="/">Snacks in a Van</a></h1>
+            <div class="navlinks">
+                {{#if customer_name}}
+                <a href="/customer/profile">Hi, {{customer_name}}</a>
+                <a href="/customer/logout">logout</a>
+                {{else}}
+                <a href="/customer/login">login</a>
+                <a href="/customer/register">register</a>
+                {{/if}}
+            </div>
         </div>
     </header>
 

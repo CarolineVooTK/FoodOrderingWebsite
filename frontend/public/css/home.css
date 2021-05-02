@@ -10,11 +10,14 @@
   background-size: cover;
   background-position: center;
   height: 500px;
-  width: 100%;
+  width: 100vw;
   margin: 0;
   color: white;
   position: relative;
   padding: 10px;
+}
+.hero .container {
+  margin-top: 50px;
 }
 .overlay {
   position: absolute;
@@ -105,7 +108,14 @@
   font-size: 44px;
   margin-bottom: 20px;
 }
-
+@media (min-width: 1250px) {
+  .hero h1 {
+    font-size: 120px;
+  }
+  .hero h2 {
+    font-size: 80px;
+  }
+}
 @media (max-width: 768px) {
   .feature {
     flex-direction: column;

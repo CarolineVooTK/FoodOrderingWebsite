@@ -2,3 +2,29 @@
   height: 100%;
   width: 100%;
 }
+
+.popup {
+  text-align: center;
+}
+.popup * {
+  width: 100%;
+}
+.popup button {
+  margin: 0 auto;
+  background: var(--color-dark);
+  color: white;
+  border-radius: 5px;
+  padding: 5px;
+}
+.popup button:hover {
+  background: grey;
+}
+.popup button a {
+  text-decoration: none;
+  color: white;
+  text-transform: uppercase;
+}
+.popup p {
+  margin: 0;
+  line-height: 0.6;
+}

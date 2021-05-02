@@ -1,63 +1,67 @@
 const express = require("express");
 const passport = require("passport");
-const LocalStrategy = require('passport-local').Strategy;
+const LocalStrategy = require("passport-local").Strategy;
 const customerRouter = express.Router();
 
 const myapi = require("./api");
 
-customerRouter.get("/login", (req, res,next) => {
+customerRouter.get("/login", (req, res, next) => {
   // console.log(req.session.passport)
   res.render("login");
 });
 
+customerRouter.get("/profile", (req, res, next) => {
+  // console.log(req.session.passport)
+  res.render("profile");
+});
 
 const redirectTodashboard = (req, res, next) => {
-    console.log(req.session);
-    if(!req.session.passport) {
-        next();
-    } else {
-        res.redirect('/');
-    }
+  console.log(req.session);
+  if (!req.session.passport) {
+    next();
+  } else {
+    res.redirect("/");
   }
-  
+};
 
-customerRouter.post('/login', passport.authenticate('local', {
-    failureRedirect: '/customer/login',
-    failureFlash: true
-  }), function (req, res, next) {
+customerRouter.post(
+  "/login",
+  passport.authenticate("local", {
+    failureRedirect: "/customer/login",
+    failureFlash: true,
+  }),
+  function (req, res, next) {
     // console.log("user",req.user);
-    req.flash('success', 'Login Success..');
-    res.redirect('/');
-  });
-    
+    req.flash("success", "Login Success..");
+    res.redirect("/");
+  }
+);
 
-
-passport.use('local',new LocalStrategy(function(username,password, done){
-
-    let req= {"username":username, "password":password}
+passport.use(
+  "local",
+  new LocalStrategy(function (username, password, done) {
+    let req = { username: username, password: password };
     // req.body.username = username
     // req.body.password = password
-    let res = ""
-    myapi.customerAuth(req,res)
-    .then((data) => {
+    let res = "";
+    myapi
+      .customerAuth(req, res)
+      .then((data) => {
         // console.log("herre")
         // console.log(data)
-        if (data){
-            return done(null, data);
+        if (data) {
+          return done(null, data);
+        } else {
+          return done(null, false, {
+            message: `Invalid Username or password`,
+          });
         }
-        else{
-            return done(null, false, {
-                message: `Invalid Username or password`
-            });
-        }
-        })
-        .catch((err) => {
+      })
+      .catch((err) => {
         console.log(err);
-        });
-  }));
-
-
-
+      });
+  })
+);
 
 passport.serializeUser(function (user, done) {
   // console.log("serialize")
@@ -65,7 +69,7 @@ passport.serializeUser(function (user, done) {
   done(null, user.data);
 });
 
-passport.deserializeUser(function (obj, done){
+passport.deserializeUser(function (obj, done) {
   // console.log("unserialize")
   done(null, obj);
 });

@@ -92,6 +92,7 @@
             console.log('{{this}}');
             L.marker(latLongStr('{{this}}')).addTo(map)
                 .bindPopup(`<div class="popup">
+                    <p class="bold">{{../../this.name}}</p>
                     <p>{{../../this.textlocation}}</p>
                     <button>
                         <a href="vendors/{{../../this._id}}">View</a>

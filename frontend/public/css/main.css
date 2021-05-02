@@ -1,0 +1,167 @@
+/* central area to control type and colour */
+:root {
+  --text-big: 36px;
+  --text-medium: 22px;
+  --text-small: 16px;
+  --font-body: "Lexend Mega", sans-serif;
+  --font-heading: "Rammetto One", cursive;
+  --color-dark: #003153;
+  --color-medium: #f5a201;
+  --color-light: #3df2ff;
+  --color-grey: #eeeeee;
+}
+
+html,
+body,
+.main {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+.main {
+  display: flex;
+  justify-content: center;
+}
+body {
+  display: flex;
+  flex-direction: column;
+}
+header {
+  height: 130px;
+  width: 100%;
+  background-color: white;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-box-shadow: 0px 1px 5px 0px #b0b0b0;
+  box-shadow: 0px 1px 5px 0px #b0b0b0;
+  z-index: 10;
+}
+header a {
+  color: var(--color-dark);
+  text-decoration: none;
+}
+header h1 {
+  font-family: "Playfair Display", serif;
+  font-size: 44px;
+}
+
+.navlinks {
+  display: flex;
+  margin: auto;
+  height: 100%;
+}
+.navlinks a {
+  margin: auto 10px;
+  text-transform: uppercase;
+}
+.navlinks a:hover {
+  color: var(--color-light);
+}
+.col {
+  display: flex;
+  flex-direction: column;
+}
+.colMiddle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex {
+  display: flex;
+}
+.flexAround {
+  display: flex;
+  justify-content: space-around;
+}
+.flexBetween {
+  display: flex;
+  justify-content: space-between;
+}
+.flexMiddle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.p10 {
+  padding: 10px;
+}
+.alignMiddle {
+  align-items: center;
+}
+.bold {
+  font-weight: bold;
+}
+
+.darkButton {
+  background: var(--color-dark);
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  color: white;
+  width: 150px;
+  height: 50px;
+  border-radius: 30px;
+}
+.darkButton a {
+  text-decoration: none;
+  color: white;
+  text-transform: uppercase;
+  width: 100%;
+  height: 100%;
+  font-weight: bold;
+}
+.darkButton:hover {
+  background: lightgrey;
+}
+.darkButton:hover a {
+  color: var(--color-dark) !important;
+}
+.lightButton {
+  background: lightgrey;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  color: var(--color-dark);
+  width: 150px;
+  height: 50px;
+  border-radius: 30px;
+}
+.lightButton a {
+  text-decoration: none;
+  color: var(--color-dark);
+  text-transform: uppercase;
+  width: 100%;
+  height: 100%;
+  font-weight: bold;
+}
+.lightButton:hover {
+  background: var(--color-dark);
+}
+.lightButton:hover a {
+  color: white !important;
+}
+.form {
+  width: 400px;
+  margin: 20px auto;
+}
+.form input {
+  width: 100%;
+  height: 44px;
+  border-radius: 30px;
+  border: 2px solid var(--color-dark);
+  outline: none;
+}
+.form input {
+  padding-left: 20px;
+}
+.form button {
+  margin-left: -50px;
+  border-radius: 30px;
+}

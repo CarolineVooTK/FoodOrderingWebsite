@@ -78,7 +78,7 @@ passport.use(
         }
       })
       .catch((err) => {
-        // console.log(err);
+        console.log(err);
       });
   })
 );
@@ -89,7 +89,7 @@ customerRouter.post(
   "/signup",
   passport.authenticate("local-signup", {
     failureRedirect: "/customer/signup",
-    failureFlash: "Invalid information",
+    failureFlash: true,
   }),
   function (req, res, next) {
     // console.log("user",req.user);
@@ -100,14 +100,8 @@ customerRouter.post(
 
 passport.use(
   "local-signup",new LocalStrategy( {passReqToCallback : true},function (req,givenName, familyName, done) {
-    // console.log("req = ",req)
-    // console.log("givenName = ",givenName)
-    // console.log("familyName = ",familyName)
-    // console.log("done = ",done)
     let input = { givenName:req.body.givenName, familyName: req.body.familyName,
                    username: req.body.username, password: req.body.password };
-    // req.body.username = username
-    // req.body.password = password
     let ress = "";
     myapi
       .addNewCustomer(input, ress)

@@ -5,24 +5,37 @@ const customerRouter = express.Router();
 
 const myapi = require("./api");
 
+// redirect middleware, redirect users to login page, if they access pages that requires login
+// and not yet login
+const redirectToLogin = (req, res, next) => {
+  console.log(req.session);
+  if (req.session.passport) {
+    next();
+  } else {
+    res.redirect("/customer/login");
+  }
+};
+
 customerRouter.get("/login", (req, res, next) => {
   // console.log(req.session.passport)
   res.render("login");
 });
 
-customerRouter.get("/profile", (req, res, next) => {
+customerRouter.get("/logout", (req, res, next) => {
+  // console.log(req.session.passport)
+  res.locals.customer_name = null;
+  res.locals.customer_id = null;
+  req.session.destroy(function (err) {
+    res.redirect('/'); //Inside a callback… bulletproof!
+  });
+});
+
+
+customerRouter.get("/profile",redirectToLogin, (req, res, next) => {
   // console.log(req.session.passport)
   res.render("profile");
 });
 
-const redirectTodashboard = (req, res, next) => {
-  console.log(req.session);
-  if (!req.session.passport) {
-    next();
-  } else {
-    res.redirect("/");
-  }
-};
 
 customerRouter.post(
   "/login",

@@ -14,7 +14,16 @@ menuRouter.get("/", async (req, res) => {
     });
 });
 
-menuRouter.get("/:id", async (req, res) => {
+const redirectTodashboard = (req, res, next) => {
+  // console.log(req.session);
+  if (req.session.passport) {
+    next();
+  } else {
+    res.redirect("/customer/login");
+  }
+};
+
+menuRouter.get("/:id",async (req, res) => {
   await myapi
     .getVendorMenu()
     .then((data) => {

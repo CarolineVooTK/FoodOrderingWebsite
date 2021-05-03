@@ -14,7 +14,17 @@ vendorRouter.get("/", async (req, res) => {
     });
 });
 
-vendorRouter.get("/:vendorId", async (req, res) => {
+
+const redirectTodashboard = (req, res, next) => {
+  // console.log(req.session);
+  if (req.session.passport) {
+    next();
+  } else {
+    res.redirect("/customer/login");
+  }
+};
+
+vendorRouter.get("/:vendorId",redirectTodashboard, async (req, res) => {
   await myapi
     .getSingleVendor({ id: req.params.vendorId })
     .then((data) => {

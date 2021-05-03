@@ -1,4 +1,4 @@
-<section id="vendors" class="flexAround">
+<section id="vendors" class="colStart">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script type="text/javascript">
         async function load_rating(vendorId) {
@@ -15,13 +15,15 @@
                 .catch((err) => {
                     console.log(err);
                 });
-            rating = data[0].rating;
-            count = data[0].count;
+            let rating = data[0].rating;
+            let dec = data[0].rating;
+            let count = data[0].count;
             if (count > 1) {
                 rating = Math.round(rating / count);
             }
-            let ratingDisplay = `<div class="flex">`;
+            let ratingDisplay = `<div class="flex rating">`;
             if (rating > 0) {
+                ratingDisplay += `<p>${dec}</p>`;
                 for (let i = 0; i < rating; i++) {
                     ratingDisplay += `<i class="fas fa-star"></i>`;
                 }
@@ -30,8 +32,9 @@
                         ratingDisplay += `<i class="far fa-star"></i>`;
                     }
                 }
+                ratingDisplay += `<p>(${count})</p>`;
             } else {
-                ratingDisplay += `<p>not available</p>`;
+                ratingDisplay += `<p>no rating</p>`;
             }
             ratingDisplay += `</div>`;
             document.getElementById(vendorId).innerHTML = ratingDisplay;
@@ -40,69 +43,88 @@
             return val.toString().split(",");
         }
     </script>
-
-    <div id="vendorList" class="col">
+    <div class="container relative height">
         <h1>Vendors Near You</h1>
-        {{#each vendors}}
-        {{#if this.active}}
-        <div class="vendor flexBetween">
-            <div class="col">
+        <div id="legend" class="colMiddle">
+            <div class="flex stretch">
+                <i id="collapseMapList" class="fas fa-chevron-down" onclick="toggleExpandMapList()"></i>
+                <div id="showList"></div>
+            </div>
+            <div id="vendorList" class="flex col">
+                {{#each vendors}}
+                {{#if this.active}}
+                <div class="vendor col">
+                    <div class="colStart title">
+                        <h2>{{this.name}}</h2>
+                        <p>{{this.textlocation}}</p>
+                        <div class="ratingContainer colMiddle">
+                            {{!-- add distance here --}}
+                            <script type="text/javascript">
+                                load_rating('{{this._id}}');
+                            </script>
+                            <div id="{{this._id}}" class="rate"></div>
+                            {{!-- {{#vendorRating this._id}}{{/vendorRating}} onload="load_rating('{{this._id}}')" --}}
+                        </div>
+                    </div>
+                    <div class="flex">
+                        <button><a href="/vendors/{{this._id}}">View</a></button>
+                        <button><a href="/vendors/{{this._id}}">Order</a></button>
+                    </div>
+                </div>
+                {{/if}}
+                {{/each}}
+            </div>
 
-                <h2>{{this.name}}</h2>
-                <p>{{this.textlocation}}</p>
-                <button><a href="/vendors/{{this._id}}">Go to Vendor</a></button>
-            </div>
-            <div class="rating colMiddle">
-                <p>RATING</p>
-                <script type="text/javascript">
-                    load_rating('{{this._id}}');
-                </script>
-                <div id="{{this._id}}" class="rate"></div>
-                {{!-- {{#vendorRating this._id}}{{/vendorRating}} onload="load_rating('{{this._id}}')" --}}
-            </div>
         </div>
-        {{/if}}
-        {{/each}}
-        {{!-- <h1>Inactive Vendors</h1>
-        <div>
-            {{#each vendors}}
-            {{#unless this.active}}
-            <p>{{this.name}}</p>
-            <button><a href="/vendors/{{this._id}}">View Vendor {{this.name}}</a></button>
-            {{/unless}}
-            {{/each}}
-        </div> --}}
-    </div>
-    <div id="vendorMap" class="flexMiddle">
-        <div id="mapid"></div>
-        <script type="text/javascript">
-            let map = L.map('mapid', {
-                center: [-37.81, 144.96],
-                zoom: 13
-            });
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            }).addTo(map);
-        </script>
-        {{#each vendors }}
-        {{#if this.active}}
-        {{#with location}}
-        {{#with coordinates}}
-        <script type="text/javascript">
-            console.log('{{this}}');
-            L.marker(latLongStr('{{this}}')).addTo(map)
-                .bindPopup(`<div class="popup">
+        <div id="vendorMap" class="flexMiddle">
+            <div id="mapid"></div>
+            {{!-- change zoom in map.locate to show nearest 5--}}
+            <script type="text/javascript">
+                let map = L.map('mapid', {
+                    center: [-37.81, 144.96],
+                    zoom: 13
+                });
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                }).addTo(map);
+                map.locate({ setView: true, maxZoom: 16 });
+            </script>
+            {{#each vendors }}
+            {{#if this.active}}
+            {{#with location}}
+            {{#with coordinates}}
+            <script type="text/javascript">
+                console.log('{{this}}');
+                L.marker(latLongStr('{{this}}')).addTo(map)
+                    .bindPopup(`<div class="popup">
                     <p class="bold">{{../../this.name}}</p>
                     <p>{{../../this.textlocation}}</p>
                     <button>
                         <a href="vendors/{{../../this._id}}">View</a>
                     </button>
                     </div>`)
-                .openPopup();
-        </script>
-        {{/with}}
-        {{/with}}
-        {{/if}}
-        {{/each}}
+                    .openPopup();
+            </script>
+            {{/with}}
+            {{/with}}
+            {{/if}}
+            {{/each}}
+        </div>
     </div>
+    <script>
+        function toggleExpandMapList() {
+            var nav = document.getElementById("vendorList");
+            if (nav.style.display == "none") {
+                nav.style.display = "flex";
+                document.getElementById("showList").innerHTML = "";
+                document.getElementById("collapseMapList").classList.remove("fa-chevron-up");
+                document.getElementById("collapseMapList").classList.add("fa-chevron-down");
+            } else {
+                nav.style.display = "none";
+                document.getElementById("showList").innerHTML = "<p>Show List</p>";
+                document.getElementById("collapseMapList").classList.remove("fa-chevron-down");
+                document.getElementById("collapseMapList").classList.add("fa-chevron-up");
+            }
+        }
+    </script>
 </section>

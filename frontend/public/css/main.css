@@ -65,13 +65,19 @@ header h1 {
   justify-content: center;
   align-items: center;
 }
-
+.colStart {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
 .flex {
   display: flex;
 }
 .flexAround {
   display: flex;
   justify-content: space-around;
+  align-items: center;
 }
 .flexBetween {
   display: flex;
@@ -161,9 +167,13 @@ header h1 {
 }
 .container {
   margin: auto;
+  height: 100%;
   width: 100%;
   max-width: 1200px;
 }
 .relative {
   position: relative;
+}
+.stretch {
+  width: 100%;
 }

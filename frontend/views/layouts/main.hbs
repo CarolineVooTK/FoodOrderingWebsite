@@ -83,15 +83,7 @@
         }, true);
         function toggleExpandNavbar() {
             var nav = document.getElementById("collapsedNav");
-            if (nav.style.display == 'flex') {
-                nav.style.display = 'none';
-            } else {
-                nav.style.display = 'flex';
-            }
-        }
-        function collapseNavbar() {
-            var nav = document.getElementById("collapsedNav");
-            nav.style.display = 'none';
+            nav.style.display = nav.style.display == "none" ? "flex" : "none";
         }
     </script>
 </body>

@@ -33,7 +33,7 @@ body {
   flex-direction: column;
 }
 header {
-  height: 130px;
+  height: auto;
   width: 100%;
   background-color: white;
   margin: 0;
@@ -44,6 +44,9 @@ header {
   box-shadow: 0px 1px 5px 0px #b0b0b0;
   z-index: 10;
 }
+header .container {
+  height: 130px;
+}
 header a {
   color: var(--color-dark);
   text-decoration: none;
@@ -52,18 +55,6 @@ header h1 {
   font-size: 44px;
 }
 
-.navlinks {
-  display: flex;
-  margin: auto;
-  height: 100%;
-}
-.navlinks a {
-  margin: auto 10px;
-  text-transform: uppercase;
-}
-.navlinks a:hover {
-  color: var(--color-light);
-}
 .col {
   display: flex;
   flex-direction: column;
@@ -172,4 +163,7 @@ header h1 {
   margin: auto;
   width: 100%;
   max-width: 1200px;
+}
+.relative {
+  position: relative;
 }

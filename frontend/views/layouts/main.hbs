@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/navbar.css">
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/home.css">
     <link rel="stylesheet" href="/css/vendors.css">
@@ -32,14 +33,32 @@
 </head>
 
 <body>
-    <header>
-        <div class="flexBetween container">
+    <header class="col">
+        <div class="flexBetween container relative">
+            <i onclick="toggleExpandNavbar()" id="hamburger" class="fas fa-bars"></i>
             <div class="navlinks">
                 <a href="/menu">menu</a>
+                <span>/</span>
                 <a href="/vendors">vendors</a>
             </div>
             <h1><a href="/">Snacks in a Van</a></h1>
             <div class="navlinks">
+                {{#if customer_name}}
+                <a href="/customer/profile">Hi, {{customer_name}}</a>
+                <span>/</span>
+                <a href="/customer/logout">logout</a>
+                {{else}}
+                <a href="/customer/login">login</a>
+                <span>/</span>
+                <a href="/customer/register">Sign Up</a>
+                {{/if}}
+            </div>
+        </div>
+        <div id="collapsedNav">
+            <div class="collapsedLinks colMiddle">
+                <a href="/">home</a>
+                <a href="/menu">menu</a>
+                <a href="/vendors">vendors</a>
                 {{#if customer_name}}
                 <a href="/customer/profile">Hi, {{customer_name}}</a>
                 <a href="/customer/logout">logout</a>
@@ -56,6 +75,26 @@
     {{!-- <footer>
         <p>footer</p>
     </footer> --}}
+    <script>
+        window.addEventListener('resize', function (event) {
+            var nav = document.getElementById("collapsedNav");
+            if (nav.style.display == 'flex') {
+                nav.style.display = 'none';
+            }
+        }, true);
+        function toggleExpandNavbar() {
+            var nav = document.getElementById("collapsedNav");
+            if (nav.style.display == 'flex') {
+                nav.style.display = 'none';
+            } else {
+                nav.style.display = 'flex';
+            }
+        }
+        function collapseNavbar() {
+            var nav = document.getElementById("collapsedNav");
+            nav.style.display = 'none';
+        }
+    </script>
 </body>
 
 </html>

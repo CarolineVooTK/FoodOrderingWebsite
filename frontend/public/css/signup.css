@@ -1,0 +1,29 @@
+#signupform {
+    width: 400px;
+    margin-top: 40px;
+}
+#signupform h1 {
+    text-align: center;
+    margin: 0;
+    font-size: 35px;
+}
+#signupform input {
+    margin-top: 5px;
+}
+#signupform input[type="submit"] {
+    width: 100%;
+    padding-left: 0;
+    margin-top: 20px;
+    background-color: var(--color-dark);
+    color: white;
+    font-size: 20px;
+    text-transform: uppercase;
+}
+#signupform .form {
+    margin-top: 0;
+} 
+label {
+    margin-top: 10px;
+    display: inline-block;
+    width: 100%;
+}

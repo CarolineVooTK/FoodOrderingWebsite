@@ -21,6 +21,13 @@ customerRouter.get("/login", (req, res, next) => {
   res.render("login");
 });
 
+customerRouter.get("/signup", (req, res, next) => {
+  // console.log(req.session.passport)
+  res.render("signup");
+});
+
+// customerRouter.post("/register")
+
 customerRouter.get("/logout", (req, res, next) => {
   // console.log(req.session.passport)
   res.locals.customer_name = null;
@@ -41,7 +48,7 @@ customerRouter.post(
   "/login",
   passport.authenticate("local", {
     failureRedirect: "/customer/login",
-    failureFlash: true,
+    failureFlash: "Incorrect email or password",
   }),
   function (req, res, next) {
     // console.log("user",req.user);

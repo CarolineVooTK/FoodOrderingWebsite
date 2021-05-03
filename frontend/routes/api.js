@@ -24,6 +24,23 @@ const customerAuth = async (req, res,next) => {
   return data;
 };
 
+const addNewCustomer = async (req, res,next) => {
+  // console.log("addnewcust: req = ",req)
+  let data = null;
+  data = await axios
+    .post(BASE_URL + "/customer/addcustomer",{email: req.username, password: req.password, 
+                                              givenName: req.givenName, familyName:req.familyName})
+    .then((data) => {
+      if (data.data) {
+        return data.data;
+      }
+      return [];
+    })
+    .catch((err) => {
+      // console.log(err);
+    });
+  return data;
+};
 
 
 
@@ -110,4 +127,13 @@ const getVendorMenu = async (vendorId) => {
 
 
 
-module.exports = { getSingleVendor, getMenu, getVendorMenu, getAllVendors, getVendorRating, customerAuth};
+module.exports = 
+{ 
+  getSingleVendor, 
+  getMenu, 
+  getVendorMenu, 
+  getAllVendors, 
+  getVendorRating, 
+  customerAuth,
+  addNewCustomer
+};

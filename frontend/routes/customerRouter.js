@@ -46,7 +46,7 @@ customerRouter.get("/profile",redirectToLogin, (req, res, next) => {
 
 customerRouter.post(
   "/login",
-  passport.authenticate("local", {
+  passport.authenticate("local-login", {
     failureRedirect: "/customer/login",
     failureFlash: "Incorrect email or password",
   }),
@@ -58,14 +58,59 @@ customerRouter.post(
 );
 
 passport.use(
-  "local",
-  new LocalStrategy(function (username, password, done) {
-    let req = { username: username, password: password };
+  "local-login",
+  new LocalStrategy( {passReqToCallback : true}, function (req,username, password, done) {
+    let input = { username: req.body.username, password: req.body.password };
     // req.body.username = username
     // req.body.password = password
     let res = "";
     myapi
-      .customerAuth(req, res)
+      .customerAuth(input, res)
+      .then((data) => {
+        // console.log("herre")
+        // console.log(data)
+        if (data) {
+          return done(null, data.data);
+        } else {
+          return done(null, false, {
+            message: `Invalid Username or password`,
+          });
+        }
+      })
+      .catch((err) => {
+        // console.log(err);
+      });
+  })
+);
+
+
+
+customerRouter.post(
+  "/signup",
+  passport.authenticate("local-signup", {
+    failureRedirect: "/customer/signup",
+    failureFlash: "Invalid information",
+  }),
+  function (req, res, next) {
+    // console.log("user",req.user);
+    req.flash("success", "Login Success..");
+    res.redirect("/");
+  }
+);
+
+passport.use(
+  "local-signup",new LocalStrategy( {passReqToCallback : true},function (req,givenName, familyName, done) {
+    // console.log("req = ",req)
+    // console.log("givenName = ",givenName)
+    // console.log("familyName = ",familyName)
+    // console.log("done = ",done)
+    let input = { givenName:req.body.givenName, familyName: req.body.familyName,
+                   username: req.body.username, password: req.body.password };
+    // req.body.username = username
+    // req.body.password = password
+    let ress = "";
+    myapi
+      .addNewCustomer(input, ress)
       .then((data) => {
         // console.log("herre")
         // console.log(data)
@@ -73,7 +118,7 @@ passport.use(
           return done(null, data);
         } else {
           return done(null, false, {
-            message: `Invalid Username or password`,
+            message: `Invalid Information`,
           });
         }
       })
@@ -83,10 +128,11 @@ passport.use(
   })
 );
 
+
 passport.serializeUser(function (user, done) {
   // console.log("serialize")
   // console.log("user = ", user)
-  done(null, user.data);
+  done(null, user);
 });
 
 passport.deserializeUser(function (obj, done) {

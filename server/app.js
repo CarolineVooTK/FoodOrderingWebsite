@@ -21,10 +21,12 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 // Express
 const express = require("express");
+const bcrypt = require('bcryptjs');
 const path = require("path");
 const exphbs = require("express-handlebars");
 const app = express();
 const cors = require("cors");
+
 
 app.set("views", path.join(__dirname, "./views"));
 app.engine(

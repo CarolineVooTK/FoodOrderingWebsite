@@ -3,6 +3,18 @@ const menuRouter = express.Router();
 
 const myapi = require("./api");
 
+// redirect middleware, redirect users to login page, if they access pages that requires login
+// and not yet login
+const redirectToLogin = (req, res, next) => {
+  // console.log(req.session);
+  if (req.session.passport) {
+    next();
+  } else {
+    res.redirect("/customer/login");
+  }
+};
+
+
 menuRouter.get("/", async (req, res) => {
   await myapi
     .getMenu()
@@ -14,14 +26,6 @@ menuRouter.get("/", async (req, res) => {
     });
 });
 
-const redirectTodashboard = (req, res, next) => {
-  // console.log(req.session);
-  if (req.session.passport) {
-    next();
-  } else {
-    res.redirect("/customer/login");
-  }
-};
 
 menuRouter.get("/:id",async (req, res) => {
   await myapi

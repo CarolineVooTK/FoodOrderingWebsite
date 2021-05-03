@@ -23,7 +23,8 @@ customerRouter.get("/login", (req, res, next) => {
 
 customerRouter.get("/signup", (req, res, next) => {
   // console.log(req.session.passport)
-  res.render("signup");
+  // console.log(req)
+  res.render("signup", {preEmail: req.query.username});
 });
 
 // customerRouter.post("/register")

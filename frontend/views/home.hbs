@@ -50,9 +50,9 @@
             <h1>Sign up for free today</h1>
             <p>Sign up now to order something online</p>
             {{!-- will need to check this form --}}
-            <form class="form flex" method="post" action="/customer/login">
+            <form class="form flex" method="get" action="/customer/signup">
                 <input placeholder="username" name="username" />
-                <button class="darkButton"><a href="/register">Sign Up</a></button>
+                <input id= "homeSubmitButton" class="darkButton" type="submit" value="Sign Up">
             </form>
         </div>
     </div>

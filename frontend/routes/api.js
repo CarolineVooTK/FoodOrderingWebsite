@@ -37,7 +37,7 @@ const addNewCustomer = async (req, res,next) => {
       return [];
     })
     .catch((err) => {
-      // console.log(err);
+      console.log(err);
     });
   return data;
 };

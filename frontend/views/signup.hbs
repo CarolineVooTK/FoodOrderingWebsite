@@ -12,7 +12,7 @@
       </label>
       <label>
         Email
-        <input placeholder="email" name="username" />
+        <input placeholder="email" name="username" value ={{preEmail}}>
       </label>
       <label class="mt20">
         Password
@@ -23,7 +23,7 @@
     </div>
   {{#if error}}
   <div class="signup_fail">
-    <a style="color:red;"> invalid username or password </a>
+    <a style="color:red;"> Invalid Information </a>
   </div>
   {{/if}}
 

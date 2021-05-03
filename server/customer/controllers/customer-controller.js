@@ -1,7 +1,7 @@
 const CustomerModel = require("../models/CustomerModel");
 const customer = CustomerModel.customer;
 const point = CustomerModel.point;
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcrypt');
 let ObjectId = require("mongoose").Types.ObjectId;
 
 const getCustomerByEmail = async (req, res) => {
@@ -22,11 +22,13 @@ const getCustomerByEmail = async (req, res) => {
   };
 
 const addNewCustomer = async (req,res) => {
+  // let hash =bcrypt.hashSync(req.body.password, 8)
+  // console.log("hash = ",hash)
   let cust = new customer({
     givenName: req.body.givenName,
     familyName: req.body.familyName,
     email: req.body.email,
-    password: req.body.password,
+    password: req.body.password
   });
   await cust
     .save()
@@ -48,11 +50,6 @@ const addNewCustomer = async (req,res) => {
 
 
 const customerAuth = async (req, res) => {
-  // var a  = "password"
-  // hash = bcrypt.hashSync(a, 8);
-  // console.log("result = ",bcrypt.compareSync(a,hash))
-  // console.log("var hash = bcrypt.hashSync(\"password\", 8) = ", hash)
-  // console.log("cusAuth in server: req.body = ",req.body)
     let cust = await customer.findOne({email: req.body.email}).lean()
       .then((data) => {
         if (!data) {
@@ -61,12 +58,10 @@ const customerAuth = async (req, res) => {
           });
         }
         else{
-            // if (bcrypt.compareSync(data.password,req.body.password)){
-            //     res.status(200).json(data);
-            // }
-            if (data.password = req.body.password){
-                  res.status(200).json(data);
-              }
+            if (bcrypt.compare(data.password,req.body.password)){
+
+              res.status(200).json(data);
+            }
             else{
                 return res.status(404).json({
                     message: "Authentication Fail",

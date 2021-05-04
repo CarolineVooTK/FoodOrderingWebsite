@@ -57,6 +57,7 @@
   #hamburger {
     display: flex;
     align-items: center;
+    z-index: 10;
   }
   .navlinks * {
     display: none;

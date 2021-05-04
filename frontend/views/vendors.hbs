@@ -17,13 +17,16 @@
                 });
             let rating = data[0].rating;
             let dec = data[0].rating;
+            if (dec.toString().length == 1) {
+                dec = dec.toString() + ".0";
+            }
             let count = data[0].count;
             if (count > 1) {
                 rating = Math.round(rating / count);
             }
             let ratingDisplay = `<div class="flex rating">`;
             if (rating > 0) {
-                ratingDisplay += `<p>${dec}</p>`;
+                ratingDisplay += `<span>${dec}</span>`;
                 for (let i = 0; i < rating; i++) {
                     ratingDisplay += `<i class="fas fa-star"></i>`;
                 }
@@ -32,7 +35,7 @@
                         ratingDisplay += `<i class="far fa-star"></i>`;
                     }
                 }
-                ratingDisplay += `<p>(${count})</p>`;
+                ratingDisplay += `<span>(${count})</span>`;
             } else {
                 ratingDisplay += `<p>no rating</p>`;
             }
@@ -47,8 +50,11 @@
         <h1>Vendors Near You</h1>
         <div id="legend" class="colMiddle">
             <div class="flex stretch">
-                <i id="collapseMapList" class="fas fa-chevron-down" onclick="toggleExpandMapList()"></i>
-                <div id="showList"></div>
+                <button id="collapseMapList" class="flex" onclick="toggleExpandMapList()">
+                    <p id="showList">show list</p>
+                    <i id="arrow" class="fas fa-chevron-down"></i>
+                </button>
+
             </div>
             <div id="vendorList" class="flex col">
                 {{#each vendors}}
@@ -116,14 +122,18 @@
             var nav = document.getElementById("vendorList");
             if (nav.style.display == "none") {
                 nav.style.display = "flex";
-                document.getElementById("showList").innerHTML = "";
-                document.getElementById("collapseMapList").classList.remove("fa-chevron-up");
-                document.getElementById("collapseMapList").classList.add("fa-chevron-down");
+                document.getElementById("showList").style.display = "none";
+                document.getElementById("arrow").classList.remove("fa-bars");
+                document.getElementById("arrow").classList.add("fa-chevron-down");
+                document.getElementById("arrow").style.fontSize = "25px";
+                document.getElementById("collapseMapList").style.width = "100px";
             } else {
                 nav.style.display = "none";
-                document.getElementById("showList").innerHTML = "<p>Show List</p>";
-                document.getElementById("collapseMapList").classList.remove("fa-chevron-down");
-                document.getElementById("collapseMapList").classList.add("fa-chevron-up");
+                document.getElementById("showList").style.display = "flex";
+                document.getElementById("arrow").classList.remove("fa-chevron-down");
+                document.getElementById("arrow").classList.add("fa-bars");
+                document.getElementById("arrow").style.fontSize = "20px";
+                document.getElementById("collapseMapList").style.width = "130px";
             }
         }
     </script>

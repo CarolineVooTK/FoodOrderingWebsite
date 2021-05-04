@@ -36,7 +36,7 @@
 <body>
     <header class="col">
         <div class="flexBetween container relative">
-            <i onclick="toggleExpandNavbar()" id="hamburger" class="fas fa-bars"></i>
+            <i onclick="showNavbar()" id="hamburger" class="fas fa-bars"></i>
             <div class="navlinks">
                 <a href="/menu">menu</a>
                 <span>/</span>
@@ -55,19 +55,39 @@
                 {{/if}}
             </div>
         </div>
-        <div id="collapsedNav">
-            <div class="collapsedLinks colMiddle">
-                <a href="/">home</a>
-                <a href="/menu">menu</a>
-                <a href="/vendors">vendors</a>
-                {{#if customer_name}}
-                <a href="/customer/profile">profile</a>
-                <a href="/customer/logout">logout</a>
-                {{else}}
-                <a href="/customer/login">login</a>
-                <a href="/customer/signup">Sign Up</a>
+        <div id="collapsedNav" class="flex">
+            <div class="collapsedLinks col">
+                <img alt="icon" src="/images/food-truck.ico" />
+                <div class="flex"><a href="/">home</a>
+                    <i class="fas fa-angle-right"></i>
+                </div>
+                <div class="flex">
+                    <a href="/menu">menu</a>
+                    <i class="fas fa-angle-right"></i>
+                </div>
+                <div class="flex">
+                    <a href="/vendors">vendors</a>
+                    <i class="fas fa-angle-right"></i>
+                </div>
+                {{#if customer_name}}<div class="flex">
+                    <a href="/customer/profile">profile</a>
+                    <i class="fas fa-angle-right"></i>
+                </div>
+                <div class="flex">
+                    <a href="/customer/logout">logout</a>
+                    <i class="fas fa-angle-right"></i>
+                </div>
+                {{else}}<div class="flex">
+                    <a href="/customer/login">login</a>
+                    <i class="fas fa-angle-right"></i>
+                </div>
+                <div class="flex">
+                    <a href="/customer/signup">Sign Up</a>
+                    <i class="fas fa-angle-right"></i>
+                </div>
                 {{/if}}
             </div>
+            <div class="modalSpace" onclick="hideNavbar()"></div>
         </div>
     </header>
 
@@ -82,9 +102,13 @@
                 nav.style.display = 'none';
             }
         }, true);
-        function toggleExpandNavbar() {
+        function showNavbar() {
             var nav = document.getElementById("collapsedNav");
-            nav.style.display = nav.style.display == "none" ? "flex" : "none";
+            nav.style.display = "flex";
+        }
+        function hideNavbar() {
+            var nav = document.getElementById("collapsedNav");
+            nav.style.display = "none";
         }
     </script>
 </body>

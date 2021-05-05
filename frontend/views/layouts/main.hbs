@@ -34,25 +34,28 @@
 </head>
 
 <body>
-    <header class="col">
-        <div class="flexBetween container relative">
-            <i onclick="showNavbar()" id="hamburger" class="fas fa-bars"></i>
-            <div class="navlinks">
-                <a href="/menu">menu</a>
-                <span>/</span>
-                <a href="/vendors">vendors</a>
-            </div>
-            <h1><a href="/">Snacks in a Van</a></h1>
-            <div class="navlinks">
+    <header class="col relative">
+        <div id="signupBanner" class="fixed">
+            <div class="container flexEnd">
                 {{#if customer_name}}
                 <a href="/customer/profile">profile</a>
-                <span>/</span>
                 <a href="/customer/logout">logout</a>
                 {{else}}
                 <a href="/customer/login">login</a>
-                <span>/</span>
                 <a href="/customer/signup">Sign Up</a>
                 {{/if}}
+            </div>
+        </div>
+        <div id="regularNav" class="regNav">
+            <div class="container flexBetween">
+                <i onclick="showNavbar()" id="hamburger" class="fas fa-bars"></i>
+                <div class="navlinks">
+                    <a href="/menu">menu</a>
+                </div>
+                <h1><a href="/">Snacks in a Van</a></h1>
+                <div class="navlinks">
+                    <a href="/vendors">Find a Van</a>
+                </div>
             </div>
         </div>
         <div id="collapsedNav" class="flex">
@@ -102,12 +105,28 @@
                 nav.style.display = 'none';
             }
         }, true);
+        document.addEventListener("scroll", () => {
+            let topnav = document.getElementById("signupBanner");
+            let nav = document.getElementById("regularNav");
+            let hero = document.getElementById("hero");
+            if (window.scrollY >= 45 && !nav.classList.contains("fixed")) {
+                nav.classList.add("fixed");
+                nav.classList.add("regFix");
+                hero.classList.add("heroFix");
+                topnav.classList.remove("fixed");
+            } else if (window.scrollY < 45 && nav.classList.contains("fixed")) {
+                nav.classList.remove("fixed");
+                topnav.classList.add("fixed");
+                nav.classList.remove("regFix");
+                hero.classList.remove("heroFix");
+            }
+        });
         function showNavbar() {
-            var nav = document.getElementById("collapsedNav");
+            let nav = document.getElementById("collapsedNav");
             nav.style.display = "flex";
         }
         function hideNavbar() {
-            var nav = document.getElementById("collapsedNav");
+            let nav = document.getElementById("collapsedNav");
             nav.style.display = "none";
         }
     </script>

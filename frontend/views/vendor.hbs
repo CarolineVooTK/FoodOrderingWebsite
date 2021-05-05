@@ -1,10 +1,41 @@
 <section id="singleVendor" class="col">
     <div class="flex p10 alignMiddle">
-        <button><a href="/vendors">Back to Vendors</a></button>
+        <button class="darkButton" onclick="location.href='/vendors'" type="button">Back to Vendors</button>
         <h1>** vendor name **</h1>
     </div>
     <div class="vendorDisplay flexBetween">
-        <div class="menu">vendor menu here</div>
-        <div class="order">customer order here</div>
+        <div id="menu">vendor menu here</div>
+        <div id="order" class="col">
+            <div class="col">
+                <h2>Your order</h2>
+                <div class="van col">
+                    <div class="flexBetween">
+                        <h4>VAN</h4>
+                        <h5>change</h5>
+                    </div>
+                    <div class="name flex">
+                        <div class="title">
+                            <p>van name</p>
+                        </div>
+                        <div class="location flex">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <p>location</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="items colStart">
+                <p>** items here **</p>
+            </div>
+            <div class="col">
+                <div class="total flexBetween">
+                    <h4>Total</h4>
+                    <p>**Price**</p>
+                </div>
+                <div class="flexMiddle">
+                    <button class="submitButton" type="submit">Place Order</button>
+                </div>
+            </div>
+        </div>
     </div>
 </section>

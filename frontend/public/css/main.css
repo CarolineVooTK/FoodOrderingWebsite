@@ -139,6 +139,26 @@ header h1 {
   color: white !important;
   cursor: pointer;
 }
+.submitButton {
+  background: rgb(9, 218, 9);
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  color: white;
+  width: 150px;
+  height: 50px;
+  border-radius: 30px;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  border: 2px solid black;
+}
+.submitButton:hover {
+  background: lightgrey;
+  border: 2px solid var(--color-dark);
+  color: var(--color-dark) !important;
+  cursor: pointer;
+}
 .form {
   width: 400px;
   margin: 20px auto;

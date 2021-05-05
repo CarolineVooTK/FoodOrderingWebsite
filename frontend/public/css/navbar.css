@@ -1,14 +1,52 @@
+#signupBanner {
+  height: 45px;
+  width: 100%;
+  background: rgb(233, 233, 233);
+  background-color: rgb(233, 233, 233);
+  z-index: 9;
+}
+#signupBanner .container {
+  height: 45px !important;
+}
+#signupBanner a {
+  margin-right: 20px;
+  text-transform: uppercase;
+}
+#signupBanner,
+#signupBanner .container {
+  height: 45px !important;
+}
+#regularNav {
+  height: 130px;
+  width: 100%;
+  z-index: 10;
+  margin-top: 45px;
+  background: white;
+  position: relative;
+  -webkit-box-shadow: 0px 2px 5px 0px #b0b0b0;
+  box-shadow: 0px 2px 5px 0px #b0b0b0;
+}
+#regularNav a {
+  width: 150px;
+  text-align: center;
+}
+.regFix {
+  top: -45px !important;
+  height: 130px;
+}
 .navlinks {
   display: flex;
   margin: auto;
   height: 100%;
 }
 .navlinks a {
+  font-size: 18px;
   margin: auto 10px;
   text-transform: uppercase;
 }
+.signupBanner a:hover,
 .navlinks a:hover {
-  color: var(--color-light);
+  color: grey;
 }
 .navlinks span {
   margin: auto;
@@ -85,7 +123,7 @@
   #hamburger {
     display: flex;
     align-items: center;
-    z-index: 10;
+    height: 130px;
   }
   .navlinks * {
     display: none;

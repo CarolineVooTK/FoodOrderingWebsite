@@ -16,8 +16,11 @@
   position: relative;
   padding: 10px;
 }
+.heroFix {
+  margin-top: 130px !important;
+}
 .hero .container {
-  margin-top: 50px;
+  margin-top: 0;
 }
 .overlay {
   position: absolute;
@@ -58,7 +61,7 @@
   margin: 0 15px;
 }
 
-#homeSubmitButton{
+#homeSubmitButton {
   margin: 0 15px;
   /* margin: 30px auto; */
   text-align: center;

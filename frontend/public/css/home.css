@@ -62,9 +62,16 @@
 }
 
 #homeSubmitButton {
-  margin: 0 15px;
-  /* margin: 30px auto; */
+  margin: auto;
+  margin-left: -50px;
+  width: 170px;
   text-align: center;
+  padding: 10px;
+  font-size: 16px;
+}
+#homeSubmitButton:hover {
+  cursor: pointer;
+  color: var(--color-dark);
 }
 
 .feature {

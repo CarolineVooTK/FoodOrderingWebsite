@@ -7,8 +7,8 @@
                 <h2>on the Move</h2>
                 {{!-- <p>Find and order from one of our many vendors at a location near you.</p> --}}
                 <div class="buttons flexMiddle">
-                    <button class="lightButton"><a href="/menu">Go to Menu</a></button>
-                    <button class="lightButton"><a href="/vendors">Find a Vendor</a></button>
+                    <button class="lightButton" onclick="location.href='/menu'" type="button">Go to Menu</button>
+                    <button class="lightButton" onclick="location.href='/vendors'" type="button">Find a Vendor</button>
                 </div>
             </div>
         </div>
@@ -21,7 +21,7 @@
                     excepturi incidunt. Nemo quaerat consequatur cum at incidunt, doloribus recusandae accusamus amet
                     nobis.
                     Consequatur, sint quibusdam!</p>
-                <button class="darkButton"><a href="/menu">Go to Menu</a></button>
+                <button class="darkButton" onclick="location.href='/menu'" type="button">Go to Menu</button>
             </div>
             <div class="imgContainer flexMiddle">
                 <img src="/images/food.jpeg" alt="food" />
@@ -40,7 +40,7 @@
                     excepturi incidunt. Nemo quaerat consequatur cum at incidunt, doloribus recusandae accusamus amet
                     nobis.
                     Consequatur, sint quibusdam!</p>
-                <button class="darkButton"><a href="/vendors">Go to Map</a></button>
+                <button class="darkButton" onclick="location.href='/vendors'" type="button">Go to Map</button>
             </div>
         </div>
     </div>
@@ -48,11 +48,11 @@
     <div class="signup colMiddle">
         <div class="info">
             <h1>Sign up for free today</h1>
-            <p>Sign up now to order something online</p>
+            <p>Sign up now and make an order online.</p>
             {{!-- will need to check this form --}}
             <form class="form flex" method="get" action="/customer/signup">
-                <input placeholder="username" name="username" />
-                <input id="homeSubmitButton" class="darkButton" type="submit" value="Sign Up">
+                <input placeholder="username" name="username" type="text" />
+                <input id="homeSubmitButton" class="darkButton" type="submit" value="Sign Up" />
             </form>
         </div>
     </div>

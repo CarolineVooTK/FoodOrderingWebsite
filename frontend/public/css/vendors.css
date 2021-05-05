@@ -77,15 +77,13 @@
   width: 100px;
   height: 35px;
   border-radius: 30px;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 .vendor button:hover {
-  background: lightgrey;
+  background: grey;
   color: white;
-}
-.vendor button a {
-  text-decoration: none;
-  color: black;
-  text-transform: uppercase;
+  cursor: pointer;
 }
 .vendor h2 {
   text-transform: uppercase;

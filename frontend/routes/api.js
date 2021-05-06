@@ -46,7 +46,7 @@ const addNewCustomer = async (req, res,next) => {
 const createNewOrder = async (req, res) => {
   let data = null ; 
   data = await axios 
-  .post(BASE_URL + "/order/createNewOrder", {orderitems: req.orderitems, quantity: req.quantity, customerId: req.customerId, 
+  .post(BASE_URL + "/orders/createNewOrder", {orderitems: req.orderitems, quantity: req.quantity, customerId: req.customerId, 
                                              vendorId:req.vendorId, time:req.time, price:req.price})
   .then((data) => {
     if (data.data) {

@@ -41,15 +41,13 @@ const addNewItemInOrder = async (req, res) => {
    var cart = new Cart(req.session.cart ? req.session.cart : {}) ; 
 
   menuitems.findone({_id : req.params.snackId}, function(err, item){
-    // or there should not be an error occuring as the customer can only select the items in our database 
     if (err) {
       // Or maybe we can add a pop out showing error message 
       // Redirect to the menu page if there is an error
-      res.render("Error while adding the Product into Cart")
-      return res.redirect('/'); 
+      return res.send("Error while adding the snack into Cart")
     }
-    // pass the product that just fetch from the database 
-    // and productName as the identifier
+    // pass the snack that just fetch from the database 
+    // and snack id as the identifier
     cart.add(item, item.id);
     // storing in cart object in my session
     req.session.cart = cart;

@@ -1,18 +1,16 @@
-<body>
-    <div class="container">
-        <div class="row row-cols-3">
-            {{#each menu}}
-            <div clsss = "row">
-                <h2 class="foodname" style="float: left;" >
-                    <a href = "/menu/{{this.id}}" >
+<div class="container">
+    <div class="row row-cols-3">
+        {{#each menu}}
+        <div class="row">
+            <h2 class="foodname" style="width: auto; float: left;">
+                <a href="/menu/{{this.id}}">
                     &nbsp;{{this.name}}
-                    </a> 
-                </h2>
-                <h2 style="float: right;">${{this.price}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h2>
-                <p style="clear: both;color:rgb(63, 63, 63)">&nbsp;{{this.description}}</p>
-                <img src = "{{this.photo}}" width = "280" height = "280">
-            </div>
-            {{/each}}
+                </a>
+            </h2>
+            <h2 style="width: auto; margin-left: auto; float: right;">${{this.price}}</h2>
+            <p style="clear: both;color:rgb(63, 63, 63)">&nbsp;{{this.description}}</p>
+            <img src="{{this.photo}}" width="280" height="280">
         </div>
+        {{/each}}
     </div>
-</body>
+</div>

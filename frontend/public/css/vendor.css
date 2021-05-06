@@ -1,0 +1,86 @@
+/* single vendor page */
+#singleVendor {
+  width: 100%;
+  max-width: 1200px;
+  padding: 20px;
+  box-sizing: border-box;
+  position: relative;
+}
+.vendorDisplay {
+  width: 100%;
+  min-height: 500px;
+}
+#singleVendor h1 {
+  margin: 0;
+  margin-left: 40px;
+}
+/* menu styles */
+#menu {
+  width: 67%;
+  background: lightgrey;
+  box-sizing: border-box;
+  height: 1200px;
+  margin-top: 10px;
+}
+/* order styles */
+#order {
+  position: fixed;
+  right: 20px;
+  top: 165px;
+  height: 500px;
+  background: rgb(242, 242, 242);
+  width: 30%;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: scroll;
+  justify-content: space-between;
+}
+#order h2 {
+  margin: 10px auto;
+  border-bottom: 1px solid grey;
+  padding-bottom: 10px;
+  width: 100%;
+  text-align: center;
+}
+.van {
+  align-items: flex-start !important;
+  width: 100%;
+  box-sizing: border-box;
+}
+.van div {
+  width: 100%;
+}
+.van h5 {
+  text-decoration: underline;
+}
+.van p {
+  margin: 0;
+  width: 100%;
+}
+.van .name {
+  text-align: start;
+  width: 100%;
+  border-bottom: 1px solid grey;
+  margin-top: -10px;
+  padding-bottom: 10px;
+  flex-wrap: wrap;
+}
+.van .name .location {
+  padding-top: 5px;
+  width: 50%;
+}
+.van .name .title {
+  width: 50%;
+  padding-top: 5px;
+}
+.van .name .location p {
+  margin-left: 10px;
+}
+.total {
+  border-top: 1px solid grey;
+  border-bottom: 1px solid grey;
+  margin-bottom: 10px;
+}
+.total h4 {
+  margin: auto 0;
+}

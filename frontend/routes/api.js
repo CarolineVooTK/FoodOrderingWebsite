@@ -42,11 +42,12 @@ const addNewCustomer = async (req, res,next) => {
   return data;
 };
 
-// add new item into an order if the item is not in the order yet
-const addNewItemInOrder = async (req, res) => {
+// add a new order 
+const createNewOrder = async (req, res) => {
   let data = null ; 
   data = await axios 
-  .post(BASE_URL + "/menu/addNewItemInOrder")
+  .post(BASE_URL + "/order/createNewOrder", {orderitems: req.orderitems, quantity: req.quantity, customerId: req.customerId, 
+                                             vendorId:req.vendorId, time:req.time, price:req.price})
   .then((data) => {
     if (data.data) {
       return data.data;
@@ -57,7 +58,7 @@ const addNewItemInOrder = async (req, res) => {
     console.log(err);
   });
 return data;
-}; 
+};
 
 // get all vendors
 const getAllVendors = async () => {

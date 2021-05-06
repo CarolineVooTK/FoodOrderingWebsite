@@ -4,16 +4,15 @@ const axios = require("axios");
 // const BASE_URL = "https://web-info-tech-group-3.herokuapp.com";
 const BASE_URL = "http://localhost:4000";
 
-
 // checkauthentication
-const customerAuth = async (req, res,next) => {
+const customerAuth = async (req, res, next) => {
   // console.log("cusAuth")
   let data = null;
   data = await axios
-    .post(BASE_URL + "/customer/custAuth",{email: req.username, password: req.password})
+    .post(BASE_URL + "/customer/custAuth", { email: req.username, password: req.password })
     .then((data) => {
       // console.log("data = ", data)
-      if (data.status == 200){
+      if (data.status == 200) {
         // console.log("data.status = 200")
       }
       return data;
@@ -24,12 +23,16 @@ const customerAuth = async (req, res,next) => {
   return data;
 };
 
-const addNewCustomer = async (req, res,next) => {
+const addNewCustomer = async (req, res, next) => {
   // console.log("addnewcust: req = ",req)
   let data = null;
   data = await axios
-    .post(BASE_URL + "/customer/addcustomer",{email: req.username, password: req.password, 
-                                              givenName: req.givenName, familyName:req.familyName})
+    .post(BASE_URL + "/customer/addcustomer", {
+      email: req.username,
+      password: req.password,
+      givenName: req.givenName,
+      familyName: req.familyName,
+    })
     .then((data) => {
       if (data.data) {
         return data.data;
@@ -42,22 +45,28 @@ const addNewCustomer = async (req, res,next) => {
   return data;
 };
 
-// add a new order 
+// add a new order
 const createNewOrder = async (req, res) => {
-  let data = null ; 
-  data = await axios 
-  .post(BASE_URL + "/orders/createNewOrder", {orderitems: req.orderitems, quantity: req.quantity, customerId: req.customerId, 
-                                             vendorId:req.vendorId, time:req.time, price:req.price})
-  .then((data) => {
-    if (data.data) {
-      return data.data;
-    }
-    return [];
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-return data;
+  let data = null;
+  data = await axios
+    .post(BASE_URL + "/orders/createNewOrder", {
+      orderitems: req.orderitems,
+      quantity: req.quantity,
+      customerId: req.customerId,
+      vendorId: req.vendorId,
+      time: req.time,
+      price: req.price,
+    })
+    .then((data) => {
+      if (data.data) {
+        return data.data;
+      }
+      return [];
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  return data;
 };
 
 // get all vendors
@@ -158,8 +167,6 @@ const getOrders = async () => {
   return data;
 };
 
-
-
 const getOrderDetails = async (orderId) => {
   let data = null;
   data = await axios
@@ -176,19 +183,15 @@ const getOrderDetails = async (orderId) => {
   return data;
 };
 
-module.exports = 
-{ 
-  getSingleVendor, 
-  getMenu, 
-  getVendorMenu, 
-  getAllVendors, 
-  getVendorRating, 
+module.exports = {
+  getSingleVendor,
+  getMenu,
+  getVendorMenu,
+  getAllVendors,
+  getVendorRating,
   customerAuth,
   addNewCustomer,
-<<<<<<< HEAD
   getOrders,
-  getOrderDetails
-=======
-  addNewItemInOrder
->>>>>>> kane_order3snacks
+  getOrderDetails,
+  // addNewItemInOrder,
 };

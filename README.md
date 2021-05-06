@@ -45,8 +45,35 @@ Project is created with:
 - Express 4.17.1
 - Express Handlebars 5.3.0
 - Mongoose 5.12.3
+- Passport 0.4.1
+- Passport-local 1.0.0
+- Path 0.12.7
+- Express-session 1.17.1
+- Axios 0.21.1
+- connect-flash 0.1.1
+- cookie-parser 1.4.5
+
+
 
 ## Code Implementation
+
+### FRONT-END
+
+#### LOGIN DETAILS
+
+Dummy1:
+username: customer@test.com
+password: password
+
+Dummy2:
+username: customer2@test.com
+password: password
+
+Dummy3:
+username: customer3@test.com
+password: securepassword
+
+
 
 ### Server
 

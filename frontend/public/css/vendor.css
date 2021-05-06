@@ -31,6 +31,7 @@
 /* order styles */
 #order {
   height: calc(100vh - 175px);
+  max-height: calc(100vh - 175px);
   background: rgb(242, 242, 242);
   width: 33%;
   max-width: 600px;
@@ -45,7 +46,7 @@
   right: 0px;
   top: 175px;
   transform: translateX(-0%);
-  min-height: 600px;
+  min-height: 500px;
 }
 #order h2 {
   margin: 10px auto;

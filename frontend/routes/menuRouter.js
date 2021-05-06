@@ -19,7 +19,7 @@ menuRouter.get("/", async (req, res) => {
   await myapi
     .getMenu()
     .then((data) => {
-      res.render("menu", { menu: data[0] });
+      res.render("menu", { menu: data });
     })
     .catch((err) => {
       console.log(err);

@@ -44,10 +44,10 @@ app.use(function(req, res, next) {
   // console.log("app.js, app.use, flash")
   res.locals.success = req.flash('success');
   if (req.session.passport){
-    res.locals.customer_name = req.session.passport.user.givenName
+    res.locals.customer_id = req.session.passport.user
+    console.log("locals. cust = ",res.locals.customer_id)
   }
-  // console.log("res local cus = ", req.session.passport)
-  res.locals.customer_id = req.session
+  // res.locals.customer_id = req.session
   // console.log("res.locals= ",res.locals)
   res.locals.error = req.flash('error');
   next();

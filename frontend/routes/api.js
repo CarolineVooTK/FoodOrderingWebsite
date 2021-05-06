@@ -42,7 +42,22 @@ const addNewCustomer = async (req, res,next) => {
   return data;
 };
 
-
+// add new item into an order if the item is not in the order yet
+const addNewItemInOrder = async (req, res) => {
+  let data = null ; 
+  data = await axios 
+  .post(BASE_URL + "/menu/addNewItemInOrder")
+  .then((data) => {
+    if (data.data) {
+      return data.data;
+    }
+    return [];
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+return data;
+}; 
 
 // get all vendors
 const getAllVendors = async () => {
@@ -60,6 +75,7 @@ const getAllVendors = async () => {
     });
   return data;
 };
+
 // get one vendor by object id
 const getSingleVendor = async (vendor) => {
   let data = null;
@@ -135,5 +151,6 @@ module.exports =
   getAllVendors, 
   getVendorRating, 
   customerAuth,
-  addNewCustomer
+  addNewCustomer,
+  addNewItemInOrder
 };

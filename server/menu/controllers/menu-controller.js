@@ -4,6 +4,8 @@ const MenuModel = require("../models/MenuItem");
 const menuitems = MenuModel.menuitems;
 let ObjectId = require("mongoose").Types.ObjectId;
 
+var Cart = require('../models/cart'); // create cart.js in model 
+
 // get all snacks
 const getAllSnacks = async (req, res) => {
   try {
@@ -32,8 +34,33 @@ const getOneSnack = async (req, res) => {
   }
 };
 
+// adding an item into cart if it is not in the cart
+const addNewItemInOrder = async (req, res) => {
+   var itemId = req.params.snackId; 
+   // create a new cart whenever a new item is added in 
+   var cart = new Cart(req.session.cart ? req.session.cart : {}) ; 
+
+  menuitems.findone({_id : req.params.snackId}, function(err, item){
+    // or there should not be an error occuring as the customer can only select the items in our database 
+    if (err) {
+      // Or maybe we can add a pop out showing error message 
+      // Redirect to the menu page if there is an error
+      res.render("Error while adding the Product into Cart")
+      return res.redirect('/'); 
+    }
+    // pass the product that just fetch from the database 
+    // and productName as the identifier
+    cart.add(item, item.id);
+    // storing in cart object in my session
+    req.session.cart = cart;
+    console.log(req.session.cart); 
+    res.redirect('/') // redirect back to menu page after adding an item into the cart  
+  })
+}
+
 // export the functions
 module.exports = {
   getAllSnacks,
   getOneSnack,
+  addNewItemInOrder 
 };

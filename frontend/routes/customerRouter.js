@@ -71,6 +71,7 @@ passport.use(
         // console.log("herre")
         // console.log(data)
         if (data) {
+          req.session.email = req.body.username
           return done(null, data.data);
         } else {
           return done(null, false, {
@@ -110,6 +111,7 @@ passport.use(
         // console.log("herre")
         // console.log(data)
         if (data) {
+          req.session.email = req.body.username
           return done(null, data);
         } else {
           return done(null, false, {

@@ -42,7 +42,23 @@ const addNewCustomer = async (req, res,next) => {
   return data;
 };
 
-
+// add a new order 
+const createNewOrder = async (req, res) => {
+  let data = null ; 
+  data = await axios 
+  .post(BASE_URL + "/orders/createNewOrder", {orderitems: req.orderitems, quantity: req.quantity, customerId: req.customerId, 
+                                             vendorId:req.vendorId, time:req.time, price:req.price})
+  .then((data) => {
+    if (data.data) {
+      return data.data;
+    }
+    return [];
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+return data;
+};
 
 // get all vendors
 const getAllVendors = async () => {
@@ -60,6 +76,7 @@ const getAllVendors = async () => {
     });
   return data;
 };
+
 // get one vendor by object id
 const getSingleVendor = async (vendor) => {
   let data = null;
@@ -168,6 +185,10 @@ module.exports =
   getVendorRating, 
   customerAuth,
   addNewCustomer,
+<<<<<<< HEAD
   getOrders,
   getOrderDetails
+=======
+  addNewItemInOrder
+>>>>>>> kane_order3snacks
 };

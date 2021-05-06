@@ -1,0 +1,26 @@
+<section id="orders" class="colStart">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <div class="container relative height">
+        <h1>Orders</h1>
+        <div id="legend" class="colMiddle">
+            <div id="orderList" class="flex col">
+                {{#each orders}}
+                <div class="order col">
+                    <div class="colStart title">
+                        <h2>{{this.orderNumber}}</h2>
+                        <p>{{this.status}}</p>
+                    
+                    </div>
+                    <div class="flex">
+                        <button onclick="location.href='/orders/{{this._id}}'" type="button">View</button>
+                    </div>
+                
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+
+</section>

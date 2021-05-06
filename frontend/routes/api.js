@@ -125,7 +125,39 @@ const getVendorMenu = async (vendorId) => {
   return data;
 };
 
+const getOrders = async () => {
+  let data = null;
+  data = await axios
+    .get(BASE_URL + "/orders")
+    .then((data) => {
+      if (data.data) {
+        return data.data;
+      }
+      return [];
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  return data;
+};
 
+
+
+const getOrderDetails = async (orderId) => {
+  let data = null;
+  data = await axios
+    .get(BASE_URL + `/orders/${orderId}`)
+    .then((data) => {
+      if (data.data) {
+        return data.data;
+      }
+      return [];
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  return data;
+};
 
 module.exports = 
 { 
@@ -135,5 +167,7 @@ module.exports =
   getAllVendors, 
   getVendorRating, 
   customerAuth,
-  addNewCustomer
+  addNewCustomer,
+  getOrders,
+  getOrderDetails
 };

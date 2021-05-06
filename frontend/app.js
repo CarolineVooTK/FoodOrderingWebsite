@@ -62,7 +62,8 @@ const menuRouter = require("./routes/menuRouter");
 app.use("/menu", menuRouter);
 const customerRouter = require("./routes/customerRouter");
 app.use("/customer", customerRouter);
-
+const orderRouter = require("./routes/orderRouter");
+app.use("/orders", orderRouter);
 // app.get("/login", (req, res,next) => {
 //   console.log(req.session.passport)
 //   res.render("login");

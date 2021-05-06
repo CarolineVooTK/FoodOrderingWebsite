@@ -1,10 +1,12 @@
-<section id="singleVendor" class="col">
-    <div class="flex alignMiddle">
+<section id="singleVendor" class="col container">
+    <div id="vendorTitle" class="flex alignMiddle">
         <button class="darkButton" onclick="location.href='/vendors'" type="button">Back to Vendors</button>
-        <h1>** vendor name **</h1>
+        <h1>{{vendor.name}}, {{vendor.textlocation}}</h1>
     </div>
-    <div class="vendorDisplay flexBetween">
-        <div id="menu">vendor menu here</div>
+    <div class="flexBetween vendorDisplay">
+        <div id="menu">
+            {{#vendorMenu vendor.menu.menuitem}}{{/vendorMenu}}
+        </div>
         <div id="order" class="col">
             <div class="col">
                 <h2>Your order</h2>
@@ -15,11 +17,11 @@
                     </div>
                     <div class="name flex">
                         <div class="title">
-                            <p>van name</p>
+                            <p>{{vendor.name}}</p>
                         </div>
                         <div class="location flex">
                             <i class="fas fa-map-marker-alt"></i>
-                            <p>location</p>
+                            <p>{{vendor.textlocation}}</p>
                         </div>
                     </div>
                 </div>

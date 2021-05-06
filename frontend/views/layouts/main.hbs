@@ -36,8 +36,8 @@
 </head>
 
 <body>
-    <header class="col relative">
-        <div id="signupBanner" class="fixed">
+    <header class="col">
+        <div id="signupBanner">
             <div class="container flexEnd">
                 {{#if customer_name}}
                 <a href="/customer/profile">profile</a>
@@ -48,7 +48,7 @@
                 {{/if}}
             </div>
         </div>
-        <div id="regularNav" class="regNav">
+        <div id="regularNav">
             <div class="container flexBetween">
                 <i onclick="showNavbar()" id="hamburger" class="fas fa-bars"></i>
                 <div class="navlinks">
@@ -62,8 +62,12 @@
         </div>
         <div id="collapsedNav" class="flex">
             <div class="collapsedLinks col">
-                <img alt="icon" src="/images/food-truck.ico" />
-                <div class="flex"><a href="/">home</a>
+                <div id="exit" class="flexBetween">
+                    <i onclick="hideNavbar()" class="fas fa-times"></i>
+                    <img alt="icon" src="/images/food-truck.ico" />
+                </div>
+                <div class="flex">
+                    <a href="/">home</a>
                     <i class="fas fa-angle-right"></i>
                 </div>
                 <div class="flex">
@@ -74,7 +78,8 @@
                     <a href="/vendors">vendors</a>
                     <i class="fas fa-angle-right"></i>
                 </div>
-                {{#if customer_name}}<div class="flex">
+                {{#if customer_name}}
+                <div class="flex">
                     <a href="/customer/profile">profile</a>
                     <i class="fas fa-angle-right"></i>
                 </div>
@@ -107,22 +112,6 @@
                 nav.style.display = 'none';
             }
         }, true);
-        document.addEventListener("scroll", () => {
-            let topnav = document.getElementById("signupBanner");
-            let nav = document.getElementById("regularNav");
-            let hero = document.getElementById("hero");
-            if (window.scrollY >= 45 && !nav.classList.contains("fixed")) {
-                nav.classList.add("fixed");
-                nav.classList.add("regFix");
-                topnav.classList.remove("fixed");
-                hero ? hero.classList.add("heroFix") : null;
-            } else if (window.scrollY < 45 && nav.classList.contains("fixed")) {
-                nav.classList.remove("fixed");
-                nav.classList.remove("regFix");
-                topnav.classList.add("fixed");
-                hero ? hero.classList.remove("heroFix") : null;
-            }
-        });
         function showNavbar() {
             let nav = document.getElementById("collapsedNav");
             nav.style.display = "flex";

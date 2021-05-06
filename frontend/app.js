@@ -45,10 +45,10 @@ app.use(function(req, res, next) {
   res.locals.success = req.flash('success');
   if (req.session.passport){
     res.locals.customer_id = req.session.passport.user
-    console.log("locals. cust = ",res.locals.customer_id)
+    // console.log("locals. cust = ",res.locals.customer_id)
   }
   // res.locals.customer_id = req.session
-  console.log("req.session= ",req.session)
+  // console.log("req.session= ",req.session)
   res.locals.error = req.flash('error');
   next();
 })

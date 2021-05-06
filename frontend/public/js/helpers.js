@@ -1,7 +1,20 @@
 const myapi = require("../../routes/api");
 
 let register = (Handlebars) => {
-  let helpers = {};
+  let helpers = {
+    listfood : function (data){
+      var ret = "<ul>";
+
+      for (var i = 0, j = data.length; i < j; i ++){
+        ret = ret + "<li>"
+        "<img src ="+ data[i].photo +"</a>"
+        +"<a>"+ data[i].name +"</a>"
+        +"<a>"+ data[i].price + "</a>"
+        +"<a>"+ data[i].description + "</a>"
+      }
+      return ret + "</ul>"
+    },
+  };
 
   if (
     Handlebars &&

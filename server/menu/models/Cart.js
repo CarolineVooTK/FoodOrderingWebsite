@@ -1,4 +1,4 @@
-module.export = function Cart(originCart) {
+module.exports = function Cart(originCart) {
   this.items = originCart.items || {};
   this.totalQuantity = originCart.totalQuantity || 0;
   this.totalPrice = originCart.totalPrice || 0;

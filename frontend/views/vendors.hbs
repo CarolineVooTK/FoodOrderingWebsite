@@ -4,7 +4,7 @@
         async function load_rating(vendorId) {
             let data = null;
             data = await axios
-                .get(`http://localhost:4000/orders/${vendorId}/rating`)
+                .get(`https://web-info-tech-group-3.herokuapp.com/orders/${vendorId}/rating`)
                 .then((data) => {
 
                     if (data.data) {

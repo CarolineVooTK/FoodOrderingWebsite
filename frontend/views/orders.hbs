@@ -1,28 +1,54 @@
-<section id="orders" class="colStart">
+<section id="orders" class="col">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <div class="container relative height">
-        <h1>Orders</h1>
-        <div id="ordersLegend" class="colMiddle">
-            <div id="orderList" class="flex col">
-                {{#each orders}}
-
-                <div class="order col">
-                    <div class="colStart title">
-                        <h2>{{this.orderNumber}}</h2>
-                        <p>{{this.status}}</p>
-
+    <script>
+        const getDate = (dateString) => {
+            let date = new Date(dateString);
+            date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+            return date.toString();
+        }
+    </script>
+    <div class="container ordersContainer">
+        <h1>Your Orders</h1>
+        {{!-- sort this eventually --}}
+        <div id="orderList" class="flex">
+            {{!-- put number in hbs template --}}
+            {{#each orders}}
+            <div class="order col">
+                {{!-- <h3>Date: {{this.time}}</h3> --}}
+                <h3>Date: 4:30pm 29 Aug 2020</h3>
+                <h3>Status: {{this.status}}</h3>
+                <div class="orderItems colStart">
+                    <h3>items:</h3>
+                    {{#each this.order}}
+                    <div class="flex orderItem">
+                        <img src={{this.photo}} alt="food" />
+                        <div class="colStart">
+                            <p>{{this.name}}</p>
+                            <p>Quantity: {{this.quantity}}</p>
+                            <p>Price: ${{this.price}}</p>
+                        </div>
                     </div>
-                    <div class="flex">
-                        <button onclick="location.href='/orders/{{this._id}}'" type="button">View</button>
-                    </div>
-
+                    {{/each}}
                 </div>
-                {{/each}}
-
-
+                <div class="flex">
+                    <p>Total Price: ${{this.price}}</p>
+                    <p>Your rating: {{this.customerRating}}</p>
+                </div>
+                <div class="flex">
+                    {{!-- <button onclick="location.href='/orders/{{this._id}}'" type="button">View</button> --}}
+                </div>
             </div>
-
+            {{/each}}
+            {{#unless orders}}
+            {{#if customer_id}}
+            <h2>You have no orders to show</h2>
+            <h2>Find a van near you to make an order</h2>
+            <button class="lightButton" onclick="location.href='/vendors'" type="button">Find a Van</button>
+            {{#else}}
+            <h2>You must login to see your orders</h2>
+            {{/else}}
+            {{/if}}
+            {{/unless}}
         </div>
     </div>
-
 </section>

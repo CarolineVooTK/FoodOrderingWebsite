@@ -22,28 +22,30 @@ const redirectToLogin = (req, res, next) => {
   }
 };
 
-orderRouter.get("/", async (req, res) => {
-    await myapi
-      .getOrders()
-      .then((data) => {
-        res.render("orders", { orders: data });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  });
-  
-  
-  orderRouter.get("/:id",async (req, res) => {
-    await myapi
-      .getOrderDetails()
-      .then((data) => {
-        res.render("orders", { order: data[0] });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  });
+// get all orders for a single customer
+orderRouter.get("/customer/:id", async (req, res) => {
+  await myapi
+    .getCustomerOrders({ id: req.params.id })
+    .then((data) => {
+      console.log(data);
+      res.render("orders", { orders: data });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
+// get details for a single order
+orderRouter.get("/:id", async (req, res) => {
+  await myapi
+    .getOrderDetails({ id: req.params.id })
+    .then((data) => {
+      res.render("orders", { order: data[0] });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
 
 // adding item into cart if it is not in cart & add quantity if already in cart 
 orderRouter.get("/addNewItemInOrder/:snackId", async (req, res) => {

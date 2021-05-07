@@ -3,46 +3,48 @@ const orders = OrderModel.orders;
 const orderItems = OrderModel.orderItems;
 let ObjectId = require("mongoose").Types.ObjectId;
 
-// gets all orders from the database
-const getAll = async (req, res) => {
+// gets all orders from a single customer
+const getAllCustomerOrders = async (req, res) => {
   await orders
     .aggregate([
-      {
-        $lookup: {
-          from: "customers",
-          localField: "customerId",
-          foreignField: "_id",
-          as: "customer",
-        },
-      },
-      {
-        $lookup: {
-          from: "vendors",
-          localField: "vendorId",
-          foreignField: "_id",
-          as: "vendor",
-        },
-      },
+      { $match: { customerId: new ObjectId(`${req.params.id}`) } },
       {
         $lookup: {
           from: "menuitems",
           localField: "orderitems.menuitem",
           foreignField: "_id",
-          as: "orderitems",
+          as: "orderitems2",
+        },
+      },
+      {
+        $addFields: {
+          order: {
+            $map: {
+              input: "$orderitems",
+              in: {
+                $mergeObjects: [
+                  "$$this",
+                  {
+                    $arrayElemAt: [
+                      "$orderitems2",
+                      {
+                        $indexOfArray: ["$orderitems2._id", "$$this.menuitem"],
+                      },
+                    ],
+                  },
+                ],
+              },
+            },
+          },
         },
       },
       {
         $project: {
-          "customer._id": 0,
-          "customer.password": 0,
-          "vendor.password": 0,
-          "customer.location": 0,
-          "customer.familyName": 0,
-          "vendor.orders": 0,
-          "vendor.menu": 0,
-          "vendor._id": 0,
+          orderitems: 0,
+          orderitems2: 0,
           customerId: 0,
           vendorId: 0,
+          _id: 0,
         },
       },
     ])
@@ -198,7 +200,7 @@ const setOrdersFulfilled = async (req, res) => {
 };
 
 module.exports = {
-  getAll,
+  getAllCustomerOrders,
   getOrderById,
   createNewOrder,
   setOrdersFulfilled,

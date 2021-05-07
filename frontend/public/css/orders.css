@@ -1,7 +1,7 @@
 #orders {
   width: 100%;
   height: 100%;
-  min-height: 1000px;
+  min-height: 100vh;
   margin: 0;
   padding: 40px;
   padding-top: 10px;
@@ -14,39 +14,43 @@
   height: 50px;
   margin: 0;
 }
-.height {
-  height: 700px;
-  margin: 0;
-  margin-bottom: auto;
-}
-.ordersLegend {
-  width: auto;
-  min-width: 300px;
-  position: absolute;
-  height: 100%;
-  z-index: 2;
-  bottom: -20px;
-  left: 20px;
+.ordersContainer {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  overflow-y: hidden;
+  justify-content: flex-start;
+  align-items: column;
 }
 #orderList {
   width: 100%;
-  overflow-x: hidden;
+  flex-wrap: wrap;
+}
+#orderList h2 {
+  color: white;
+}
+#orderList .order img {
+  width: 100px;
+  height: 100px;
+}
+#orderList .order h3 {
+  margin: 0;
+  margin-bottom: 20px;
+}
+#orderList .order p {
+  margin: 5px 20px;
+}
+#orderList .order .orderItem {
+  margin: 5px 0;
 }
 
-.order {
-  background: var(--color-dark);
+#orderList .order {
   margin-bottom: 10px;
-  padding: 20px 10px 10px 20px;
-  width: 100%;
+  padding: 20px;
+  width: 450px;
   color: white;
-  border-radius: 10px;
   box-sizing: border-box;
+  text-align: start;
 }
-.order button {
+#orderList .order button {
   background: white;
   border: none;
   border-radius: 5px;
@@ -58,20 +62,20 @@
   font-weight: bold;
   text-transform: uppercase;
 }
-.order button:hover {
+#orderList .order button:hover {
   background: grey;
   color: white;
   cursor: pointer;
 }
-.order h2 {
+#orderList .order h2 {
   text-transform: uppercase;
   margin: 0;
   color: var(--color-light);
 }
-.order .title p {
+#orderList .order .title p {
   margin-top: 0px;
 }
-.order button {
+#orderList .order button {
   margin: 0 5px;
 }
 

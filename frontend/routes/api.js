@@ -151,11 +151,13 @@ const getVendorMenu = async (vendorId) => {
   return data;
 };
 
-const getOrders = async () => {
+// gets all orders for a single customer
+const getCustomerOrders = async (customerId) => {
   let data = null;
   data = await axios
-    .get(BASE_URL + "/orders")
+    .get(BASE_URL + `/orders/customer/${customerId.id}`)
     .then((data) => {
+      console.log(data);
       if (data.data) {
         return data.data;
       }
@@ -207,7 +209,7 @@ module.exports = {
   getVendorRating,
   customerAuth,
   addNewCustomer,
-  getOrders,
+  getCustomerOrders,
   getOrderDetails,
   createNewOrder,
   getMenuById

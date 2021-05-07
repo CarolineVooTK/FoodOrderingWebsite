@@ -29,7 +29,7 @@ Welcome!
 | Chai Seng Loi        | Vendor Route 2                   | Login, Register and Session Functionality **(#1)** |
 | Jin Yuan Hee (Kane)  | Vendor Route 3                   | Order Snacks Functionality **(#3)** |
 | Sam Nee              | Customer Route 3, Vendor Route 1 | Styling for Navbar, Home, Vendor Map, Vendor Order, Login Pages <br> Created Vendors Map and Vendor Order Page (excluding menu content) <br> Customer Orders Page **(#4)** |
-| Yuchen Cai (Cynthia) | Customer Route 1                 | Created Menu Page **(#2)** |
+| Yuchen Cai (Cynthia) | Customer Route 1                 | Created Menu Page **(#2)** <br> Styling for Menu Page |
 
 ## General info
 

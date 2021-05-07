@@ -39,6 +39,29 @@ let register = (Handlebars) => {
       }
       return menuitem + `</div>`;
     },
+    vendorList: (data) => {
+      let vendors = `<div id="vendorList">`;
+      for (let i = 0; i < data.length; i++) {
+        if (data[i].active) {
+          vendors += `<div class="vendor col">
+            <div class="colStart title">
+                <h2>${data[i].name}</h2>
+                <p>${data[i].textlocation}</p>
+                <div class="ratingContainer colMiddle">
+                    <script type="text/javascript">
+                        load_rating('${data[i]._id}');
+                    </script>
+                    <div id="${data[i]._id}" class="rate"></div>
+                </div>
+            </div>
+            <div class="flex">
+                <button class="flexMiddle" onclick="location.href='/vendors/${data[i]._id}'" type="button">View Van Menu</button>
+            </div>
+        </div>`;
+        }
+      }
+      return vendors + `</div>`;
+    },
   };
 
   if (

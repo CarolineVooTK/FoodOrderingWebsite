@@ -1,8 +1,8 @@
 const axios = require("axios");
 
 // server to send requests to
-// const BASE_URL = "https://web-info-tech-group-3.herokuapp.com";
-const BASE_URL = "http://localhost:4000";
+const BASE_URL = "https://web-info-tech-group-3.herokuapp.com";
+// const BASE_URL = "http://localhost:4000";
 
 // checkauthentication
 const customerAuth = async (req, res, next) => {
@@ -212,5 +212,5 @@ module.exports = {
   getCustomerOrders,
   getOrderDetails,
   createNewOrder,
-  getMenuById
+  getMenuById,
 };

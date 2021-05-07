@@ -41,9 +41,12 @@
             {{/each}}
             {{#unless orders}}
             {{#if customer_id}}
-            <h2>You have no orders to show</h2>
-            <h2>Find a van near you to make an order</h2>
-            <button class="lightButton" onclick="location.href='/vendors'" type="button">Find a Van</button>
+            <div class="col">
+                <h2>You have no orders to show</h2>
+                <h2>Find a van near you to make an order</h2>
+                <button class="lightButton" onclick="location.href='/vendors'" type="button"
+                    style="margin: 0 auto;">Find a Van</button>
+            </div>
             {{#else}}
             <h2>You must login to see your orders</h2>
             {{/else}}

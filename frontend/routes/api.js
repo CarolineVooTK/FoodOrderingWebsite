@@ -183,6 +183,22 @@ const getOrderDetails = async (orderId) => {
   return data;
 };
 
+const getMenuById = async (snackId) => {
+  let data = null;
+  data = await axios
+    .get(BASE_URL + `/menu/${snackId}`)
+    .then((data) => {
+      if (data.data) {
+        return data.data;
+      }
+      return [];
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  return data;
+};
+
 module.exports = {
   getSingleVendor,
   getMenu,
@@ -193,5 +209,6 @@ module.exports = {
   addNewCustomer,
   getOrders,
   getOrderDetails,
-  // addNewItemInOrder,
+  createNewOrder,
+  getMenuById
 };

@@ -27,12 +27,21 @@
                 </div>
             </div>
             <div class="items colStart">
-                <p>** items here **</p>
+                {{! Display the items in the cart if there are items, else display no items in cart}}
+                {{# if items}}
+                    {{# each items}} 
+                        <span class='badge'> {{this.items.quantity}} </span>
+                        <strong>{{ this.items.item }} </strong>
+                    {{/each}}
+                {{else}}
+                    <p>No Item is Added Yet</p>
+                {{/if}}
             </div>
             <div class="col">
                 <div class="total flexBetween">
                     <h4>Total</h4>
-                    <p>**Price**</p>
+                    {{! Display the total price of the cart}}
+                    <strong> {{totalPrice}} </strong> 
                 </div>
                 <div class="flexMiddle">
                     <button class="submitButton" onclick="location.href='/orders'" type="submit">Place Order</button>

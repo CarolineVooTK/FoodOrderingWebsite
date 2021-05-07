@@ -1,12 +1,12 @@
 <section id="vendors" class="colStart">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script type="text/javascript">
+        // the logic of this is wrong and I get around to changing it
         async function load_rating(vendorId) {
             let data = null;
             data = await axios
                 .get(`https://web-info-tech-group-3.herokuapp.com/orders/${vendorId}/rating`)
                 .then((data) => {
-
                     if (data.data) {
                         return data.data;
                     }
@@ -21,20 +21,11 @@
                 dec = dec.toString() + ".0";
             }
             let count = data[0].count;
-            if (count > 1) {
-                rating = Math.round(rating / count);
-            }
             let ratingDisplay = `<div class="flex rating">`;
             if (rating > 0) {
                 ratingDisplay += `<span>${dec}</span>`;
-                for (let i = 0; i < rating; i++) {
-                    ratingDisplay += `<i class="fas fa-star"></i>`;
-                }
-                if (rating < 5) {
-                    for (let j = 0; j < 5 - rating; j++) {
-                        ratingDisplay += `<i class="far fa-star"></i>`;
-                    }
-                }
+                ratingDisplay += (`<i class="fas fa-star"></i>`).repeat(rating);
+                ratingDisplay += (`<i class="far fa-star"></i>`).repeat(5 - rating);
                 ratingDisplay += `<span>(${count})</span>`;
             } else {
                 ratingDisplay += `<p>no rating</p>`;
@@ -48,39 +39,14 @@
     </script>
     <div class="container relative height">
         <h1>Vendors Near You</h1>
-        <div id="legend" class="colMiddle">
+        <div id="legend">
             <div class="flex stretch">
                 <button id="collapseMapList" class="flex" onclick="toggleExpandMapList()">
                     <p id="showList">show list</p>
                     <i id="arrow" class="fas fa-chevron-down"></i>
                 </button>
-
             </div>
-            <div id="vendorList" class="flex col">
-                {{#each vendors}}
-                {{#if this.active}}
-                <div class="vendor col">
-                    <div class="colStart title">
-                        <h2>{{this.name}}</h2>
-                        <p>{{this.textlocation}}</p>
-                        <div class="ratingContainer colMiddle">
-                            {{!-- add distance here --}}
-                            <script type="text/javascript">
-                                load_rating('{{this._id}}');
-                            </script>
-                            <div id="{{this._id}}" class="rate"></div>
-                            {{!-- {{#vendorRating this._id}}{{/vendorRating}} onload="load_rating('{{this._id}}')" --}}
-                        </div>
-                    </div>
-                    <div class="flex">
-                        <button onclick="location.href='/vendors/{{this._id}}'" type="button">View</button>
-                        <button onclick="location.href='/vendors/{{this._id}}'" type="button">Order</button>
-                    </div>
-                </div>
-                {{/if}}
-                {{/each}}
-            </div>
-
+            {{#vendorList vendors}}{{/vendorList}}
         </div>
         <div id="vendorMap" class="flexMiddle">
             <div id="mapid"></div>

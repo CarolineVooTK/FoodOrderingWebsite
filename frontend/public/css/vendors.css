@@ -1,12 +1,15 @@
 #vendors {
   width: 100%;
   height: 100%;
-  min-height: 1000px;
+  min-height: calc(100vh - 175px);
   margin: 0;
   padding: 40px;
   padding-top: 10px;
   background-color: var(--color-dark);
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 #vendors h1 {
   color: white;
@@ -24,12 +27,14 @@
   position: absolute;
   height: 100%;
   z-index: 2;
-  bottom: -20px;
+  padding-top: 10px;
+  box-sizing: border-box;
+  bottom: -50px;
   left: 20px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  overflow-y: hidden;
+  overflow-y: auto;
 }
 #collapseMapList {
   font-size: 25px;
@@ -57,32 +62,38 @@
 #vendorList {
   width: 100%;
   overflow-x: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
 }
-
 .vendor {
-  background: var(--color-dark);
+  background: rgb(125, 125, 125);
   margin-bottom: 10px;
-  padding: 20px 10px 10px 20px;
+  max-height: 175px;
+  padding: 10px;
   width: 100%;
   color: white;
   border-radius: 10px;
   box-sizing: border-box;
 }
 .vendor button {
-  background: white;
+  background: var(--color-dark);
+  color: white;
   border: none;
   border-radius: 5px;
   padding: 10px;
-  color: black;
-  width: 100px;
+  width: 200px;
   height: 35px;
   border-radius: 30px;
   font-weight: bold;
   text-transform: uppercase;
+  border: 2px solid var(--color-dark);
 }
 .vendor button:hover {
-  background: grey;
-  color: white;
+  background: white;
+  color: black;
   cursor: pointer;
 }
 .vendor h2 {

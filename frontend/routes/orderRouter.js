@@ -4,8 +4,8 @@ const orderRouter = express.Router();
 const myapi = require("./api");
 
 // import menu model
-const MenuModel = require("../../server/menu/models/MenuItem");
-const menuitems = MenuModel.menuitems;
+// const MenuModel = require("./MenuItem");
+// const menuitems = MenuModel.menuitems;
 
 const Cart = require("../routes/Cart");
 

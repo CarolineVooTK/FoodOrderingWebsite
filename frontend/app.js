@@ -42,6 +42,9 @@ app.use(passport.session());
 app.use(function (req, res, next) {
   // console.log("app.js, app.use, flash")
   res.locals.success = req.flash("success");
+  if (res.locals.isVendor){
+    console.log(res.locals.isVendor)
+  }
   if (req.session.passport) {
     res.locals.customer_id = req.session.passport.user;
     // console.log("locals. cust = ",res.locals.customer_id)

@@ -14,6 +14,15 @@ const redirectToLogin = (req, res, next) => {
   }
 };
 
+vendorRouter.get("/login", (req, res, next) => {
+  // console.log(req.session.passport)
+  console.log("here")
+  // console.log(isVendor)
+  res.locals.isVendor = 1;
+  console.log(res.locals.isVendor)
+  res.render("login");
+})
+
 vendorRouter.get("/", async (req, res) => {
   await myapi
     .getAllVendors()
@@ -37,5 +46,11 @@ vendorRouter.get("/:vendorId",redirectToLogin, async (req, res) => {
       console.log(err);
     });
 });
+
+
+// Vendors login temp
+
+
+
 
 module.exports = vendorRouter;

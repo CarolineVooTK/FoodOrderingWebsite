@@ -1,5 +1,3 @@
-const myapi = require("../../frontend/routes/api");
-
 let register = (Handlebars) => {
   let helpers = {
     listfood: function (data) {

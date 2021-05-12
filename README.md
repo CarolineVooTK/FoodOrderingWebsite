@@ -4,8 +4,7 @@
 
 ## Links
 
-[The Heroku Client](https://snacks-in-a-van-aus.herokuapp.com/)
-[The Heroku Server](https://web-info-tech-group-3.herokuapp.com/)
+[Link to our Website](https://web-info-tech-group-3.herokuapp.com/)
 
 MongoDB Link = "mongodb+srv://admin:g_3_pass@cluster0.nvrgb.mongodb.net/snacks?retryWrites=true&w=majority"
 
@@ -102,6 +101,6 @@ Our Node server is hosted by Heroku and connects to a MongoDB cloud cluster whic
 - [x] Read the Project handouts carefully
 - [x] User Interface (UI)mockup
 - [x] App server mockup
-- [ ] Front-end + back-end (one feature)
+- [x] Front-end + back-end (one feature)
 - [ ] Complete system + source code
 - [ ] Report on your work(+ test1 feature)

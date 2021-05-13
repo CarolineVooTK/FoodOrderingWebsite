@@ -34,43 +34,11 @@ const pointSchema = new mongoose.Schema(
   );
 
 
-
-//   CustomerSchema.pre('save', function(next) {
-//     var user = this;
-
-//     // only hash the password if it has been modified (or is new)
-//     if (!user.isModified('password')) return next();
-//     console.log("in pre save 111")
-//     // generate a salt
-//     bcrypt.genSalt(10, function(err, salt) {
-//       if (err) return next(err);
-//       console.log("in pre save")
-//         // hash the password using our new salt
-//         bcrypt.hashSync(user.password,salt,null, function(err, hash) {
-//         console.log("in below hashSync")
-//         if (err) return next(err);
-//         // override the cleartext password with the hashed one
-//         user.password = hash;
-//         console.log("next in  cust models")
-//         next();
-//       });
-//         console.log("done in pre save")
-//         next()
-//     });
-// });
-
 CustomerSchema.methods.generateHash = function(password) {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
 };
 
 CustomerSchema.methods.validPassword = function(password) {
-  console.log("in cust schema")
-  if (bcrypt.compareSync(password, this.password)){
-    console.log("true")
-  }
-  else{
-    console.log("bcrypt false")
-  }
   return bcrypt.compareSync(password, this.password);
 }
 

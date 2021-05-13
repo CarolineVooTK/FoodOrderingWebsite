@@ -22,20 +22,16 @@ const redirectToLogin = (req, res, next) => {
 };
 
 router.get("/login", (req, res, next) => {
-  // console.log(req.session.passport)
   res.render("login");
 });
 
 router.get("/signup", (req, res, next) => {
-  // console.log(req.session.passport)
-  // console.log(req)
-  res.render("signup", { preEmail: req.query.username });
+  res.render("signup", { preEmail: req.query.username ,signup_message : req.flash("signupMessage")});
 });
 
-// router.post("/register")
+
 
 router.get("/logout", (req, res, next) => {
-  // console.log(req.session.passport)
   res.locals.customer_name = null;
   res.locals.customer_id = null;
   req.session.destroy(function (err) {
@@ -44,7 +40,6 @@ router.get("/logout", (req, res, next) => {
 });
 
 router.get("/profile", redirectToLogin, (req, res, next) => {
-  // console.log(req.session.passport)
   res.render("profile");
 });
 
@@ -59,35 +54,6 @@ router.post(
     res.redirect("/");
   }
 );
-
-// passport.use(
-//   "local-login",
-//   new LocalStrategy({ passReqToCallback: true }, async function (req, username, password, done) {
-//     // let input = { username: req.body.username, password: req.body.password };
-//     // req.body.email = username
-//     // req.body.password = password
-//     await customer
-//       .findOne({ email: req.body.username })
-//       .lean()
-//       .then((data) => {
-//         if (!data) {
-//           return done(null, false, {
-//             message: `Customer not found`,
-//           });
-//         }
-//         if (bcrypt.compare(data.password, req.body.password)) {
-//           req.session.email = req.body.username;
-//           return done(null, data);
-//         }
-//         return done(null, false, {
-//           message: `Invalid Username or password`,
-//         });
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//       });
-//   })
-// );
 
 router.post(
   "/signup",

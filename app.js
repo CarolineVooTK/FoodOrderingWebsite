@@ -21,7 +21,6 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 // Express
 const express = require("express");
-const bcrypt = require("bcrypt");
 const path = require("path");
 const exphbs = require("express-handlebars");
 const app = express();
@@ -61,7 +60,8 @@ app.use(passport.session());
 
 app.use(function (req, res, next) {
   // console.log("app.js, app.use, flash")
-  res.locals.success = req.flash("success");
+  // console.log(req);
+  // res.locals.success = req.flash("success");
   if (res.locals.isVendor) {
     console.log(res.locals.isVendor);
   }
@@ -72,6 +72,7 @@ app.use(function (req, res, next) {
   // res.locals.customer_id = req.session
   // console.log("req.session= ",req.session)
   res.locals.error = req.flash("error");
+  // console.log("error = ",req.flash("signupMessage"))
   next();
 });
 

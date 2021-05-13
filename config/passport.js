@@ -49,7 +49,7 @@ module.exports = function(passport) {
                     }
 
                     // if (!user.validPassword(req.body.password)){\\
-                    if (user.password!= req.body.password){
+                    if (!user.validPassword(req.body.password)){
                         // false in done() indicates to the strategy that authentication has
                         // failed
                         console.log("wrong pass")
@@ -93,7 +93,7 @@ module.exports = function(passport) {
                         // create a new user
                         var newUser = new customer();
                         newUser.email = req.body.username;
-                        newUser.password = req.body.password;
+                        newUser.password = newUser.generateHash(req.body.password);
                         newUser.familyName = req.body.familyName;
                         newUser.givenName = req.body.givenName;
 

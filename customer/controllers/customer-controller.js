@@ -23,31 +23,31 @@ const getCustomerByEmail = async (req, res) => {
     });
 };
 
-const addNewCustomer = async (req, res) => {
-  // let hash =bcrypt.hashSync(req.body.password, 8)
-  // console.log("hash = ",hash)
-  let cust = new customer({
-    givenName: req.body.givenName,
-    familyName: req.body.familyName,
-    email: req.body.email,
-    password: req.body.password,
-  });
-  await cust
-    .save()
-    .then((data) => {
-      if (!data) {
-        return res.status(404).json({
-          message: "Customer not created",
-        });
-      }
-      res.status(200).json(data);
-    })
-    .catch((error) => {
-      res.status(500).json({
-        error: error,
-      });
-    });
-};
+// const addNewCustomer = async (req, res) => {
+//   // let hash =bcrypt.hashSync(req.body.password, 8)
+//   // console.log("hash = ",hash)
+//   let cust = new customer({
+//     givenName: req.body.givenName,
+//     familyName: req.body.familyName,
+//     email: req.body.email,
+//     password: req.body.password,
+//   });
+//   await cust
+//     .save()
+//     .then((data) => {
+//       if (!data) {
+//         return res.status(404).json({
+//           message: "Customer not created",
+//         });
+//       }
+//       res.status(200).json(data);
+//     })
+//     .catch((error) => {
+//       res.status(500).json({
+//         error: error,
+//       });
+//     });
+// };
 
 // const customerAuth = async (req, res) => {
 //   let cust = await customer
@@ -78,5 +78,5 @@ const addNewCustomer = async (req, res) => {
 module.exports = {
   getCustomerByEmail,
   // customerAuth,
-  addNewCustomer,
+  // addNewCustomer,
 };

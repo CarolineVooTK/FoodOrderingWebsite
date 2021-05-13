@@ -21,7 +21,7 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 // Express
 const express = require("express");
-const bcrypt = require("bcrypt");
+// const bcrypt = require("bcrypt");
 const path = require("path");
 const exphbs = require("express-handlebars");
 const app = express();

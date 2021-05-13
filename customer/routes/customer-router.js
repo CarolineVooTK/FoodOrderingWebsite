@@ -58,11 +58,6 @@ router.post(
     req.flash("success", "Login Success..");
     res.redirect("/");
   }
-  // function (req, res, next) {
-  //   // console.log("user",req.user);
-  //   req.flash("success", "Login Success..");
-  //   res.redirect("/");
-  // }
 );
 
 // passport.use(
@@ -94,18 +89,18 @@ router.post(
 //   })
 // );
 
-// router.post(
-//   "/signup",
-//   passport.authenticate("local-signup", {
-//     failureRedirect: "/customer/signup",
-//     failureFlash: true,
-//   }),
-//   function (req, res, next) {
-//     // console.log("user",req.user);
-//     req.flash("success", "Login Success..");
-//     res.redirect("/");
-//   }
-// );
+router.post(
+  "/signup",
+  passport.authenticate("local-customer-signup", {
+    failureRedirect: "/customer/signup",
+    failureFlash: true,
+  }),
+  function (req, res, next) {
+    // console.log("user",req.user);
+    req.flash("success", "Login Success..");
+    res.redirect("/");
+  }
+);
 
 // passport.use(
 //   "local-signup",

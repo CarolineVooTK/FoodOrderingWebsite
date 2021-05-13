@@ -70,51 +70,49 @@ module.exports = function(passport) {
 
 
 
-    // // for signup
-    // passport.use('local-signup', new LocalStrategy({
-    //         usernameField : 'email',
-    //         passwordField : 'password',
-    //         passReqToCallback : true }, // pass the req as the first arg to the callback for verification 
+    // for signup
+    passport.use('local-customer-signup', new LocalStrategy({
+            passReqToCallback : true }, // pass the req as the first arg to the callback for verification 
             
-    //      function(req, email, password, done) {             
-    //         process.nextTick( function() {
-    //             User.findOne({'email': email}, function(err, existingUser) {
-    //                 // search a user by the username (email in our case)
-    //                 // if user is not found or exists, exit with false indicating
-    //                 // authentication failure
-    //                 if (err) {
-    //                     console.log(err);
-    //                     return done(err);
-    //                 }
-    //                 if (existingUser) {
-    //                     console.log("existing");
-    //                     return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
-    //                 }
-    //                 else {
-    //                     // otherwise
-    //                     // create a new user
-    //                     var newUser = new User();
-    //                     newUser.email = email;
-    //                     newUser.password = newUser.generateHash(password);
-    //                     newUser.nameFamily = req.body.nameFamily;
-    //                     newUser.nameGiven = req.body.nameGiven;
-    //                     newUser.favourites = [];
+         function(req, email, password, done) {             
+            process.nextTick( function() {
+                customer.findOne({'email': req.body.username}, function(err, existingUser) {
+                    // search a user by the username (email in our case)
+                    // if user is not found or exists, exit with false indicating
+                    // authentication failure
+                    if (err) {
+                        console.log(err);
+                        return done(err);
+                    }
+                    if (existingUser) {
+                        console.log("existing");
+                        return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
+                    }
+                    else {
+                        // otherwise
+                        // create a new user
+                        var newUser = new customer();
+                        newUser.email = req.body.username;
+                        newUser.password = req.body.password;
+                        newUser.familyName = req.body.familyName;
+                        newUser.givenName = req.body.givenName;
 
-    //                     // and save the user
-    //                     newUser.save(function(err) {
-    //                         if (err)
-    //                             throw err;
+                        // and save the user
+                        newUser.save(function(err) {
+                            if (err)
+                                throw err;
 
-    //                         return done(null, newUser);
-    //                     });
+                            return done(null, newUser);
+                        });
 
-    //                     // put the user's email in the session so that it can now be used for all
-    //                     // communications between the client (browser) and the FoodBuddy app
-    //                     req.session.email=email;
-    //                 }
-    //             });
-    //         });
-    //     }));
+                        // put the user's email in the session so that it can now be used for all
+                        // communications between the client (browser) and the FoodBuddy app
+                        req.session.email=email;
+                        req.session.type_of_user = "Customer"
+                    }
+                });
+            });
+        }));
 
     
 

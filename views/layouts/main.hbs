@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="/css/main.css">
     {{/checkUser}}
     <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylrsheet" href="/css/vendorProfile.css">
     <link rel="stylesheet" href="/css/vendors.css">
     <link rel="stylesheet" href="/css/map.css">
     <link rel="stylesheet" href="/css/login.css">
@@ -49,6 +50,7 @@
                 <a href="/customer/profile">profile</a>
                 <a href="/customer/logout">logout</a>
                 {{else if vendor_id}}
+                <a href="/vendors/profile">profile</a>
                 <a href="/customer/logout">logout</a>
                 {{else}}
                 <a id="vendor_login" href="/vendors/login">Vendor Login</a>

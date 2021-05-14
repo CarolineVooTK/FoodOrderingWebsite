@@ -52,10 +52,13 @@ router.post(
   }
 );
 
+router.get("/profile",redirectToLogin, vendorController.getStatus)
+router.get("/setoff",redirectToLogin, vendorController.setVendorOff)
+router.post("/setActive", redirectToLogin, vendorController.setVendorActive)
 router.get("/", vendorController.getAll);
 router.get("/:id", redirectToLogin, vendorController.getVendorById);
 router.post("/addVendor", vendorController.addNewVendor);
-router.put("/:id/setVendorActive", vendorController.setVendorActive);
+// router.put("/:id/setVendorActive", vendorController.setVendorActive);
 router.get("/:id/outstandingOrders", vendorController.getOutstandingOrders);
 
 

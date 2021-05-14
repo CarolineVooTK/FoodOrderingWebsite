@@ -143,23 +143,16 @@ passport.use('local-vendor-signup', new LocalStrategy({
                     newUser.email = req.body.username;
                     newUser.password = newUser.generateHash(req.body.password);
                     newUser.name = req.body.vanName;
+                    newUser.active = false;
                     newUser.menu = []
                     await menuitems.find({}, function(err,menus){
                         menus.forEach(function(menu){
                             var newMenuItem = new menuItemsSchema();
                             newMenuItem.menuitem = new ObjectId(`${menu._id}`)
                             newMenuItem.quantity = 0
-                            // console.log("newMenuItem = ",newMenuItem)
                             newUser.menu.push(newMenuItem)
-                            // temp_json = {"menuitem":{"$oid": new ObjectId((`${menu._id}`))},"quantity": 0}
-                            // vendormenu.push(temp_json)
                         });
-                        // console.log("newUserMenu = ",newUserMenu)
-                        
-                        // newUser.menu = menus
                     })
-                    // newUser.menu = await newUser.generateMenu();
-                    
                     console.log("newUser.menu = ",newUser.menu)
                     // and save the user
                     newUser.save(function(err) {

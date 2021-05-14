@@ -1,0 +1,30 @@
+#setActiveform {
+    width: 400px;
+    margin-top: 40px;
+}
+#setActiveform h1 {
+    text-align: center;
+    margin: 0;
+    font-size: 35px;
+}
+#setActiveform input {
+    margin-top: 5px;
+}
+#setActiveform input[type="submit"] {
+    width: 100%;
+    padding-left: 0;
+    margin-top: 20px;
+    background-color: var(--color-dark);
+    color: white;
+    font-size: 20px;
+    text-transform: uppercase;
+}
+#setActiveform .form {
+    margin-top: 0;
+}
+  
+label {
+    margin-top: 10px;
+    display: inline-block;
+    width: 100%;
+}

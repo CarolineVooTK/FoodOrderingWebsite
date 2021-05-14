@@ -65,21 +65,16 @@ const placeOrder = async (req, res) => {
   for (index = 0; index < req.session.orderlist.length; index++){
     totalprice += req.session.orderlist[index].quantity * req.session.orderlist[index].price
   }
-  console.log("totalprice = ",totalprice)
   var newOrder = new orders();
-  // newOrder.customerId = new ObjectId(`${req.session.passport.user}`)
-  // newOrder.vendorId = new ObjectId(`${req.session.orderlist[0].vendorid}`)
-  newOrder.customerId = req.session.passport.user
-  newOrder.vendorId = req.session.orderlist[0].vendorid
+  newOrder.customerId = new ObjectId(`${String(req.session.passport.user)}`)
+  newOrder.vendorId = new ObjectId(`${req.session.orderlist[0].vendorid}`)
   newOrder.orderitems = []
   newOrder.price = totalprice;
   newOrder.status = "pending"
 
-  console.log("now start orderitems")
   for (index = 0; index < req.session.orderlist.length; index++){
     var newOrderItem = new orderItems();
-    // newOrderItem.menuitem = new ObjectId(`${req.session.orderlist[index].menuitem}`)
-    newOrderItem.menuitem = req.session.orderlist[index].menuitem
+    newOrderItem.menuitem = new ObjectId(`${String(req.session.orderlist[index].menuitem)}`)
     newOrderItem.quantity = req.session.orderlist[index].quantity
     newOrder.orderitems.push(newOrderItem)
   }
@@ -87,7 +82,8 @@ const placeOrder = async (req, res) => {
     if (err)
         throw err;
       });
-  res.render("/")
+  req.session.orderlist = []
+  res.render("profile")
 }
 
 // gets a single order from the database by matching its id

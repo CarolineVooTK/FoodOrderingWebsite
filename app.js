@@ -31,6 +31,7 @@ const session = require("express-session");
 const passport = require("passport");
 const cookieParser = require("cookie-parser");
 const flash = require("connect-flash");
+const morgan = require("morgan")
 
 
 
@@ -45,6 +46,7 @@ app.engine(
 );
 app.set("view engine", "hbs");
 app.use(express.json());
+// app.use(morgan('common'))
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static("public"));
 app.use(cors());
@@ -82,9 +84,6 @@ app.use(function (req, res, next) {
         res.locals.vendor_id = req.session.passport.user;
       }
     }
-  }
-  if(req.session.orderlist){
-    console.log("app.use: req.session.orderlist = ",req.session.orderlist)
   }
   res.locals.error = req.flash("error");
   next();

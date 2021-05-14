@@ -85,7 +85,7 @@ const addNewOrderItem = async (req, res) => {
     newMenuItem.menuitem = new ObjectId(`${menu._id}`)
     newMenuItem.quantity = 1
     newMenuItem.name = menu.name
-    newMenuItem.vendorid = req.params.vendorid
+    newMenuItem.vendorid = new ObjectId(`${req.params.vendorid}`)
     newMenuItem.price = menu.price
     let found = 0
     for(index = 0; index < req.session.orderlist.length; index++){

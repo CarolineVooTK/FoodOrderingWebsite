@@ -14,5 +14,7 @@ menuRouter.get("/:snackId", (req, res) => menuController.getOneSnack(req, res));
 
 // handle the get request to add snack to order details
 menuRouter.get("/addNewItemInOrder/:snackId", menuController.addNewItemInOrder);
+menuRouter.get("/getCart", menuController.getCart);
+menuRouter.post("/checkOut", menuController.checkOut);
 
 module.exports = menuRouter;

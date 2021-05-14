@@ -1,26 +1,18 @@
-module.exports = function Cart(originCart) {
+function Cart(originCart) {
   this.items = originCart.items || {};
   this.totalQuantity = originCart.totalQuantity || 0;
   this.totalPrice = originCart.totalPrice || 0;
 
-  this.add = function (item, id) {
+  this.add = function (item, id, price) {
     var storedItem = this.items[id];
     // if the item added is not in the cart, we create a new one
     if (!storedItem) {
-      storedItem = this.items[id] = { item: item, quantity: 0, price: 0 };
+      storedItem = this.items[id] = { item: item, quantity: 0, price: price };
     }
-    storedItem.qty++;
-    storedItem.price = storedItem.item.price * storedItem.qty;
+    storedItem.quantity++;
+    storedItem.price = storedItem.price * storedItem.quantity;
     this.totalQuantity++;
-    this.totalPrice += storedItem.item.price;
-
-    // the bottom lines can be in the handlebars
-    // return message stating that already achieve 3 items stop adding
-    if (this.totalQuantity == 3) {
-      res.render("Already achive maximum number of items");
-      // directing to the checkout page when there are 3 items added
-      res.redirect("/checkout");
-    }
+    this.totalPrice += storedItem.price;
   };
 
   // give cart items as an array
@@ -31,4 +23,6 @@ module.exports = function Cart(originCart) {
     }
     return arr;
   };
-};
+}
+
+module.exports = Cart;

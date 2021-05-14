@@ -60,6 +60,18 @@ let register = (Handlebars) => {
       }
       return vendors + `</div>`;
     },
+
+    checkUser: function (isVendor, type_of_user, options){
+      if(isVendor == true) {
+        return options.fn(this);
+      }
+      else if (type_of_user == "vendor"){
+        return options.fn(this);
+      }
+      
+      return options.inverse(this);
+    },
+
   };
 
   if (

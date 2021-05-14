@@ -51,6 +51,9 @@
     color: var(--color-grey);
     text-decoration: none;
   }
+  #signupBanner a {
+    color: var(--color-dark);
+  }
   header h1 {
     font-size: 44px;
     margin: auto;

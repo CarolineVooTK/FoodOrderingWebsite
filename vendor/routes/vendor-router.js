@@ -24,7 +24,7 @@ router.get("/login", (req,res) => {
 router.get("/signup", (req,res) => {
   res.locals.isVendor = true;
   // console.log("res.locals.isVendor")
-  res.render("vendorSignup");
+  res.render("vendorSignup",{signup_message : req.flash("signupMessage")});
 })
 
 router.post(

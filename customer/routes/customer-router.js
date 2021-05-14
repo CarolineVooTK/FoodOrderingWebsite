@@ -29,6 +29,8 @@ router.get("/signup", (req, res, next) => {
 
 router.get("/logout", (req, res, next) => {
   res.locals.customer_name = null;
+  res.locals.vendor_id = null;
+  res.locals.type_of_user = null;
   res.locals.customer_id = null;
   req.session.destroy(function (err) {
     res.redirect("/"); //Inside a callback… bulletproof!

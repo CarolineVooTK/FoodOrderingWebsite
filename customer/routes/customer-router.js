@@ -1,16 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const customerController = require("../controllers/customer-controller");
-// const passport = require("passport");
-// const LocalStrategy = require("passport-local").Strategy;
 const passport = require('passport');
 require('../../config/passport')(passport);
 const CustomerModel = require("../models/customerModel");
 const customer = CustomerModel.customer;
 const bcrypt = require("bcrypt-nodejs");
 
-// router.post("/custAuth", customerController.customerAuth);
-// router.post("/addcustomer", customerController.addNewCustomer);
 
 const redirectToLogin = (req, res, next) => {
   console.log(req.session);

@@ -6,11 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/navbar.css">
-    {{#if isVendor}}
+    {{#checkUser isVendor type_of_user}}
     <link rel="stylesheet" href="/css/vendormain.css">
     {{else}}
     <link rel="stylesheet" href="/css/main.css">
-    {{/if}}
+    {{/checkUser}}
     <link rel="stylesheet" href="/css/home.css">
     <link rel="stylesheet" href="/css/vendors.css">
     <link rel="stylesheet" href="/css/map.css">
@@ -47,6 +47,8 @@
                 {{#if customer_id}}
                 <a id="orderLink" href="/orders/customer/{{customer_id}}">Your orders</a>
                 <a href="/customer/profile">profile</a>
+                <a href="/customer/logout">logout</a>
+                {{else if vendor_id}}
                 <a href="/customer/logout">logout</a>
                 {{else}}
                 <a id="vendor_login" href="/vendors/login">VendorLogin</a>

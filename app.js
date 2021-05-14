@@ -19,7 +19,9 @@ mongoose
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
-// Express
+
+
+// require packages
 const express = require("express");
 const path = require("path");
 const exphbs = require("express-handlebars");
@@ -29,6 +31,8 @@ const session = require("express-session");
 const passport = require("passport");
 const cookieParser = require("cookie-parser");
 const flash = require("connect-flash");
+
+
 
 app.set("views", path.join(__dirname, "./views"));
 app.engine(
@@ -44,7 +48,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static("public"));
 app.use(cors());
-
 app.use(cookieParser());
 app.use(flash());
 app.use(
@@ -54,19 +57,36 @@ app.use(
     resave: false,
   })
 );
+
+// initialize the passport and session
 app.use(passport.initialize());
 app.use(passport.session());
 
+
+
+// this middleware is used for the locals variable 
+// for render in the page
 app.use(function (req, res, next) {
-  if (res.locals.isVendor) {
-    console.log(res.locals.isVendor);
-  }
+
+  // if someone is authenticated
   if (req.session.passport) {
-    res.locals.customer_id = req.session.passport.user;
+    // req.session.type_of_user can be in three states, which is{ undefined , "customer", "vendor"}
+    if (req.session.type_of_user){
+      res.locals.type_of_user = req.session.type_of_user;
+      // we make the res.locals.customer_id to be the customer_id(passport.user)
+      if (req.session.type_of_user == "customer"){
+        res.locals.customer_id = req.session.passport.user;
+      }
+      else{
+        // we make the res.locals.vendor_id to be the vendor_id(passport.user)
+        res.locals.vendor_id = req.session.passport.user;
+      }
+    }
   }
   res.locals.error = req.flash("error");
   next();
 });
+
 
 // Routes
 const vendorRouter = require("./vendor/routes/vendor-router");
@@ -84,12 +104,10 @@ app.get("/", (req, res, next) => {
 
 app.get("*", function (req, res, next) {
   res.locals.user = req.user || null;
-  if (res.locals.user) {
-    // console.log(res.locals.user);
-  }
   next();
 });
 
+// port 
 const port = process.env.PORT || 4000;
 app.listen(port, () => {
   console.log(`The Snacks in a Van App is listening on port ${port}!`);

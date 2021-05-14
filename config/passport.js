@@ -104,8 +104,8 @@ module.exports = function(passport) {
                 }
 
                 //check if the password is valid
-                if(user.password != req.body.password){
-                // if (!user.validPassword(req.body.password)){
+                // if(user.password != req.body.password){
+                if (!user.validPassword(req.body.password)){
                     return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.'));
                 }
 
@@ -140,8 +140,8 @@ passport.use('local-vendor-signup', new LocalStrategy({
                     // a new user, therefore create a new Customer in database
                     var newUser = new vendors();
                     newUser.email = req.body.username;
-                    // newUser.password = newUser.generateHash(req.body.password);
-                    newUser.password = req.body.password;
+                    newUser.password = newUser.generateHash(req.body.password);
+                    // newUser.password = req.body.password;
                     newUser.name = req.body.vanName;
 
                     // and save the user

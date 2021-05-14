@@ -30,7 +30,7 @@ router.get("/signup", (req,res) => {
 router.post(
   "/login",
   passport.authenticate("local-vendor-login", {
-    failureRedirect: "/vendor/login",
+    failureRedirect: "/vendors/login",
     failureFlash: "Incorrect email or password",
   }),function (req, res, next) {
     // console.log("user",req.user);
@@ -42,7 +42,7 @@ router.post(
 router.post(
   "/signup",
   passport.authenticate("local-vendor-signup", {
-    failureRedirect: "/vendor/signup",
+    failureRedirect: "/vendors/signup",
     failureFlash: true,
   }),
   function (req, res, next) {

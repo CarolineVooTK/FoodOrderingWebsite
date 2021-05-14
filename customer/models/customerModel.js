@@ -33,11 +33,12 @@ const pointSchema = new mongoose.Schema(
     { versionKey: false }
   );
 
-
+// the method to generate hash password for new customer
 CustomerSchema.methods.generateHash = function(password) {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
 };
 
+// the method to validate the password when customer sign in
 CustomerSchema.methods.validPassword = function(password) {
   return bcrypt.compareSync(password, this.password);
 }

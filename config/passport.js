@@ -1,9 +1,12 @@
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt-nodejs');
+let ObjectId = require("mongoose").Types.ObjectId;
 
 // our  model
 const { customer } = require('../customer/models/customerModel');
 const { vendors } = require("../vendor/models/Vendor")
+const { menuitems } = require("../menu/models/MenuItem")
+const { menuItemsSchema } = require("../vendor/models/Vendor")
 
 module.exports = function(passport) {
 
@@ -65,13 +68,11 @@ module.exports = function(passport) {
                         return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
                     }
                     else {
-                        // a new user, therefore create a new Customer in database
                         var newUser = new customer();
                         newUser.email = req.body.username;
                         newUser.password = newUser.generateHash(req.body.password);
                         newUser.familyName = req.body.familyName;
                         newUser.givenName = req.body.givenName;
-
                         // and save the user
                         newUser.save(function(err) {
                             if (err)
@@ -129,7 +130,7 @@ passport.use('local-vendor-signup', new LocalStrategy({
      function(req, email, password, done) {             
         process.nextTick( function() {
             // to see if there are one already exist, email have to be unique
-            vendors.findOne({'email': req.body.username}, function(err, existingUser) {
+            vendors.findOne({'email': req.body.username}, async function(err, existingUser) {
                 if (err) {
                     return done(err);
                 }
@@ -137,13 +138,29 @@ passport.use('local-vendor-signup', new LocalStrategy({
                     return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
                 }
                 else {
-                    // a new user, therefore create a new Customer in database
+                    // a new user, therefore create a new Vendor in database
                     var newUser = new vendors();
                     newUser.email = req.body.username;
                     newUser.password = newUser.generateHash(req.body.password);
-                    // newUser.password = req.body.password;
                     newUser.name = req.body.vanName;
-
+                    newUser.menu = []
+                    await menuitems.find({}, function(err,menus){
+                        menus.forEach(function(menu){
+                            var newMenuItem = new menuItemsSchema();
+                            newMenuItem.menuitem = new ObjectId(`${menu._id}`)
+                            newMenuItem.quantity = 0
+                            // console.log("newMenuItem = ",newMenuItem)
+                            newUser.menu.push(newMenuItem)
+                            // temp_json = {"menuitem":{"$oid": new ObjectId((`${menu._id}`))},"quantity": 0}
+                            // vendormenu.push(temp_json)
+                        });
+                        // console.log("newUserMenu = ",newUserMenu)
+                        
+                        // newUser.menu = menus
+                    })
+                    // newUser.menu = await newUser.generateMenu();
+                    
+                    console.log("newUser.menu = ",newUser.menu)
                     // and save the user
                     newUser.save(function(err) {
                         if (err)

@@ -1,0 +1,46 @@
+<script>
+window.onload = function getLocation() {
+    //var x = document.getElementById("demo");
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position){
+            
+             //x.innerHTML = "Latitude: " + position.coords.latitude +
+             "<br>Longitude: " + position.coords.longitude; 
+             document.getElementById("longitude").value = position.coords.longitude;
+             document.getElementById("latitude").value = position.coords.latitude;
+        });
+    } else {
+        alert("Geolocation is not supported by this browser.");
+    }
+}
+</script>
+
+<section id = "vendor_profile" >
+    <p> status: {{vendor_status}}</p>
+    {{#ifEquals vendor_status "Active"}}
+    <a href="/vendors/setoff">Quit for the day</a>
+    {{else}}
+    <div id="setActiveform">
+        <form class="form flex" method="post" action="/vendors/setActive">
+            <label>
+                Text Location
+                <input placeholder="TextString" name="textlocation" type="text" />
+            </label>
+            <label>
+                Longitude
+                <input id = "longitude" placeholder = "Longitude", name = "longitude" type="text">
+            </label>
+            <label>
+                Latitude
+                <input id = "latitude" placeholder = "latitude", name = "latitude" type="text">
+            </label>
+                <input id="VendorActiveButton" class="darkButton" type="submit" value="Submit" />
+        </form>
+    </div>
+    {{/ifEquals}}
+    <p id = "demo"> </p>
+    <p>{{vendor_error}}</p>
+
+
+
+</section>

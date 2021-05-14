@@ -124,7 +124,7 @@ const setVendorActive = async (req, res) => {
   const { longitude, latitude, textlocation } = req.body;
   await vendors
     .findOneAndUpdate(
-      { _id: req.params.id },
+      { _id: req.session.passport.user },
       {
         active: true,
         location: new point({ type: "Point", coordinates: [longitude, latitude] }),
@@ -134,11 +134,9 @@ const setVendorActive = async (req, res) => {
     )
     .then((data) => {
       if (!data) {
-        return res.status(404).json({
-          message: "Vendor not updated",
-        });
+        return res.render("vendorProfile", {vendor_error: "Error wrong data", vendor_status: "Off"})
       }
-      res.status(200).json(data);
+      res.render("vendorProfile", {vendor_status: "Active"})
     })
     .catch((error) => {
       res.status(500).json({
@@ -146,6 +144,46 @@ const setVendorActive = async (req, res) => {
       });
     });
 };
+
+
+const getStatus = async (req,res) => {
+  let vendor = await vendors.findById({_id : req.session.passport.user})
+  // console.log("vendor =",vendor)
+  if (vendor.active){
+    vendor_current_status = "Active"
+  }
+  else{
+    vendor_current_status = "Off"
+  }
+  res.render("vendorProfile", {vendor_status: vendor_current_status})
+}
+
+
+
+
+const setVendorOff = async (req,res) => {
+  await vendors
+    .findOneAndUpdate(
+      { _id: req.session.passport.user },
+      {
+        active: false,
+      },
+      { returnNewDocument: true }
+    )
+    .then((data) => {
+      if (!data) {
+        return res.status(404).json({
+          message: "Vendor not updated",
+        });
+      }
+      res.render("vendorProfile", {vendor_status: "Off"})
+    })
+    .catch((error) => {
+      res.status(500).json({
+        error: error,
+      });
+    });
+}
 
 // gets all outstanding orders from the database
 const getOutstandingOrders = async (req, res) => {
@@ -203,4 +241,6 @@ module.exports = {
   addNewVendor,
   setVendorActive,
   getOutstandingOrders,
+  getStatus,
+  setVendorOff,
 };

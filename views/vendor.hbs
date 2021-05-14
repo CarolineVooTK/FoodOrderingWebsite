@@ -30,8 +30,8 @@
                 {{! Display the items in the cart if there are items, else display no items in cart}}
                 {{# if items}}
                     {{# each items}} 
-                        <span class='badge'> {{this.items.quantity}} </span>
-                        <strong>{{ this.items.item }} </strong>
+                        <span class='badge'> {{this.quantity}} </span>
+                        <strong>{{ this.item }} </strong>
                     {{/each}}
                 {{else}}
                     <p>No Item is Added Yet</p>

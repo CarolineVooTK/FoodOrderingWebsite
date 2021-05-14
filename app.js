@@ -27,7 +27,6 @@ const app = express();
 const cors = require("cors");
 const session = require("express-session");
 const passport = require("passport");
-const LocalStrategy = require("passport-local").Strategy;
 const cookieParser = require("cookie-parser");
 const flash = require("connect-flash");
 
@@ -59,20 +58,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(function (req, res, next) {
-  // console.log("app.js, app.use, flash")
-  // console.log(req);
-  // res.locals.success = req.flash("success");
   if (res.locals.isVendor) {
     console.log(res.locals.isVendor);
   }
   if (req.session.passport) {
     res.locals.customer_id = req.session.passport.user;
-    // console.log("locals. cust = ",res.locals.customer_id)
   }
-  // res.locals.customer_id = req.session
-  // console.log("req.session= ",req.session)
   res.locals.error = req.flash("error");
-  // console.log("error = ",req.flash("signupMessage"))
   next();
 });
 

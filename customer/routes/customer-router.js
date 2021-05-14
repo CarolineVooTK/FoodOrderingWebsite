@@ -68,45 +68,4 @@ router.post(
   }
 );
 
-// passport.use(
-//   "local-signup",
-//   new LocalStrategy({ passReqToCallback: true }, function (req, givenName, familyName, done) {
-//     let input = {
-//       givenName: req.body.givenName,
-//       familyName: req.body.familyName,
-//       username: req.body.username,
-//       password: req.body.password,
-//     };
-//     let ress = "";
-//     customerController
-//       .addNewCustomer(input, res)
-//       .then((data) => {
-//         // console.log("herre")
-//         // console.log(data)
-//         if (data) {
-//           req.session.email = req.body.username;
-//           return done(null, data);
-//         } else {
-//           return done(null, false, {
-//             message: `Invalid Information`,
-//           });
-//         }
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//       });
-//   })
-// );
-
-// passport.serializeUser(function (user, done) {
-//   // console.log("serialize")
-//   // console.log("user = ", user)
-//   done(null, user._id);
-// });
-
-// passport.deserializeUser(function (obj, done) {
-//   // console.log("unserialize")
-//   done(null, obj);
-// });
-
 module.exports = router;

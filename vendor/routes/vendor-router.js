@@ -9,14 +9,20 @@ const redirectToLogin = (req, res, next) => {
   if (req.session.passport) {
     next();
   } else {
-    res.redirect("/customer/login");
+    res.redirect("/vendors/login");
   }
 };
 
+router.get("/login", (req,res) => {
+  res.locals.isVendor = true;
+  res.render("vendorLogin");
+})
 router.get("/", vendorController.getAll);
 router.get("/:id", redirectToLogin, vendorController.getVendorById);
 router.post("/addVendor", vendorController.addNewVendor);
 router.put("/:id/setVendorActive", vendorController.setVendorActive);
 router.get("/:id/outstandingOrders", vendorController.getOutstandingOrders);
+
+router.get("/login", (req, res) => {res.render("vendorLogin")});
 
 module.exports = router;

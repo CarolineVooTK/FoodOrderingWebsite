@@ -83,6 +83,9 @@ app.use(function (req, res, next) {
       }
     }
   }
+  if(req.session.orderlist){
+    console.log("app.use: req.session.orderlist = ",req.session.orderlist)
+  }
   res.locals.error = req.flash("error");
   next();
 });

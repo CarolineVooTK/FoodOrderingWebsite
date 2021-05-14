@@ -20,7 +20,7 @@ let register = (Handlebars) => {
       }
       return ret + "</ul>";
     },
-    vendorMenu: (data) => {
+    vendorMenu: (data, vendorid) => {
       let menuitem = `<div class="row row-cols-3">`;
       for (let i = 0; i < data.length; i++) {
         menuitem += `<div class="row">
@@ -32,7 +32,7 @@ let register = (Handlebars) => {
             <h2 style="width: auto; margin-left: auto; float: right;">${data[i].price}</h2>
             <p style="clear: both;color:rgb(63, 63, 63)">&nbsp;${data[i].description}</p>
             <img src="${data[i].photo}" width="280" height="280">
-            <button class="darkButton" onclick="location.href = '/menu/addNewItemInOrder/${data[i]._id}'">Add to Order</button>
+            <button class="darkButton" onclick="location.href = '/customer/addNewItemInOrder/${data[i]._id}/${vendorid}'">Add to Order</button>
         </div>`;
       }
       return menuitem + `</div>`;

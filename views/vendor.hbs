@@ -5,7 +5,7 @@
     </div>
     <div class="flexBetween vendorDisplay">
         <div id="menu">
-            {{#vendorMenu vendor.menu.menuitem}}{{/vendorMenu}}
+            {{#vendorMenu vendor.menu.menuitem vendor._id}}{{/vendorMenu}}
         </div>
         <div id="order" class="col">
             <div class="col">
@@ -28,10 +28,11 @@
             </div>
             <div class="items colStart">
                 {{! Display the items in the cart if there are items, else display no items in cart}}
-                {{# if items}}
-                    {{# each items}} 
+                {{#if orderitems}}
+                    {{#each orderitems}} 
                         <span class='badge'> {{this.quantity}} </span>
-                        <strong>{{ this.item }} </strong>
+                        <strong>{{ this.name }} </strong>
+                        <a href="/customer/deleteOrderItem/"+{{this.id}}+"/"+{{vendor.id}}>delete</a>
                     {{/each}}
                 {{else}}
                     <p>No Item is Added Yet</p>

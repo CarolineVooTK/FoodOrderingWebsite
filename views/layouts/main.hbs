@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/navbar.css">
+    {{#checkUser isVendor type_of_user}}
+    <link rel="stylesheet" href="/css/vendormain.css">
+    {{else}}
+    <link rel="stylesheet" href="/css/main.css">
+    {{/checkUser}}
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/vendors.css">
+    <link rel="stylesheet" href="/css/map.css">
+    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="/css/signup.css">
+    <link rel="stylesheet" href="/css/vendor.css">
+    <link rel="stylesheet" href="/css/menu.css">
+    <link rel="stylesheet" href="/css/orders.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="icon" href="/images/food-truck.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+        crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"
+        integrity="sha512-RNLkV3d+aLtfcpEyFG8jRbnWHxUqVZozacROI4J2F1sTaDqo1dPQYs01OMi1t1w9Y2FdbSCDSQ2ZVdAC8bzgAg=="
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
+    <title>Snacks in a Van</title>
+</head>
+
+<body>
+    <header class="col">
+        <div id="signupBanner">
+            <div class="container flexEnd">
+                {{#if customer_id}}
+                <a id="orderLink" href="/orders/customer/{{customer_id}}">Your orders</a>
+                <a href="/customer/profile">profile</a>
+                <a href="/customer/logout">logout</a>
+                {{else if vendor_id}}
+                <a href="/customer/logout">logout</a>
+                {{else}}
+                <a id="vendor_login" href="/vendors/login">Vendor Login</a>
+                <a id="vendor_signup" href="/vendors/signup">Vendor SignUp</a>
+                <a href="/customer/login">login</a>
+                <a href="/customer/signup">Sign Up</a>
+                {{/if}}
+            </div>
+        </div>
+        <div id="regularNav">
+            <div class="container flexBetween">
+                <i onclick="showNavbar()" id="hamburger" class="fas fa-bars"></i>
+                <div class="navlinks">
+                    <a href="/menu">menu</a>
+                </div>
+                <h1><a href="/">Snacks in a Van</a></h1>
+                <div class="navlinks">
+                    <a href="/vendors">Find a Van</a>
+                </div>
+            </div>
+        </div>
+        <div id="collapsedNav" class="flex">
+            <div class="collapsedLinks col">
+                <div id="exit" class="flexBetween">
+                    <i onclick="hideNavbar()" class="fas fa-times"></i>
+                    <img alt="icon" src="/images/food-truck.ico" />
+                </div>
+                <div class="flex">
+                    <a href="/">home</a>
+                    <i class="fas fa-angle-right"></i>
+                </div>
+                <div class="flex">
+                    <a href="/orders">orders</a>
+                    <i class="fas fa-angle-right"></i>
+                </div>
+                <div class="flex">
+                    <a href="/menu">menu</a>
+                    <i class="fas fa-angle-right"></i>
+                </div>
+                <div class="flex">
+                    <a href="/vendors">vendors</a>
+                    <i class="fas fa-angle-right"></i>
+                </div>
+                {{#if customer_name}}
+                <div class="flex">
+                    <a href="/customer/profile">profile</a>
+                    <i class="fas fa-angle-right"></i>
+                </div>
+                <div class="flex">
+                    <a href="/customer/logout">logout</a>
+                    <i class="fas fa-angle-right"></i>
+                </div>
+                {{else}}<div class="flex">
+                    <a href="/customer/login">login</a>
+                    <i class="fas fa-angle-right"></i>
+                </div>
+                <div class="flex">
+                    <a href="/customer/signup">Sign Up</a>
+                    <i class="fas fa-angle-right"></i>
+                </div>
+                {{/if}}
+            </div>
+            <div class="modalSpace" onclick="hideNavbar()"></div>
+        </div>
+    </header>
+
+    <div class="main">{{{body}}}</div>
+    {{!-- <footer>
+        <p>footer</p>
+    </footer> --}}
+    <script>
+        window.addEventListener('resize', function (event) {
+            var nav = document.getElementById("collapsedNav");
+            if (nav.style.display == 'flex') {
+                nav.style.display = 'none';
+            }
+        }, true);
+        function showNavbar() {
+            let nav = document.getElementById("collapsedNav");
+            nav.style.display = "flex";
+        }
+        function hideNavbar() {
+            let nav = document.getElementById("collapsedNav");
+            nav.style.display = "none";
+        }
+    </script>
+</body>
+
+</html>

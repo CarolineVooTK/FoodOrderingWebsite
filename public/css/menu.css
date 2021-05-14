@@ -1,0 +1,68 @@
+#menuPage h4 {
+  margin: 0 40px;
+  padding-bottom: 5px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+#menuPage h4 a {
+  text-decoration: underline;
+  color: blue;
+}
+
+#menuPage h3 span:hover {
+  cursor: pointer;
+}
+
+.row {
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 0;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: auto;
+  margin-right: auto;
+  margin-left: auto;
+  font: "Lucida Console";
+}
+
+.row > * {
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 100%;
+  padding-right: auto;
+  padding-left: auto;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: auto;
+}
+
+.row-cols-3 > * {
+  flex: 0 0 auto;
+  width: 280px;
+  margin: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.row img {
+  width: 100%;
+}
+
+.container {
+  width: 100%;
+  padding-right: var(--bs-gutter-x, 0.75rem);
+  padding-left: var(--bs-gutter-x, 0.75rem);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.col {
+  flex: 1 0 0%;
+}
+
+.row button {
+  margin-top: 20px;
+}

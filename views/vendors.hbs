@@ -1,0 +1,107 @@
+<section id="vendors" class="colStart">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript">
+        // the logic of this is wrong and I get around to changing it
+        async function load_rating(vendorId) {
+            let data = null;
+            data = await axios
+                .get(`https://web-info-tech-group-3.herokuapp.com/orders/${vendorId}/rating`)
+                .then((data) => {
+                    if (data.data) {
+                        return data.data;
+                    }
+                    return [{ rating: 0, count: 0 }];
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+            let rating = data[0].rating;
+            let dec = data[0].rating;
+            if (dec.toString().length == 1) {
+                dec = dec.toString() + ".0";
+            }
+            let count = data[0].count;
+            let ratingDisplay = `<div class="flex rating">`;
+            if (rating > 0) {
+                ratingDisplay += `<span>${dec}</span>`;
+                ratingDisplay += (`<i class="fas fa-star"></i>`).repeat(rating);
+                ratingDisplay += (`<i class="far fa-star"></i>`).repeat(5 - rating);
+                ratingDisplay += `<span>(${count})</span>`;
+            } else {
+                ratingDisplay += `<p>no rating</p>`;
+            }
+            ratingDisplay += `</div>`;
+            document.getElementById(vendorId).innerHTML = ratingDisplay;
+        }
+        function latLongStr(val) {
+            return val.toString().split(",");
+        }
+    </script>
+    <div class="container relative height">
+        <h1>Vendors Near You</h1>
+        <div id="legend">
+            <div class="flex stretch">
+                <button id="collapseMapList" class="flex" onclick="toggleExpandMapList()">
+                    <p id="showList">show list</p>
+                    <i id="arrow" class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+            {{#vendorList vendors}}{{/vendorList}}
+        </div>
+        <div id="vendorMap" class="flexMiddle">
+            <div id="mapid"></div>
+            {{!-- change zoom in map.locate to show nearest 5--}}
+            <script type="text/javascript">
+                let map = L.map('mapid', {
+                    center: [-37.81, 144.96],
+                    zoom: 13
+                });
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                }).addTo(map);
+                map.zoomControl.setPosition('topright');
+                map.locate({ setView: true, maxZoom: 16 });
+            </script>
+            {{#each vendors }}
+            {{#if this.active}}
+            {{#with location}}
+            {{#with coordinates}}
+            <script type="text/javascript">
+                console.log('{{this}}');
+                L.marker(latLongStr('{{this}}')).addTo(map)
+                    .bindPopup(`<div class="popup">
+                    <p class="bold">{{../../this.name}}</p>
+                    <p>{{../../this.textlocation}}</p>
+                    <button>
+                        <a href="vendors/{{../../this._id}}">View</a>
+                    </button>
+                    </div>`)
+                    .openPopup();
+            </script>
+            {{/with}}
+            {{/with}}
+            {{/if}}
+            {{/each}}
+        </div>
+    </div>
+    <script>
+        function toggleExpandMapList() {
+            var nav = document.getElementById("vendorList");
+            if (nav.style.display == "none") {
+                nav.style.display = "flex";
+                document.getElementById("showList").style.display = "none";
+                document.getElementById("arrow").classList.remove("fa-bars");
+                document.getElementById("arrow").classList.add("fa-chevron-down");
+                document.getElementById("arrow").style.fontSize = "25px";
+                document.getElementById("collapseMapList").style.width = "100px";
+            } else {
+                nav.style.display = "none";
+                document.getElementById("showList").style.display = "flex";
+                document.getElementById("arrow").classList.remove("fa-chevron-down");
+                document.getElementById("arrow").classList.add("fa-bars");
+                document.getElementById("arrow").style.fontSize = "20px";
+                document.getElementById("collapseMapList").style.width = "130px";
+            }
+        }
+    </script>
+</section>

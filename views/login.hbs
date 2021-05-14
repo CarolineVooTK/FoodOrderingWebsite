@@ -1,0 +1,26 @@
+<section id="loginform">
+  <h1>Login</h1>
+  <div class="loginform-login">
+    <form class="form" method="post" action="/customer/login">
+      <label>
+        Email
+        <input placeholder="email" name="username" />
+      </label>
+      <label class="mt20">
+        Password
+        <input placeholder="password" type="password" name="password" />
+      </label>
+      <input type="submit" value="submit">
+    </form>
+  </div>
+  {{#if error}}
+  <div class="login_fail">
+    <a style="color:red;"> invalid username or password </a>
+  </div>
+  {{/if}}
+  <p>For Testing Purpose:</p>
+  <p>customer@test.com : password</p>
+  <p>customer2@test.com : password</p>
+  <p>customer3@test.com : securepassword</p>
+
+</section>

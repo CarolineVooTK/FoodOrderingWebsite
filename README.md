@@ -4,8 +4,7 @@
 
 ## Links
 
-[The Heroku Client](https://snacks-in-a-van-aus.herokuapp.com/)
-[The Heroku Server](https://web-info-tech-group-3.herokuapp.com/)
+[Link to our Website](https://web-info-tech-group-3.herokuapp.com/)
 
 MongoDB Link = "mongodb+srv://admin:g_3_pass@cluster0.nvrgb.mongodb.net/snacks?retryWrites=true&w=majority"
 
@@ -23,13 +22,13 @@ Welcome!
 
 ## Team Members
 
-| Name                 | Server Routes                    |
-| :------------------- | :------------------------------- |
-| Caroline Voo         | Customer Route 2                 |
-| Chai Seng Loi        | Vendor Route 2                   |
-| Jin Yuan Hee (Kane)  | Vendor Route 3                   |
-| Sam Nee              | Customer Route 3, Vendor Route 1 |
-| Yuchen Cai (Cynthia) | Customer Route 1                 |
+| Name                 | Server Routes                    | Front End + Back End                    |
+| :------------------- | :------------------------------- | :------------------------------- |
+| Caroline Voo         | Customer Route 2                 | Created Orders Page **(#4)** |
+| Chai Seng Loi        | Vendor Route 2                   | Login, Register and Session Functionality **(#1)** |
+| Jin Yuan Hee (Kane)  | Vendor Route 3                   | Order Snacks Functionality **(#3)** |
+| Sam Nee              | Customer Route 3, Vendor Route 1 | Styling for Navbar, Home, Vendor Map, Vendor Order, Login Pages <br> Created Vendors Map and Vendor Order Page (excluding menu content) <br> Customer Orders Page **(#4)** |
+| Yuchen Cai (Cynthia) | Customer Route 1                 | Created Menu Page **(#2)** <br> Styling for Menu Page |
 
 ## General info
 
@@ -102,6 +101,6 @@ Our Node server is hosted by Heroku and connects to a MongoDB cloud cluster whic
 - [x] Read the Project handouts carefully
 - [x] User Interface (UI)mockup
 - [x] App server mockup
-- [ ] Front-end + back-end (one feature)
+- [x] Front-end + back-end (one feature)
 - [ ] Complete system + source code
 - [ ] Report on your work(+ test1 feature)

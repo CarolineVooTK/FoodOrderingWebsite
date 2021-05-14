@@ -85,7 +85,7 @@ const getVendorById = async (req, res) => {
       },
     ])
     .then((data) => {
-      res.render("vendor", { vendor: data[0] });
+      res.render("vendor", { vendor: data[0] , orderitems:req.session.orderlist});
     })
     .catch((error) => {
       res.status(500).json({

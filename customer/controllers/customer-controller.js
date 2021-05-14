@@ -31,12 +31,12 @@ const getCustomerByEmail = async (req, res) => {
 const deleteOrderItem = async (req,res) => {
   let found = -1
   for(index = 0; index < req.session.orderlist.length; index++){
-    if (req.session.orderlist[index].menuitem == req.params.snackid){
+    if (req.session.orderlist[index].menuitem == new ObjectId(req.params.snackid)){
       found = index
     }
   }
   if (found > -1){
-    req.session.orderlist.splice(index, 1);
+    req.session.orderlist.splice(found, 1);
   }
   await vendors
     .aggregate([
@@ -77,9 +77,6 @@ const deleteOrderItem = async (req,res) => {
 
 
 const addNewOrderItem = async (req, res) => {
-  console.log("req.params.snackid= ", req.params.snackid)
-  console.log("req.params.vendorid= ", req.params.vendorid)
-  console.log("addnew before: req.session = ",req.session)
   if (req.session.orderlist == null){
     req.session.orderlist = []
   }
@@ -88,6 +85,8 @@ const addNewOrderItem = async (req, res) => {
     newMenuItem.menuitem = new ObjectId(`${menu._id}`)
     newMenuItem.quantity = 1
     newMenuItem.name = menu.name
+    newMenuItem.vendorid = req.params.vendorid
+    newMenuItem.price = menu.price
     let found = 0
     for(index = 0; index < req.session.orderlist.length; index++){
       if (req.session.orderlist[index].menuitem == newMenuItem.menuitem){
@@ -99,7 +98,7 @@ const addNewOrderItem = async (req, res) => {
       req.session.orderlist.push(newMenuItem)
     }
   })
-  console.log("addnew: req.session.orderlist = ",req.session.orderlist)
+  let totalprice = 0
   await vendors
     .aggregate([
       { $match: { _id: new ObjectId(`${req.params.vendorid}`) } },
@@ -127,7 +126,10 @@ const addNewOrderItem = async (req, res) => {
         },
       ])
       .then((data) => {
-        res.render("vendor", { vendor: data[0], orderitems:req.session.orderlist});
+        for (index = 0; index < req.session.orderlist.length; index++){
+          totalprice += req.session.orderlist[index].quantity * req.session.orderlist[index].price
+        }
+        res.render("vendor", { vendor: data[0], orderitems:req.session.orderlist, totalPrice: totalprice});
       })
       .catch((error) => {
         res.status(500).json({

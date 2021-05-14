@@ -27,7 +27,7 @@ router.get("/signup", (req, res, next) => {
 
 
 router.get("/addNewItemInOrder/:snackid/:vendorid", customerController.addNewOrderItem)
-router.get("/customer/deleteOrderItem/:snackid/:vendorid",customerController.deleteOrderItem)
+router.get("/deleteOrderItem/:snackid/:vendorid",customerController.deleteOrderItem)
 
 router.get("/logout", (req, res, next) => {
   res.locals.customer_name = null;

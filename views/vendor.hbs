@@ -32,7 +32,8 @@
                     {{#each orderitems}} 
                         <span class='badge'> {{this.quantity}} </span>
                         <strong>{{ this.name }} </strong>
-                        <a href="/customer/deleteOrderItem/"+{{this.id}}+"/"+{{vendor.id}}>delete</a>
+                        <strong>{{ this.price }} Unit price </strong>
+                        <a href="/customer/deleteOrderItem/{{this.menuitem}}/{{this.vendorid}}">delete</a>
                     {{/each}}
                 {{else}}
                     <p>No Item is Added Yet</p>
@@ -45,7 +46,7 @@
                     <strong> {{totalPrice}} </strong> 
                 </div>
                 <div class="flexMiddle">
-                    <button class="submitButton" onclick="location.href='/orders'" type="submit">Place Order</button>
+                    <button class="submitButton" onclick="location.href='/orders/placeOrder'" type="submit">Place Order</button>
                 </div>
             </div>
         </div>

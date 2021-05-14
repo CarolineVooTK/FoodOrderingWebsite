@@ -17,8 +17,14 @@ const redirectToLogin = (req, res, next) => {
 
 router.get("/login", (req,res) => {
   res.locals.isVendor = true;
-  console.log("res.locals.isVendor")
+  // console.log("res.locals.isVendor")
   res.render("vendorLogin");
+})
+
+router.get("/signup", (req,res) => {
+  res.locals.isVendor = true;
+  // console.log("res.locals.isVendor")
+  res.render("vendorSignup");
 })
 
 router.post(

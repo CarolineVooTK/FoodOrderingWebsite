@@ -39,7 +39,7 @@ module.exports = function(passport) {
 
                     // this is a valid email and valid password
                     else {
-                        req.session.email = email; 
+                        req.session.email = req.body.username; 
                         req.session.type_of_user = "customer"; 
 
                         return done(null, user, req.flash('loginMessage', 'Login successful'));
@@ -79,7 +79,7 @@ module.exports = function(passport) {
 
                             return done(null, newUser);
                         });
-                        req.session.email=email;
+                        req.session.email = req.body.username;
                         req.session.type_of_user = "customer"
                     }
                 });
@@ -87,7 +87,7 @@ module.exports = function(passport) {
         }));
 
 
-         // ths passport strategy for customer login
+         // ths passport strategy for vendor login
     passport.use('local-vendor-login', new LocalStrategy({
         passReqToCallback : true}, 
     function(req, email, password, done) {
@@ -111,7 +111,7 @@ module.exports = function(passport) {
 
                 // this is a valid email and valid password
                 else {
-                    req.session.email = email; 
+                    req.session.email = req.body.username; 
                     req.session.type_of_user = "vendor"; 
 
                     return done(null, user, req.flash('loginMessage', 'Login successful'));
@@ -123,13 +123,13 @@ module.exports = function(passport) {
 
 
 
-// for signup
-passport.use('local-customer-signup', new LocalStrategy({
+// for vendor signup
+passport.use('local-vendor-signup', new LocalStrategy({
         passReqToCallback : true },     
      function(req, email, password, done) {             
         process.nextTick( function() {
             // to see if there are one already exist, email have to be unique
-            customer.findOne({'email': req.body.username}, function(err, existingUser) {
+            vendors.findOne({'email': req.body.username}, function(err, existingUser) {
                 if (err) {
                     return done(err);
                 }
@@ -138,11 +138,11 @@ passport.use('local-customer-signup', new LocalStrategy({
                 }
                 else {
                     // a new user, therefore create a new Customer in database
-                    var newUser = new customer();
+                    var newUser = new vendors();
                     newUser.email = req.body.username;
-                    newUser.password = newUser.generateHash(req.body.password);
-                    newUser.familyName = req.body.familyName;
-                    newUser.givenName = req.body.givenName;
+                    // newUser.password = newUser.generateHash(req.body.password);
+                    newUser.password = req.body.password;
+                    newUser.name = req.body.vanName;
 
                     // and save the user
                     newUser.save(function(err) {
@@ -151,8 +151,8 @@ passport.use('local-customer-signup', new LocalStrategy({
 
                         return done(null, newUser);
                     });
-                    req.session.email=email;
-                    req.session.type_of_user = "Customer"
+                    req.session.email = req.body.username;
+                    req.session.type_of_user = "vendor"
                 }
             });
         });

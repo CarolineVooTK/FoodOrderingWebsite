@@ -1,0 +1,24 @@
+<section id="signupform">
+  <h1>Sign Up</h1>
+  <div class="signupform-signup">
+    <form class="form" method="post" action="/vendors/signup">
+      <label>
+        Van Name
+        <input placeholder="Van Name" name="vanName" />
+      </label>
+      <label>
+        Email
+        <input placeholder="email" name="username" value ={{preEmail}}>
+      </label>
+      <label class="mt20">
+        Password
+        <input placeholder="password" type="password" name="password" />
+      </label>
+      <input type="submit" value="submit">
+    </form>
+    </div>
+  <div class="signup_fail">
+    <a style="color:red;"> {{signup_message}} </a>
+  </div>
+
+</section>

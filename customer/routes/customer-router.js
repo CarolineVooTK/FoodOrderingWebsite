@@ -1,12 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const customerController = require("../controllers/customer-controller");
-const passport = require('passport');
-require('../../config/passport')(passport);
+const passport = require("passport");
+require("../../config/passport")(passport);
 const CustomerModel = require("../models/customerModel");
 const customer = CustomerModel.customer;
 const bcrypt = require("bcrypt-nodejs");
-
+const orderController = require("../../order/controllers/order-controller");
 
 const redirectToLogin = (req, res, next) => {
   console.log(req.session);
@@ -22,12 +22,14 @@ router.get("/login", (req, res, next) => {
 });
 
 router.get("/signup", (req, res, next) => {
-  res.render("signup", { preEmail: req.query.username ,signup_message : req.flash("signupMessage")});
+  res.render("signup", {
+    preEmail: req.query.username,
+    signup_message: req.flash("signupMessage"),
+  });
 });
 
-
-router.get("/addNewItemInOrder/:snackid/:vendorid", customerController.addNewOrderItem)
-router.get("/deleteOrderItem/:snackid/:vendorid",customerController.deleteOrderItem)
+router.get("/addNewItemInOrder/:snackid/:vendorid", customerController.addNewOrderItem);
+router.get("/deleteOrderItem/:snackid/:vendorid", customerController.deleteOrderItem);
 
 router.get("/logout", (req, res, next) => {
   res.locals.customer_name = null;
@@ -39,8 +41,12 @@ router.get("/logout", (req, res, next) => {
   });
 });
 
-router.get("/profile", redirectToLogin, (req, res, next) => {
-  res.render("profile");
+router.get("/profile", redirectToLogin, async (req, res, next) => {
+  if (req.session.orderlist && req.session.fromVendor) {
+    res.render("profile", { orderitems: req.session.orderlist, vendor: req.session.fromVendor });
+  } else {
+    res.render("profile");
+  }
 });
 
 router.post(
@@ -48,7 +54,8 @@ router.post(
   passport.authenticate("local-customer-login", {
     failureRedirect: "/customer/login",
     failureFlash: "Incorrect email or password",
-  }),function (req, res, next) {
+  }),
+  function (req, res, next) {
     // console.log("user",req.user);
     req.flash("success", "Login Success..");
     res.redirect("/");

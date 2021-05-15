@@ -55,8 +55,10 @@
   width: 100%;
   text-align: center;
 }
-#order .items {
+#order .orderItems {
   height: 100%;
+  padding: 20px 0;
+  box-sizing: border-box;
 }
 .van {
   align-items: flex-start !important;
@@ -92,13 +94,34 @@
 .van .name .location p {
   margin-left: 10px;
 }
-.total {
+.orderTotal {
   border-top: 1px solid grey;
   border-bottom: 1px solid grey;
   margin-bottom: 10px;
+  padding: 20px 0;
+  box-sizing: border-box;
+  font-size: 20px;
 }
-.total h4 {
+.orderTotal h4 {
   margin: auto 0;
+}
+.orderItem {
+  font-size: 20px;
+  padding: 10px 0;
+}
+.orderItem p {
+  margin: 0;
+}
+.badge {
+  margin-right: 20px;
+}
+.removeItem {
+  color: rgb(228, 59, 59);
+  font-size: 17px;
+  margin-left: 15px;
+}
+.removeItem:hover {
+  color: maroon;
 }
 @media (max-width: 950px) {
   #vendorTitle h1 {

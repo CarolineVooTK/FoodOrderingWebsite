@@ -58,33 +58,29 @@ const getAllCustomerOrders = async (req, res) => {
     });
 };
 
-
-
 const placeOrder = async (req, res) => {
-  let totalprice = 0
-  for (index = 0; index < req.session.orderlist.length; index++){
-    totalprice += req.session.orderlist[index].quantity * req.session.orderlist[index].price
+  let totalprice = 0;
+  for (index = 0; index < req.session.orderlist.length; index++) {
+    totalprice += req.session.orderlist[index].quantity * req.session.orderlist[index].price;
   }
   var newOrder = new orders();
-  newOrder.customerId = new ObjectId(`${String(req.session.passport.user)}`)
-  newOrder.vendorId = new ObjectId(`${req.session.orderlist[0].vendorid}`)
-  newOrder.orderitems = []
+  newOrder.customerId = new ObjectId(`${String(req.session.passport.user)}`);
+  newOrder.vendorId = new ObjectId(`${req.session.orderlist[0].vendorid}`);
+  newOrder.orderitems = [];
   newOrder.price = totalprice;
-  newOrder.status = "pending"
+  newOrder.status = "pending";
 
-  for (index = 0; index < req.session.orderlist.length; index++){
+  for (index = 0; index < req.session.orderlist.length; index++) {
     var newOrderItem = new orderItems();
-    newOrderItem.menuitem = new ObjectId(`${String(req.session.orderlist[index].menuitem)}`)
-    newOrderItem.quantity = req.session.orderlist[index].quantity
-    newOrder.orderitems.push(newOrderItem)
+    newOrderItem.menuitem = new ObjectId(`${String(req.session.orderlist[index].menuitem)}`);
+    newOrderItem.quantity = req.session.orderlist[index].quantity;
+    newOrder.orderitems.push(newOrderItem);
   }
-  newOrder.save(function(err) {
-    if (err)
-        throw err;
-      });
-  req.session.orderlist = []
-  res.render("profile")
-}
+  newOrder.save(function (err) {
+    if (err) throw err;
+  });
+  res.redirect(`/customer/profile`);
+};
 
 // gets a single order from the database by matching its id
 const getOrderById = async (req, res) => {
@@ -131,7 +127,12 @@ const getOrderById = async (req, res) => {
       },
     ])
     .then((data) => {
-      res.render("orders", { order: data[0] });
+      console.log("req", req);
+      // if (req.body && req.body.id) {
+      //   return data[0];
+      // } else {
+      //   res.render("orders", { order: data[0] });
+      // }
     })
     .catch((error) => {
       res.status(500).json({
@@ -223,5 +224,5 @@ module.exports = {
   createNewOrder,
   setOrdersFulfilled,
   getVendorRating,
-  placeOrder
+  placeOrder,
 };

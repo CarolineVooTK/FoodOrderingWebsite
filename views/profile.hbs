@@ -1,1 +1,61 @@
-<h1>Profile page</h1>
+<section id="profile" class="container" onload="showOrderPopup()">
+    <h1>Profile page</h1>
+    {{#if customer_id}}
+        {{#if orderitems}}
+            <div id="orderPopup" class="colMiddle">
+                <div id="orderPopupModal">
+                    <h1>Your order has been sent!</h1>
+                    {{!-- order items --}}
+                    {{#if vendor}}
+                    <div class="popupItem">
+                        <p>{{vendor.name}}, {{vendor.textlocation}}</p>
+                    </div>
+                    {{/if}}
+                    {{#popupOrderItems orderitems}}{{/popupOrderItems}}
+                    <div class="popupButtons flexMiddle stretch">
+                        {{!-- hide cancel button after 10 minutes --}}
+                        <button class="changeButton" onclick="showCancelPopup()">Cancel</button>
+                        <button class="changeButton" onclick="changeOrder()">Change</button>
+                        <button class="doneButton" onclick="hideOrderPopup()">Done</button>
+                    </div>
+                </div>
+            </div>
+        {{/if}}
+    {{/if}}
+    <div id="cancelPopup" class="colMiddle">
+        <div id="cancelPopupModal">
+            <h1>Are you sure you want to cancel your order?</h1>
+            <div class="popupButtons flexMiddle stretch">
+                <button class="changeButton" onclick="showOrderPopup()">No</button>
+                <button class="doneButton" onclick="hideCancelPopup()">Yes</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        const showOrderPopup = () => {
+            hideCancelPopup();
+            let popup = document.getElementById("orderPopup");
+            popup.style.display = "flex";
+        }
+        const hideOrderPopup = () => {
+            let popup = document.getElementById("orderPopup");
+            popup.style.display = "none";
+            // set session order to []
+        }
+        const showCancelPopup = () => {
+            hideOrderPopup();
+            let cancelPopup = document.getElementById("cancelPopup");
+            cancelPopup.style.display = "flex";
+        }
+        const hideCancelPopup = () => {
+            let cancelPopup = document.getElementById("cancelPopup");
+            cancelPopup.style.display = "none";
+            // set session order to []
+            // set order to cancelled in database
+        }
+        const changeOrder = () => {
+            // redirect to previous orders page
+            // use history?
+        }
+    </script>
+</section>

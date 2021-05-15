@@ -11,7 +11,7 @@
                     &nbsp;{{this.name}}
                 </a>
             </h2>
-            <h2 style="width: auto; margin-left: auto; float: right;">${{this.price}}</h2>
+            <h2 style="width: auto; margin-left: auto; float: right;">${{#priceDisplay this.price }}{{/priceDisplay}}</h2>
             <p style="clear: both;color:rgb(63, 63, 63)">&nbsp;{{this.description}}</p>
             <img src="{{this.photo}}" width="280" height="280">
         </div>

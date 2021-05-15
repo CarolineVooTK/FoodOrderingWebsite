@@ -25,9 +25,7 @@ let register = (Handlebars) => {
       for (let i = 0; i < data.length; i++) {
         menuitem += `<div class="row">
             <h2 class="foodname" style="width: auto; float: left;">
-                <a href="/menu/${data[i]._id}">
-                    &nbsp;${data[i].name}
-                </a>
+              &nbsp;${data[i].name}
             </h2>
             <h2 style="width: auto; margin-left: auto; float: right;">${data[i].price}</h2>
             <p style="clear: both;color:rgb(63, 63, 63)">&nbsp;${data[i].description}</p>
@@ -60,23 +58,48 @@ let register = (Handlebars) => {
       }
       return vendors + `</div>`;
     },
+    priceDisplay: (p) => {
+      if (p) {
+        p = p.toString();
+        p += p.includes(".") ? (p.indexOf(".") + 2 == p.length ? "0" : "") : ".00";
+        return p;
+      }
+      return "";
+    },
+    popupOrderItems: (orderitems) => {
+      let display = "";
+      for (let i = 0; i < orderitems.length; i++) {
+        let p = orderitems[i].price;
+        p = p.toString();
+        p += p.includes(".") ? (p.indexOf(".") + 2 == p.length ? "0" : "") : ".00";
+        display += `
+          <div class="orderItem popupItem colTop">
+              <div class="flexBetween stretch">
+                  <div class="flex">
+                      <span class="badge">${orderitems[i].quantity} x </span>
+                      <p>${orderitems[i].name}</p>
+                  </div>
+                  <div class="flex">
+                      <p>$${p}</p>
+                  </div>
+              </div>
+          </div>`;
+      }
+      return display;
+    },
+    checkUser: function (isVendor, type_of_user, options) {
+      if (isVendor == true) {
+        return options.fn(this);
+      } else if (type_of_user == "vendor") {
+        return options.fn(this);
+      }
 
-    checkUser: function (isVendor, type_of_user, options){
-      if(isVendor == true) {
-        return options.fn(this);
-      }
-      else if (type_of_user == "vendor"){
-        return options.fn(this);
-      }
-      
       return options.inverse(this);
     },
 
-
-    ifEquals: function(arg1, arg2, options) {
-      return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
+    ifEquals: function (arg1, arg2, options) {
+      return arg1 == arg2 ? options.fn(this) : options.inverse(this);
     },
-
   };
 
   if (

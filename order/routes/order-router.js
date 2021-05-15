@@ -3,13 +3,12 @@ const router = express.Router();
 const orderController = require("../controllers/order-controller");
 
 // router.get("/", orderController.getAll);
-router.get("/placeOrder", orderController.placeOrder)
+router.get("/placeOrder", orderController.placeOrder);
 router.get("/:id", orderController.getOrderById);
 router.get("/customer/:id", orderController.getAllCustomerOrders);
 router.get("/:vendorId/rating", orderController.getVendorRating);
 router.post("/createNewOrder", orderController.createNewOrder);
 router.put("/:id/setOrdersFulfilled", orderController.setOrdersFulfilled);
-
 
 // get the cart
 router.get("/cart", function (req, res) {

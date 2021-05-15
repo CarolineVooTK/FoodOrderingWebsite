@@ -1,0 +1,83 @@
+#profile {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+}
+
+#orderPopup,
+#cancelPopup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(194, 194, 194, 0.4);
+  backdrop-filter: blur(3px);
+  z-index: 15;
+  text-align: center;
+}
+#orderPopupModal,
+#cancelPopupModal {
+  background: var(--color-dark);
+  color: white;
+  border-radius: 30px;
+  width: 50%;
+  height: auto;
+  padding: 40px;
+  box-sizing: border-box;
+}
+#cancelPopup {
+  display: none;
+}
+
+.popupItem {
+  width: 50%;
+  margin: 20px auto;
+}
+.popupButtons {
+  margin: 20px auto;
+  margin-top: auto;
+}
+.popupButtons button {
+  margin: 0 10px;
+}
+
+.changeButton {
+  background: rgb(176, 26, 26);
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  color: white;
+  width: 120px;
+  height: 40px;
+  border-radius: 30px;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+.changeButton:hover {
+  background: lightgrey;
+  border: 2px solid var(--color-dark);
+  color: var(--color-dark) !important;
+  cursor: pointer;
+}
+.doneButton {
+  background: var(--color-green);
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  color: var(--color-dark);
+  width: 120px;
+  height: 40px;
+  border-radius: 30px;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+.doneButton:hover {
+  background: var(--color-darkgreen);
+  border: 2px solid white;
+  color: white !important;
+  cursor: pointer;
+}

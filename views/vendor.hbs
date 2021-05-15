@@ -26,24 +26,34 @@
                     </div>
                 </div>
             </div>
-            <div class="items colStart">
+            <div class="orderItems colTop">
                 {{! Display the items in the cart if there are items, else display no items in cart}}
                 {{#if orderitems}}
                     {{#each orderitems}} 
-                        <span class='badge'> {{this.quantity}} </span>
-                        <strong>{{ this.name }} </strong>
-                        <strong>{{ this.price }} Unit price </strong>
-                        <a href="/customer/deleteOrderItem/{{this.menuitem}}/{{this.vendorid}}">delete</a>
+                    <div class="orderItem colTop stretch">
+                        <div class="flexBetween stretch">
+                            <div class="flex">
+                                <span class="badge">{{this.quantity}} x </span>
+                                <p>{{ this.name }}</p>
+                            </div>
+                            <div class="flex">
+                                <p>${{#priceDisplay this.price }}{{/priceDisplay}}</p>
+                                <a class="removeItem" href="/customer/deleteOrderItem/{{this.menuitem}}/{{this.vendorid}}">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                     {{/each}}
                 {{else}}
-                    <p>No Item is Added Yet</p>
+                    <p>No Items in Order</p>
                 {{/if}}
             </div>
             <div class="col">
-                <div class="total flexBetween">
+                <div class="orderTotal flexBetween">
                     <h4>Total</h4>
                     {{! Display the total price of the cart}}
-                    <strong> {{totalPrice}} </strong> 
+                    <strong>${{#priceDisplay totalPrice }}{{/priceDisplay}}</strong> 
                 </div>
                 <div class="flexMiddle">
                     <button class="submitButton" onclick="location.href='/orders/placeOrder'" type="submit">Place Order</button>

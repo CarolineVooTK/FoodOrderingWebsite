@@ -145,11 +145,18 @@ const getOrderById = async (req, res) => {
 const getVendorRating = async (req, res) => {
   await orders
     .aggregate([
-      { $match: { vendorId: new ObjectId(`${req.params.vendorId}`) } },
+      {
+        $match: {
+          $and: [
+            { vendorId: new ObjectId(`${req.params.vendorId}`) },
+            { customerRating: { $gt: 0 } },
+          ],
+        },
+      },
       {
         $group: {
           _id: null,
-          rating: { $sum: "$customerRating" },
+          rating: { $avg: "$customerRating" },
           count: { $sum: 1 },
         },
       },

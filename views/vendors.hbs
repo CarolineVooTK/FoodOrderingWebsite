@@ -1,7 +1,7 @@
 <section id="vendors" class="colStart">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script type="text/javascript">
-        // the logic of this is wrong and I get around to changing it
+        // display the rating for the vendor
         async function load_rating(vendorId) {
             let data = null;
             data = await axios
@@ -15,20 +15,27 @@
                 .catch((err) => {
                     console.log(err);
                 });
-            let rating = data[0].rating;
+            let rating = Math.round(data[0].rating * 2) / 2;
+            let flr = Math.floor(data[0].rating);
             let dec = data[0].rating;
-            if (dec.toString().length == 1) {
+            if (!dec.toString().includes(".")) {
                 dec = dec.toString() + ".0";
             }
             let count = data[0].count;
             let ratingDisplay = `<div class="flex rating">`;
+            let half = false;
             if (rating > 0) {
                 ratingDisplay += `<span>${dec}</span>`;
-                ratingDisplay += (`<i class="fas fa-star"></i>`).repeat(rating);
-                ratingDisplay += (`<i class="far fa-star"></i>`).repeat(5 - rating);
+                ratingDisplay += (`<i class="fas fa-star"></i>`).repeat(flr);
+                if (rating > flr) {
+                    ratingDisplay += (`<i class="fas fa-star-half-alt"></i>`);
+                    half = true;
+                }
+                ratingDisplay += half ? (`<i class="far fa-star"></i>`).repeat(5 - flr - 1) : 
+                (`<i class="far fa-star"></i>`).repeat(5 - flr);
                 ratingDisplay += `<span>(${count})</span>`;
             } else {
-                ratingDisplay += `<p>no rating</p>`;
+                ratingDisplay += `<p>no reviews</p>`;
             }
             ratingDisplay += `</div>`;
             document.getElementById(vendorId).innerHTML = ratingDisplay;

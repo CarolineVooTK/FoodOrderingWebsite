@@ -85,7 +85,7 @@ const getVendorById = async (req, res) => {
       },
     ])
     .then((data) => {
-      res.render("vendor", { vendor: data[0] , orderitems:req.session.orderlist});
+      res.render("vendor", { vendor: data[0], orderitems: req.session.orderlist });
     })
     .catch((error) => {
       res.status(500).json({
@@ -127,16 +127,19 @@ const setVendorActive = async (req, res) => {
       { _id: req.session.passport.user },
       {
         active: true,
-        location: new point({ type: "Point", coordinates: [longitude, latitude] }),
+        location: new point({ type: "Point", coordinates: [latitude, longitude] }),
         textlocation: textlocation,
       },
       { returnNewDocument: true }
     )
     .then((data) => {
       if (!data) {
-        return res.render("vendorProfile", {vendor_error: "Error wrong data", vendor_status: "Off"})
+        return res.render("vendorProfile", {
+          vendor_error: "Error wrong data",
+          vendor_status: "Off",
+        });
       }
-      res.render("vendorProfile", {vendor_status: "Active"})
+      res.render("vendorProfile", { vendor_status: "Active" });
     })
     .catch((error) => {
       res.status(500).json({
@@ -145,23 +148,18 @@ const setVendorActive = async (req, res) => {
     });
 };
 
-
-const getStatus = async (req,res) => {
-  let vendor = await vendors.findById({_id : req.session.passport.user})
+const getStatus = async (req, res) => {
+  let vendor = await vendors.findById({ _id: req.session.passport.user });
   // console.log("vendor =",vendor)
-  if (vendor.active){
-    vendor_current_status = "Active"
+  if (vendor.active) {
+    vendor_current_status = "Active";
+  } else {
+    vendor_current_status = "Off";
   }
-  else{
-    vendor_current_status = "Off"
-  }
-  res.render("vendorProfile", {vendor_status: vendor_current_status})
-}
+  res.render("vendorProfile", { vendor_status: vendor_current_status });
+};
 
-
-
-
-const setVendorOff = async (req,res) => {
+const setVendorOff = async (req, res) => {
   await vendors
     .findOneAndUpdate(
       { _id: req.session.passport.user },
@@ -176,14 +174,14 @@ const setVendorOff = async (req,res) => {
           message: "Vendor not updated",
         });
       }
-      res.render("vendorProfile", {vendor_status: "Off"})
+      res.render("vendorProfile", { vendor_status: "Off" });
     })
     .catch((error) => {
       res.status(500).json({
         error: error,
       });
     });
-}
+};
 
 // gets all outstanding orders from the database
 const getOutstandingOrders = async (req, res) => {

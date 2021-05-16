@@ -67,8 +67,10 @@
             {{#with location}}
             {{#with coordinates}}
             <script type="text/javascript">
-                console.log('{{this}}');
-                L.marker(latLongStr('{{this}}')).addTo(map)
+                vanIcon = L.divIcon({
+                    html: `<img style="height: 35px" src="/images/food-truck.ico"/>`,  
+                });
+                L.marker(latLongStr('{{this}}'), { icon: vanIcon }).addTo(map)
                     .bindPopup(`<div class="popup">
                     <p class="bold">{{../../this.name}}</p>
                     <p>{{../../this.textlocation}}</p>
@@ -77,6 +79,7 @@
                     </button>
                     </div>`)
                     .openPopup();
+                
             </script>
             {{/with}}
             {{/with}}

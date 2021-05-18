@@ -244,12 +244,37 @@ const setOrderCollected = async (req, res) => {
     });
 };
 
+// sets a single order's rating by matching its id to the req.params id value
+const setOrderRating = async (req, res) => {
+  let rated = 0;
+  let r = Number(req.body.rating);
+  if (r && !isNaN(r)) {
+    rated = r;
+  }
+  await orders
+    .findOneAndUpdate({ _id: req.params.id }, { customerRating: rated })
+    .then((data) => {
+      if (!data) {
+        return res.status(404).json({
+          message: "Orders cannot be Fulfilled.",
+        });
+      }
+      res.status(200).json(data);
+    })
+    .catch((error) => {
+      res.status(500).json({
+        error: error,
+      });
+    });
+};
+
 module.exports = {
   getAllCustomerOrders,
   getOrderById,
   createNewOrder,
   setOrderFulfilled,
   setOrderCollected,
+  setOrderRating,
   getVendorRating,
   placeOrder,
 };

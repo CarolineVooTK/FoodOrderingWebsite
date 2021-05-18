@@ -9,6 +9,7 @@ router.get("/customer/:id", orderController.getAllCustomerOrders);
 router.get("/:vendorId/rating", orderController.getVendorRating);
 router.post("/createNewOrder", orderController.createNewOrder);
 router.put("/:id/setOrdersFulfilled", orderController.setOrdersFulfilled);
+router.put("/:id/setOrdersPickedUp", orderController.setOrdersPickedUp);
 
 // get the cart
 router.get("/cart", function (req, res) {

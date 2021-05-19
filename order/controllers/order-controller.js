@@ -268,7 +268,6 @@ const setOrderRating = async (req, res) => {
     });
 };
 
-
 module.exports = {
   getAllCustomerOrders,
   getOrderById,

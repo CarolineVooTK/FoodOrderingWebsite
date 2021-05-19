@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const vendorController = require("../controllers/vendor-controller");
-const passport = require('passport');
-require('../../config/passport')(passport);
+const passport = require("passport");
+require("../../config/passport")(passport);
 
 // redirect middleware, redirect users to login page, if they access pages that requires login
 // and not yet login
@@ -15,24 +15,25 @@ const redirectToLogin = (req, res, next) => {
   }
 };
 
-router.get("/login", (req,res) => {
+router.get("/login", (req, res) => {
   res.locals.isVendor = true;
   // console.log("res.locals.isVendor")
   res.render("vendorLogin");
-})
+});
 
-router.get("/signup", (req,res) => {
+router.get("/signup", (req, res) => {
   res.locals.isVendor = true;
   // console.log("res.locals.isVendor")
-  res.render("vendorSignup",{signup_message : req.flash("signupMessage")});
-})
+  res.render("vendorSignup", { signup_message: req.flash("signupMessage") });
+});
 
 router.post(
   "/login",
   passport.authenticate("local-vendor-login", {
     failureRedirect: "/vendors/login",
     failureFlash: "Incorrect email or password",
-  }),function (req, res, next) {
+  }),
+  function (req, res, next) {
     // console.log("user",req.user);
     req.flash("success", "Login Success..");
     res.redirect("/");
@@ -52,9 +53,9 @@ router.post(
   }
 );
 
-router.get("/profile",redirectToLogin, vendorController.getStatus)
-router.get("/setoff",redirectToLogin, vendorController.setVendorOff)
-router.post("/setActive", redirectToLogin, vendorController.setVendorActive)
+router.get("/profile", redirectToLogin, vendorController.getStatus);
+router.get("/setoff", redirectToLogin, vendorController.setVendorOff);
+router.post("/setActive", redirectToLogin, vendorController.setVendorActive);
 router.get("/", vendorController.getAll);
 router.get("/:id", redirectToLogin, vendorController.getVendorById);
 router.post("/addVendor", vendorController.addNewVendor);
@@ -62,6 +63,5 @@ router.post("/addVendor", vendorController.addNewVendor);
 router.get("/:id/outstandingOrders", vendorController.getOutstandingOrders);
 router.get("/getOutsOrdersByVendor", vendorController.getOutsOrdersByVendor); 
 router.get("/getPastOrdersByVendor", vendorController.getOutsOrdersByVendor); 
-
 
 module.exports = router;

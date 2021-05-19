@@ -207,9 +207,55 @@ const createNewOrder = async (req, res) => {
 };
 
 // sets a single order's status to fulfilled by matching its id to the req.params id value
-const setOrdersFulfilled = async (req, res) => {
+const setOrderFulfilled = async (req, res) => {
   await orders
     .findOneAndUpdate({ _id: req.params.id }, { status: "Fulfilled" })
+<<<<<<< HEAD
+=======
+    .then((data) => {
+      if (!data) {
+        return res.status(404).json({
+          message: "Orders cannot be Fulfilled.",
+        });
+      }
+      res.status(200).json(data);
+    })
+    .catch((error) => {
+      res.status(500).json({
+        error: error,
+      });
+    });
+};
+
+// sets a single order's status to collected by matching its id to the req.params id value
+const setOrderCollected = async (req, res) => {
+  await orders
+    .findOneAndUpdate({ _id: req.params.id }, { status: "Collected" })
+    .then((data) => {
+      if (!data) {
+        return res.status(404).json({
+          message: "Orders cannot be Fulfilled.",
+        });
+      }
+      res.status(200).json(data);
+    })
+    .catch((error) => {
+      res.status(500).json({
+        error: error,
+      });
+    });
+};
+
+// sets a single order's rating by matching its id to the req.params id value
+const setOrderRating = async (req, res) => {
+  let rated = 0;
+  let r = Number(req.body.rating);
+  if (r && !isNaN(r)) {
+    rated = r;
+  }
+  await orders
+    .findOneAndUpdate({ _id: req.params.id }, { customerRating: rated })
+>>>>>>> main
     .then((data) => {
       if (!data) {
         return res.status(404).json({
@@ -230,7 +276,9 @@ module.exports = {
   getAllCustomerOrders,
   getOrderById,
   createNewOrder,
-  setOrdersFulfilled,
+  setOrderFulfilled,
+  setOrderCollected,
+  setOrderRating,
   getVendorRating,
   placeOrder 
 };

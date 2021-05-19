@@ -35,7 +35,9 @@
                     <p>Your rating: {{this.customerRating}}</p>
                 </div>
                 <div class="flex">
-                    {{!-- <button onclick="location.href='/orders/{{this._id}}'" type="button">View</button> --}}
+                    <button onclick="location.href='/orders/{{this._id}}'" type="button">View</button>
+                    <button onclick="location.href='/orders/{{this._id}}/setOrderCancelled'" type="button">Cancel</button>
+                    <button onclick="location.href='/orders/{{this._id}}/setOrderRating'" type="button">Rate</button>
                 </div>
             </div>
             {{/each}}

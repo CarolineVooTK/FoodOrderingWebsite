@@ -253,7 +253,27 @@ const setOrderCollected = async (req, res) => {
       });
     });
 };
-
+//sets a single order status to cancelled
+const setOrderCancelled = async (req, res) => {
+  await orders
+    .findOneAndUpdate({ _id: req.params.id }, { status: "Cancelled" })
+    .then((data) => {
+      //if(Date.now().getMinute() - data.time.getMinute() > 2 ){
+      //  return alert("Order cannot be cancelled after 2 mins!")
+      //}
+      if (!data) {
+        return res.status(404).json({
+          message: "Orders cannot be Fulfilled.",
+        });
+      }
+      res.status(200).json(data);
+    })
+    .catch((error) => {
+      res.status(500).json({
+        error: error,
+      });
+    });
+};
 // sets a single order's rating by matching its id to the req.params id value
 const setOrderRating = async (req, res) => {
   let rated = 0;
@@ -284,6 +304,7 @@ module.exports = {
   createNewOrder,
   setOrderFulfilled,
   setOrderCollected,
+  setOrderCancelled,
   setOrderRating,
   getVendorRating,
   placeOrder 

@@ -233,6 +233,106 @@ const getOutstandingOrders = async (req, res) => {
     });
 };
 
+// get outstanding orders of a specific vendor 
+const getOutsOrdersByVendor = async (req, res) => {
+  await vendors
+    .aggregate([
+      { $match: { _id: req.session.passport.user } },
+      {
+        $lookup: {
+          from: "orders",
+          localField: "orders",
+          foreignField: "_id",
+          as: "orders",
+        },
+      },
+      { $match: { "orders.status": "pending" } },
+      {
+        $lookup: {
+          from: "customers",
+          localField: "orders.customerId",
+          foreignField: "_id",
+          as: "customer",
+        },
+      },
+      {
+        $project: {
+          name: 1,
+          "orders._id": 1,
+          "orders.status": 1,
+          "orders.time": 1,
+          "orders.price": 1,
+          "orders.orderitems": 1,
+          "customer.givenName": 1,
+          "customer._id": 1,
+        },
+      },
+    ])
+    .then((data) => {
+      if (!data) {
+        return res.status(200).json({
+          message: "vendor has no outstanding orders",
+        });
+      }
+      res.render("vendorsOutstandingOrders", {OutstandingOrders : data});
+    })
+    .catch((error) => {
+      res.status(500).json({
+        error: error,
+      });
+    });
+};
+
+// get all the past (picked up) orders from a vendor
+const getPastOrdersByVendor = async (req, res) => {
+  await vendors
+    .aggregate([
+      { $match: { _id: req.session.passport.user } },
+      {
+        $lookup: {
+          from: "orders",
+          localField: "orders",
+          foreignField: "_id",
+          as: "orders",
+        },
+      },
+      { $match: { "orders.status": "Picked Up" } },
+      {
+        $lookup: {
+          from: "customers",
+          localField: "orders.customerId",
+          foreignField: "_id",
+          as: "customer",
+        },
+      },
+      {
+        $project: {
+          name: 1,
+          "orders._id": 1,
+          "orders.status": 1,
+          "orders.time": 1,
+          "orders.price": 1,
+          "orders.orderitems": 1,
+          "customer.givenName": 1,
+          "customer._id": 1,
+        },
+      },
+    ])
+    .then((data) => {
+      if (!data) {
+        return res.status(200).json({
+          message: "vendor has no picked up orders",
+        });
+      }
+      res.render("vendorPastOrders", {PastOrders : data});
+    })
+    .catch((error) => {
+      res.status(500).json({
+        error: error,
+      });
+    });
+};
+
 module.exports = {
   getAll,
   getVendorById,
@@ -241,4 +341,6 @@ module.exports = {
   getOutstandingOrders,
   getStatus,
   setVendorOff,
+  getOutsOrdersByVendor,
+  getPastOrdersByVendor
 };

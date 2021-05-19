@@ -86,7 +86,8 @@ const addNewOrderItem = async (req, res) => {
     newMenuItem.price = menu.price;
     let found = 0;
     for (index = 0; index < req.session.orderlist.length; index++) {
-      if (req.session.orderlist[index].menuitem == newMenuItem.menuitem) {
+      if (req.session.orderlist[index].menuitem == newMenuItem.menuitem &&
+         req.session.orderlist[index].vendorid == newMenuItem.vendorid) {
         req.session.orderlist[index].quantity = req.session.orderlist[index].quantity + 1;
         found = 1;
       }
@@ -124,9 +125,12 @@ const addNewOrderItem = async (req, res) => {
     ])
     .then((data) => {
       for (index = 0; index < req.session.orderlist.length; index++) {
-        totalprice += req.session.orderlist[index].quantity * req.session.orderlist[index].price;
+        if(req.params.vendorid == req.session.orderlist[index].vendorid){
+          totalprice += req.session.orderlist[index].quantity * req.session.orderlist[index].price;
+        }
       }
       req.session.fromVendor = data[0];
+
       res.render("vendor", {
         vendor: req.session.fromVendor,
         orderitems: req.session.orderlist,

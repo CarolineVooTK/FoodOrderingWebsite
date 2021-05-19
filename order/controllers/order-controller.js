@@ -61,23 +61,33 @@ const getAllCustomerOrders = async (req, res) => {
 const placeOrder = async (req, res) => {
   let totalprice = 0;
   for (index = 0; index < req.session.orderlist.length; index++) {
-    totalprice += req.session.orderlist[index].quantity * req.session.orderlist[index].price;
+    if(req.params.vendorid == req.session.orderlist[index].vendorid){
+      totalprice += req.session.orderlist[index].quantity * req.session.orderlist[index].price;
+    }
   }
   var newOrder = new orders();
   newOrder.customerId = new ObjectId(`${String(req.session.passport.user)}`);
-  newOrder.vendorId = new ObjectId(`${req.session.orderlist[0].vendorid}`);
+  newOrder.vendorId = new ObjectId(`${req.params.vendorid}`);
   newOrder.orderitems = [];
   newOrder.price = totalprice;
   newOrder.status = "pending";
 
   for (index = 0; index < req.session.orderlist.length; index++) {
-    var newOrderItem = new orderItems();
-    newOrderItem.menuitem = new ObjectId(`${String(req.session.orderlist[index].menuitem)}`);
-    newOrderItem.quantity = req.session.orderlist[index].quantity;
-    newOrder.orderitems.push(newOrderItem);
+    if(req.params.vendorid == req.session.orderlist[index].vendorid){
+      var newOrderItem = new orderItems();
+      newOrderItem.menuitem = new ObjectId(`${String(req.session.orderlist[index].menuitem)}`);
+      newOrderItem.quantity = req.session.orderlist[index].quantity;
+      newOrder.orderitems.push(newOrderItem);
+    }
   }
   newOrder.save(function (err) {
-    if (err) throw err;
+    if (err) {
+      console.log("order fail")
+      throw err;
+    }
+    else{
+      console.log("order success")
+    }
   });
   res.redirect(`/customer/profile`);
 };

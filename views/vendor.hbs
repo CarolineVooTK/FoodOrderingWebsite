@@ -58,9 +58,66 @@
                     <strong>${{#priceDisplay totalPrice }}{{/priceDisplay}}</strong> 
                 </div>
                 <div class="flexMiddle">
-                    <button class="submitButton" onclick="location.href='/orders/placeOrder/{{vendor._id}}'" type="submit">Place Order</button>
+                    <button class="submitButton" onclick="showOrderPopup()" type="submit">Place Order</button>
                 </div>
+{{!-- onclick="location.href='/orders/placeOrder/{{vendor._id}}'" --}}
             </div>
         </div>
     </div>
+     <div id="orderPopup" class="colMiddle" style="display: none;">
+        <div id="orderPopupModal">
+            <h1>Your order will be submitted!</h1>
+            {{!-- order items --}}
+            {{#if vendor}}
+            <div class="popupItem">
+                <p>{{vendor.name}}, {{vendor.textlocation}}</p>
+            </div>
+            {{/if}}  
+            {{#if orderitems}} 
+                {{#popupOrderItems2 orderitems vendor._id}}{{/popupOrderItems2}}
+            {{/if}}
+            <div class="popupButtons flexMiddle stretch">
+                {{!-- hide cancel button after 10 minutes --}}
+                <button class="changeButton" onclick="showCancelPopup()">Cancel</button>
+                <button class="changeButton" onclick="changeOrder()">Change</button>
+                <button class="doneButton" onclick="location.href='/orders/placeOrder/{{vendor._id}}'">Done</button>
+            </div>
+        </div>
+    </div>
+    <div id="cancelPopup" class="colMiddle">
+        <div id="cancelPopupModal">
+            <h1>Are you sure you want to cancel your order?</h1>
+            <div class="popupButtons flexMiddle stretch">
+                <button class="changeButton" onclick="showOrderPopup()">No</button>
+                <button class="doneButton" onclick="hideCancelPopup()">Yes</button>
+            </div>
+        </div>
+    </div>
+    <script>
+            const showOrderPopup = () => {
+                hideCancelPopup();
+                let popup = document.getElementById("orderPopup");
+                popup.style.display = "flex";
+            }
+            const hideOrderPopup = () => {
+                let popup = document.getElementById("orderPopup");
+                popup.style.display = "none";
+                // set session order to []
+            }
+            const showCancelPopup = () => {
+                hideOrderPopup();
+                let cancelPopup = document.getElementById("cancelPopup");
+                cancelPopup.style.display = "flex";
+            }
+            const hideCancelPopup = () => {
+                let cancelPopup = document.getElementById("cancelPopup");
+                cancelPopup.style.display = "none";
+                // set session order to []
+                // set order to cancelled in database
+            }
+            const changeOrder = () => {
+                // redirect to previous orders page
+                // use history?
+            }
+        </script>
 </section>

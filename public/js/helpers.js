@@ -1,3 +1,5 @@
+const { json } = require("express");
+
 let register = (Handlebars) => {
   let helpers = {
     listfood: function (data) {
@@ -69,6 +71,30 @@ let register = (Handlebars) => {
     popupOrderItems: (orderitems) => {
       let display = "";
       for (let i = 0; i < orderitems.length; i++) {
+        let p = orderitems[i].price;
+        p = p.toString();
+        p += p.includes(".") ? (p.indexOf(".") + 2 == p.length ? "0" : "") : ".00";
+        display += `
+          <div class="orderItem popupItem colTop">
+              <div class="flexBetween stretch">
+                  <div class="flex">
+                      <span class="badge">${orderitems[i].quantity} x </span>
+                      <p>${orderitems[i].name}</p>
+                  </div>
+                  <div class="flex">
+                      <p>$${p}</p>
+                  </div>
+              </div>
+          </div>`;
+      }
+      return display;
+    },
+    popupOrderItems2: (orderitems, vendor_id) => {
+      let display = "";
+      for (let i = 0; i < orderitems.length; i++) {
+        if(JSON.stringify(orderitems[i].vendorid) != JSON.stringify(vendor_id)){
+          continue;
+        }
         let p = orderitems[i].price;
         p = p.toString();
         p += p.includes(".") ? (p.indexOf(".") + 2 == p.length ? "0" : "") : ".00";

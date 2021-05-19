@@ -209,7 +209,7 @@ const createNewOrder = async (req, res) => {
 // sets a single order's status to fulfilled by matching its id to the req.params id value
 const setOrdersFulfilled = async (req, res) => {
   await orders
-    .findOneAndUpdate({ _id: req.params.id }, { status: "Fulfilled but not yet Picked Up" }, { returnNewDocument: true })
+    .findOneAndUpdate({ _id: req.params.id }, { status: "Fulfilled" })
     .then((data) => {
       if (!data) {
         return res.status(404).json({
@@ -225,24 +225,6 @@ const setOrdersFulfilled = async (req, res) => {
     });
 };
 
-// sets a single order's status to pickedup by matching its id to the req.params id value
-const setOrdersPickedUp = async (req, res) => {
-  await orders
-    .findOneAndUpdate({ _id: req.params.id }, { status: "Picked Up" }, { returnNewDocument: true })
-    .then((data) => {
-      if (!data) {
-        return res.status(404).json({
-          message: "Error while changing the status of the Order.",
-        });
-      }
-      res.status(200).json(data);
-    })
-    .catch((error) => {
-      res.status(500).json({
-        error: error,
-      });
-    });
-};
 
 module.exports = {
   getAllCustomerOrders,
@@ -250,6 +232,5 @@ module.exports = {
   createNewOrder,
   setOrdersFulfilled,
   getVendorRating,
-  placeOrder,
-  setOrdersPickedUp 
+  placeOrder 
 };

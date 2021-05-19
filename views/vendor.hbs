@@ -89,7 +89,9 @@
             <h1>Are you sure you want to cancel your order?</h1>
             <div class="popupButtons flexMiddle stretch">
                 <button class="changeButton" onclick="showOrderPopup()">No</button>
-                <button class="doneButton" onclick="hideCancelPopup()">Yes</button>
+                <button class="doneButton" onclick="hideCancelPopup();location.href='/vendors'">Yes</button>
+                {{!-- now the done button will redirect the page to vendors page, 
+                to make it different from the change button --}}
             </div>
         </div>
     </div>
@@ -112,12 +114,18 @@
             const hideCancelPopup = () => {
                 let cancelPopup = document.getElementById("cancelPopup");
                 cancelPopup.style.display = "none";
+    
                 // set session order to []
                 // set order to cancelled in database
             }
             const changeOrder = () => {
-                // redirect to previous orders page
-                // use history?
+                let popup = document.getElementById("orderPopup");
+                popup.style.display = "none";
+                //the change button will just back to the order page
+            }
+            const goback = () => {
+                hideCancelPopup();
+                window.history.back();
             }
         </script>
 </section>

@@ -14,6 +14,14 @@ const redirectToLogin = (req, res, next) => {
     res.redirect("/vendors/login");
   }
 };
+const redirectToCustomerLogin = (req, res, next) => {
+  // console.log(req.session);
+  if (req.session.passport) {
+    next();
+  } else {
+    res.redirect("/customer/login");
+  }
+};
 
 router.get("/login", (req, res) => {
   res.locals.isVendor = true;
@@ -57,7 +65,7 @@ router.get("/profile", redirectToLogin, vendorController.getStatus);
 router.get("/setoff", redirectToLogin, vendorController.setVendorOff);
 router.post("/setActive", redirectToLogin, vendorController.setVendorActive);
 router.get("/", vendorController.getAll);
-router.get("/:id", redirectToLogin, vendorController.getVendorById);
+router.get("/:id", redirectToCustomerLogin, vendorController.getVendorById);
 router.post("/addVendor", vendorController.addNewVendor);
 // router.put("/:id/setVendorActive", vendorController.setVendorActive);
 router.get("/:id/outstandingOrders", vendorController.getOutstandingOrders);

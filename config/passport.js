@@ -94,25 +94,25 @@ module.exports = function(passport) {
     function(req, email, password, done) {
         process.nextTick(function() {
             // see if the user with the email exists
-            vendors.findOne({ 'email' :  req.body.username }, function(err, user) {
+            vendors.findOne({ 'name' :  req.body.username}, function(err, user) {
                 if (err){   
-                    console.log("err")
+                    // console.log("err")
                     return done(err);
                 }
                 if (!user){
-                    console.log("no user")
-                    return done(null, false, req.flash('loginMessage', 'No user found.'));
+                    // console.log("no user")
+                    return done(null, false, req.flash('loginMessage', 'Invalid username or password'));
                 }
 
                 //check if the password is valid
                 // if(user.password != req.body.password){
                 if (!user.validPassword(req.body.password)){
-                    return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.'));
+                    return done(null, false, req.flash('loginMessage', 'Invalid username or password.'));
                 }
 
                 // this is a valid email and valid password
                 else {
-                    req.session.email = req.body.username; 
+                    req.session.name = req.body.username; 
                     req.session.type_of_user = "vendor"; 
 
                     return done(null, user, req.flash('loginMessage', 'Login successful'));
@@ -161,7 +161,7 @@ passport.use('local-vendor-signup', new LocalStrategy({
 
                         return done(null, newUser);
                     });
-                    req.session.email = req.body.username;
+                    req.session.name = req.body.vanName;
                     req.session.type_of_user = "vendor"
                 }
             });

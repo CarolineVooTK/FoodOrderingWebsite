@@ -15,7 +15,7 @@ const OrderSchema = new mongoose.Schema(
     vendorId: { type: mongoose.Schema.Types.ObjectId, required: true },
     orderitems: { type: [OrderItemSchema], required: true },
     price: { type: Number, required: true },
-    status: { type: String, required: false, default: "not submitted" },
+    status: { type: String, required: false, default: "pending" },
     time: { type: Date, required: true, default: Date.now },
     customerRating: { type: Number, required: false, default: 0 },
     discountApplied: { type: Boolean, required: false },

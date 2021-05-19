@@ -61,6 +61,7 @@ router.post("/addVendor", vendorController.addNewVendor);
 // router.put("/:id/setVendorActive", vendorController.setVendorActive);
 router.get("/:id/outstandingOrders", vendorController.getOutstandingOrders);
 router.get("/getOutsOrdersByVendor", vendorController.getOutsOrdersByVendor); 
+router.get("/getPastOrdersByVendor", vendorController.getOutsOrdersByVendor); 
 
 
 module.exports = router;

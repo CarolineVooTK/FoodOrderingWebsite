@@ -1,7 +1,7 @@
-<section id="vendorsOutstandingOrders">
-        <h1 style="text-align: center;">Orders that Have Not Been Fulfilled or Picked Up Yet</h1>
-        {{#if OutstandingOrders.length}}
-        <p>{{OutstandingOrders}}</p>
+<section id="vendorPastOrders">
+        <h1 style="text-align: center;">Our Orders History</h1>
+        {{#if PastOrders.length}}
+        <p>{{PastOrders}}</p>
         {{/if}}
         {{! Need to sort them with the order time}}
         {{!-- {{#each OutstandingOrdes}}

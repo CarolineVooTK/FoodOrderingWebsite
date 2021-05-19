@@ -228,7 +228,7 @@ const setOrdersFulfilled = async (req, res) => {
 // sets a single order's status to pickedup by matching its id to the req.params id value
 const setOrdersPickedUp = async (req, res) => {
   await orders
-    .findOneAndUpdate({ _id: req.params.id }, { status: "Picked Up By Customers" }, { returnNewDocument: true })
+    .findOneAndUpdate({ _id: req.params.id }, { status: "Picked Up" }, { returnNewDocument: true })
     .then((data) => {
       if (!data) {
         return res.status(404).json({

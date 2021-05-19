@@ -210,8 +210,6 @@ const createNewOrder = async (req, res) => {
 const setOrderFulfilled = async (req, res) => {
   await orders
     .findOneAndUpdate({ _id: req.params.id }, { status: "Fulfilled" })
-<<<<<<< HEAD
-=======
     .then((data) => {
       if (!data) {
         return res.status(404).json({
@@ -255,7 +253,6 @@ const setOrderRating = async (req, res) => {
   }
   await orders
     .findOneAndUpdate({ _id: req.params.id }, { customerRating: rated })
->>>>>>> main
     .then((data) => {
       if (!data) {
         return res.status(404).json({
@@ -270,7 +267,6 @@ const setOrderRating = async (req, res) => {
       });
     });
 };
-
 
 module.exports = {
   getAllCustomerOrders,

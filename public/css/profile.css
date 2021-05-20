@@ -4,6 +4,40 @@
   width: 100%;
   margin: 0 auto;
 }
+#profileDetail{
+  background: var(--color-grey);
+  color: black;
+  width: 100%;
+  height: auto;
+  padding: 50px;
+  box-sizing: border-box;
+}
+.nickname{
+  font-size :var(--text-big);
+}
+.email {
+  font-size : var(--text-small);
+  color:dimgray;
+
+}
+.contactDetails{
+  text-align: right ;
+  font-size:  var(--text-medium);
+  color:dimgray;
+}
+.contactDetailsHead{
+  text-align: left ;
+  font-size:  var(--text-medium);
+  color:dimgray;
+
+}
+
+#pastOrder  button:hover {
+  background: grey;
+  color: white;
+  cursor: pointer;
+}
+
 
 #orderPopup,
 #cancelPopup {

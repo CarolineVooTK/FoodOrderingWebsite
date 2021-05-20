@@ -8,6 +8,15 @@ const point = CustomerModel.point;
 const bcrypt = require("bcrypt-nodejs");
 // let ObjectId = require("mongoose").Types.ObjectId;
 
+const getCustDetails = async (req, res) => {
+  let customers = await customer.findById({ _id: req.session.passport.user });
+  // console.log("vendor =",vendor)
+
+  res.render("profile", { custFamName: customers.familyName, custGivenName: customers.givenName,
+    custEmail: customers.email, custPassword: customers.password });
+};
+
+
 const getCustomerByEmail = async (req, res) => {
   let cust = await customer
     .findOne({ email: req.params.email })
@@ -149,4 +158,5 @@ module.exports = {
   getCustomerByEmail,
   addNewOrderItem,
   deleteOrderItem,
+  getCustDetails,
 };

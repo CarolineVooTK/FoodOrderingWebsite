@@ -41,9 +41,11 @@ router.get("/logout", (req, res, next) => {
   });
 });
 
-router.get("/profile", redirectToLogin, async (req, res, next) => {
-  if (req.session.orderlist && req.session.fromVendor) {
-    res.render("profile", { orderitems: req.session.orderlist, vendor: req.session.fromVendor });
+router.get(
+  "/profile", redirectToLogin,customerController.getCustDetails,
+  async (req, res, next) => {
+  if (req.session.orderlist && req.session.fromVendor ) {
+    res.render("profile", { orderitems: req.session.orderlist, vendor: req.session.fromVendor});
   } else {
     res.render("profile");
   }

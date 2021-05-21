@@ -4,6 +4,7 @@
   width: 100%;
   margin: 0 auto;
 }
+
 #profileDetail{
   background: var(--color-grey);
   color: black;
@@ -21,21 +22,34 @@
 
 }
 .contactDetails{
-  text-align: right ;
   font-size:  var(--text-medium);
   color:dimgray;
 }
+.alignleft{
+  float:left;
+}
+
+.alignright{
+  float:right;
+}
 .contactDetailsHead{
-  text-align: left ;
   font-size:  var(--text-medium);
   color:dimgray;
 
 }
 
 #pastOrder  button:hover {
-  background: grey;
-  color: white;
-  cursor: pointer;
+  background: var(--color-grey);
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  color: var(--color-dark);
+  width: 120px;
+  height: 40px;
+  border-radius: 30px;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 
 

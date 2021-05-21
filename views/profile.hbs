@@ -9,18 +9,33 @@
                 <p>{{custEmail}}</p>
             </div>
         </div>
-        <h2>Contact Details</h2>
+        <h2 style = "float: left;">Contact Details</h2>
+        <h2 style = "float:right">
+            <button   onclick="location.href='/menu'" type="button">Change Details</button>
+        </h2>
+        <div style ="clear : both;"></div>
+
         <div id="profileDetail">
             <div class ="contactDetailsHead">
-                <p>Name : <div class = "contactDetails">{{custGivenName}} {{custFamName}}</p></div>
-                <p>Password : {{custPassword}} </p>
+                <span class="alignleft">Given Name : </span><span class="alignright">{{custGivenName}}&nbsp;</span>
+                <div style ="clear : both;"></div>
+                <br>
+                <span class="alignleft">Family Name : </span><span class="alignright">{{custFamName}}</span>
+                <div style ="clear : both;"></div>
+                <br>
+                <span class="alignleft">Password : </span><span class="alignright">**********</span>
+                <div style ="clear : both;"></div>
             </div>
         </div>
         <div id = "pastOrder">
-            <button class="hover" onclick="location.href='/orders/customer/{{customer_id}}'">Past Orders</button>
+            <h1>
+
+            <button class="hover" onclick="location.href='/orders/customer/{{customer_id}}'">My Past Orders</button>
+
+            </h1>
         </div>
     {{/if}}
-    
+
     {{#if customer_id}}
         {{#if orderitems}}
             <div id="orderPopup" class="colMiddle">

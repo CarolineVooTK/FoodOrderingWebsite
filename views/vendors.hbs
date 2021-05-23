@@ -1,5 +1,6 @@
 <section id="vendors" class="colStart">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src='https://unpkg.com/@turf/turf/turf.min.js'></script>
     <script type="text/javascript">
         // display the rating for the vendor
         async function load_rating(vendorId) {
@@ -43,55 +44,58 @@
         function latLongStr(val) {
             return val.toString().split(",");
         }
+        function getDistance(vendorId) {
+            if (window.vendorDistances) {
+                for (let j = 0; j < window.vendorDistances.length; j++) {
+                    if (window.vendorDistances[j].vendorId == vendorId) {
+                        let distanceDisplay = `${window.vendorDistances[j].distance} km`;
+                        console.log("getting distance:", distanceDisplay);
+                        setTimeout(() => {
+                            document.getElementById(vendorId + "-distance").innerHTML = distanceDisplay;
+                        }, 2000)
+                        return "";
+                    }
+                }
+            }
+            return "";
+        }
     </script>
     <div class="container relative height">
         <h1>Vendors Near You</h1>
-        <div id="legend">
-            <div class="flex stretch">
-                <button id="collapseMapList" class="flex" onclick="toggleExpandMapList()">
-                    <p id="showList">show list</p>
-                    <i id="arrow" class="fas fa-chevron-down"></i>
-                </button>
-            </div>
-            {{#vendorList vendors}}{{/vendorList}}
-        </div>
         <div id="vendorMap" class="flexMiddle">
-            <div id="mapid"></div>
-            {{!-- change zoom in map.locate to show nearest 5--}}
-            <script type="text/javascript">
-                let map = L.map('mapid', {
-                    center: [-37.81, 144.96],
-                    zoom: 13
-                });
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                }).addTo(map);
-                map.zoomControl.setPosition('topright');
-                map.locate({ setView: true, maxZoom: 16 });
-            </script>
+            {{#vendorMap vendors}}{{/vendorMap}}
             {{#each vendors }}
             {{#if this.active}}
             {{#with location}}
             {{#with coordinates}}
-            <script type="text/javascript">
+            <script typr="text/javascript">
                 vanIcon = L.divIcon({
-                    html: `<img style="height: 35px" src="/images/food-truck.ico"/>`,  
-                });
-                L.marker(latLongStr('{{this}}'), { icon: vanIcon }).addTo(map)
-                    .bindPopup(`<div class="popup">
+                        html: `<img style="height: 35px" src="/images/food-truck.ico"/>`,
+                    });
+                    L.marker(latLongStr('{{this}}'), { icon: vanIcon }).addTo(map)
+                        .bindPopup(`<div class="popup">
                     <p class="bold">{{../../this.name}}</p>
                     <p>{{../../this.textlocation}}</p>
                     <button>
                         <a href="vendors/{{../../this._id}}">View</a>
                     </button>
                     </div>`)
-                    .openPopup();
-                
+                        .openPopup();
             </script>
             {{/with}}
             {{/with}}
             {{/if}}
             {{/each}}
+            </div>
+            <div id="legend">
+                <div class="flex stretch">
+                    <button id="collapseMapList" class="flex" onclick="toggleExpandMapList()">
+                        <p id="showList">show list</p>
+                        <i id="arrow" class="fas fa-chevron-down"></i>
+                    </button>
+                </div>
+                {{#vendorList vendors}}{{/vendorList}}
+            </div>
         </div>
     </div>
     <script>

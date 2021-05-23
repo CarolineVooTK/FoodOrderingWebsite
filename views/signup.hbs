@@ -13,10 +13,18 @@
       <label>
         Email
         <input placeholder="email" name="username" value ={{preEmail}}>
+        <a style="color:red;"> {{email_valid_fail}} </a>
       </label>
       <label class="mt20">
         Password
         <input placeholder="password" type="password" name="password" />
+        {{#if password_valid_fail}}
+          <div id = "passord_valid_fail">
+            <p>1. At least one alphabet (upper or lower case A-Z)</p>
+            <p>2. At least one numerical digit (0-9)</p>
+            <p>3. A length of at least 8 characters </p>
+          </div>
+        {{/if}}
       </label>
       <input type="submit" value="submit">
     </form>

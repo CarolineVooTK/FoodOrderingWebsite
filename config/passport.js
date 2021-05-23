@@ -2,6 +2,9 @@ const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcrypt-nodejs");
 let ObjectId = require("mongoose").Types.ObjectId;
 
+
+
+
 // our  model
 const { customer } = require("../data/models/customerModel");
 const { vendors } = require("../data/models/Vendor");

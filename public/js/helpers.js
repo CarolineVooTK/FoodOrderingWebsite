@@ -41,7 +41,14 @@ let register = (Handlebars) => {
         if (data[i].active) {
           vendors += `<div class="vendor col">
             <div class="colStart title">
-                <h2>${data[i].name}</h2>
+                <div class="flexBetween stretch"
+                  <h2 style="text-transform:uppercase;color:#3df2ff;font-weight:bold;font-size:25px;">${data[i].name}</h2>
+                  <div id="${data[i]._id}-distance" class="distance">
+                    <script type="text/javascript">
+                      getDistance('${data[i]._id}');
+                    </script>
+                  </div>
+                </div>
                 <p>${data[i].textlocation}</p>
                 <div class="ratingContainer colMiddle">
                     <script type="text/javascript">
@@ -96,9 +103,52 @@ let register = (Handlebars) => {
 
       return options.inverse(this);
     },
-
     ifEquals: function (arg1, arg2, options) {
-      return JSON.stringify(arg1) == JSON.stringify(arg2) ? options.fn(this) : options.inverse(this);
+      return JSON.stringify(arg1) == JSON.stringify(arg2)
+        ? options.fn(this)
+        : options.inverse(this);
+    },
+    vendorMap: (vendors) => {
+      let vMap = `
+        <div id="mapid"></div>
+        <script type="text/javascript">
+          L = window.L;
+          let map = L.map("mapid", {
+            center: [-37.81, 144.96],
+            zoom: 13,
+          });
+          L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+            attribution:
+              '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+          }).addTo(map);
+          map.zoomControl.setPosition("topright");
+          d = 100;
+          v = "";
+          window.minVendor = [d, v];
+          window.vendorDistances = [];
+          map.locate({ setView: true, watch: true, maxZoom: 16 }).on("locationfound", (e) => {        
+        `;
+      for (var k = 0; k < vendors.length; k++) {
+        vMap += `
+        from = turf.point([e.latitude, e.longitude]); // should be location of user
+        to = turf.point([${vendors[k].location.coordinates}]);
+        distance = Math.round(turf.distance(from, to) * 100) / 100;
+        console.log("setting distance from:", e.latitude, e.longitude);
+        window.vendorDistances.push({distance: distance, vendorId: "${vendors[k]._id}"});
+        if (distance < d) {
+          d = distance;
+          v = "${vendors[k]._id}";
+          window.minVendor = [d, v];
+        }
+        `;
+      }
+      return vMap + `}); </script>`;
+    },
+    minVendorUrl: () => {
+      if (window.minVendor) {
+        return window.minVendor[1];
+      }
+      return "6075878024b5d615b324ee1d";
     },
   };
 

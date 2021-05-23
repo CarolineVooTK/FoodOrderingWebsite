@@ -67,11 +67,25 @@
             <div class="container flexBetween">
                 <i onclick="showNavbar()" id="hamburger" class="fas fa-bars"></i>
                 <div class="navlinks">
-                    <a href="/menu">menu</a>
+                    <a href="/vendors">Find a Van</a>
                 </div>
                 <h1><a href="/">Snacks in a Van</a></h1>
                 <div class="navlinks">
-                    <a href="/vendors">Find a Van</a>
+                    {{!-- will try to change this to closest vendor --}}
+                    <script type="text/javascript">
+                        document.addEventListener("DOMContentLoaded", () => {
+                            // could possibly make this default value a random vendors id
+                            let id = "6075878024b5d615b324ee1d";
+                            if (window.minVendor) {
+                                id = window.minVendor[1];
+                            }
+                            let links = document.getElementsByClassName("linkToClosestVendor");
+                            for (let i = 0; i < links.length; i++) {
+                                links[i].href = `http://localhost:4000/vendors/${id}`;
+                            }
+                        });
+                    </script>
+                    <a class="linkToClosestVendor" href="/vendors/6075878024b5d615b324ee1d">Order Now</a>
                 </div>
             </div>
         </div>
@@ -90,7 +104,7 @@
                     <i class="fas fa-angle-right"></i>
                 </div>
                 <div class="flex">
-                    <a href="/menu">menu</a>
+                    <a class="linkToClosestVendor" href="/vendors/6075878024b5d615b324ee1d">menu</a>
                     <i class="fas fa-angle-right"></i>
                 </div>
                 <div class="flex">

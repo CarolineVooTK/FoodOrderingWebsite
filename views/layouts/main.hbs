@@ -71,20 +71,6 @@
                 </div>
                 <h1><a href="/">Snacks in a Van</a></h1>
                 <div class="navlinks">
-                    {{!-- will try to change this to closest vendor --}}
-                    <script type="text/javascript">
-                        document.addEventListener("DOMContentLoaded", () => {
-                            // could possibly make this default value a random vendors id
-                            let id = "6075878024b5d615b324ee1d";
-                            if (window.minVendor) {
-                                id = window.minVendor[1];
-                            }
-                            let links = document.getElementsByClassName("linkToClosestVendor");
-                            for (let i = 0; i < links.length; i++) {
-                                links[i].href = `/vendors/${id}`;
-                            }
-                        });
-                    </script>
                     <a class="linkToClosestVendor" href="/vendors/6075878024b5d615b324ee1d">Order Now</a>
                 </div>
             </div>

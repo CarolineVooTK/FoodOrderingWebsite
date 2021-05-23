@@ -12,33 +12,71 @@ window.onload = function getLocation() {
     } else {
         alert("Geolocation is not supported by this browser.");
     }
+    let rating_ = Math.round({{rating}} * 2) / 2;
+    let flr = Math.floor({{rating}});
+    let dec = {{rating}};
+    if (!dec.toString().includes(".")) {
+        dec = dec.toString() + ".0";
+    }
+    let count_ = {{count}};
+    let ratingDisplay = `<div class="flex rating">`;
+    let half = false;
+    if (rating_ > 0) {
+        ratingDisplay += `<span>${dec}</span>`;
+        ratingDisplay += (`<i class="fas fa-star"></i>`).repeat(flr);
+        if (rating_ > flr) {
+            ratingDisplay += (`<i class="fas fa-star-half-alt"></i>`);
+            half = true;
+        }
+        ratingDisplay += half ? (`<i class="far fa-star"></i>`).repeat(5 - flr - 1) : 
+        (`<i class="far fa-star"></i>`).repeat(5 - flr);
+        ratingDisplay += `<span>(${count_})</span>`;
+    } else {
+        ratingDisplay += `<p>no reviews</p>`;
+    }
+    ratingDisplay += `</div>`;
+    document.getElementById("vendor star rating").innerHTML = ratingDisplay;
+}
+function showForm(){
+    document.getElementById("setActiveform").style = "";
+    document.getElementById("setStatusActiveButton").style = "display: none";
 }
 </script>
 
 <section id="vendorProfile" >
-    <p>Current Status: <span>{{vendor_status}}</span></p>
-    {{#ifEquals vendor_status "Active"}}
-    <a href="/vendors/setoff">Quit for the day</a>
-    {{else}}
-    <div id="setActiveform">
-        <h2>Update your location</h2>
-        <form class="form colMiddle" method="post" action="/vendors/setActive">
-            <label>
-                Text Location
-                <input placeholder="Your location name..." name="textlocation" type="text" />
-            </label>
-            <label>
-                Latitude
-                <input id = "latitude" placeholder = "Latitude...", name = "latitude" type="text">
-            </label>
-            <label>
-                Longitude
-                <input id="longitude" placeholder="Longitude..." , name="longitude" type="text">
-            </label>
-            <input id="VendorActiveButton" class="darkButton" type="submit" value="Submit" />
-        </form>
+    <div id = "vendor_name">
+        <h2> NAME: {{vendor.name}}</h2>
     </div>
-    {{/ifEquals}}
+    <div id = "vendor status">
+        <h2>CURRENT STATUS: {{vendor_status}}</h2>
+        {{#ifEquals vendor_status "Active"}}
+            <button class="setStatusButton" onclick="location.href='/vendors/setoff'">Quit for the day</button>
+        {{else}}
+            <button id = "setStatusActiveButton" class="setStatusButton" onclick="showForm()">Set Active</button>
+            <div id="setActiveform" style="display: none">
+                <h3>Update your location</h3>
+                <form class="form colMiddle" method="post" action="/vendors/setActive">
+                    <label>
+                        Text Location
+                        <input placeholder="Your location name..." name="textlocation" type="text" />
+                    </label>
+                    <label>
+                        Latitude
+                        <input id = "latitude" placeholder = "Latitude...", name = "latitude" type="text">
+                    </label>
+                    <label>
+                        Longitude
+                        <input id="longitude" placeholder="Longitude..." , name="longitude" type="text">
+                    </label>
+                    <input id="VendorActiveButton" class="VendorActiveButton" type="submit" value="Open for Business" />
+                </form>
+            </div>
+        {{/ifEquals}}
+    </div>
+    <div id = "vendor rating">
+        <h2> RATING : <div id = "vendor star rating"></div></h2>
+    </div>
+    
     <p id = "demo"> </p>
     <p>{{vendor_error}}</p>
 

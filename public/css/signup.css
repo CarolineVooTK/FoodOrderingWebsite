@@ -10,6 +10,11 @@
 #signupform input {
     margin-top: 5px;
 }
+#passord_valid_fail p{
+    color: red;
+    text-indent: 5px;
+    line-height: 0.5;
+}
 #signupform input[type="submit"] {
     width: 100%;
     padding-left: 0;

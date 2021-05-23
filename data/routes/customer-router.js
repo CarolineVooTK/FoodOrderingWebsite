@@ -7,6 +7,60 @@ const CustomerModel = require("../models/customerModel");
 const customer = CustomerModel.customer;
 const bcrypt = require("bcrypt-nodejs");
 const orderController = require("../controllers/order-controller");
+const { check, validationResult } = require('express-validator');
+
+
+// the validator for checking customer password and email
+// when doing customer registration 
+const validation = [
+    check('password')
+      .exists()
+      .isLength({ min: 8 })
+      .withMessage('password not valid')
+      .matches(/\d/)
+      .withMessage('password not valid')
+      .matches(/[A-Za-z]/)
+      .withMessage('password not valid'),
+    check('username')
+        .exists()
+        .withMessage('username is required')
+        .isEmail()
+        .withMessage('username not valid'),
+];
+
+// the errors handle for customer email and password validation
+function handleValidationErrors(req, res, next) {
+  const errors = validationResult(req);
+
+  // if there are error
+  if (!errors.isEmpty()) {
+    var username_error = 0;
+    var pass_error = 0;
+
+    // find what kind of error is that
+    errors.array().forEach(error =>{
+      if (error.msg == "username not valid"){
+        username_error += 1;
+      }
+      else if (error.msg == "password not valid"){
+        pass_error += 1;
+      }
+    })
+    // both email and password are invalid
+    if (username_error >= 1 && pass_error >= 1){
+      return res.render("signup",{email_valid_fail: "Require a valid email", password_valid_fail: true})
+    }
+    // email is invalid
+    else if (username_error >= 1){
+      return res.render("signup",{email_valid_fail: "Required a valid email"})
+    }
+    // password is invalid
+    else{
+      return res.render("signup",{password_valid_fail: true})
+    }
+  }
+  next();
+};
 
 const redirectToLogin = (req, res, next) => {
   console.log(req.session);
@@ -64,7 +118,7 @@ router.post(
 );
 
 router.post(
-  "/signup",
+  "/signup",validation, handleValidationErrors,
   passport.authenticate("local-customer-signup", {
     failureRedirect: "/customer/signup",
     failureFlash: true,

@@ -6,7 +6,7 @@ require("../../config/passport")(passport);
 const CustomerModel = require("../models/customerModel");
 const customer = CustomerModel.customer;
 const bcrypt = require("bcrypt-nodejs");
-const orderController = require("../../order/controllers/order-controller");
+const orderController = require("../controllers/order-controller");
 
 const redirectToLogin = (req, res, next) => {
   console.log(req.session);
@@ -43,8 +43,8 @@ router.get("/logout", (req, res, next) => {
 
 router.get("/profile", customerController.getCustDetails);
 router.get("/profile", redirectToLogin, async (req, res, next) => {
-  if (req.session.orderlist && req.session.fromVendor ) {
-    res.render("profile", { orderitems: req.session.orderlist, vendor: req.session.fromVendor});
+  if (req.session.orderlist && req.session.fromVendor) {
+    res.render("profile", { orderitems: req.session.orderlist, vendor: req.session.fromVendor });
   } else {
     res.render("profile");
   }

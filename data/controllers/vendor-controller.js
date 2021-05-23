@@ -233,7 +233,7 @@ const getOutstandingOrders = async (req, res) => {
     });
 };
 
-// get outstanding orders of a specific vendor 
+// get outstanding orders of a specific vendor
 const getOutsOrdersByVendor = async (req, res) => {
   await vendors
     .aggregate([
@@ -274,7 +274,7 @@ const getOutsOrdersByVendor = async (req, res) => {
           message: "vendor has no outstanding orders",
         });
       }
-      res.render("vendorsOutstandingOrders", {OutstandingOrders : data});
+      res.render("vendorsOutstandingOrders", { OutstandingOrders: data });
     })
     .catch((error) => {
       res.status(500).json({
@@ -324,7 +324,7 @@ const getPastOrdersByVendor = async (req, res) => {
           message: "vendor has no picked up orders",
         });
       }
-      res.render("vendorPastOrders", {PastOrders : data});
+      res.render("vendorPastOrders", { PastOrders: data });
     })
     .catch((error) => {
       res.status(500).json({
@@ -342,5 +342,5 @@ module.exports = {
   getStatus,
   setVendorOff,
   getOutsOrdersByVendor,
-  getPastOrdersByVendor
+  getPastOrdersByVendor,
 };

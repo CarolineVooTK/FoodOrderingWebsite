@@ -45,7 +45,7 @@ let register = (Handlebars) => {
             <div class="colStart title">
                 <div class="flexBetween stretch"
                   <h2 style="text-transform:uppercase;color:#3df2ff;font-weight:bold;font-size:25px;">${data[i].name}</h2>
-                  <div id="${data[i]._id}-distance" class="distance">
+                  <div id="${data[i]._id}-distance" class="distance" style="color:white;font-size:18px;">
                     <script type="text/javascript">
                       getDistance('${data[i]._id}');
                     </script>
@@ -99,7 +99,7 @@ let register = (Handlebars) => {
     popupOrderItems2: (orderitems, vendor_id) => {
       let display = "";
       for (let i = 0; i < orderitems.length; i++) {
-        if(JSON.stringify(orderitems[i].vendorid) != JSON.stringify(vendor_id)){
+        if (JSON.stringify(orderitems[i].vendorid) != JSON.stringify(vendor_id)) {
           continue;
         }
         let p = orderitems[i].price;

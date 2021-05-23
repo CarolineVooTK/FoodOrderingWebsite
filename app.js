@@ -80,13 +80,13 @@ app.use(function (req, res, next) {
 });
 
 // Routes
-const vendorRouter = require("./vendor/routes/vendor-router");
+const vendorRouter = require("./data/routes/vendor-router");
 app.use("/vendors", vendorRouter);
-const menuRouter = require("./menu/routes/menu-router");
+const menuRouter = require("./data/routes/menu-router");
 app.use("/menu", menuRouter);
-const orderRouter = require("./order/routes/order-router");
+const orderRouter = require("./data/routes/order-router");
 app.use("/orders", orderRouter);
-const customerRouter = require("./customer/routes/customer-router");
+const customerRouter = require("./data/routes/customer-router");
 app.use("/customer", customerRouter);
 
 app.get("/", (req, res, next) => {

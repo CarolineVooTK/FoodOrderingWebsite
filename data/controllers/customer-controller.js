@@ -1,7 +1,7 @@
 const CustomerModel = require("../models/customerModel");
-const { menuItemsSchema } = require("../../vendor/models/Vendor");
-const { menuitems } = require("../../menu/models/MenuItem");
-const { vendors } = require("../../vendor/models/Vendor");
+const { menuItemsSchema } = require("../models/Vendor");
+const { menuitems } = require("../models/MenuItem");
+const { vendors } = require("../models/Vendor");
 let ObjectId = require("mongoose").Types.ObjectId;
 const customer = CustomerModel.customer;
 const point = CustomerModel.point;
@@ -12,10 +12,13 @@ const getCustDetails = async (req, res) => {
   let customers = await customer.findById({ _id: req.session.passport.user });
   // console.log("vendor =",vendor)
 
-  res.render("profile", { custFamName: customers.familyName, custGivenName: customers.givenName,
-    custEmail: customers.email, custPassword: customers.password });
+  res.render("profile", {
+    custFamName: customers.familyName,
+    custGivenName: customers.givenName,
+    custEmail: customers.email,
+    custPassword: customers.password,
+  });
 };
-
 
 const getCustomerByEmail = async (req, res) => {
   let cust = await customer
@@ -95,8 +98,10 @@ const addNewOrderItem = async (req, res) => {
     newMenuItem.price = menu.price;
     let found = 0;
     for (index = 0; index < req.session.orderlist.length; index++) {
-      if (req.session.orderlist[index].menuitem == newMenuItem.menuitem &&
-         req.session.orderlist[index].vendorid == newMenuItem.vendorid) {
+      if (
+        req.session.orderlist[index].menuitem == newMenuItem.menuitem &&
+        req.session.orderlist[index].vendorid == newMenuItem.vendorid
+      ) {
         req.session.orderlist[index].quantity = req.session.orderlist[index].quantity + 1;
         found = 1;
       }
@@ -134,7 +139,7 @@ const addNewOrderItem = async (req, res) => {
     ])
     .then((data) => {
       for (index = 0; index < req.session.orderlist.length; index++) {
-        if(req.params.vendorid == req.session.orderlist[index].vendorid){
+        if (req.params.vendorid == req.session.orderlist[index].vendorid) {
           totalprice += req.session.orderlist[index].quantity * req.session.orderlist[index].price;
         }
       }

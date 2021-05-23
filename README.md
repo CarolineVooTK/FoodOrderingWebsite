@@ -8,6 +8,9 @@
 
 MongoDB Link = "mongodb+srv://admin:g_3_pass@cluster0.nvrgb.mongodb.net/snacks?retryWrites=true&w=majority"
 
+.env file:<br/>
+CONNECTION_URI=mongodb+srv://admin:g_3_pass@cluster0.nvrgb.mongodb.net/snacks?retryWrites=true&w=majority
+
 # Group 3 Project Repository
 
 Welcome!

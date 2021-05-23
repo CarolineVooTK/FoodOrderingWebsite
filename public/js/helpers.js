@@ -159,7 +159,6 @@ let register = (Handlebars) => {
         from = turf.point([e.latitude, e.longitude]); // should be location of user
         to = turf.point([${vendors[k].location.coordinates}]);
         distance = Math.round(turf.distance(from, to) * 100) / 100;
-        console.log("setting distance from:", e.latitude, e.longitude);
         window.vendorDistances.push({distance: distance, vendorId: "${vendors[k]._id}"});
         if (distance < d) {
           d = distance;

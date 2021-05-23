@@ -1,0 +1,90 @@
+#vendorPastOrders {
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    margin: 0;
+    padding: 40px;
+    padding-top: 10px;
+    background-color: var(--color-dark);
+    text-align: center;
+  }
+  #vendorPastOrders h1 {
+    color: white;
+    font-size: 40px;
+    height: 50px;
+    margin: 0;
+  }
+  .PastOrdersContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: column;
+  }
+  #PastOrderList {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+  #PastOrderList h2 {
+    color: white;
+  }
+  #PastOrderList .order img {
+    width: 100px;
+    height: 100px;
+  }
+  #PastOrderList .order h3 {
+    margin: 0;
+    margin-bottom: 20px;
+  }
+  #PastOrderList .order p {
+    margin: 5px 20px;
+  }
+  #PastOrderList .order .orderItem {
+    margin: 5px 0;
+  }
+  
+  #PastOrderList .order {
+    margin-bottom: 10px;
+    padding: 20px;
+    width: 450px;
+    color: white;
+    box-sizing: border-box;
+    text-align: start;
+  }
+  #PastOrderList .order button {
+    background: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    color: black;
+    width: 100px;
+    height: 35px;
+    border-radius: 30px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  #PastOrderList .order button:hover {
+    background: grey;
+    color: white;
+    cursor: pointer;
+  }
+  #PastOrderList .order h2 {
+    text-transform: uppercase;
+    margin: 0;
+    color: var(--color-light);
+  }
+  #PastOrderList .order .title p {
+    margin-top: 0px;
+  }
+  #PastOrderList .order button {
+    margin: 0 5px;
+  }
+  
+  @media (max-width: 800px) {
+    #vendorPastOrders h1 {
+      margin-top: 10px;
+    }
+    #vendorPastOrders {
+      padding: 0;
+    }
+  }
+  

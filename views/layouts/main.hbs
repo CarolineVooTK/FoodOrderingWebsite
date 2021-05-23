@@ -51,10 +51,10 @@
                 <a href="/customer/profile">profile</a>
                 <a href="/customer/logout">logout</a>
                 {{else if vendor_id}}
+                <a href="/vendors/getOutsOrdersByVendor">view current orders</a>
+                <a href="/vendors/getPastOrdersByVendor">view past (picked up) orders</a>
                 <a href="/vendors/profile">profile</a>
                 <a href="/customer/logout">logout</a>
-                <a href="/vendors/getOutsOrdersByVendor">view orders list</a>
-                <a href="/vendors/getPastOrdersByVendor">view past (picked up) orders</a>
                 {{else}}
                 <a id="vendor_login" href="/vendors/login">Vendor Login</a>
                 <a id="vendor_signup" href="/vendors/signup">Vendor SignUp</a>

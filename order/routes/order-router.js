@@ -10,6 +10,7 @@ router.get("/:vendorId/rating", orderController.getVendorRating);
 router.post("/createNewOrder", orderController.createNewOrder);
 router.patch("/:id/setOrderFulfilled", orderController.setOrderFulfilled);
 router.patch("/:id/setOrderCollected", orderController.setOrderCollected);
+router.patch("/:id/setOrderCancelled", orderController.setOrderCancelled);
 router.patch("/:id/setOrderRating", orderController.setOrderRating);
 
 // get the cart

@@ -5,6 +5,54 @@
   margin: 0 auto;
 }
 
+#profileDetail{
+  background: var(--color-grey);
+  color: black;
+  width: 100%;
+  height: auto;
+  padding: 50px;
+  box-sizing: border-box;
+}
+.nickname{
+  font-size :var(--text-big);
+}
+.email {
+  font-size : var(--text-small);
+  color:dimgray;
+
+}
+.contactDetails{
+  font-size:  var(--text-medium);
+  color:dimgray;
+}
+.alignleft{
+  float:left;
+}
+
+.alignright{
+  float:right;
+}
+.contactDetailsHead{
+  font-size:  var(--text-medium);
+  color:dimgray;
+
+}
+
+#pastOrder  button:hover {
+  background: var(--color-grey);
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  color: var(--color-dark);
+  width: 120px;
+  height: 40px;
+  border-radius: 30px;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+
 #orderPopup,
 #cancelPopup {
   position: fixed;

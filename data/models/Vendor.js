@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
-const MenuItemSchema = require("../../menu/models/MenuItem");
-const { menuitems } = require("../../menu/models/MenuItem");
+const MenuItemSchema = require("./MenuItem");
+const { menuitems } = require("./MenuItem");
 const bcrypt = require("bcrypt-nodejs");
 let ObjectId = require("mongoose").Types.ObjectId;
 

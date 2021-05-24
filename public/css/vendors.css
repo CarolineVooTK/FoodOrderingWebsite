@@ -103,7 +103,7 @@
   color: black;
   cursor: pointer;
 }
-.vendor h2 {
+.vendor .title div h2 {
   text-transform: uppercase;
   margin: 0;
   color: var(--color-light);

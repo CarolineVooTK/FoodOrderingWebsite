@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
-const MenuItemSchema = require("../../menu/models/MenuItem");
-const {menuitems} = require("../../menu/models/MenuItem")
-const bcrypt = require('bcrypt-nodejs');
+const MenuItemSchema = require("./MenuItem");
+const { menuitems } = require("./MenuItem");
+const bcrypt = require("bcrypt-nodejs");
 let ObjectId = require("mongoose").Types.ObjectId;
 
 const pointSchema = new mongoose.Schema(
@@ -37,7 +37,6 @@ const menuItemsSchema = new mongoose.Schema(
 const VendorSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
-    email: { type: String, required: true, unique:true},
     password: { type: String, required: true },
     location: { type: pointSchema, required: false },
     textlocation: { type: String, required: false },
@@ -51,14 +50,14 @@ const VendorSchema = new mongoose.Schema(
 );
 
 // the method to generate hash password for new vendor
-VendorSchema.methods.generateHash = function(password) {
+VendorSchema.methods.generateHash = function (password) {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
 };
 
 // the method to validate the password when vendor sign in
-VendorSchema.methods.validPassword = function(password) {
+VendorSchema.methods.validPassword = function (password) {
   return bcrypt.compareSync(password, this.password);
-}
+};
 
 // VendorSchema.methods.generateMenu = async function(){
 //   vendormenu = []
@@ -73,7 +72,6 @@ VendorSchema.methods.validPassword = function(password) {
 //   })
 //   return vendormenu
 // }
-
 
 // model from schema
 module.exports = {

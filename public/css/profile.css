@@ -38,12 +38,13 @@
 
 }
 
-#pastOrder  button:hover {
-  background: var(--color-grey);
+
+#pastOrder .button{
+  background :gray;
   border: none;
   border-radius: 5px;
   padding: 10px;
-  color: var(--color-dark);
+  color : black;
   width: 120px;
   height: 40px;
   border-radius: 30px;

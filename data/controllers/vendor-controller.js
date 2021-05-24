@@ -1,7 +1,10 @@
 const VendorModel = require("../models/Vendor");
+const OrderModel = require("../models/Order");
 const vendors = VendorModel.vendors;
 const point = VendorModel.point;
+const orders = OrderModel.orders;
 let ObjectId = require("mongoose").Types.ObjectId;
+const { json } = require("express");
 
 // gets all vendors from the database
 const getAll = async (req, res) => {
@@ -122,6 +125,38 @@ const addNewVendor = async (req, res) => {
 // updates its latitude, longitude and text location
 const setVendorActive = async (req, res) => {
   const { longitude, latitude, textlocation } = req.body;
+  let rating_ = 0;
+  let count_ = 0;
+  await orders
+  .aggregate([
+    {
+      $match: {
+        $and: [
+          { vendorId: new ObjectId(`${req.session.passport.user}`) },
+          { customerRating: { $gt: 0 } },
+        ],
+      },
+    },
+    {
+      $group: {
+        _id: null,
+        rating: { $avg: "$customerRating" },
+        count: { $sum: 1 },
+      },
+    },
+  ])
+  .then((data) => {
+    if (data.length === 0) {
+      rating_ = 0
+      count_ = 0
+    }
+    else{
+      rating_ = data[0].rating
+      count_ = data[0].count
+    }
+  })
+  .catch((error) => {
+  });
   await vendors
     .findOneAndUpdate(
       { _id: req.session.passport.user },
@@ -139,27 +174,92 @@ const setVendorActive = async (req, res) => {
           vendor_status: "Off",
         });
       }
-      res.render("vendorProfile", { vendor_status: "Active" });
     })
     .catch((error) => {
       res.status(500).json({
         error: error,
       });
     });
+    let vendor_ = await vendors.findById({ _id: req.session.passport.user }).lean();
+    res.render("vendorProfile", { vendor_status: "Active", vendor: vendor_, rating: rating_, count: count_});
 };
 
 const getStatus = async (req, res) => {
-  let vendor = await vendors.findById({ _id: req.session.passport.user });
-  // console.log("vendor =",vendor)
-  if (vendor.active) {
+  let rating_ = 0;
+  let count_ = 0;
+  await orders
+  .aggregate([
+    {
+      $match: {
+        $and: [
+          { vendorId: new ObjectId(`${req.session.passport.user}`) },
+          { customerRating: { $gt: 0 } },
+        ],
+      },
+    },
+    {
+      $group: {
+        _id: null,
+        rating: { $avg: "$customerRating" },
+        count: { $sum: 1 },
+      },
+    },
+  ])
+  .then((data) => {
+    if (data.length === 0) {
+      rating_ = 0
+      count_ = 0
+    }
+    else{
+      rating_ = data[0].rating
+      count_ = data[0].count
+    }
+  })
+  .catch((error) => {
+  });
+
+  let vendor_ = await vendors.findById({ _id: req.session.passport.user }).lean();
+  if (vendor_.active) {
     vendor_current_status = "Active";
   } else {
     vendor_current_status = "Off";
   }
-  res.render("vendorProfile", { vendor_status: vendor_current_status });
+  res.render("vendorProfile", { vendor_status: vendor_current_status , vendor: vendor_, rating: rating_, count: count_});
 };
 
 const setVendorOff = async (req, res) => {
+  let rating_ = 0;
+  let count_ = 0;
+  await orders
+  .aggregate([
+    {
+      $match: {
+        $and: [
+          { vendorId: new ObjectId(`${req.session.passport.user}`) },
+          { customerRating: { $gt: 0 } },
+        ],
+      },
+    },
+    {
+      $group: {
+        _id: null,
+        rating: { $avg: "$customerRating" },
+        count: { $sum: 1 },
+      },
+    },
+  ])
+  .then((data) => {
+    if (data.length === 0) {
+      rating_ = 0
+      count_ = 0
+    }
+    else{
+      rating_ = data[0].rating
+      count_ = data[0].count
+    }
+  })
+  .catch((error) => {
+  });
   await vendors
     .findOneAndUpdate(
       { _id: req.session.passport.user },
@@ -174,13 +274,15 @@ const setVendorOff = async (req, res) => {
           message: "Vendor not updated",
         });
       }
-      res.render("vendorProfile", { vendor_status: "Off" });
+      // res.render("vendorProfile", { vendor_status: "Off", vendor: vendor_, rating: rating_, count: count_});
     })
     .catch((error) => {
       res.status(500).json({
         error: error,
       });
     });
+    let vendor_ = await vendors.findById({ _id: req.session.passport.user }).lean();
+    res.render("vendorProfile", { vendor_status: "Off", vendor: vendor_, rating: rating_, count: count_});
 };
 
 // gets all outstanding orders from the database
@@ -233,7 +335,7 @@ const getOutstandingOrders = async (req, res) => {
     });
 };
 
-// get outstanding orders of a specific vendor 
+// get outstanding orders of a specific vendor
 const getOutsOrdersByVendor = async (req, res) => {
   await vendors
     .aggregate([
@@ -274,7 +376,7 @@ const getOutsOrdersByVendor = async (req, res) => {
           message: "vendor has no outstanding orders",
         });
       }
-      res.render("vendorsOutstandingOrders", {OutstandingOrders : data});
+      res.render("vendorsOutstandingOrders", { OutstandingOrders: data });
     })
     .catch((error) => {
       console.log(error);
@@ -327,7 +429,7 @@ const getPastOrdersByVendor = async (req, res) => {
           message: "vendor has no picked up orders",
         });
       }
-      res.render("vendorPastOrders", {PastOrders : data});
+      res.render("vendorPastOrders", { PastOrders: data });
     })
     .catch((error) => {
       res.redirect('/'); 
@@ -347,5 +449,5 @@ module.exports = {
   getStatus,
   setVendorOff,
   getOutsOrdersByVendor,
-  getPastOrdersByVendor
+  getPastOrdersByVendor,
 };

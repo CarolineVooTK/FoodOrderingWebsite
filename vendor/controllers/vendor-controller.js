@@ -277,6 +277,9 @@ const getOutsOrdersByVendor = async (req, res) => {
       res.render("vendorsOutstandingOrders", {OutstandingOrders : data});
     })
     .catch((error) => {
+      console.log(error);
+      res.redirect('/'); 
+      res.send("Redirected to HomePage."); 
       res.status(500).json({
         error: error,
       });
@@ -327,6 +330,8 @@ const getPastOrdersByVendor = async (req, res) => {
       res.render("vendorPastOrders", {PastOrders : data});
     })
     .catch((error) => {
+      res.redirect('/'); 
+      res.send("Redirected to HomePage."); 
       res.status(500).json({
         error: error,
       });

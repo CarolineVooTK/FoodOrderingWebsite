@@ -9,6 +9,14 @@
                 return dateTime.toString();
         }
         </script>
+
+        <script>
+        // Showing the time remaining when vendor click the button. 
+        function showPopUpTime() {
+                alert("Remaining Time before Discount is Applied : ___")
+        }
+        </script>
+
         <div class = "container OutstandingOrdersContainer">
                 <h1 style="text-align: center;">Orders that Have Not Been Fulfilled or Picked Up Yet</h1>
                 {{! Need to Sort it accroding to the time }}
@@ -36,7 +44,7 @@
                                 </div>
                                 {{! Two buttons for vendors to set the orders status}}
                                 <div class="flex">
-                                        <button onclick="location.href='/orders/{{this._id}}/setOrderFulfilled'" type="button">Oreder Fulfilled</button>
+                                        <button onclick = "showPopUpTime" onclick = "location.href='/orders/{{this._id}}/setOrderFulfilled'" type="button">Order Fulfilled</button>
                                         <button onclick="location.href='/orders/{{this._id}}/setOrderCollected'" type="button">Order Collected</button>
                                 </div>
                         </div>

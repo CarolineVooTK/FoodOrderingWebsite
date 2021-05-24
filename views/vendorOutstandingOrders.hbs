@@ -1,12 +1,44 @@
-<section id="vendorsOutstandingOrders">
-        <h1 style="text-align: center;">Orders that Have Not Been Fulfilled or Picked Up Yet</h1>
-        {{#if OutstandingOrders.length}}
-        <p>{{OutstandingOrders}}</p>
-        {{/if}}
-        {{! Need to sort them with the order time}}
-        {{!-- {{#each OutstandingOrdes}}
-        <h2 class = "Outstanding Orders" style = "width:auto; float:left;">
-        </h2>
-        {{/each}} --}}
-
+<section id="vendorsOutstandingOrders" class  = "col">
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script> 
+        const getDateTime = (dateString) => {
+                let dateTime = new Date(dateString);
+                date = dateTime.getFullYear() + '-' + (dateTime.getMonth() + 1) + '-' + dateTime.getDate();
+                time = dateTime.getHours() + ":" + dateTime.getMinutes() + ":" + dateTime.getSeconds();
+                dateTime = date+' '+time;
+                return dateTime.toString();
+        }
+        </script>
+        <div class = "container OutstandingOrdersContainer">
+                <h1 style="text-align: center;">Orders that Have Not Been Fulfilled or Picked Up Yet</h1>
+                {{! Need to Sort it accroding to the time }}
+                <div id="OutstandingOrderList" class="flex">
+                        {{#each OutstandingOrdes}}
+                        <div class = "outsOrders col">
+                                {{! Date Time should show the time when customer place an order}}
+                                <h3>Date Time Order Placed: {{this.time}}</h3>
+                                <h3>Status: {{this.status}}</h3>
+                                <h3>Order Number: {{this.orderNumber}}</h3>
+                                <h3>Customer Name: **Not Sure How To Get it Yet**</h3>
+                                <h3>Time Remain Before Discount: **Not Sure How to Get It Yet**</h3>
+                                <div class="orderItems colStart">
+                                        <h3>Items Ordered:</h3>
+                                        {{#each this.order}}
+                                        <div class="flex orderItem">
+                                                <div class="colStart">
+                                                        <p>{{this.name}}</p>
+                                                        <p>Quantity: {{this.quantity}}</p>
+                                                        <p>Price: ${{this.price}}</p>
+                                                </div>
+                                        </div>
+                                        {{/each}}
+                                </div>
+                                <div class="flex">
+                                        <button onclick="location.href='/orders/{{this._id}}/setOrderFulfilled'" type="button">Oreder Fulfilled</button>
+                                        <button onclick="location.href='/orders/{{this._id}}/setOrderCollected'" type="button">Order Collected</button>
+                                </div>
+                        </div>
+                        {{/each}}
+                </div>
+        </div>
 </section>

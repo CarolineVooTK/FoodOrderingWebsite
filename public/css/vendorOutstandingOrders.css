@@ -1,0 +1,90 @@
+#vendorsOutstandingOrders {
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    margin: 0;
+    padding: 40px;
+    padding-top: 10px;
+    background-color: var(--color-dark);
+    text-align: center;
+  }
+  #vendorOutstandingOrders h1 {
+    color: white;
+    font-size: 40px;
+    height: 50px;
+    margin: 0;
+  }
+  .OutstandingOrdersContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: column;
+  }
+  #OutstandingOrderList {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+  #OutstandingOrderList h2 {
+    color: white;
+  }
+  #OutstandingOrderList .order img {
+    width: 100px;
+    height: 100px;
+  }
+  #OutstandingOrderList .order h3 {
+    margin: 0;
+    margin-bottom: 20px;
+  }
+  #OutstandingOrderList .order p {
+    margin: 5px 20px;
+  }
+  #OutstandingOrderList .order .orderItem {
+    margin: 5px 0;
+  }
+  
+  #OutstandingOrderList .order {
+    margin-bottom: 10px;
+    padding: 20px;
+    width: 450px;
+    color: white;
+    box-sizing: border-box;
+    text-align: start;
+  }
+  #OutstandingOrderList .order button {
+    background: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    color: black;
+    width: 100px;
+    height: 35px;
+    border-radius: 30px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  #OutstandingOrderList .order button:hover {
+    background: grey;
+    color: white;
+    cursor: pointer;
+  }
+  #OutstandingOrderList .order h2 {
+    text-transform: uppercase;
+    margin: 0;
+    color: var(--color-light);
+  }
+  #OutstandingOrderList .order .title p {
+    margin-top: 0px;
+  }
+  #OutstandingOrderList .order button {
+    margin: 0 5px;
+  }
+  
+  @media (max-width: 800px) {
+    #vendorOutstandingOrders h1 {
+      margin-top: 10px;
+    }
+    #vendorOutstandingOrders {
+      padding: 0;
+    }
+  }
+  

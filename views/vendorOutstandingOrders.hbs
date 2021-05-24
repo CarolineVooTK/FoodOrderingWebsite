@@ -19,6 +19,7 @@
                                 <h3>Date Time Order Placed: {{this.time}}</h3>
                                 <h3>Status: {{this.status}}</h3>
                                 <h3>Order Number: {{this.orderNumber}}</h3>
+                                {{! Showing Customer Given Name & Time Remaining}}
                                 <h3>Customer Name: **Not Sure How To Get it Yet**</h3>
                                 <h3>Time Remain Before Discount: **Not Sure How to Get It Yet**</h3>
                                 <div class="orderItems colStart">
@@ -33,6 +34,7 @@
                                         </div>
                                         {{/each}}
                                 </div>
+                                {{! Two buttons for vendors to set the orders status}}
                                 <div class="flex">
                                         <button onclick="location.href='/orders/{{this._id}}/setOrderFulfilled'" type="button">Oreder Fulfilled</button>
                                         <button onclick="location.href='/orders/{{this._id}}/setOrderCollected'" type="button">Order Collected</button>

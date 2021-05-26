@@ -339,7 +339,7 @@ const getOutstandingOrders = async (req, res) => {
 const getOutsOrdersByVendor = async (req, res) => {
   await vendors
     .aggregate([
-      { $match: { _id: req.session.passport.user } },
+      { $match: { _id: new ObjectId(req.params.vendorid) } },
       {
         $lookup: {
           from: "orders",
@@ -376,7 +376,7 @@ const getOutsOrdersByVendor = async (req, res) => {
           message: "vendor has no outstanding orders",
         });
       }
-      res.render("vendorsOutstandingOrders", { OutstandingOrders: data });
+      res.render("vendorOutstandingOrders", { OutstandingOrders: data });
     })
     .catch((error) => {
       console.log(error);
@@ -392,7 +392,7 @@ const getOutsOrdersByVendor = async (req, res) => {
 const getPastOrdersByVendor = async (req, res) => {
   await vendors
     .aggregate([
-      { $match: { _id: req.session.passport.user } },
+      { $match: { _id: new ObjectId(req.params.vendorid) } },
       {
         $lookup: {
           from: "orders",

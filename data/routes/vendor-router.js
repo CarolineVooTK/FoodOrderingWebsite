@@ -63,7 +63,7 @@ router.get("/", vendorController.getAll);
 router.get("/:id", redirectToCustomerLogin, vendorController.getVendorById);
 router.post("/addVendor", vendorController.addNewVendor);
 router.get("/:id/outstandingOrders", vendorController.getOutstandingOrders);
-router.get("/getOutsOrdersByVendor", vendorController.getOutsOrdersByVendor); 
-router.get("/getPastOrdersByVendor", vendorController.getPastOrdersByVendor); 
+router.get("/getOutsOrdersByVendor/:vendorid", vendorController.getOutsOrdersByVendor); 
+router.get("/getPastOrdersByVendor/:vendorid", vendorController.getPastOrdersByVendor); 
 
 module.exports = router;

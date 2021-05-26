@@ -1,4 +1,4 @@
-<section id="vendorsOutstandingOrders" class  = "col">
+<section id="vendorOutstandingOrders" class  = "col">
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script> 
         const getDateTime = (dateString) => {
@@ -19,20 +19,19 @@
 
         <div class = "container OutstandingOrdersContainer">
                 <h1 style="text-align: center;">Orders that Have Not Been Fulfilled or Picked Up Yet</h1>
-                {{! Need to Sort it accroding to the time }}
                 <div id="OutstandingOrderList" class="flex">
-                        {{#each OutstandingOrdes}}
+                        {{#each OutstandingOrders}}
                         <div class = "outsOrders col">
                                 {{! Date Time should show the time when customer place an order}}
-                                <h3>Date Time Order Placed: {{this.time}}</h3>
-                                <h3>Status: {{this.status}}</h3>
-                                <h3>Order Number: {{this.orderNumber}}</h3>
+                                <h3>Date Time Order Placed: {{orders.time}}</h3>
+                                <h3>Status: {{orders.status}}</h3>
+                                <h3>Order Number: {{orders.orderNumber}}</h3>
                                 {{! Showing Customer Given Name & Time Remaining}}
-                                <h3>Customer Name: **Not Sure How To Get it Yet**</h3>
+                                <h3>Customer Name: {{customer.givenName}}</h3>
                                 <h3>Time Remain Before Discount: **Not Sure How to Get It Yet**</h3>
                                 <div class="orderItems colStart">
                                         <h3>Items Ordered:</h3>
-                                        {{#each this.order}}
+                                        {{#each orders.orderitems}}
                                         <div class="flex orderItem">
                                                 <div class="colStart">
                                                         <p>{{this.name}}</p>
@@ -48,6 +47,8 @@
                                         <button onclick="location.href='/orders/{{this._id}}/setOrderCollected'" type="button">Order Collected</button>
                                 </div>
                         </div>
+                        {{else}}
+                        <h3 style="text-align: center;"> Currently, We Don't Have Any Outstanding Orders</h3>                      
                         {{/each}}
                 </div>
         </div>

@@ -348,7 +348,7 @@ const getOutsOrdersByVendor = async (req, res) => {
           as: "orders",
         },
       },
-      { $match: { "orders.status": "pending" } },
+      { $match: { $or: [ {"orders.status" : "pending"}, {"orders.status" : "Fulfilled"}]}},
       {
         $lookup: {
           from: "customers",
@@ -365,8 +365,15 @@ const getOutsOrdersByVendor = async (req, res) => {
           "orders.time": 1,
           "orders.price": 1,
           "orders.orderitems": 1,
+          "orders.orderNumber" : 1, 
           "customer.givenName": 1,
           "customer._id": 1,
+        },
+      },
+      {
+        // sort the time of the orders with more urgent at the top.
+        $sort: {
+          "orders.time" : -1
         },
       },
     ])
@@ -377,6 +384,7 @@ const getOutsOrdersByVendor = async (req, res) => {
         });
       }
       res.render("vendorOutstandingOrders", { OutstandingOrders: data });
+      console.log(data);
     })
     .catch((error) => {
       console.log(error);
@@ -401,7 +409,7 @@ const getPastOrdersByVendor = async (req, res) => {
           as: "orders",
         },
       },
-      { $match: { "orders.status": "Picked Up" } },
+      { $match: { "orders.status": "Collected" } },
       {
         $lookup: {
           from: "customers",
@@ -413,9 +421,7 @@ const getPastOrdersByVendor = async (req, res) => {
       {
         $project: {
           name: 1,
-          "orders._id": 1,
-          "orders.status": 1,
-          "orders.time": 1,
+          "orders.orderNumber": 1,
           "orders.price": 1,
           "orders.orderitems": 1,
           "customer.givenName": 1,

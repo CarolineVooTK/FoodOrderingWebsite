@@ -3,6 +3,18 @@ const orders = OrderModel.orders;
 const orderItems = OrderModel.orderItems;
 let ObjectId = require("mongoose").Types.ObjectId;
 
+
+const cancelSessionOrder = async (req, res) => {
+  console.log("here")
+  console.log("session.ol = ", req.session.orderlist)
+  // if (req.session.orderlist.length > 0){
+  req.session.orderlist = null;
+  // }
+
+  console.log("session.ol = ", req.session.orderlist)
+  res.redirect(`/vendors`);
+};
+
 // gets all orders from a single customer
 const getAllCustomerOrders = async (req, res) => {
   await orders
@@ -298,6 +310,10 @@ const setOrderRating = async (req, res) => {
     });
 };
 
+
+
+
+
 module.exports = {
   getAllCustomerOrders,
   getOrderById,
@@ -307,5 +323,6 @@ module.exports = {
   setOrderCancelled,
   setOrderRating,
   getVendorRating,
+  cancelSessionOrder,
   placeOrder 
 };

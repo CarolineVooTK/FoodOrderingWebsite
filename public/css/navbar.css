@@ -139,6 +139,19 @@
 #orderLink {
   color: rgb(32, 118, 184);
 }
+
+#vendor_current_order {
+  color: rgb(32, 118, 184)
+}
+
+#vendor_current_order {
+  color: rgb(32, 118, 184);
+}
+
+#vendor_past_order {
+  color: rgb(32, 118, 184);
+}
+
 @media (max-width: 800px) {
   #hamburger {
     display: flex;

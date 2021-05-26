@@ -1,26 +1,27 @@
-<section id="vendorPastOrders">
+<section id="vendorPastOrders" class="col">
         <div class = "container PastOrdersContainer">
                 <h1 style="text-align: center;">Our Orders History</h1>
-                <div id="OutstandingOrderList" class="flex">
+                <div id="PastOrderList" class="flex">
                         {{#each PastOrders}}
                         <div class = "pastOrders col">
-                                <h3>Order Number: {{this.orderNumber}}</h3>
-                                {{! Showing Customer Given Name & Time Remaining}}
-                                <h3>Customer Name: **Not Sure How To Get it Yet**</h3>
-                                <h3>Time Remain Before Discount: **Not Sure How to Get It Yet**</h3>
+                                <h3>Order Number: {{orders.orderNumber}}</h3>
+                                {{! Showing Customer Given Name}}
+                                <h3>Customer Name: {{customer.givenName}}</h3>
+                                <h3>Total Price of Order: {{orders.price}}</h3>
                                 <div class="pastOrderItems colStart">
                                         <h3>Items Ordered:</h3>
-                                        {{#each this.order}}
+                                        {{#each orders.orderitems}}
                                         <div class="flex orderItem">
                                                 <div class="colStart">
                                                         <p>{{this.name}}</p>
                                                         <p>Quantity: {{this.quantity}}</p>
-                                                        <p>Price: ${{this.price}}</p>
                                                 </div>
                                         </div>
                                         {{/each}}
                                 </div>
                         </div>
+                        {{else}}
+                        <h3 style="text-align: center;"> We Don't Have Past Orders Yet.</h3>                      
                         {{/each}}
                 </div>
         </div>

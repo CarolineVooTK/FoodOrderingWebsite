@@ -27,22 +27,22 @@
   #PastOrderList h2 {
     color: white;
   }
-  #PastOrderList .order img {
+  #PastOrderList .pastOrders img {
     width: 100px;
     height: 100px;
   }
-  #PastOrderList .order h3 {
+  #PastOrderList .pastOrders h3 {
     margin: 0;
     margin-bottom: 20px;
   }
-  #PastOrderList .order p {
+  #PastOrderList .pastOrders p {
     margin: 5px 20px;
   }
-  #PastOrderList .order .orderItem {
+  #PastOrderList .pastOrders .pastOrdersItem {
     margin: 5px 0;
   }
   
-  #PastOrderList .order {
+  #PastOrderList .pastOrders {
     margin-bottom: 10px;
     padding: 20px;
     width: 450px;
@@ -50,7 +50,7 @@
     box-sizing: border-box;
     text-align: start;
   }
-  #PastOrderList .order button {
+  #PastOrderList .pastOrders button {
     background: white;
     border: none;
     border-radius: 5px;
@@ -62,20 +62,20 @@
     font-weight: bold;
     text-transform: uppercase;
   }
-  #PastOrderList .order button:hover {
+  #PastOrderList .pastOrders button:hover {
     background: grey;
     color: white;
     cursor: pointer;
   }
-  #PastOrderList .order h2 {
+  #PastOrderList .pastOrders h2 {
     text-transform: uppercase;
     margin: 0;
     color: var(--color-light);
   }
-  #PastOrderList .order .title p {
+  #PastOrderList .pastOrders .title p {
     margin-top: 0px;
   }
-  #PastOrderList .order button {
+  #PastOrderList .pastOrders button {
     margin: 0 5px;
   }
   

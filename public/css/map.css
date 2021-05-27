@@ -10,6 +10,13 @@
   width: 100%;
   z-index: 1;
 }
+.leaflet-div-icon {
+  background: none !important;
+  border: none !important;
+}
+.leaflet-popup {
+  left: -45px !important;
+}
 .popup {
   text-align: center;
 }

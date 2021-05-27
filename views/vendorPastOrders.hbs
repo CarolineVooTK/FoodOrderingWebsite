@@ -4,21 +4,31 @@
                 <div id="PastOrderList" class="flex">
                         {{#each PastOrders}}
                         <div class = "pastOrders col">
-                                <h3>Order Number: {{orders.orderNumber}}</h3>
-                                {{! Showing Customer Given Name}}
-                                <h3>Customer Name: {{customer.givenName}}</h3>
-                                <h3>Total Price of Order: {{orders.price}}</h3>
-                                <div class="pastOrderItems colStart">
-                                        <h3>Items Ordered:</h3>
-                                        {{#each orders.orderitems}}
-                                        <div class="flex orderItem">
-                                                <div class="colStart">
-                                                        <p>{{this.name}}</p>
-                                                        <p>Quantity: {{this.quantity}}</p>
+                                <h3>Items Ordered:</h3>
+                                {{#each itemName}}
+                                        <div class = "flex pastOrdersItem">
+                                                <div class = "colStart">
+                                                        <p>{{lookup ../itemName @index}}</p>
                                                 </div>
                                         </div>
-                                        {{/each}}
-                                </div>
+                                {{/each}}
+                                {{#each orders}}
+                                        <h3>Order Number: {{this.orderNumber}}</h3>
+                                        <h3>Total Price of Order: ${{this.price}}</h3>
+                                        <div class="pastOrderItems colStart">
+                                                <h3>Quantity of Each Item:</h3>
+                                                {{#each orderitems}}
+                                                <div class="flex orderItem">
+                                                        <div class="colStart">
+                                                                <p>{{this.quantity}}</p>
+                                                        </div>
+                                                </div>
+                                                {{/each}}
+                                        </div>
+                                {{/each}}
+                                {{#each customer}}
+                                        <h3>Customer Name: {{this.givenName}}</h3>
+                                {{/each}}
                         </div>
                         {{else}}
                         <h3 style="text-align: center;"> We Don't Have Past Orders Yet.</h3>                      

@@ -5,13 +5,7 @@ let ObjectId = require("mongoose").Types.ObjectId;
 
 
 const cancelSessionOrder = async (req, res) => {
-  console.log("here")
-  console.log("session.ol = ", req.session.orderlist)
-  // if (req.session.orderlist.length > 0){
   req.session.orderlist = null;
-  // }
-
-  console.log("session.ol = ", req.session.orderlist)
   res.redirect(`/vendors`);
 };
 
@@ -94,11 +88,9 @@ const placeOrder = async (req, res) => {
   }
   newOrder.save(function (err) {
     if (err) {
-      console.log("order fail")
       throw err;
     }
     else{
-      console.log("order success")
     }
   });
   res.redirect(`/customer/profile`);
@@ -150,11 +142,6 @@ const getOrderById = async (req, res) => {
     ])
     .then((data) => {
       console.log("req", req);
-      // if (req.body && req.body.id) {
-      //   return data[0];
-      // } else {
-      //   res.render("orders", { order: data[0] });
-      // }
     })
     .catch((error) => {
       res.status(500).json({

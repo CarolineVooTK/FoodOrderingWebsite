@@ -4,9 +4,6 @@ const customerController = require("../controllers/customer-controller");
 const passport = require("passport");
 require("../../config/passport")(passport);
 const CustomerModel = require("../models/customerModel");
-const customer = CustomerModel.customer;
-const bcrypt = require("bcrypt-nodejs");
-const orderController = require("../controllers/order-controller");
 const { check, validationResult } = require('express-validator');
 
 
@@ -82,8 +79,8 @@ router.get("/signup", (req, res, next) => {
   });
 });
 
-router.get("/addNewItemInOrder/:snackid/:vendorid", customerController.addNewOrderItem);
-router.get("/deleteOrderItem/:snackid/:vendorid", customerController.deleteOrderItem);
+router.get("/addNewItemInOrder/:snackid/:vendorid",redirectToLogin, customerController.addNewOrderItem);
+router.get("/deleteOrderItem/:snackid/:vendorid",redirectToLogin, customerController.deleteOrderItem);
 
 router.get("/logout", (req, res, next) => {
   res.locals.customer_name = null;
@@ -91,11 +88,11 @@ router.get("/logout", (req, res, next) => {
   res.locals.type_of_user = null;
   res.locals.customer_id = null;
   req.session.destroy(function (err) {
-    res.redirect("/"); //Inside a callback… bulletproof!
+    res.redirect("/");
   });
 });
 
-router.get("/profile",customerController.getCustDetails);
+router.get("/profile", redirectToLogin, customerController.getCustDetails);
 
 router.post(
   "/login",
@@ -104,7 +101,6 @@ router.post(
     failureFlash: "Incorrect email or password",
   }),
   function (req, res, next) {
-    // console.log("user",req.user);
     req.flash("success", "Login Success..");
     res.redirect("/");
   }
@@ -117,7 +113,6 @@ router.post(
     failureFlash: true,
   }),
   function (req, res, next) {
-    // console.log("user",req.user);
     req.flash("success", "Login Success..");
     res.redirect("/");
   }

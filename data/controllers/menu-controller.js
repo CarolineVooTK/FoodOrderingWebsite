@@ -4,7 +4,6 @@ const MenuModel = require("../models/MenuItem");
 const menuitems = MenuModel.menuitems;
 let ObjectId = require("mongoose").Types.ObjectId;
 
-var Cart = require("../models/Cart.js"); // create cart.js in model
 
 // get all snacks
 const getAllSnacks = async (req, res) => {

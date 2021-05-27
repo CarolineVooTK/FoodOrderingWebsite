@@ -152,7 +152,16 @@ let register = (Handlebars) => {
           v = "";
           window.minVendor = [d, v];
           window.vendorDistances = [];
-          map.locate({ setView: true, watch: true, maxZoom: 16 }).on("locationfound", (e) => {        
+          window.map = map;
+          map.locate({ setView: true, watch: true, maxZoom: 16 }).on("locationfound", (e) => {
+            window.currentLocation = [e.latitude, e.longitude];
+            icon = L.divIcon({
+              html: '<img style="height: 60px" src="/images/location.svg"/>',
+            });
+            L.marker(([e.latitude, e.longitude]), { icon: icon }).addTo(window.map)
+            .bindPopup("<div class='popup'>You are here</div>")
+            .openPopup();
+                
         `;
       for (var k = 0; k < vendors.length; k++) {
         vMap += `

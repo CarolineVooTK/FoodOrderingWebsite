@@ -85,10 +85,17 @@
                     <a href="/">home</a>
                     <i class="fas fa-angle-right"></i>
                 </div>
+                {{#if customer_id}}
                 <div class="flex">
-                    <a href="/orders">orders</a>
+                    <a href="orders/customer/{{customer_id}}">orders</a>
                     <i class="fas fa-angle-right"></i>
                 </div>
+                {{else if vendor_id}}
+                <div class="flex">
+                    <a href="orders/vendor/{{vendor_id}}">orders</a>
+                    <i class="fas fa-angle-right"></i>
+                </div>
+                {{else}}{{/if}}
                 <div class="flex">
                     <a class="linkToClosestVendor" href="/vendors/6075878024b5d615b324ee1d">menu</a>
                     <i class="fas fa-angle-right"></i>

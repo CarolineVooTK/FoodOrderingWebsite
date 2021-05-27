@@ -10,6 +10,7 @@ MongoDB Link = "mongodb+srv://admin:g_3_pass@cluster0.nvrgb.mongodb.net/snacks?r
 
 .env file:<br/>
 CONNECTION_URI=mongodb+srv://admin:g_3_pass@cluster0.nvrgb.mongodb.net/snacks?retryWrites=true&w=majority
+PASSPORT_KEY=secret
 
 # Group 3 Project Repository
 
@@ -63,17 +64,25 @@ Project is created with:
 
 #### LOGIN DETAILS
 
-Dummy1:
+CustomerDummy1:
 username: customer@test.com
-password: password
+password: password123
 
-Dummy2:
+CustomerDummy2:
 username: customer2@test.com
-password: password
+password: password123
 
-Dummy3:
+CustomerDummy3:
 username: customer3@test.com
-password: securepassword
+password: SecurePass123
+
+VendorDummy1:
+Van name: Vendor 1
+password: 987654
+
+VendorDummy2:
+Van name: Vendor 2
+password: 123456
 
 
 

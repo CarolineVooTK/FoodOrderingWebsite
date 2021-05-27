@@ -10,20 +10,12 @@ const bcrypt = require("bcrypt-nodejs");
 
 const getCustDetails = async (req, res) => {
   let customers = await customer.findById({ _id: req.session.passport.user });
-  // console.log("vendor =",vendor)
-  if (req.session.orderlist && req.session.fromVendor) {
-    res.render("profile", { orderitems: req.session.orderlist, vendor: req.session.fromVendor, custFamName: customers.familyName,
-      custGivenName: customers.givenName,
-      custEmail: customers.email,
-      custPassword: customers.password,});
-  } 
-  else {
   res.render("profile", {
     custFamName: customers.familyName,
     custGivenName: customers.givenName,
     custEmail: customers.email,
     custPassword: customers.password,
-  })};
+  })
 };
 
 
@@ -164,7 +156,6 @@ const addNewOrderItem = async (req, res) => {
         error: error,
       });
     });
-  // res.render("home")
 };
 
 module.exports = {

@@ -48,7 +48,7 @@ app.use(cookieParser());
 app.use(flash());
 app.use(
   session({
-    secret: "secret",
+    secret: process.env.PASSPORT_KEY,
     saveUninitialized: false,
     resave: false,
   })

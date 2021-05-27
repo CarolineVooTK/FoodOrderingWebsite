@@ -92,7 +92,7 @@ router.get("/logout", (req, res, next) => {
   });
 });
 
-router.get("/profile",customerController.getCustDetails);
+router.get("/profile", redirectToLogin, customerController.getCustDetails);
 
 router.post(
   "/login",

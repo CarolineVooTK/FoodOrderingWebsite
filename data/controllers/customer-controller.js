@@ -21,7 +21,12 @@ const getCustDetails = async (req, res) => {
 
 // changes the given name
 const changeCustDetails = async (req, res) => {
-  const {newFamName,newGivenName} = req.body
+  const {newFamName,newGivenName,newPassword} = req.body
+  
+  // the method to generate hash password for customer
+  generateHash = function(password) {
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
+  };
   
   await customer
         .findOneAndUpdate(
@@ -29,6 +34,7 @@ const changeCustDetails = async (req, res) => {
           {
             familyName : newFamName,
             givenName : newGivenName,
+            password : generateHash(newPassword),
 
           },
          { returnNewDocument: true }

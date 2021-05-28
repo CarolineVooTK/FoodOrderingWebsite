@@ -105,7 +105,19 @@
 .popupButtons button {
   margin: 0 10px;
 }
-
+.cancelButton {
+  background: rgb(176, 26, 26);
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  color: white;
+  width: 80px;
+  height: 30px;
+  border-radius: 30px;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: bold;
+}
 .changeButton {
   background: rgb(176, 26, 26);
   border: none;
@@ -162,7 +174,7 @@
   padding-left: 0;
   margin-top: 20px;
   background-color: var(--color-dark);
-  color: white;
+  color:white;
   font-size: 20px;
   text-transform: uppercase;
 }

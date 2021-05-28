@@ -17,11 +17,11 @@
         }
         </script>
 
-        <div class = "container OutstandingOrdersContainer">
+        <div class="container OutstandingOrdersContainer">
                 <h1 style="text-align: center;">Orders that Have Not Been Fulfilled or Picked Up Yet</h1>
                 <div id="OutstandingOrderList" class="flex">
                         {{#each OutstandingOrders}}
-                        <div class = "outsOrders col">
+                        <div class="outsOrders col">
                                 {{! Date Time should show the time when customer place an order}}
                                 <h3>Date Time Order Placed: {{this.time}}</h3>
                                 <h3>Status: {{this.status}}</h3>

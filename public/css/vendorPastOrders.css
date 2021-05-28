@@ -7,84 +7,83 @@
     padding-top: 10px;
     background-color: var(--color-dark);
     text-align: center;
-  }
+}
+#vendorPastOrders h1 {
+  color: white;
+  font-size: 40px;
+  height: 50px;
+  margin: 0;
+}
+.PastOrdersContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: column;
+}
+#PastOrderList {
+  width: 100%;
+  flex-wrap: wrap;
+}
+#PastOrderList h2 {
+  color: white;
+}
+#PastOrderList .pastOrders img {
+  width: 100px;
+  height: 100px;
+}
+#PastOrderList .pastOrders h3 {
+  margin: 0;
+  margin-bottom: 20px;
+}
+#PastOrderList .pastOrders p {
+  margin: 5px 20px;
+}
+#PastOrderList .pastOrders .pastOrdersItem {
+  margin: 5px 0;
+}
+
+#PastOrderList .pastOrders {
+  margin-bottom: 10px;
+  padding: 20px;
+  width: 450px;
+  color: white;
+  box-sizing: border-box;
+  text-align: start;
+}
+#PastOrderList .pastOrders button {
+  background: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  color: black;
+  width: 100px;
+  height: 35px;
+  border-radius: 30px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+#PastOrderList .pastOrders button:hover {
+  background: grey;
+  color: white;
+  cursor: pointer;
+}
+#PastOrderList .pastOrders h2 {
+  text-transform: uppercase;
+  margin: 0;
+  color: var(--color-light);
+}
+#PastOrderList .pastOrders .title p {
+  margin-top: 0px;
+}
+#PastOrderList .pastOrders button {
+  margin: 0 5px;
+}
+
+@media (max-width: 800px) {
   #vendorPastOrders h1 {
-    color: white;
-    font-size: 40px;
-    height: 50px;
-    margin: 0;
+    margin-top: 10px;
   }
-  .PastOrdersContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: column;
+  #vendorPastOrders {
+    padding: 0;
   }
-  #PastOrderList {
-    width: 100%;
-    flex-wrap: wrap;
-  }
-  #PastOrderList h2 {
-    color: white;
-  }
-  #PastOrderList .pastOrders img {
-    width: 100px;
-    height: 100px;
-  }
-  #PastOrderList .pastOrders h3 {
-    margin: 0;
-    margin-bottom: 20px;
-  }
-  #PastOrderList .pastOrders p {
-    margin: 5px 20px;
-  }
-  #PastOrderList .pastOrders .pastOrdersItem {
-    margin: 5px 0;
-  }
-  
-  #PastOrderList .pastOrders {
-    margin-bottom: 10px;
-    padding: 20px;
-    width: 450px;
-    color: white;
-    box-sizing: border-box;
-    text-align: start;
-  }
-  #PastOrderList .pastOrders button {
-    background: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px;
-    color: black;
-    width: 100px;
-    height: 35px;
-    border-radius: 30px;
-    font-weight: bold;
-    text-transform: uppercase;
-  }
-  #PastOrderList .pastOrders button:hover {
-    background: grey;
-    color: white;
-    cursor: pointer;
-  }
-  #PastOrderList .pastOrders h2 {
-    text-transform: uppercase;
-    margin: 0;
-    color: var(--color-light);
-  }
-  #PastOrderList .pastOrders .title p {
-    margin-top: 0px;
-  }
-  #PastOrderList .pastOrders button {
-    margin: 0 5px;
-  }
-  
-  @media (max-width: 800px) {
-    #vendorPastOrders h1 {
-      margin-top: 10px;
-    }
-    #vendorPastOrders {
-      padding: 0;
-    }
-  }
-  
+}

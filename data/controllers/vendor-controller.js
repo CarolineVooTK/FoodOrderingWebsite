@@ -482,25 +482,6 @@ const getPastOrdersByVendor = async (req, res) => {
         });
       }
       res.render("vendorPastOrders", { PastOrders: data });
-      console.log(data);
-      // console.log(data);
-      // console.log(data[0].orders[0]);
-      // console.log(data[0].orders[0].orderitems);
-      // console.log(data[0].orders[0].orderNumber);
-      // console.log(data[0].orders[0].price);
-      // console.log(data[0].customer[0].givenName);
-      // // This is to get array of ordered items 
-      // console.log(data[0].orders[0].orderitems);
-      // // Show the items in the ordered items array 
-      // console.log(data[0].orders[0].orderitems[0].menuitem);
-      // console.log(data[0].orders[0].orderitems[0].quantity);
-      // console.log(data[0].orders[0].orderitems[1].menuitem);
-      // console.log(data[0].orders[0].orderitems[1].quantity);
-      // console.log(data[0].orderitems2[0].name);
-      // console.log(data[0].orderitems2[0].photo);
-      // console.log(data[0].orderitems2[1].name);
-      // console.log(data[0].orderitems2[1].photo);
-      // console.log("oh yes yes");
     })
     .catch((error) => {
       res.redirect('/'); 

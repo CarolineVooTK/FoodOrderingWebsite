@@ -192,7 +192,7 @@ const getVendorRating = async (req, res) => {
 // sets a single order's status to fulfilled by matching its id to the req.params id value
 const setOrderFulfilled = async (req, res) => {
   await orders
-    .findOneAndUpdate({ _id: req.params.id }, { status: "Fulfilled" })
+    .findOneAndUpdate({ _id: new ObjectId(`${req.params.id}`) }, { status: "Fulfilled" })
     .then((data) => {
       if (!data) {
         return res.status(404).json({

@@ -392,7 +392,6 @@ const getOutsOrdersByVendor = async (req, res) => {
           orderitems2: 0,
           customerId: 0,
           vendorId: 0,
-          _id: 0,
         },
       },
     ])
@@ -402,7 +401,7 @@ const getOutsOrdersByVendor = async (req, res) => {
           message: "vendor has no outstanding orders",
         });
       }
-      res.render("vendorOutstandingOrders", { OutstandingOrders: data });
+      res.render("vendorOutstandingOrders", { OutstandingOrders: data, timer: encodeURIComponent(JSON.stringify(data)) });
     })
     .catch((error) => {
       console.log(error);

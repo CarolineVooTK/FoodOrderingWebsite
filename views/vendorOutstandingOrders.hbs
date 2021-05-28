@@ -8,6 +8,22 @@
                 dateTime = date+' '+time;
                 return dateTime.toString();
         }
+        var myfunc = setInterval(function() {
+                var decodedJson = decodeURIComponent("{{{timer}}}");
+                var jsonObj = JSON.parse(decodedJson);
+                for(var obj of jsonObj){
+                        let temp = "timer_"+obj._id
+                        var startTime = new Date()
+                        var end = new Date(obj.time)
+                        var timeDiff = parseInt(end - startTime) + 15*60*1000;
+                        min = Math.floor((timeDiff/1000/60) << 0),
+                        sec = Math.floor((timeDiff/1000) % 60);
+                        let time = min + ':' + sec
+                        document.getElementById(temp).innerHTML = time;
+                }
+        }, 1000)
+
+        //window.onload
         </script>
 
         <script>
@@ -25,12 +41,12 @@
                                 {{! Date Time should show the time when customer place an order}}
                                 <h3>Date Time Order Placed: {{this.time}}</h3>
                                 <h3>Status: {{this.status}}</h3>
-                                <h3>Order Number: {{this.orderNumber}}</h3>
+                                <h3>Order Number: {{this._id}}</h3>
                                 {{! Showing Customer Given Name & Time Remaining}}
                                 {{#each customer}}
                                         <h3>Customer Name: {{this.givenName}}</h3>
                                 {{/each}}
-                                <h3>Time Remain Before Discount: **Not Sure How to Get It Yet**</h3>
+                                <h3 id= "timer_{{this._id}}">Time Remain Before Discount: **Not Sure How to Get It Yet**</h3>
                                 <div class="orderItems colStart">
                                         <h3>Items Ordered:</h3>
                                         {{#each orderDetails}}

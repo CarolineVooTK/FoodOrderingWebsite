@@ -56,7 +56,6 @@ const getAllCustomerOrders = async (req, res) => {
     ])
     .then((data) => {
       res.render("orders", { orders: data });
-      console.log(data);
     })
     .catch((error) => {
       res.status(500).json({

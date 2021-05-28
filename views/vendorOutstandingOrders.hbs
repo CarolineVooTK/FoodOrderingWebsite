@@ -23,23 +23,28 @@
                         {{#each OutstandingOrders}}
                         <div class = "outsOrders col">
                                 {{! Date Time should show the time when customer place an order}}
-                                <h3>Date Time Order Placed: {{orders.time}}</h3>
-                                <h3>Status: {{orders.status}}</h3>
-                                <h3>Order Number: {{orders.orderNumber}}</h3>
+                                <h3>Date Time Order Placed: {{this.time}}</h3>
+                                <h3>Status: {{this.status}}</h3>
+                                <h3>Order Number: {{this.orderNumber}}</h3>
                                 {{! Showing Customer Given Name & Time Remaining}}
-                                <h3>Customer Name: {{customer.givenName}}</h3>
+                                {{#each customer}}
+                                        <h3>Customer Name: {{this.givenName}}</h3>
+                                {{/each}}
                                 <h3>Time Remain Before Discount: **Not Sure How to Get It Yet**</h3>
                                 <div class="orderItems colStart">
                                         <h3>Items Ordered:</h3>
-                                        {{#each orders.orderitems}}
+                                        {{#each orderDetails}}
                                         <div class="flex orderItem">
                                                 <div class="colStart">
-                                                        <p>{{this.name}}</p>
+                                                        <p>Item: {{this.name}}</p>
                                                         <p>Quantity: {{this.quantity}}</p>
                                                         <p>Price: ${{this.price}}</p>
                                                 </div>
                                         </div>
                                         {{/each}}
+                                </div>
+                                <div class="flex">
+                                        <h3>Total Price of Order: ${{this.price}}</h3> 
                                 </div>
                                 {{! Two buttons for vendors to set the orders status}}
                                 <div class="flex">

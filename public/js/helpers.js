@@ -24,14 +24,18 @@ let register = (Handlebars) => {
     },
     vendorMenu: (data, vendorid) => {
       let menuitem = `<div class="row row-cols-3">`;
+      let p = "";
       for (let i = 0; i < data.length; i++) {
+        p = "";
+        p = data[i].price.toString();
+        p += p.includes(".") ? (p.indexOf(".") + 2 == p.length ? "0" : "") : ".00";
         menuitem += `<div class="row">
-            <h2 class="foodname" style="width: auto; float: left;">
+            <h3 class="foodname" style="width:auto;float:left;margin-bottom:8px;">
               &nbsp;${data[i].name}
-            </h2>
-            <h2 style="width: auto; margin-left: auto; float: right;">${data[i].price}</h2>
-            <p style="clear: both;color:rgb(63, 63, 63)">&nbsp;${data[i].description}</p>
-            <img src="${data[i].photo}" width="280" height="280">
+            </h3>
+            <h5 style="width:auto;margin-left:auto;float:right;margin-bottom:8px;">$${p}</h5>
+            <p style="clear: both;color:rgb(63, 63, 63);">&nbsp;${data[i].description}</p>
+            <img src="${data[i].photo}" width="200px" height="200px">
             <button class="darkButton" onclick="location.href = '/customer/addNewItemInOrder/${data[i]._id}/${vendorid}'">Add to Order</button>
         </div>`;
       }

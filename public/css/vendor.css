@@ -1,7 +1,7 @@
 /* single vendor page */
 #singleVendor {
   width: 100%;
-  padding: 20px;
+  padding: 10px 20px 20px 20px;
   box-sizing: border-box;
   position: relative;
 }
@@ -27,6 +27,7 @@
   height: 1200px;
   margin-top: 10px;
   order: 1;
+  padding-right: 15px;
 }
 /* order styles */
 #order {
@@ -57,13 +58,19 @@
 }
 #order .orderItems {
   height: 100%;
+  margin-bottom: auto;
   padding: 20px 0;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 .van {
   align-items: flex-start !important;
   width: 100%;
   box-sizing: border-box;
+  height: auto;
+  margin-bottom: 10px;
 }
 .van div {
   width: 100%;
@@ -94,6 +101,15 @@
 .van .name .location p {
   margin-left: 10px;
 }
+.orderHeader {
+  height: 165px;
+  max-height: 165px;
+}
+.orderTotalCon {
+  height: 150px;
+  max-height: 150px;
+  margin-top: auto;
+}
 .orderTotal {
   border-top: 1px solid grey;
   border-bottom: 1px solid grey;
@@ -108,9 +124,11 @@
 .orderItem {
   font-size: 20px;
   padding: 10px 0;
+  font-family: "Playfair Display", serif;
 }
 .orderItem p {
   margin: 0;
+  font-weight: bold;
 }
 .badge {
   margin-right: 20px;

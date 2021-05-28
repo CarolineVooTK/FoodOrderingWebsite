@@ -8,7 +8,7 @@ a {
   color: black;
 }
 
-#menuPage h4 a {
+#menuPage h5 a {
   text-decoration: underline;
   color: blue;
 }
@@ -41,7 +41,7 @@ a {
 
 .row-cols-3 > * {
   flex: 0 0 auto;
-  width: 280px;
+  width: 200px;
   margin: 20px;
   margin-left: auto;
   margin-right: auto;

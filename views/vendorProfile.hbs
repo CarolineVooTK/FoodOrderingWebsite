@@ -37,49 +37,61 @@ window.onload = function getLocation() {
     ratingDisplay += `</div>`;
     document.getElementById("vendor star rating").innerHTML = ratingDisplay;
 }
-function showForm(){
-    document.getElementById("setActiveform").style = "";
-    document.getElementById("setStatusActiveButton").style = "display: none";
-}
 </script>
 
-<section id="vendorProfile" >
-    <div id = "vendor_name">
-        <h2> NAME: {{vendor.name}}</h2>
-    </div>
-    <div id = "vendor status">
-        <h2>CURRENT STATUS: {{vendor_status}}</h2>
-        {{#ifEquals vendor_status "Active"}}
-            <button class="setStatusButton" onclick="location.href='/vendors/setoff'">Quit for the day</button>
-        {{else}}
-            <button id = "setStatusActiveButton" class="setStatusButton" onclick="showForm()">Set Active</button>
-            <div id="setActiveform" style="display: none">
-                <h3>Update your location</h3>
-                <form class="form colMiddle" method="post" action="/vendors/setActive">
-                    <label>
-                        Text Location
-                        <input placeholder="Your location name..." name="textlocation" type="text" />
-                    </label>
-                    <label>
-                        Latitude
-                        <input id = "latitude" placeholder = "Latitude...", name = "latitude" type="text">
-                    </label>
-                    <label>
-                        Longitude
-                        <input id="longitude" placeholder="Longitude..." , name="longitude" type="text">
-                    </label>
-                    <input id="VendorActiveButton" class="VendorActiveButton" type="submit" value="Open for Business" />
-                </form>
-            </div>
-        {{/ifEquals}}
-    </div>
-    <div id = "vendor rating">
-        <h2> RATING : <div id = "vendor star rating"></div></h2>
+<section id="vendorProfile" class="container flexBetween" >
+    <div id="vendor_details" class="col">
+        <h1>Your Details</h1>
+        <div class="flexBetween stretch pill"> <h2>Name:</h2> <h3>{{vendor.name}}</h3></div>
+        <div class="flexBetween stretch pill"> <h2>Email:</h2> <h3>{{vendor.email}}</h3></div>
+        <div class="flexBetween stretch pill">
+            <h2>Current Location:</h2>
+            {{#ifEquals vendor_status "Active"}}
+            <h3>{{vendor.textlocation}}</h3>
+            {{else}}
+            <h3>n/a</h3>
+            {{/ifEquals}}
+        </div>
+        <div class="flexBetween stretch pill">
+            <h2>Orders:</h2>
+            <p>{{vendor.orders.length}}</p>
+        </div>
+        <div class="flexBetween stretch pill"> <h2>Current Status:</h2> <h3>{{vendor_status}}</h3></div>
+        <div class="flexBetween profileRating pill">
+            <h2>Your Rating : </h2><div id="vendor star rating"></div>
+        </div>
+        <div class="flex buttons">
+            <button class="darkButton" onclick="location.href='/vendors/getPastOrdersByVendor/{{vendor_id}}'">View Past Orders</button>
+            <button class="darkButton" onclick="location.href='/vendors/getOutsOrdersByVendor/{{vendor_id}}'">View Current Orders</button>
+            {{#ifEquals vendor_status "Active"}}
+            <button class="setStatusButton" onclick="location.href='/vendors/setoff'">Go Offline</button>
+            {{/ifEquals}}
+        </div>
     </div>
     
-    <p id = "demo"> </p>
+    <div id="vendor_status">
+        <div id="setActiveform">
+            <h1>Update your location</h1>
+            <form class="form colMiddle" method="post" action="/vendors/setActive">
+                <label>
+                    <span>Text Location</span>
+                    <input placeholder="Your location name..." name="textlocation" type="text" />
+                </label>
+                <label>
+                    <span>Latitude</span>
+                    <input id = "latitude" placeholder = "Latitude...", name = "latitude" type="text">
+                </label>
+                <label>
+                    <span>Longitude</span>
+                    <input id="longitude" placeholder="Longitude..." , name="longitude" type="text">
+                </label>
+                {{#ifEquals vendor_status "Active"}}
+                <input class="darkButton" type="submit" value="Update Location" />
+                {{else}}
+                <input class="darkButton" type="submit" value="Open for Business" />
+                {{/ifEquals}}
+            </form>
+        </div>
+    </div>
     <p>{{vendor_error}}</p>
-
-
-
 </section>

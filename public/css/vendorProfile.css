@@ -1,3 +1,10 @@
+#vendorProfile {
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  height: 100%;
+}
+
 #vendorProfile p {
   margin-top: 20px;
   font-weight: bold;
@@ -5,51 +12,119 @@
 #vendorProfile p span {
   font-weight: normal;
 }
-#setActiveform {
-  width: 400px;
-  margin-top: 40px;
+#vendor_details,
+#vendor_status {
+  width: calc(50% - 40px);
+  max-width: calc(50% - 40px);
+  margin: 20px;
+  padding-bottom: 20px !important;
+  box-sizing: border-box !important;
+  height: auto !important;
 }
-#setActiveform h1 {
+#vendorProfile .container {
+  height: auto !important;
+  max-height: auto !important;
+}
+#vendor_details .buttons {
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+#vendor_details .buttons button {
+  margin-top: 10px;
+  margin-right: 10px;
+}
+.profileRating span {
+  color: black !important;
+  margin: 0 4px;
+}
+.profileRating * {
+  font-size: 20px !important;
+}
+
+#vendor_details .pill {
+  align-items: center !important;
+  box-sizing: border-box;
+  margin-top: 10px;
+}
+#vendor_details {
+  border-radius: 40px;
+  -webkit-box-shadow: 0px 2px 5px 2px #dadada;
+  box-shadow: 0px 2px 5px 2px #dadada;
+  padding: 0 40px;
+  width: 100%;
+  box-sizing: border-box !important;
+}
+.profileRating div {
+  width: auto !important;
+  margin-left: auto !important;
+  background: none !important;
+}
+#vendor_name span {
+  margin-right: 20px;
+}
+#vendorProfile h2,
+#vendorProfile h3 {
+  font-size: 20px !important;
+}
+#vendor_status h2 {
+  font-size: 24px !important;
+}
+#vendor_details h3 {
+  font-weight: normal;
+}
+#setActiveform h3 {
   text-align: center;
-  margin: 0;
-  font-size: 35px;
+  margin: 0 auto;
+  width: 100%;
 }
 #setActiveform input {
   margin-top: 5px;
 }
 #setActiveform input[type="submit"] {
-  width: 100%;
-  padding-left: 0;
+  font-size: 20px;
   margin-top: 20px;
-  background-color: var(--color-dark);
-  color: white;
-  font-size: 20px;
-  text-transform: uppercase;
-
-}
-
-button.setStatusButton{
-  width: 60%;
-  align-items: center;
-  background-color: var(--color-dark);
-  color: white;
-  font-size: 20px;
-  text-transform: uppercase;
-  border-radius: 8px;
-  transition-duration: 0.2s;
-  text-align: center;
-}
-
-button.setStatusButton:hover{
-  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
 #setActiveform .form {
   margin-top: 0;
 }
 
-label {
-  margin-top: 10px;
+#setActiveform label span {
+  margin-top: 5px;
   display: inline-block;
   width: 100%;
+  text-align: left;
+  font-weight: bold;
+}
+
+.setStatusButton {
+  background: rgb(150, 10, 8);
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  color: white;
+  width: 150px;
+  height: 50px;
+  border-radius: 30px;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+.setStatusButton:hover {
+  background: lightgrey;
+  border: 2px solid var(--color-dark);
+  color: var(--color-dark) !important;
+  cursor: pointer;
+}
+
+@media (max-width: 970px) {
+  #vendorProfile {
+    flex-direction: column;
+    justify-content: center !important;
+  }
+  #vendor_details,
+  #vendor_status {
+    width: calc(100% - 40px);
+    max-width: calc(100% - 40px);
+  }
 }

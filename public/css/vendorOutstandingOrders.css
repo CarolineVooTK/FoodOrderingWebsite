@@ -39,6 +39,7 @@
   margin: 5px 20px;
 }
 #OutstandingOrderList .outsOrders .orderItem {
+  color: var(--color-light);
   margin: 5px 0;
 }
 

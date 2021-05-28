@@ -1,37 +1,32 @@
-<section id="vendorPastOrders" class="col">
-        <div class = "container PastOrdersContainer">
-                <h1 style="text-align: center;">Our Orders History</h1>
+<section id="vendorPastOrders" class  = "col">
+        <div class="container PastOrdersContainer">
+                <h1 style="text-align: center;">Our Order History</h1>
                 <div id="PastOrderList" class="flex">
                         {{#each PastOrders}}
-                        <div class = "pastOrders col">
-                                <h3>Items Ordered:</h3>
-                                {{#each itemName}}
-                                        <div class = "flex orderItem">
-                                                <div class = "colStart">
-                                                        <p>{{lookup ../itemName @index}}</p>
-                                                </div>
-                                        </div>
-                                {{/each}}
-                                {{#each orders}}
-                                        <h3>Order Number: {{this.orderNumber}}</h3>
-                                        <h3>Total Price of Order: ${{this.price}}</h3>
-                                        <div class="pastOrderItems colStart">
-                                                <h3>Quantity of Each Item:</h3>
-                                                {{#each orderitems}}
-                                                <div class="flex orderItem">
-                                                        <div class="colStart">
-                                                                <p>{{this.quantity}}</p>
-                                                        </div>
-                                                </div>
-                                                {{/each}}
-                                        </div>
-                                {{/each}}
+                        <div class="pastOrders col">
+                                <h3>Order Number: {{this.orderNumber}}</h3>
                                 {{#each customer}}
                                         <h3>Customer Name: {{this.givenName}}</h3>
                                 {{/each}}
+                                <div class="pastOrderItems colStart">
+                                        <h3>Items Ordered:</h3>
+                                        {{#each orderDetails}}
+                                        <div class="flex orderItem">
+                                                <img src={{this.photo}} alt="food" />
+                                                <div class="colStart">
+                                                        <p>Item: {{this.name}}</p>
+                                                        <p>Quantity: {{this.quantity}}</p>
+                                                        <p>Price: ${{this.price}}</p>
+                                                </div>
+                                        </div>
+                                        {{/each}}
+                                </div>
+                                <div class="flex">
+                                        <h3>Total Price of Order: ${{this.price}}</h3> 
+                                </div>
                         </div>
                         {{else}}
-                        <h3 style="text-align: center;"> We Don't Have Past Orders Yet.</h3>                      
+                        <h3 style="font-size:5vw; color:white"> We Don't Have Past Orders Yet.</h3>                      
                         {{/each}}
                 </div>
         </div>

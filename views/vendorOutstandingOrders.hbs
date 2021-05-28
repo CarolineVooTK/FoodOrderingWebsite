@@ -49,12 +49,12 @@
                                 </div>
                                 {{! Two buttons for vendors to set the orders status}}
                                 <div class="flex">
-                                        <button onclick = "showPopUpTime" onclick = "location.href='/orders/{{this._id}}/setOrderFulfilled'" type="button">Order Fulfilled</button>
+                                        <button onclick = "location.href='/orders/{{this._id}}/setOrderFulfilled'" type="button">Order Fulfilled</button>
                                         <button onclick="location.href='/orders/{{this._id}}/setOrderCollected'" type="button">Order Collected</button>
                                 </div>
                         </div>
                         {{else}}
-                        <h3 style="text-align: center;"> Currently, We Don't Have Any Outstanding Orders</h3>                      
+                        <h3 style="font-size:5vw; color:white">> Currently, We Don't Have Any Outstanding Orders</h3>                      
                         {{/each}}
                 </div>
         </div>

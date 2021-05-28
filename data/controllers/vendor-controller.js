@@ -416,22 +416,20 @@ const getOutsOrdersByVendor = async (req, res) => {
 
 // get all the past (picked up) orders from a vendor
 const getPastOrdersByVendor = async (req, res) => {
-  await vendors
+  await orders
     .aggregate([
-      { $match: { _id: new ObjectId(req.params.vendorid) } },
-      {
-        $lookup: {
-          from: "orders",
-          localField: "orders",
-          foreignField: "_id",
-          as: "orders",
-        },
+      { 
+        $match: {
+          $and: [
+            { vendorId: new ObjectId(req.params.vendorid) },
+            { status : "Collected"}
+          ]
+        }
       },
-      { $match: { "orders.status": "Collected" } },
       {
         $lookup: {
           from: "customers",
-          localField: "orders.customerId",
+          localField: "customerId",
           foreignField: "_id",
           as: "customer",
         },
@@ -439,31 +437,42 @@ const getPastOrdersByVendor = async (req, res) => {
       {
         $lookup: {
           from: "menuitems",
-          localField: "orders.orderitems.menuitem",
+          localField: "orderitems.menuitem",
           foreignField: "_id",
           as: "orderitems2",
         },
       },
       {
-        $project: {
-          name: 1,
-          "orders.orderNumber": 1,
-          "orders.price": 1,
-          "orders.orderitems": 1,
-          "customer.givenName": 1,
-          "customer._id": 1,
-          "orderitems2.name": 1, 
-          "orderitems2.photo": 1,
+        $addFields: {
+          orderDetails: {
+            $map: {
+              input: "$orderitems",
+              in: {
+                $mergeObjects: [
+                  "$$this",
+                  {
+                    $arrayElemAt: [
+                      "$orderitems2",
+                      {
+                        $indexOfArray: ["$orderitems2._id", "$$this.menuitem"],
+                      },
+                    ],
+                  },
+                ],
+              },
+            },
+          },
         },
       },
       {
-        $addFields: {
-          orderNumber: "$orders.orderNumber", 
-          totalPrice: "$orders.price",
-          custName: "$customer.givenName",
-          itemName: "$orderitems2.name",
-          itemPhoto: "$orderitems2.photo"
-        }
+        $project: {
+          customerRating: 0,
+          orderitems: 0,
+          orderitems2: 0,
+          customerId: 0,
+          vendorId: 0,
+          _id: 0,
+        },
       },
     ])
     .then((data) => {
@@ -473,24 +482,6 @@ const getPastOrdersByVendor = async (req, res) => {
         });
       }
       res.render("vendorPastOrders", { PastOrders: data });
-      // console.log(data);
-      // console.log(data[0].orders[0]);
-      // console.log(data[0].orders[0].orderitems);
-      // console.log(data[0].orders[0].orderNumber);
-      // console.log(data[0].orders[0].price);
-      // console.log(data[0].customer[0].givenName);
-      // // This is to get array of ordered items 
-      // console.log(data[0].orders[0].orderitems);
-      // // Show the items in the ordered items array 
-      // console.log(data[0].orders[0].orderitems[0].menuitem);
-      // console.log(data[0].orders[0].orderitems[0].quantity);
-      // console.log(data[0].orders[0].orderitems[1].menuitem);
-      // console.log(data[0].orders[0].orderitems[1].quantity);
-      // console.log(data[0].orderitems2[0].name);
-      // console.log(data[0].orderitems2[0].photo);
-      // console.log(data[0].orderitems2[1].name);
-      // console.log(data[0].orderitems2[1].photo);
-      // console.log("oh yes yes");
     })
     .catch((error) => {
       res.redirect('/'); 

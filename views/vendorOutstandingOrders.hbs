@@ -35,6 +35,7 @@
                                         <h3>Items Ordered:</h3>
                                         {{#each orderDetails}}
                                         <div class="flex orderItem">
+                                                <img src={{this.photo}} alt="food" />
                                                 <div class="colStart">
                                                         <p>Item: {{this.name}}</p>
                                                         <p>Quantity: {{this.quantity}}</p>

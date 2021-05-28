@@ -40,11 +40,25 @@
 
 
 #pastOrder .button{
-  background :gray;
+  background : #003153;
   border: none;
   border-radius: 5px;
   padding: 10px;
-  color : black;
+  color :white;
+  width: 120px;
+  height: 40px;
+  border-radius: 30px;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+#contactDetails .button{
+  background : #003153;;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  color :white;
   width: 120px;
   height: 40px;
   border-radius: 30px;
@@ -54,8 +68,9 @@
 }
 
 
-#orderPopup,
-#cancelPopup {
+#changeDetailsPopup,
+#changeNamePopup,
+#changePasswordPopup {
   position: fixed;
   top: 0;
   left: 0;
@@ -66,8 +81,9 @@
   z-index: 15;
   text-align: center;
 }
-#orderPopupModal,
-#cancelPopupModal {
+#changeDetailsPopupModal,
+#changeNamePopupModal,
+#changePasswordPopupModal{
   background: var(--color-dark);
   color: white;
   border-radius: 30px;
@@ -76,9 +92,7 @@
   padding: 40px;
   box-sizing: border-box;
 }
-#cancelPopup {
-  display: none;
-}
+
 
 .popupItem {
   width: 50%;
@@ -98,8 +112,8 @@
   border-radius: 5px;
   padding: 10px;
   color: white;
-  width: 120px;
-  height: 40px;
+  width: 80px;
+  height: 30px;
   border-radius: 30px;
   text-decoration: none;
   text-transform: uppercase;
@@ -129,4 +143,35 @@
   border: 2px solid white;
   color: white !important;
   cursor: pointer;
+}
+
+#changeDetailsform {
+  width: 400px;
+  margin-top: 40px;
+}
+#changeDetailsform h1 {
+  text-align: center;
+  margin: 0;
+  font-size: 35px;
+}
+#changeDetailsform input {
+  margin-top: 5px;
+}
+#changeDetailsform input[type="submit"] {
+  width: 100%;
+  padding-left: 0;
+  margin-top: 20px;
+  background-color: var(--color-dark);
+  color: white;
+  font-size: 20px;
+  text-transform: uppercase;
+}
+#changeDetailsform .form {
+  margin-top: 0;
+}
+
+label {
+  margin-top: 10px;
+  display: inline-block;
+  width: 100%;
 }

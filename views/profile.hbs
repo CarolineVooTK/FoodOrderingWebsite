@@ -9,7 +9,14 @@
                 <p>{{custEmail}}</p>
             </div>
         </div>
-        <h2 style = "float: left;">Contact Details</h2>
+        <div id = 'contactDetails'>
+            <h2 style = "float: left;">Contact Details</h2>
+            <h2 style = "float:right">
+
+                <button class='button' onclick="showChangeDetailsPopup()" type="button">Change Details</button>
+
+            </h2>
+        </div>
 
         <div style ="clear : both;"></div>
 
@@ -31,6 +38,77 @@
             {{!-- hide cancel button after 10 minutes --}}
             <button class= 'button' onclick="location.href='/orders/customer/{{customer_id}}'">Past Orders</button>
             </h1>
+
         </div>
     {{/if}}
+    
+    <div id="changeDetailsPopup" class="colMiddle" style="display: none;">
+        <div id="changeDetailsPopupModal">
+            <h1>Change Details</h1>
+            <div class="popupItem">
+
+                <span class="alignleft">Name</span><span class="alignright"><button class ="changeButton" onclick="showChangeNamePopup()">Change</button></span>
+                <div style ="clear : both;"></div>
+                <br>
+            
+                
+                <span class="alignleft">Password</span><span class="alignright"><button class ="changeButton" onclick="showChangePasswordPopup()">Change</button></span>
+                <div style ="clear : both;"></div>
+                <br>
+            </div>
+
+            <div class="popupButtons flexMiddle stretch">
+                <button class="doneButton" onclick="location.href='/customer/profile'">Done</button>
+            </div>
+        </div>
+    </div>
+    <div id="changeNamePopup" class="colMiddle" style="display: none;">
+        <div id="changeNamePopupModal">
+            <h1>Change Name</h1>
+            <div class="changeDetailsform">
+               <form class="form" method="post" action="/customer/profile">
+               <label class="mt20">
+                   <span>Given Name : </span>
+                   <input placeholder="Type New Given Name" type="text" name="newGivenName" />
+                   <br>
+                   <span>Family Name : </span>
+                   <input placeholder="Type New Family Name" type ="text" name="newFamName"/>
+                   <br>
+               </label>
+               <input type="submit" value="submit">
+               </form>
+            </div>
+        </div>
+    </div>
+    <div id="changePasswordPopup" class="colMiddle" style="display: none;">
+        <div id="changePasswordPopupModal">
+            <h1>Change Password</h1>
+            <div class="popupItem">
+
+                <span class="alignleft">New Password : </span><span class="alignright"><button class ="changeButton" onclick="showChangeGivenNamePopup()">Change</button></span>
+                <div style ="clear : both;"></div>
+                <br>
+            </div>
+        </div>
+    </div>
+
+
+
+    
+
+     <script>
+        const showChangeDetailsPopup = () => {
+            let popup = document.getElementById("changeDetailsPopup");
+            popup.style.display = "flex";
+        }
+        const showChangeNamePopup = () =>{
+            let popup = document.getElementById("changeNamePopup");
+            popup.style.display = "flex";
+        }
+        const showChangePasswordPopup = () =>{
+            let popup = document.getElementById("changePasswordPopup");
+            popup.style.display = "flex";
+        }
+    </script>
+
 </section>

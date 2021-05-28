@@ -93,6 +93,7 @@ router.get("/logout", (req, res, next) => {
 });
 
 router.get("/profile", redirectToLogin, customerController.getCustDetails);
+router.post("/profile", redirectToLogin, customerController.changeCustDetails);
 
 router.post(
   "/login",
@@ -117,5 +118,7 @@ router.post(
     res.redirect("/");
   }
 );
+
+
 
 module.exports = router;

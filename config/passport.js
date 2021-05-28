@@ -94,7 +94,6 @@ module.exports = function (passport) {
       }
     )
   );
-
   // ths passport strategy for vendor login
   passport.use(
     "local-vendor-login",

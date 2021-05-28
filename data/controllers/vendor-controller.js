@@ -403,9 +403,6 @@ const getOutsOrdersByVendor = async (req, res) => {
         });
       }
       res.render("vendorOutstandingOrders", { OutstandingOrders: data });
-      console.log(data);
-      console.log(data[0].customer);
-      console.log(data[0].orderDetails);
     })
     .catch((error) => {
       console.log(error);
@@ -476,7 +473,7 @@ const getPastOrdersByVendor = async (req, res) => {
         });
       }
       res.render("vendorPastOrders", { PastOrders: data });
-      console.log(data);
+      // console.log(data);
       // console.log(data[0].orders[0]);
       // console.log(data[0].orders[0].orderitems);
       // console.log(data[0].orders[0].orderNumber);

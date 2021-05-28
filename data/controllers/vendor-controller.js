@@ -337,43 +337,62 @@ const getOutstandingOrders = async (req, res) => {
 
 // get outstanding orders of a specific vendor
 const getOutsOrdersByVendor = async (req, res) => {
-  await vendors
+  await orders
     .aggregate([
-      { $match: { _id: new ObjectId(req.params.vendorid) } },
-      {
-        $lookup: {
-          from: "orders",
-          localField: "orders",
-          foreignField: "_id",
-          as: "orders",
-        },
+      { 
+        $match: {
+          $and: [
+            { vendorId: new ObjectId(req.params.vendorid) },
+            { $or: [{"status" : "pending"}, {"status" : "Fulfilled"}]}
+          ]
+        }
       },
-      { $match: { $or: [{"orders.status" : "pending"}, {"orders.status" : "Fulfilled"}]}},
       {
         $lookup: {
           from: "customers",
-          localField: "orders.customerId",
+          localField: "customerId",
           foreignField: "_id",
           as: "customer",
         },
       },
       {
-        $project: {
-          name: 1,
-          "orders._id": 1,
-          "orders.status": 1,
-          "orders.time": 1,
-          "orders.price": 1,
-          "orders.orderitems": 1,
-          "orders.orderNumber" : 1, 
-          "customer.givenName": 1,
-          "customer._id": 1,
+        $lookup: {
+          from: "menuitems",
+          localField: "orderitems.menuitem",
+          foreignField: "_id",
+          as: "orderitems2",
         },
       },
       {
-        // sort the time of the orders with more urgent at the top.
-        $sort: {
-          "orders.time" : -1
+        $addFields: {
+          orderDetails: {
+            $map: {
+              input: "$orderitems",
+              in: {
+                $mergeObjects: [
+                  "$$this",
+                  {
+                    $arrayElemAt: [
+                      "$orderitems2",
+                      {
+                        $indexOfArray: ["$orderitems2._id", "$$this.menuitem"],
+                      },
+                    ],
+                  },
+                ],
+              },
+            },
+          },
+        },
+      },
+      {
+        $project: {
+          customerRating: 0,
+          orderitems: 0,
+          orderitems2: 0,
+          customerId: 0,
+          vendorId: 0,
+          _id: 0,
         },
       },
     ])
@@ -384,7 +403,9 @@ const getOutsOrdersByVendor = async (req, res) => {
         });
       }
       res.render("vendorOutstandingOrders", { OutstandingOrders: data });
-      console.log;
+      console.log(data);
+      console.log(data[0].customer);
+      console.log(data[0].orderDetails);
     })
     .catch((error) => {
       console.log(error);
@@ -435,7 +456,7 @@ const getPastOrdersByVendor = async (req, res) => {
           "customer.givenName": 1,
           "customer._id": 1,
           "orderitems2.name": 1, 
-          "orderitems2.photo": 1
+          "orderitems2.photo": 1,
         },
       },
       {

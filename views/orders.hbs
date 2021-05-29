@@ -40,7 +40,7 @@
                 <div style="width: 40%; float:right; vertical-align:middle">
                     <div class="order col" >
                         <div style="vertical-align: middle;">
-                            <button onclick="location.href='/orders/{{this._id}}'" type="button">View</button>
+                            <button class="changeButton" onclick="showOrderPopup()">RateTest</button>
                             <button onclick="location.href='/orders/{{this._id}}/setOrderCancelled'" type="button">Cancel</button>
                             <button onclick="location.href='/orders/{{this._id}}/setOrderRating'" type="button">Rate</button>
                         </div>                   
@@ -64,5 +64,63 @@
             {{/unless}}
         </div>
         </div>
+
+        <div id="orderPopup" class="colMiddle" style="display: none;">
+        <div id="orderPopupModal">
+            <div class="flexBetween exitModal">
+                <i onclick="hideOrderPopup()" class="fas fa-times"></i>
+            </div>
+            <div class="card-body text-center"> <img src=" https://i.imgur.com/d2dKtI7.png" height="100" width="100">
+                <div class="comment-box text-center">
+                    <h4>Rate Your Order</h4>
+                    <div class="rating"> 
+                        <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label> 
+                        <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label> 
+                        <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label> 
+                        <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label> 
+                        <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label> 
+                    </div>
+                </div>
+            </div>
+            <div class="popupButtons flexMiddle stretch">
+                {{!-- hide cancel button after 10 minutes --}}
+                <button class="doneButton" onclick="location.href='/orders/{{order._id}}/setOrderRating'">Submit</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+            const showOrderPopup = () => {
+                let popup = document.getElementById("orderPopup");
+                popup.style.display = "flex";
+            }
+            const hideOrderPopup = () => {
+                let popup = document.getElementById("orderPopup");
+                popup.style.display = "none";
+                // set session order to []
+            }
+            const showCancelPopup = () => {
+                hideOrderPopup();
+                let cancelPopup = document.getElementById("cancelPopup");
+                cancelPopup.style.display = "flex";
+            }
+            const hideCancelPopup = () => {
+                let cancelPopup = document.getElementById("cancelPopup");
+                cancelPopup.style.display = "none";
+    
+                // set session order to []
+                // set order to cancelled in database
+            }
+            const changeOrder = () => {
+                let popup = document.getElementById("orderPopup");
+                popup.style.display = "none";
+                //the change button will just back to the order page
+            }
+            //const goback = () => {
+            //    hideCancelPopup();
+            //    window.history.back();
+            //}
+        </script>
+
     
 </section>

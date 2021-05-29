@@ -68,7 +68,8 @@
 #changeNamePopup,
 #changePasswordPopup,
 #orderPopup,
-#cancelPopup {
+#cancelPopup,
+#orderSuccessPopup {
   position: fixed;
   top: 0;
   left: 0;
@@ -83,7 +84,8 @@
 #changeNamePopupModal,
 #changePasswordPopupModal,
 #orderPopupModal,
-#cancelPopupModal {
+#cancelPopupModal,
+#orderSuccessPopupModal {
   background: var(--color-dark);
   color: white;
   border-radius: 30px;
@@ -102,7 +104,8 @@
 #cancelPopupModal h1 {
   margin-bottom: 30px;
 }
-#orderPopupModal .location {
+#orderPopupModal .location,
+#orderSuccessPopup .location {
   border-bottom: 2px solid white;
   width: 75% !important;
 }

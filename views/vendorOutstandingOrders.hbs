@@ -19,17 +19,22 @@
                         min = Math.floor((timeDiff/1000/60) << 0),
                         sec = Math.floor((timeDiff/1000) % 60);
                         let time = min + ':' + sec
-                        document.getElementById(temp).innerHTML = time;
+                        // If the time goes to negative means that 15 minutes have passed 
+                        // Hence, discount should be applied.
+                        if (sec >= 0) {
+                                document.getElementById(temp).innerHTML = "Time Remaining before Discount: " + time;
+                        } else {
+                                document.getElementById(temp).innerHTML = "20% Discount should be Applied to the Order.";
+                                // changes to the status of discount applied to database
+                                obj.discountApplied = true; 
+                        }
                 }
         }, 1000)
 
-        //window.onload
-        </script>
 
-        <script>
-        // Showing the time remaining when vendor click the button. 
-        function showPopUpTime() {
-                alert("Remaining Time before Discount is Applied : ___")
+        // reloading page after the button is clicked 
+        function refreshPage() {
+                window.location.reload(); 
         }
         </script>
 
@@ -65,8 +70,8 @@
                                 </div>
                                 {{! Two buttons for vendors to set the orders status}}
                                 <div class="flex">
-                                        <button onclick = "location.href='/orders/{{this._id}}/setOrderFulfilled'" type="button">Order Fulfilled</button>
-                                        <button onclick="location.href='/orders/{{this._id}}/setOrderCollected'" type="button">Order Collected</button>
+                                        <button onclick = "location.href='/orders/{{this._id}}/setOrderFulfilled'; refreshPage()" type="button">Order Fulfilled</button>
+                                        <button onclick="location.href='/orders/{{this._id}}/setOrderCollected'; refreshPage()" type="button">Order Collected</button>
                                 </div>
                         </div>
                         {{else}}

@@ -49,7 +49,6 @@ const getAllCustomerOrders = async (req, res) => {
           orderitems2: 0,
           customerId: 0,
           vendorId: 0,
-          _id: 0,
         },
       },
     ])
@@ -187,7 +186,7 @@ const getVendorRating = async (req, res) => {
 // sets a single order's status to fulfilled by matching its id to the req.params id value
 const setOrderFulfilled = async (req, res) => {
   await orders
-    .findOneAndUpdate({ _id: new ObjectId(`${req.params.id}`) }, { status: "Fulfilled" })
+    .findOneAndUpdate({ _id: new ObjectId(`${req.params.id}`) }, { status: "Fulfilled" },{returnOriginal:false})
     .then((data) => {
       if (!data) {
         return res.status(404).json({
@@ -206,7 +205,7 @@ const setOrderFulfilled = async (req, res) => {
 // sets a single order's status to collected by matching its id to the req.params id value
 const setOrderCollected = async (req, res) => {
   await orders
-    .findOneAndUpdate({ _id: req.params.id }, { status: "Collected" })
+    .findOneAndUpdate({ _id: new ObjectId(`${req.params.id}` )}, { status: "Collected" },{upsert: true},{returnOriginal:false})
     .then((data) => {
       if (!data) {
         return res.status(404).json({
@@ -224,24 +223,27 @@ const setOrderCollected = async (req, res) => {
 //sets a single order status to cancelled
 const setOrderCancelled = async (req, res) => {
   await orders
-    .findOneAndUpdate({ _id: req.params.id }, { status: "Cancelled" })
-    .then((data) => {
-      //if(Date.now().getMinute() - data.time.getMinute() > 2 ){
-      //  return alert("Order cannot be cancelled after 2 mins!")
-      //}
-      if (!data) {
-        return res.status(404).json({
-          message: "Orders cannot be Fulfilled.",
-        });
-      }
-      res.status(200).json(data);
-    })
-    .catch((error) => {
-      res.status(500).json({
-        error: error,
+  .findOneAndUpdate({ _id: new ObjectId(`${req.params.id}` )}, { status: "Cancelled" },{upsert: true},{returnOriginal:false})
+  .then((data) => {
+    if (!data) {
+      return res.status(404).json({
+        message: "Orders cannot be Fulfilled.",
       });
+    }
+    res.status(200).json(data);
+  })
+  .catch((error) => {
+    res.status(500).json({
+      error: error,
     });
+  });
 };
+
+
+
+
+
+
 // sets a single order's rating by matching its id to the req.params id value
 const setOrderRating = async (req, res) => {
   let rated = 0;
@@ -264,7 +266,7 @@ const setOrderRating = async (req, res) => {
         error: error,
       });
     });
-    
+
 };
 
 module.exports = {

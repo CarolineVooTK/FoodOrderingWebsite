@@ -1,34 +1,46 @@
 #signupform {
-    width: 400px;
-    margin-top: 40px;
+  width: 400px;
+  margin-top: 40px;
 }
 #signupform h1 {
-    text-align: center;
-    margin: 0;
-    font-size: 35px;
+  text-align: center;
+  margin: 0;
+  font-size: 35px;
 }
 #signupform input {
-    margin-top: 5px;
+  margin-top: 5px;
 }
-#passord_valid_fail p{
-    color: red;
-    text-indent: 5px;
-    line-height: 0.5;
+#passord_valid_fail p {
+  color: red;
+  text-indent: 5px;
+  line-height: 0.5;
 }
 #signupform input[type="submit"] {
-    width: 100%;
-    padding-left: 0;
-    margin-top: 20px;
-    background-color: var(--color-dark);
-    color: white;
-    font-size: 20px;
-    text-transform: uppercase;
+  background: var(--color-dark) !important;
+  border: none !important;
+  border-radius: 5px !important;
+  padding: 10px !important;
+  color: white !important;
+  width: 100% !important;
+  height: 50px !important;
+  border-radius: 30px !important;
+  text-decoration: none !important;
+  text-transform: uppercase !important;
+  font-weight: bold !important;
+  margin-top: 20px !important;
+  font-size: 20px !important;
+}
+#signupform input[type="submit"]:hover {
+  background: lightgrey !important;
+  border: 2px solid var(--color-dark) !important;
+  color: var(--color-dark) !important;
+  cursor: pointer !important;
 }
 #signupform .form {
-    margin-top: 0;
-} 
+  margin-top: 0;
+}
 label {
-    margin-top: 10px;
-    display: inline-block;
-    width: 100%;
+  margin-top: 10px;
+  display: inline-block;
+  width: 100%;
 }

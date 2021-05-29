@@ -97,29 +97,7 @@
             const hideOrderPopup = () => {
                 let popup = document.getElementById("orderPopup");
                 popup.style.display = "none";
-                // set session order to []
             }
-            const showCancelPopup = () => {
-                hideOrderPopup();
-                let cancelPopup = document.getElementById("cancelPopup");
-                cancelPopup.style.display = "flex";
-            }
-            const hideCancelPopup = () => {
-                let cancelPopup = document.getElementById("cancelPopup");
-                cancelPopup.style.display = "none";
-    
-                // set session order to []
-                // set order to cancelled in database
-            }
-            const changeOrder = () => {
-                let popup = document.getElementById("orderPopup");
-                popup.style.display = "none";
-                //the change button will just back to the order page
-            }
-            //const goback = () => {
-            //    hideCancelPopup();
-            //    window.history.back();
-            //}
         </script>
 
     

@@ -13,7 +13,7 @@
             <h2 style = "float: left;">Contact Details</h2>
             <h2 style = "float:right">
 
-                <button class='button' onclick="showChangeDetailsPopup()" type="button">Change Details</button>
+                <button class='darkButton' onclick="showChangeDetailsPopup()" type="button">Change Details</button>
 
             </h2>
         </div>
@@ -44,6 +44,9 @@
     
     <div id="changeDetailsPopup" class="colMiddle" style="display: none;">
         <div id="changeDetailsPopupModal">
+            <div class="flexBetween exitModal">
+                <i onclick="hideChangeDetailsPopup()" class="fas fa-times"></i>
+            </div>
             <h1>Change Details</h1>
             <div class="popupItem">
 
@@ -65,6 +68,9 @@
     </div>
     <div id="changeNamePopup" class="colMiddle" style="display: none;">
         <div id="changeNamePopupModal">
+            <div class="flexBetween exitModal">
+                <i onclick="hideChangeNamePopup()" class="fas fa-times"></i>
+            </div>
             <h1>Change Name</h1>
             <div class="changeDetailsform-changeDetails">
                <form class="form" method="post" action="/customer/profile">
@@ -87,6 +93,9 @@
     </div>
     <div id="changePasswordPopup" class="colMiddle" style="display: none;">
         <div id="changePasswordPopupModal">
+            <div class="flexBetween exitModal">
+                <i onclick="hideChangePasswordPopup()" class="fas fa-times"></i>
+            </div>
             <h1>Change Password</h1>
            <div class="changeDetailsform-changeDetails">
                <form class="form" method="post" action="/customer/profile">
@@ -129,6 +138,19 @@
             let popup = document.getElementById("changePasswordPopup");
             popup.style.display = "flex";
         }
+        const hideChangeDetailsPopup = () => {
+            let popup = document.getElementById("changeDetailsPopup");
+            popup.style.display = "none";
+        }
+        const hideChangeNamePopup = () => {
+            let popup = document.getElementById("changeNamePopup");
+            popup.style.display = "none";
+        }
+        const hideChangePasswordPopup = () => {
+            let popup = document.getElementById("changePasswordPopup");
+            popup.style.display = "none";
+        }
+
     </script>
 
 </section>

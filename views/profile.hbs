@@ -80,6 +80,7 @@
             </div>
 
             <div class="popupButtons flexMiddle stretch">
+
                 <button class="doneButton" onclick="location.href='/customer/profile'">Done</button>
             </div>
         </div>
@@ -90,18 +91,22 @@
                 <i onclick="hideChangeNamePopup()" class="fas fa-times"></i>
             </div>
             <h1>Change Name</h1>
-            <div class="changeDetailsform">
+            <div class="changeDetailsform-changeDetails">
                <form class="form" method="post" action="/customer/profile">
                <label class="mt20">
-                   <span>Given Name : </span>
+                   <span>New Given Name : </span>
                    <input placeholder="Type New Given Name" type="text" name="newGivenName" />
                    <br>
-                   <span>Family Name : </span>
+                   <span>New Family Name : </span>
                    <input placeholder="Type New Family Name" type ="text" name="newFamName"/>
                    <br>
                </label>
+               <br>
                <input type="submit" value="submit">
                </form>
+            </div>
+            <div class="popupButtons flexMiddle stretch">
+                <button class="cancelButton" onclick="location.href='/customer/profile'">Cancel</button>
             </div>
         </div>
     </div>
@@ -111,11 +116,26 @@
                 <i onclick="hideChangePasswordPopup()" class="fas fa-times"></i>
             </div>
             <h1>Change Password</h1>
-            <div class="popupItem">
+           <div class="changeDetailsform-changeDetails">
+               <form class="form" method="post" action="/customer/profile">
+               <label class="mt20">
+                   <span>Given Name : </span>
+                   <input placeholder="Type Given Name" type="text" name="newGivenName" />
+                   <br>
+                   <span>Family Name : </span>
+                   <input placeholder="Type Family Name" type ="text" name="newFamName"/>
+                   <br>
+                   <span>New Password : </span>
+                   <input placeholder="Type New Password" type="text" name="newPassword"/>
+                   <br>
 
-                <span class="alignleft">New Password : </span><span class="alignright"><button class ="changeButton" onclick="showChangeGivenNamePopup()">Change</button></span>
-                <div style ="clear : both;"></div>
-                <br>
+               </label>
+               <br>
+               <input type="submit" value="submit">
+               </form>
+            </div>
+            <div class="popupButtons flexMiddle stretch">
+                <button class="cancelButton" onclick="location.href='/customer/profile'">Cancel</button>
             </div>
         </div>
     </div>

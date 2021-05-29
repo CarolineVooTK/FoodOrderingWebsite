@@ -25,31 +25,38 @@ const getCustDetails = async (req, res) => {
 
 // changes the given name
 const changeCustDetails = async (req, res) => {
-  const { newFamName, newGivenName } = req.body;
-
+  const {newFamName,newGivenName,newPassword} = req.body
+  
+  // the method to generate hash password for customer
+  generateHash = function(password) {
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
+  };
+  
   await customer
     .findOneAndUpdate(
       { _id: req.session.passport.user },
       {
-        familyName: newFamName,
-        givenName: newGivenName,
+        familyName : newFamName,
+        givenName : newGivenName,
+        password : generateHash(newPassword),
+
       },
-      { returnNewDocument: true }
+     { returnNewDocument: true }
     )
+  .then((data) => {
+     if (!data) {
+       return res.render("profile", {
+      customer_error: "Error wrong data",
 
-    .then((data) => {
-      if (!data) {
-        return res.render("profile", {
-          customer_error: "Error wrong data",
-        });
-      }
-    })
-    .catch((error) => {
-      res.status(500).json({
-        error: error,
       });
-    });
-
+   }
+  })
+  .catch((error) => {
+     res.status(500).json({
+     error: error,
+     });
+   });
+  
   let customers = await customer.findById({ _id: req.session.passport.user }).lean();
   res.render("profile", {
     custFamName: customers.familyName,

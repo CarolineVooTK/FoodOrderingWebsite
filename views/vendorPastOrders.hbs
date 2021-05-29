@@ -4,7 +4,7 @@
                 <div id="PastOrderList" class="flex">
                         {{#each PastOrders}}
                         <div class="pastOrders col">
-                                <h3>Order Number: {{this.orderNumber}}</h3>
+                                <h3>Order Number: {{this._id}}</h3>
                                 {{#each customer}}
                                         <h3>Customer Name: {{this.givenName}}</h3>
                                 {{/each}}

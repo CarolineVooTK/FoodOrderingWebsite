@@ -264,6 +264,7 @@ const setOrderRating = async (req, res) => {
         error: error,
       });
     });
+    
 };
 
 module.exports = {

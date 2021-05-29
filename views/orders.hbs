@@ -40,13 +40,55 @@
                 <div style="width: 40%; float:right; vertical-align:middle">
                     <div class="order col" >
                         <div style="vertical-align: middle;">
-                            <button class="changeButton" onclick="showOrderPopup()">RateTest</button>
-                            <button onclick="location.href='/orders/{{this._id}}/setOrderCancelled'" type="button">Cancel</button>
-                            <button onclick="location.href='/orders/{{this._id}}/setOrderRating'" type="button">Rate</button>
+                            <button class="changeButton">Change</button>
+                            <button type="changeButton" onclick="showCancelPopup()">Cancel</button>
+                            <button class="changeButton" onclick="showRatePopup()">RateTest</button>
                         </div>                   
                     </div>
                 </div>
-                <hr style="width:100%", size="3", color=white>  
+                <hr style="width:100%", size="3", color=white> 
+        
+        {{!rating popup}}
+        <div id="ratePopup" class="colMiddle" style="display: none;">
+        <div id="orderPopupModal">
+            <div class="flexBetween exitModal">
+                <i onclick="hideRatePopup()" class="fas fa-times"></i>
+            </div>
+            <div class="card-body text-center"> <img src=" https://i.imgur.com/d2dKtI7.png" height="100" width="100">
+                <div class="comment-box text-center">
+                    <h4>Rate Your Order</h4>
+                    <div class="rating"> 
+                        <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label> 
+                        <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label> 
+                        <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label> 
+                        <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label> 
+                        <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label> 
+                    </div>
+                </div>
+            </div>
+            <div class="popupButtons flexMiddle stretch">
+                {{!-- hide cancel button after 10 minutes --}}
+                <button class="doneButton" onclick="location.href='/{{this._id}}/setOrderRating'">Submit</button>
+            </div>
+        </div>
+        </div>
+
+        {{!Cancel popup}}   
+
+        <div id="cancelPopup" class="colMiddle" style="display: none;">
+        <div id="cancelPopupModal">
+            <div class="flexBetween exitModal">
+                <i onclick="hideCancelPopup()" class="fas fa-times"></i>
+            </div>
+            <h4>Are you sure you want to cancel your order?</h4>
+            <div class="popupButtons flexMiddle stretch">
+                <button class="changeButton" onclick="hideCancelPopup()">No</button>
+                <button class="doneButton" onclick="location.href='/orders/cancelSessionOrder'">Yes</button>
+                {{!-- now the done button will redirect the page to vendors page, 
+                to make it different from the change button --}}
+            </div>
+        </div>
+        </div>
                 
             {{/each}}
             {{#unless orders}}
@@ -64,41 +106,33 @@
             {{/unless}}
         </div>
         </div>
+        
+        
 
-        <div id="orderPopup" class="colMiddle" style="display: none;">
-        <div id="orderPopupModal">
-            <div class="flexBetween exitModal">
-                <i onclick="hideOrderPopup()" class="fas fa-times"></i>
-            </div>
-            <div class="card-body text-center"> <img src=" https://i.imgur.com/d2dKtI7.png" height="100" width="100">
-                <div class="comment-box text-center">
-                    <h4>Rate Your Order</h4>
-                    <div class="rating"> 
-                        <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label> 
-                        <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label> 
-                        <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label> 
-                        <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label> 
-                        <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label> 
-                    </div>
-                </div>
-            </div>
-            <div class="popupButtons flexMiddle stretch">
-                {{!-- hide cancel button after 10 minutes --}}
-                <button class="doneButton" onclick="location.href='/orders/{{order._id}}/setOrderRating'">Submit</button>
-            </div>
-        </div>
-    </div>
+        
+        
     
     <script>
-            const showOrderPopup = () => {
-                let popup = document.getElementById("orderPopup");
+            const showRatePopup = () => {
+                let popup = document.getElementById("ratePopup");
                 popup.style.display = "flex";
             }
-            const hideOrderPopup = () => {
-                let popup = document.getElementById("orderPopup");
+            const hideRatePopup = () => {
+                let popup = document.getElementById("ratePopup");
                 popup.style.display = "none";
             }
-        </script>
+            const showCancelPopup = () => {
+                let cancelPopup = document.getElementById("cancelPopup");
+                cancelPopup.style.display = "flex";
+            }
+            const hideCancelPopup = () => {
+                let cancelPopup = document.getElementById("cancelPopup");
+                cancelPopup.style.display = "none";}
+
+
+
+
+    </script>
 
     
 </section>

@@ -166,3 +166,10 @@
 .rating:hover>input:checked~label:before {
   opacity: 0.4
 }
+
+#modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

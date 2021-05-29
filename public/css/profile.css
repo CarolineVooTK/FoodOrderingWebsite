@@ -69,6 +69,7 @@
 #changePasswordPopup,
 #orderPopup,
 #cancelPopup,
+#ratePopup,
 #orderSuccessPopup {
   position: fixed;
   top: 0;

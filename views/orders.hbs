@@ -13,6 +13,7 @@
         <div id="orderList" class="flex">
             {{!-- put number in hbs template --}}
             {{#each orders}}
+            
             {{!-- <button class="doneButton" onclick="location.href='/orders/{{orders._id}}/setOrderCancelled'">Yes</button> --}}
             <div style="width: 60%; float:left">
             <div class="order col" >  
@@ -43,6 +44,7 @@
                 <div style="width: 40%; float:right; vertical-align:middle">
                     <div class="order col" >
                         <div style="vertical-align: middle">
+                            {{!-- <button class="doneButton" onclick="location.href='/orders/{{this._id}}/setOrderCancelled'">Yes</button> --}}
                             <button class="changeButton" onclick="location.href='/vendors/6075878024b5d615b324ee1d'">Change</button>
                             <button class="doneButton" onclick="showCancelPopup()">Cancel</button>
                             <button class="changeButton" onclick="showRatePopup()">RateTest</button>
@@ -71,6 +73,7 @@
             </div>
             <div class="popupButtons flexMiddle stretch">
                 {{!-- hide cancel button after 10 minutes --}}
+                 <h4>{{this._id}}></h4> {{!--testing purpose --}}
                 <button class="doneButton" onclick="location.href='/{{this._id}}/setOrderRating'">Submit</button>
 
             </div>
@@ -85,17 +88,18 @@
                 <i onclick="hideCancelPopup()" class="fas fa-times"></i>
             </div>
             <h4>Are you sure you want to cancel your order?</h4>
+            <h4>{{this._id}}></h4> {{!--testing purpose --}}
             <div class="popupButtons flexMiddle stretch">
                 <button class="changeButton" onclick="hideCancelPopup()">No</button>
-                <button class="doneButton" onclick="location.href='/orders/{{this._id}}/setOrderCancelled'">Yes</button>
+                <button class="doneButton" onclick="location.href='/orders/{{this._id}}/setOrderCancelled';refreshPage()">Yes</button>
                 {{!-- now the done button will redirect the page to vendors page, 
                 to make it different from the change button --}}
             </div>
         </div>
-        </div>
         
-                
-        {{/each}}
+        </div>  
+        {{/each}}     
+        
             {{#unless orders}}
             {{#if customer_id}}
             <div class="col">

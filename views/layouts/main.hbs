@@ -70,18 +70,18 @@
             <div class="container flexBetween">
                 <i onclick="showNavbar()" id="hamburger" class="fas fa-bars"></i>
                 <div class="navlinks">
-                    {{#if customer_id}}
-                    <a href="/vendors">Find a Van</a>
-                    {{else if vendor_id}}
+                    {{#if vendor_id}}
                     <a href="/vendors">All Vendors</a>
+                    {{else}}
+                    <a href="/vendors">Find a Van</a>
                     {{/if}}
                 </div>
                 <h1><a href="/">Snacks in a Van</a></h1>
                 <div class="navlinks">
-                    {{#if customer_id}}
-                    <a class="linkToClosestVendor" href="/vendors/6075878024b5d615b324ee1d">Order Now</a>
-                    {{else if vendor_id}}
+                    {{#if vendor_id}}
                     <a href="/vendors/getOutsOrdersByVendor/{{vendor_id}}">Your Orders</a>
+                    {{else}}
+                    <a class="linkToClosestVendor" href="/vendors/6075878024b5d615b324ee1d">Order Now</a>
                     {{/if}}
                 </div>
             </div>
@@ -96,22 +96,22 @@
                     <a href="/">home</a>
                     <i class="fas fa-angle-right"></i>
                 </div>
-                {{#if customer_id}}
-                <div class="flex">
-                    <a class="linkToClosestVendor" href="/vendors/6075878024b5d615b324ee1d">Order Now</a>
-                    <i class="fas fa-angle-right"></i>
-                </div>
-                <div class="flex">
-                    <a href="/vendors">Find a Van</a>
-                    <i class="fas fa-angle-right"></i>
-                </div>
-                {{else if vendor_id}}
+                {{#if vendor_id}}
                 <div class="flex">
                     <a href="/vendors/getOutsOrdersByVendor/{{vendor_id}}">Your Orders</a>
                     <i class="fas fa-angle-right"></i>
                 </div>
                 <div class="flex">
                     <a href="/vendors">All vans</a>
+                    <i class="fas fa-angle-right"></i>
+                </div>
+                {{else}}
+                <div class="flex">
+                    <a class="linkToClosestVendor" href="/vendors/6075878024b5d615b324ee1d">Order Now</a>
+                    <i class="fas fa-angle-right"></i>
+                </div>
+                <div class="flex">
+                    <a href="/vendors">Find a Van</a>
                     <i class="fas fa-angle-right"></i>
                 </div>
                 {{/if}}

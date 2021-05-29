@@ -8,26 +8,47 @@
                 {{!-- <p>Find and order from one of our many vendors at a location near you.</p> --}}
                 <div class="buttons flexMiddle">
                     <button class="lightButton linkToClosestVendor" onclick="location.href='/vendors/6075878024b5d615b324ee1d'" type="button">Go to Menu</button>
+                    {{#if vendor_id}}
+                    <button class="lightButton" onclick="location.href='/vendors'" type="button">All Vendors</button>
+                    {{else}}
                     <button class="lightButton" onclick="location.href='/vendors'" type="button">Find a Vendor</button>
+                    {{/if}}
                 </div>
             </div>
         </div>
     </div>
+    {{#if vendor_id}}
     <div class="feature flexAround">
         <div class="flex container">
             <div class="info">
-                <h1>View our menu and order online</h1>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae, quisquam dolore. Nulla beatae iusto
-                    excepturi incidunt. Nemo quaerat consequatur cum at incidunt, doloribus recusandae accusamus amet
-                    nobis.
-                    Consequatur, sint quibusdam!</p>
-                <button class="darkButton linkToClosestVendor" onclick="location.href='/vendors/6075878024b5d615b324ee1d'" type="button">Go to Menu</button>
+                <h1>View your current orders</h1>
+                <p>Take a look at all of your current orders in one place.</p>
+                <p>Customers are often in a hurry and appreciate receiving their orders quickly, 
+                    so make sure that every order is accounted for!</p>
+                <button class="darkButton linkToClosestVendor" onclick='location.href="/vendors/getOutsOrdersByVendor/{{vendor_id}}"'
+                    type="button">Go to Orders</button>
             </div>
             <div class="imgContainer flexMiddle">
                 <img src="/images/food.jpeg" alt="food" />
             </div>
         </div>
     </div>
+    {{else}}
+    <div class="feature flexAround">
+        <div class="flex container">
+            <div class="info">
+                <h1>View our menu and order online</h1>
+                <p>View the menu of the closest van to your location.</p>
+                <p>Browse the list of snacks and coffees and make an order online now!</p>
+                <button class="darkButton linkToClosestVendor" onclick="location.href='/vendors/6075878024b5d615b324ee1d'"
+                    type="button">Go to Menu</button>
+            </div>
+            <div class="imgContainer flexMiddle">
+                <img src="/images/food.jpeg" alt="food" />
+            </div>
+        </div>
+    </div>
+    {{/if}}
     <div class="banner banner1"></div>
     <div class="feature flex">
         <div class="flex container">
@@ -35,16 +56,55 @@
                 <img src="/images/vanwalk.jpeg" alt="food van" />
             </div>
             <div class="info">
-                <h1>Find a vendor near you</h1>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae, quisquam dolore. Nulla beatae iusto
-                    excepturi incidunt. Nemo quaerat consequatur cum at incidunt, doloribus recusandae accusamus amet
-                    nobis.
-                    Consequatur, sint quibusdam!</p>
+                {{#if vendor_id}}
+                <h1>View all vendors near you</h1>
+                {{else}}
+                <h1>Find a van near you</h1>
+                {{/if}}
+                <p>Go to our interactive map showing all of our vans, their location, rating, and distance, to find the closest Snacks Van near you.</p>
+                {{#if vendor_id}}
+                {{else}}
+                <p>View each van's menu and start ordering right now!</p>
+                {{/if}}
                 <button class="darkButton" onclick="location.href='/vendors'" type="button">Go to Map</button>
             </div>
         </div>
     </div>
     <div class="banner banner2"></div>
+    {{#if vendor_id}}
+    <div class="feature flexAround">
+        <div class="flex container">
+            <div class="info">
+                <h1>Want to change your details?</h1>
+                <p>Is something in your profile not quite right? 
+                    Do you need to update your location or sign off for the day?</p>
+                <p>Update your details easily from your dedicated profile page.</p>
+                <button class="darkButton" onclick="location.href='/vendors/profile'"
+                    type="button">Go to Profile</button>
+            </div>
+            <div class="imgContainer flexMiddle relative">
+                <img src="/images/details.png" alt="details" />
+                <div class="imgOverlay"></div>
+            </div>
+        </div>
+    </div>
+    {{else if customer_id}}
+    <div class="feature flexAround">
+        <div class="flex container">
+            <div class="info">
+                <h1>Want to change your details?</h1>
+                <p>Is something in your profile not quite right?</p>
+                <p>Update your details easily from your dedicated profile page.</p>
+                <button class="darkButton" onclick="location.href='/customer/profile'" type="button">Go
+                    to Profile</button>
+            </div>
+            <div class="imgContainer flexMiddle relative">
+                <img src="/images/custdetails.png" alt="details" />
+                <div class="imgOverlay"></div>
+            </div>
+        </div>
+    </div>
+    {{else}}
     <div class="signup colMiddle">
         <div class="info">
             <h1>Sign up for free today</h1>
@@ -56,6 +116,7 @@
             </form>
         </div>
     </div>
+    {{/if}}
 
 
 </section>

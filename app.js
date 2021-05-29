@@ -103,3 +103,5 @@ const port = process.env.PORT || 4000;
 app.listen(port, () => {
   console.log(`The Snacks in a Van App is listening on port ${port}!`);
 });
+
+module.exports = app;

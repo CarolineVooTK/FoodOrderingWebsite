@@ -4,7 +4,6 @@ const vendorController = require("../controllers/vendor-controller");
 const passport = require("passport");
 require("../../config/passport")(passport);
 
-
 // redirect middleware, redirect users to login page, if they access pages that requires login
 // and not yet login
 const redirectToLogin = (req, res, next) => {
@@ -63,7 +62,15 @@ router.get("/", vendorController.getAll);
 router.get("/:id", redirectToCustomerLogin, vendorController.getVendorById);
 router.post("/addVendor", vendorController.addNewVendor);
 router.get("/:id/outstandingOrders", vendorController.getOutstandingOrders);
-router.get("/getOutsOrdersByVendor/:vendorid", redirectToLogin, vendorController.getOutsOrdersByVendor); 
-router.get("/getPastOrdersByVendor/:vendorid", redirectToLogin, vendorController.getPastOrdersByVendor); 
+router.get(
+  "/getOutsOrdersByVendor/:vendorid",
+  redirectToLogin,
+  vendorController.getOutsOrdersByVendor
+);
+router.get(
+  "/getPastOrdersByVendor/:vendorid",
+  redirectToLogin,
+  vendorController.getPastOrdersByVendor
+);
 
 module.exports = router;

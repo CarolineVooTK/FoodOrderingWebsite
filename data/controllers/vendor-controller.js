@@ -124,42 +124,49 @@ const addNewVendor = async (req, res) => {
 // sets a single vendor from the database to active, and
 // updates its latitude, longitude and text location
 const setVendorActive = async (req, res) => {
-  const { longitude, latitude, textlocation } = req.body;
+  let { longitude, latitude, textlocation } = req.body;
+  if (req.headers && req.headers.longitude) {
+    longitude = req.headers.longitude;
+    latitude = req.headers.latitude;
+    textlocation = req.headers.textlocation;
+  }
+  let vendorId = req.session.passport.user;
+  if (!latitude || !longitude || !textlocation || !vendorId) {
+    return res.status(400).render("vendorProfile", {
+      vendor_error: "Error wrong data",
+      vendor_status: "Off",
+    });
+  }
   let rating_ = 0;
   let count_ = 0;
   await orders
-  .aggregate([
-    {
-      $match: {
-        $and: [
-          { vendorId: new ObjectId(`${req.session.passport.user}`) },
-          { customerRating: { $gt: 0 } },
-        ],
+    .aggregate([
+      {
+        $match: {
+          $and: [{ vendorId: new ObjectId(`${vendorId}`) }, { customerRating: { $gt: 0 } }],
+        },
       },
-    },
-    {
-      $group: {
-        _id: null,
-        rating: { $avg: "$customerRating" },
-        count: { $sum: 1 },
+      {
+        $group: {
+          _id: null,
+          rating: { $avg: "$customerRating" },
+          count: { $sum: 1 },
+        },
       },
-    },
-  ])
-  .then((data) => {
-    if (data.length === 0) {
-      rating_ = 0
-      count_ = 0
-    }
-    else{
-      rating_ = data[0].rating
-      count_ = data[0].count
-    }
-  })
-  .catch((error) => {
-  });
+    ])
+    .then((data) => {
+      if (data.length === 0) {
+        rating_ = 0;
+        count_ = 0;
+      } else {
+        rating_ = data[0].rating;
+        count_ = data[0].count;
+      }
+    })
+    .catch((error) => {});
   await vendors
     .findOneAndUpdate(
-      { _id: req.session.passport.user },
+      { _id: vendorId },
       {
         active: true,
         location: new point({ type: "Point", coordinates: [latitude, longitude] }),
@@ -180,43 +187,46 @@ const setVendorActive = async (req, res) => {
         error: error,
       });
     });
-    let vendor_ = await vendors.findById({ _id: req.session.passport.user }).lean();
-    res.render("vendorProfile", { vendor_status: "Active", vendor: vendor_, rating: rating_, count: count_});
+  let vendor_ = await vendors.findById({ _id: vendorId }).lean();
+  res.status(200).render("vendorProfile", {
+    vendor_status: "Active",
+    vendor: vendor_,
+    rating: rating_,
+    count: count_,
+  });
 };
 
 const getStatus = async (req, res) => {
   let rating_ = 0;
   let count_ = 0;
   await orders
-  .aggregate([
-    {
-      $match: {
-        $and: [
-          { vendorId: new ObjectId(`${req.session.passport.user}`) },
-          { customerRating: { $gt: 0 } },
-        ],
+    .aggregate([
+      {
+        $match: {
+          $and: [
+            { vendorId: new ObjectId(`${req.session.passport.user}`) },
+            { customerRating: { $gt: 0 } },
+          ],
+        },
       },
-    },
-    {
-      $group: {
-        _id: null,
-        rating: { $avg: "$customerRating" },
-        count: { $sum: 1 },
+      {
+        $group: {
+          _id: null,
+          rating: { $avg: "$customerRating" },
+          count: { $sum: 1 },
+        },
       },
-    },
-  ])
-  .then((data) => {
-    if (data.length === 0) {
-      rating_ = 0
-      count_ = 0
-    }
-    else{
-      rating_ = data[0].rating
-      count_ = data[0].count
-    }
-  })
-  .catch((error) => {
-  });
+    ])
+    .then((data) => {
+      if (data.length === 0) {
+        rating_ = 0;
+        count_ = 0;
+      } else {
+        rating_ = data[0].rating;
+        count_ = data[0].count;
+      }
+    })
+    .catch((error) => {});
 
   let vendor_ = await vendors.findById({ _id: req.session.passport.user }).lean();
   if (vendor_.active) {
@@ -224,42 +234,45 @@ const getStatus = async (req, res) => {
   } else {
     vendor_current_status = "Off";
   }
-  res.render("vendorProfile", { vendor_status: vendor_current_status , vendor: vendor_, rating: rating_, count: count_});
+  res.render("vendorProfile", {
+    vendor_status: vendor_current_status,
+    vendor: vendor_,
+    rating: rating_,
+    count: count_,
+  });
 };
 
 const setVendorOff = async (req, res) => {
   let rating_ = 0;
   let count_ = 0;
   await orders
-  .aggregate([
-    {
-      $match: {
-        $and: [
-          { vendorId: new ObjectId(`${req.session.passport.user}`) },
-          { customerRating: { $gt: 0 } },
-        ],
+    .aggregate([
+      {
+        $match: {
+          $and: [
+            { vendorId: new ObjectId(`${req.session.passport.user}`) },
+            { customerRating: { $gt: 0 } },
+          ],
+        },
       },
-    },
-    {
-      $group: {
-        _id: null,
-        rating: { $avg: "$customerRating" },
-        count: { $sum: 1 },
+      {
+        $group: {
+          _id: null,
+          rating: { $avg: "$customerRating" },
+          count: { $sum: 1 },
+        },
       },
-    },
-  ])
-  .then((data) => {
-    if (data.length === 0) {
-      rating_ = 0
-      count_ = 0
-    }
-    else{
-      rating_ = data[0].rating
-      count_ = data[0].count
-    }
-  })
-  .catch((error) => {
-  });
+    ])
+    .then((data) => {
+      if (data.length === 0) {
+        rating_ = 0;
+        count_ = 0;
+      } else {
+        rating_ = data[0].rating;
+        count_ = data[0].count;
+      }
+    })
+    .catch((error) => {});
   await vendors
     .findOneAndUpdate(
       { _id: req.session.passport.user },
@@ -281,8 +294,13 @@ const setVendorOff = async (req, res) => {
         error: error,
       });
     });
-    let vendor_ = await vendors.findById({ _id: req.session.passport.user }).lean();
-    res.render("vendorProfile", { vendor_status: "Off", vendor: vendor_, rating: rating_, count: count_});
+  let vendor_ = await vendors.findById({ _id: req.session.passport.user }).lean();
+  res.status(200).render("vendorProfile", {
+    vendor_status: "Off",
+    vendor: vendor_,
+    rating: rating_,
+    count: count_,
+  });
 };
 
 // gets all outstanding orders from the database
@@ -339,13 +357,13 @@ const getOutstandingOrders = async (req, res) => {
 const getOutsOrdersByVendor = async (req, res) => {
   await orders
     .aggregate([
-      { 
+      {
         $match: {
           $and: [
             { vendorId: new ObjectId(req.params.vendorid) },
-            { $or: [{"status" : "pending"}, {"status" : "Fulfilled"}]}
-          ]
-        }
+            { $or: [{ status: "pending" }, { status: "Fulfilled" }] },
+          ],
+        },
       },
       {
         $lookup: {
@@ -401,12 +419,15 @@ const getOutsOrdersByVendor = async (req, res) => {
           message: "vendor has no outstanding orders",
         });
       }
-      res.render("vendorOutstandingOrders", { OutstandingOrders: data, timer: encodeURIComponent(JSON.stringify(data)) });
+      res.render("vendorOutstandingOrders", {
+        OutstandingOrders: data,
+        timer: encodeURIComponent(JSON.stringify(data)),
+      });
     })
     .catch((error) => {
       console.log(error);
-      res.redirect('/'); 
-      res.send("Redirected to HomePage."); 
+      res.redirect("/");
+      res.send("Redirected to HomePage.");
       res.status(500).json({
         error: error,
       });
@@ -417,13 +438,10 @@ const getOutsOrdersByVendor = async (req, res) => {
 const getPastOrdersByVendor = async (req, res) => {
   await orders
     .aggregate([
-      { 
+      {
         $match: {
-          $and: [
-            { vendorId: new ObjectId(req.params.vendorid) },
-            { status : "Collected"}
-          ]
-        }
+          $and: [{ vendorId: new ObjectId(req.params.vendorid) }, { status: "Collected" }],
+        },
       },
       {
         $lookup: {
@@ -483,8 +501,8 @@ const getPastOrdersByVendor = async (req, res) => {
       res.render("vendorPastOrders", { PastOrders: data });
     })
     .catch((error) => {
-      res.redirect('/'); 
-      res.send("Redirected to HomePage."); 
+      res.redirect("/");
+      res.send("Redirected to HomePage.");
       res.status(500).json({
         error: error,
       });

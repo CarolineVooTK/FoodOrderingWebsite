@@ -66,7 +66,7 @@
                                         {{/each}}
                                 </div>
                                 <div class="flex">
-                                        <h3>Total Price of Order: ${{this.price}}</h3> 
+                                        <h3>Total Price of the Order: ${{this.price}}</h3> 
                                 </div>
                                 {{! Two buttons for vendors to set the orders status}}
                                 <div class="flex">
@@ -74,6 +74,7 @@
                                         <button onclick="location.href='/orders/{{this._id}}/setOrderCollected'; refreshPage()" type="button">Order Collected</button>
                                 </div>
                         </div>
+                        <hr style="width:100%", size="3", color=white>  
                         {{else}}
                         <h3 style="font-size:5vw; color:white">> Currently, We Don't Have Any Outstanding Orders</h3>                      
                         {{/each}}

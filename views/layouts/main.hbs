@@ -55,8 +55,7 @@
                 <a href="/customer/profile">profile</a>
                 <a href="/customer/logout">logout</a>
                 {{else if vendor_id}}
-                <a id="vendor_current_order" href="/vendors/getOutsOrdersByVendor/{{vendor_id}}">view current orders</a>
-                <a id="vendor_past_order" href="/vendors/getPastOrdersByVendor/{{vendor_id}}">view past (picked up) orders</a>
+                <a id="vendor_past_order" href="/vendors/getPastOrdersByVendor/{{vendor_id}}">Past Orders</a>
                 <a href="/vendors/profile">profile</a>
                 <a href="/customer/logout">logout</a>
                 {{else}}
@@ -71,11 +70,19 @@
             <div class="container flexBetween">
                 <i onclick="showNavbar()" id="hamburger" class="fas fa-bars"></i>
                 <div class="navlinks">
+                    {{#if customer_id}}
                     <a href="/vendors">Find a Van</a>
+                    {{else if vendor_id}}
+                    <a href="/vendors">All Vendors</a>
+                    {{/if}}
                 </div>
                 <h1><a href="/">Snacks in a Van</a></h1>
                 <div class="navlinks">
+                    {{#if customer_id}}
                     <a class="linkToClosestVendor" href="/vendors/6075878024b5d615b324ee1d">Order Now</a>
+                    {{else if vendor_id}}
+                    <a href="/vendors/getOutsOrdersByVendor/{{vendor_id}}">Your Orders</a>
+                    {{/if}}
                 </div>
             </div>
         </div>
@@ -91,33 +98,51 @@
                 </div>
                 {{#if customer_id}}
                 <div class="flex">
-                    <a href="orders/customer/{{customer_id}}">orders</a>
+                    <a class="linkToClosestVendor" href="/vendors/6075878024b5d615b324ee1d">Order Now</a>
+                    <i class="fas fa-angle-right"></i>
+                </div>
+                <div class="flex">
+                    <a href="/vendors">Find a Van</a>
                     <i class="fas fa-angle-right"></i>
                 </div>
                 {{else if vendor_id}}
                 <div class="flex">
-                    <a href="orders/vendor/{{vendor_id}}">orders</a>
-                    <i class="fas fa-angle-right"></i>
-                </div>
-                {{else}}{{/if}}
-                <div class="flex">
-                    <a class="linkToClosestVendor" href="/vendors/6075878024b5d615b324ee1d">menu</a>
+                    <a href="/vendors/getOutsOrdersByVendor/{{vendor_id}}">Your Orders</a>
                     <i class="fas fa-angle-right"></i>
                 </div>
                 <div class="flex">
-                    <a href="/vendors">vendors</a>
+                    <a href="/vendors">All vans</a>
                     <i class="fas fa-angle-right"></i>
                 </div>
-                {{#if customer_name}}
+                {{/if}}
+                {{#if customer_id}}
                 <div class="flex">
                     <a href="/customer/profile">profile</a>
+                    <i class="fas fa-angle-right"></i>
+                </div>
+                <div class="flex">
+                    <a href="/orders/customer/{{customer_id}}">Past Orders</a>
                     <i class="fas fa-angle-right"></i>
                 </div>
                 <div class="flex">
                     <a href="/customer/logout">logout</a>
                     <i class="fas fa-angle-right"></i>
                 </div>
-                {{else}}<div class="flex">
+                {{else if vendor_id}}
+                <div class="flex">
+                    <a href="/vendors/profile">profile</a>
+                    <i class="fas fa-angle-right"></i>
+                </div>
+                <div class="flex">
+                    <a href="/vendors/getPastOrdersByVendor/{{vendor_id}}">Past Orders</a>
+                    <i class="fas fa-angle-right"></i>
+                </div>
+                <div class="flex">
+                    <a href="/customer/logout">logout</a>
+                    <i class="fas fa-angle-right"></i>
+                </div>
+                {{else}}
+                <div class="flex">
                     <a href="/customer/login">login</a>
                     <i class="fas fa-angle-right"></i>
                 </div>

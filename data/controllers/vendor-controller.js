@@ -470,7 +470,6 @@ const getPastOrdersByVendor = async (req, res) => {
           orderitems2: 0,
           customerId: 0,
           vendorId: 0,
-          _id: 0,
         },
       },
     ])

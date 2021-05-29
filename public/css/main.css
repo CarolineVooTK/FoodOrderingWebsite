@@ -210,7 +210,17 @@ header h1 {
   top: 0;
   width: 100%;
 }
-
+.exitModal {
+  text-align: right;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -10px;
+}
+.exitModal:hover {
+  color: red;
+  cursor: pointer;
+}
 @media (max-width: 600px) {
   header h1 {
     font-size: 35px;

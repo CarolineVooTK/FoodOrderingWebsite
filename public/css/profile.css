@@ -92,17 +92,26 @@
   padding: 40px;
   box-sizing: border-box;
 }
+
 #cancelPopup {
   display: none;
 }
-
+#orderPopupModal h1 {
+  margin: 0;
+}
+#cancelPopupModal h1 {
+  margin-bottom: 30px;
+}
+#orderPopupModal .location {
+  border-bottom: 2px solid white;
+  width: 75% !important;
+}
 .popupItem {
   width: 50%;
-  margin: 20px auto;
+  margin: 0px auto 20px auto;
 }
 .popupButtons {
-  margin: 20px auto;
-  margin-top: auto;
+  margin: auto auto 0 auto;
 }
 .popupButtons button {
   margin: 0 10px;
@@ -123,7 +132,7 @@
 }
 .changeButton:hover {
   background: lightgrey;
-  border: 2px solid var(--color-dark);
+  border: 2px solid white;
   color: var(--color-dark) !important;
   cursor: pointer;
 }

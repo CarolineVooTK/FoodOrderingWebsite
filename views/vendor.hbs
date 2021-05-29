@@ -66,10 +66,13 @@
     </div>
      <div id="orderPopup" class="colMiddle" style="display: none;">
         <div id="orderPopupModal">
-            <h1>Your order will be submitted!</h1>
+            <div class="flexBetween exitModal">
+                <i onclick="hideOrderPopup()" class="fas fa-times"></i>
+            </div>
+            <h1>Are you ready to submit your order?</h1>
             {{!-- order items --}}
             {{#if vendor}}
-            <div class="popupItem">
+            <div class="popupItem location">
                 <p>{{vendor.name}}, {{vendor.textlocation}}</p>
             </div>
             {{/if}}  
@@ -80,7 +83,7 @@
                 {{!-- hide cancel button after 10 minutes --}}
                 <button class="changeButton" onclick="showCancelPopup()">Cancel</button>
                 <button class="changeButton" onclick="changeOrder()">Change</button>
-                <button class="doneButton" onclick="location.href='/orders/placeOrder/{{vendor._id}}'">Done</button>
+                <button class="doneButton" onclick="location.href='/orders/placeOrder/{{vendor._id}}'">Submit</button>
             </div>
         </div>
     </div>

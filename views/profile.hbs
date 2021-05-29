@@ -40,6 +40,25 @@
             </h1>
 
         </div>
+        {{#if orderitems}}
+        <div id="orderSuccessPopup" class="colMiddle">
+            <div id="orderSuccessPopupModal">
+                <div class="flexBetween exitModal">
+                    <i onclick="hideOrderSuccessPopup()" class="fas fa-times"></i>
+                </div>
+                <h1>Your order has been sent!</h1>
+                {{#if vendor}}
+                <div class="popupItem location">
+                    <p>You purchased from:</p>
+                    <p>{{vendor.name}}, {{vendor.textlocation}}</p>
+                </div>
+                {{/if}}
+                <div class="popupButtons flexMiddle stretch">
+                    <button class="doneButton" onclick="hideOrderSuccessPopup()">Done</button>
+                </div>
+            </div>
+        </div>
+        {{/if}}
     {{/if}}
     
     <div id="changeDetailsPopup" class="colMiddle" style="display: none;">
@@ -130,7 +149,10 @@
             let popup = document.getElementById("changePasswordPopup");
             popup.style.display = "none";
         }
-
+        const hideOrderSuccessPopup = () => {
+            let popup = document.getElementById("orderSuccessPopup");
+            popup.style.display = "none";
+        }    
     </script>
 
 </section>

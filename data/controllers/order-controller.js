@@ -3,7 +3,6 @@ const orders = OrderModel.orders;
 const orderItems = OrderModel.orderItems;
 let ObjectId = require("mongoose").Types.ObjectId;
 
-
 const cancelSessionOrder = async (req, res) => {
   req.session.orderlist = null;
   res.redirect(`/vendors`);
@@ -69,7 +68,7 @@ const getAllCustomerOrders = async (req, res) => {
 const placeOrder = async (req, res) => {
   let totalprice = 0;
   for (index = 0; index < req.session.orderlist.length; index++) {
-    if(req.params.vendorid == req.session.orderlist[index].vendorid){
+    if (req.params.vendorid == req.session.orderlist[index].vendorid) {
       totalprice += req.session.orderlist[index].quantity * req.session.orderlist[index].price;
     }
   }
@@ -81,7 +80,7 @@ const placeOrder = async (req, res) => {
   newOrder.status = "pending";
 
   for (index = 0; index < req.session.orderlist.length; index++) {
-    if(req.params.vendorid == req.session.orderlist[index].vendorid){
+    if (req.params.vendorid == req.session.orderlist[index].vendorid) {
       var newOrderItem = new orderItems();
       newOrderItem.menuitem = new ObjectId(`${String(req.session.orderlist[index].menuitem)}`);
       newOrderItem.quantity = req.session.orderlist[index].quantity;
@@ -91,8 +90,7 @@ const placeOrder = async (req, res) => {
   newOrder.save(function (err) {
     if (err) {
       throw err;
-    }
-    else{
+    } else {
     }
   });
   res.redirect(`/customer/profile`);
@@ -142,8 +140,7 @@ const getOrderById = async (req, res) => {
         },
       },
     ])
-    .then((data) => {
-    })
+    .then((data) => {})
     .catch((error) => {
       res.status(500).json({
         error: error,
@@ -186,8 +183,6 @@ const getVendorRating = async (req, res) => {
       });
     });
 };
-
-
 
 // sets a single order's status to fulfilled by matching its id to the req.params id value
 const setOrderFulfilled = async (req, res) => {
@@ -271,8 +266,6 @@ const setOrderRating = async (req, res) => {
     });
 };
 
-
-
 module.exports = {
   getAllCustomerOrders,
   getOrderById,
@@ -282,5 +275,5 @@ module.exports = {
   setOrderRating,
   getVendorRating,
   cancelSessionOrder,
-  placeOrder 
+  placeOrder,
 };

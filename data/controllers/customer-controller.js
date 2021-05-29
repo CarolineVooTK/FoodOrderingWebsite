@@ -14,49 +14,50 @@ const getCustDetails = async (req, res) => {
     custFamName: customers.familyName,
     custGivenName: customers.givenName,
     custEmail: customers.email,
-    custPassword: customers.password,});
-  
+    custPassword: customers.password,
+    orderitems: req.session.orderlist,
+    vendor: req.session.fromVendor,
+  });
+  // clear current order after being submitted
+  req.session.orderlist = [];
+  req.session.fromVendor = {};
 };
-
 
 // changes the given name
 const changeCustDetails = async (req, res) => {
-  const {newFamName,newGivenName} = req.body
-  
+  const { newFamName, newGivenName } = req.body;
+
   await customer
-        .findOneAndUpdate(
-          { _id: req.session.passport.user },
-          {
-            familyName : newFamName,
-            givenName : newGivenName,
+    .findOneAndUpdate(
+      { _id: req.session.passport.user },
+      {
+        familyName: newFamName,
+        givenName: newGivenName,
+      },
+      { returnNewDocument: true }
+    )
 
-          },
-         { returnNewDocument: true }
-        )
-    
-      .then((data) => {
-         if (!data) {
-           return res.render("profile", {
+    .then((data) => {
+      if (!data) {
+        return res.render("profile", {
           customer_error: "Error wrong data",
+        });
+      }
+    })
+    .catch((error) => {
+      res.status(500).json({
+        error: error,
+      });
+    });
 
-          });
-       }
-      })
-      .catch((error) => {
-         res.status(500).json({
-         error: error,
-         });
-       });
-  
-    let customers = await customer.findById({ _id: req.session.passport.user }).lean();
-    res.render("profile", {custFamName: customers.familyName,
-      custGivenName: customers.givenName,
-      custEmail: customers.email,
-      custPassword: customers.password,});
+  let customers = await customer.findById({ _id: req.session.passport.user }).lean();
+  res.render("profile", {
+    custFamName: customers.familyName,
+    custGivenName: customers.givenName,
+    custEmail: customers.email,
+    custPassword: customers.password,
+  });
 };
-
-
-
 
 const getCustomerByEmail = async (req, res) => {
   let cust = await customer

@@ -2,9 +2,6 @@ const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcrypt-nodejs");
 let ObjectId = require("mongoose").Types.ObjectId;
 
-
-
-
 // our  model
 const { customer } = require("../data/models/customerModel");
 const { vendors } = require("../data/models/Vendor");
@@ -102,31 +99,35 @@ module.exports = function (passport) {
         passReqToCallback: true,
       },
       function (req, email, password, done) {
+        console.log(req.body);
         process.nextTick(function () {
           // see if the user with the email exists
           vendors.findOne({ name: req.body.username }, function (err, user) {
             if (err) {
-              // console.log("err")
               return done(err);
             }
             if (!user) {
-              // console.log("no user")
               return done(null, false, req.flash("loginMessage", "Invalid username or password"));
             }
 
             //check if the password is valid
             // if(user.password != req.body.password){
             if (!user.validPassword(req.body.password)) {
-              return done(null, false, req.flash("loginMessage", "Invalid username or password."));
+              // checks if password entered is in plain text and matches hashed user password
+              var testStringPassword = new vendors();
+              if (!testStringPassword.generateHash(req.body.password == user.password)) {
+                return done(
+                  null,
+                  false,
+                  req.flash("loginMessage", "Invalid username or password.")
+                );
+              }
             }
 
             // this is a valid email and valid password
-            else {
-              req.session.name = req.body.username;
-              req.session.type_of_user = "vendor";
-
-              return done(null, user, req.flash("loginMessage", "Login successful"));
-            }
+            req.session.name = req.body.username;
+            req.session.type_of_user = "vendor";
+            return done(null, user, req.flash("loginMessage", "Login successful"));
           });
         });
       }

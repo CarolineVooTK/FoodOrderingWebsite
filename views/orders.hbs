@@ -33,6 +33,21 @@
             minutes = minutes > 0 ? minutes + " Minutes, " : "";
             return days + hours + minutes + seconds + " Seconds ago";
         }
+        const showOrHideCancelButton = (dateString, id) => {
+            let date = new Date(dateString);
+            let now = Date.now();
+            let diff = now - date;
+
+            let days = Math.floor(diff / 1000 / 60 / (60 * 24));
+            diff = new Date(diff);
+            let hours = diff.getHours() - 10;
+            let minutes = diff.getMinutes();
+            let seconds = diff.getSeconds();
+            if (days > 0 || hours > 0 || minutes > 10) {
+                console.log(dateString, id)
+                document.getElementById(`cancel-${id}`).style.display = "none";
+            }
+        }
     </script>
     <div class="container ordersContainer">
         <h1>Your Orders</h1>
@@ -79,7 +94,10 @@
                         <div style="vertical-align: middle">
                             {{!-- <button class="doneButton" onclick="location.href='/orders/{{this._id}}/setOrderCancelled'">Yes</button> --}}
                             <button class="doneButton" onclick="showChangePopup('{{this._id}}')">Change</button>
-                            <button class="doneButton" onclick="showCancelPopup('{{this._id}}')">Cancel</button>
+                            <button id="cancel-{{this._id}}" class="doneButton" onclick="showCancelPopup('{{this._id}}')">Cancel</button>
+                            <script>
+                                showOrHideCancelButton('{{this.time}}', '{{this._id}}');
+                            </script>
                             <button class="changeButton" onclick="showRatePopup('{{this._id}}')">RateTest</button>
                             
                         </div>                   

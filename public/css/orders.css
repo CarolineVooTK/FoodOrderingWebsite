@@ -18,7 +18,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: column
+  align-items: column;
 }
 #orderList {
   width: 100%;
@@ -88,26 +88,25 @@
   }
 }
 
-
 .cross {
   padding: 10px;
   color: #d6312d;
   cursor: pointer;
-  font-size: 23px
+  font-size: 23px;
 }
 
 .cross i {
   margin-top: -5px;
-  cursor: pointer
+  cursor: pointer;
 }
 
 .comment-box {
-  padding: 5px
+  padding: 5px;
 }
 
 .comment-area textarea {
   resize: none;
-  border: 1px solid #ff0000
+  border: 1px solid #ff0000;
 }
 
 .form-control:focus {
@@ -115,56 +114,56 @@
   background-color: #fff;
   border-color: #ffffff;
   outline: 0;
-  box-shadow: 0 0 0 1px rgb(255, 0, 0) !important
+  box-shadow: 0 0 0 1px rgb(255, 0, 0) !important;
 }
 
 .send {
   color: #fff;
   background-color: #ff0000;
-  border-color: #ff0000
+  border-color: #ff0000;
 }
 
 .send:hover {
   color: #fff;
   background-color: #f50202;
-  border-color: #f50202
+  border-color: #f50202;
 }
 
 .rating {
   display: inline-flex;
   margin-top: -10px;
-  flex-direction: row-reverse
+  flex-direction: row-reverse;
 }
 
-.rating>input {
-  display: none
+.rating > input {
+  display: none;
 }
 
-.rating>label {
+.rating > label {
   position: relative;
   width: 28px;
   font-size: 35px;
   color: #f7d307;
-  cursor: pointer
+  cursor: pointer;
 }
 
-.rating>label::before {
+.rating > label::before {
   content: "\2605";
   position: absolute;
-  opacity: 0
+  opacity: 0;
 }
 
-.rating>label:hover:before,
-.rating>label:hover~label:before {
-  opacity: 1 !important
+.rating > label:hover:before,
+.rating > label:hover ~ label:before {
+  opacity: 1 !important;
 }
 
-.rating>input:checked~label:before {
-  opacity: 1
+.rating > input:checked ~ label:before {
+  opacity: 1;
 }
 
-.rating:hover>input:checked~label:before {
-  opacity: 0.4
+.rating:hover > input:checked ~ label:before {
+  opacity: 0.4;
 }
 
 #modal {
@@ -172,4 +171,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+.order .changeButton {
+  width: 150px !important;
+}
+.order h1 {
+  padding-bottom: 20px;
 }

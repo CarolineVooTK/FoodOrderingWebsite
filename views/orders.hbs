@@ -13,7 +13,7 @@
         const getOrderNumber = (num) => {
             count += 1;
             if (num == 0) {
-                return "Order number: " + count;
+                return "# " + count;
             }
             return "";
         }
@@ -33,7 +33,7 @@
             minutes = minutes > 0 ? minutes + " Minutes, " : "";
             return days + hours + minutes + seconds + " Seconds ago";
         }
-        const showOrHideCancelButton = (dateString, id) => {
+        const showOrHideButtons = (dateString, id) => {
             let date = new Date(dateString);
             let now = Date.now();
             let diff = now - date;
@@ -43,9 +43,9 @@
             let hours = diff.getHours();
             let minutes = diff.getMinutes();
             let seconds = diff.getSeconds();
-            if (days > 0 || hours > 0 || minutes > 10) {
-                console.log(dateString, id)
+            if (days > 0 || hours > 10 || minutes > 10) {
                 document.getElementById(`cancel-${id}`).style.display = "none";
+                document.getElementById(`change-${id}`).style.display = "none";
             }
         }
     </script>
@@ -58,13 +58,13 @@
             {{!-- <button class="doneButton" onclick="location.href='/orders/{{orders._id}}/setOrderCancelled'">Yes</button> --}}
             <div style="width: 60%; float:left">
             <div class="order col" >  
+                <h1 id="order-{{this._id}}"></h1>
                 <h3 id="time-{{this._id}}">Date and Time: {{this.time}}</h3>
                 <h3 id="timer-{{this._id}}"></h3>
                 <script>
                     document.getElementById("time-{{this._id}}").innerHTML = getFullDate('{{this.time}}');
                     document.getElementById("timer-{{this._id}}").innerHTML = getTimeDiff('{{this.time}}');
                 </script>
-                <h3 id="order-{{this._id}}"></h3>
                 <script>
                     document.getElementById("order-{{this._id}}").innerHTML = getOrderNumber({{this.orderNumber}});
                 </script>
@@ -89,19 +89,17 @@
                 </div>
                 </div>
                 </div>
-                <div style="width: 40%; float:right; vertical-align:middle">
-                    <div class="order col" >
-                        <div style="vertical-align: middle">
-                            {{!-- <button class="doneButton" onclick="location.href='/orders/{{this._id}}/setOrderCancelled'">Yes</button> --}}
-                            <button class="doneButton" onclick="showChangePopup('{{this._id}}')">Change</button>
-                            <button id="cancel-{{this._id}}" class="doneButton" onclick="showCancelPopup('{{this._id}}')">Cancel</button>
-                            <script>
-                                showOrHideCancelButton('{{this.time}}', '{{this._id}}');
-                            </script>
-                            <button class="changeButton" onclick="showRatePopup('{{this._id}}')">RateTest</button>
-                            
-                        </div>                   
-                    </div>
+                <div class="order col" >
+                    <div style="vertical-align: middle">
+                        {{!-- <button class="doneButton" onclick="location.href='/orders/{{this._id}}/setOrderCancelled'">Yes</button> --}}
+                        <button id="change-{{this._id}}" class="doneButton" onclick="showChangePopup('{{this._id}}')">Change</button>
+                        <button id="cancel-{{this._id}}" class="doneButton" onclick="showCancelPopup('{{this._id}}')">Cancel</button>
+                        <script>
+                            showOrHideButtons('{{this.time}}', '{{this._id}}');
+                        </script>
+                        <button class="changeButton" onclick="showRatePopup('{{this._id}}')">Rate this order</button>
+                        
+                    </div>                   
                 </div>
                     
                 <hr style="width:100%", size="3", color=white> 

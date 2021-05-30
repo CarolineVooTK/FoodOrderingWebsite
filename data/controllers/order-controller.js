@@ -2,6 +2,7 @@ const OrderModel = require("../models/Order");
 const orders = OrderModel.orders;
 const orderItems = OrderModel.orderItems;
 let ObjectId = require("mongoose").Types.ObjectId;
+let vendorController = require("./vendor-controller");
 
 const cancelSessionOrder = async (req, res) => {
   req.session.orderlist = null;
@@ -186,9 +187,10 @@ const getVendorRating = async (req, res) => {
 // sets a single order's status to fulfilled by matching its id to the req.params id value
 const setOrderFulfilled = async (req, res) => {
   await orders
-    .findOneAndUpdate({ _id: new ObjectId(`${req.params.id}`) }, 
-    { status: "Fulfilled" },
-    {returnOriginal:false}
+    .findOneAndUpdate(
+      { _id: new ObjectId(`${req.params.id}`) },
+      { status: "Fulfilled" },
+      { returnOriginal: false }
     )
     .then((data) => {
       if (!data) {
@@ -208,9 +210,10 @@ const setOrderFulfilled = async (req, res) => {
 // sets a single order's status to collected by matching its id to the req.params id value
 const setOrderCollected = async (req, res) => {
   await orders
-    .findOneAndUpdate({ _id: new ObjectId(`${req.params.id}` )}, 
-    { status: "Collected" },
-    {upsert: true, returnOriginal:false}
+    .findOneAndUpdate(
+      { _id: new ObjectId(`${req.params.id}`) },
+      { status: "Collected" },
+      { upsert: true, returnOriginal: false }
     )
     .then((data) => {
       if (!data) {
@@ -230,24 +233,24 @@ const setOrderCollected = async (req, res) => {
 //sets a single order status to cancelled
 const setOrderCancelled = async (req, res) => {
   await orders
-  .findOneAndUpdate(
-  { _id: new ObjectId(`${req.params.id}` )}, 
-  { status: "Cancelled" },
-  {upsert: true, returnOriginal:false})
-  .then((data) => {
-    if (!data) {
-      return res.status(404).json({
-        message: "Error Occurs when trying to cancel an order.",
+    .findOneAndUpdate(
+      { _id: new ObjectId(`${req.params.id}`) },
+      { status: "Cancelled" },
+      { upsert: true, returnOriginal: false }
+    )
+    .then((data) => {
+      if (!data) {
+        return res.status(404).json({
+          message: "Error Occurs when trying to cancel an order.",
+        });
+      }
+      res.status(200).json(data);
+    })
+    .catch((error) => {
+      res.status(500).json({
+        error: error,
       });
-    }
-    res.status(200).json(data);
-   
-  })
-  .catch((error) => {
-    res.status(500).json({
-      error: error,
     });
-  });
 };
 
 // sets a single order's rating by matching its id to the req.params id value
@@ -265,6 +268,7 @@ const setOrderRating = async (req, res) => {
           message: "Error Occurs when trying to rate the order.",
         });
       }
+      updateVendorRating(data.vendorId);
       res.status(200).json(data);
     })
     .catch((error) => {
@@ -272,7 +276,41 @@ const setOrderRating = async (req, res) => {
         error: error,
       });
     });
+};
 
+const updateVendorRating = async (vendorId) => {
+  rating = 0;
+  count = 0;
+  await orders
+    .aggregate([
+      {
+        $match: {
+          $and: [{ vendorId: new ObjectId(`${vendorId}`) }, { customerRating: { $gt: 0 } }],
+        },
+      },
+      {
+        $group: {
+          _id: null,
+          rating: { $avg: "$customerRating" },
+          count: { $sum: 1 },
+        },
+      },
+    ])
+    .then((data) => {
+      if (data.length === 0) {
+        rating = 0;
+        count = 0;
+      } else {
+        rating = data[0].rating;
+        count = data[0].count;
+      }
+      if (rating > 0 && count > 0) {
+        vendorController.updateVendorRating(vendorId, rating, count);
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 module.exports = {

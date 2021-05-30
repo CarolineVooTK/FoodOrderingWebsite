@@ -1,46 +1,6 @@
 <section id="vendors" class="colStart">
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src='https://unpkg.com/@turf/turf/turf.min.js'></script>
     <script type="text/javascript">
-        // display the rating for the vendor
-        async function load_rating(vendorId) {
-            let data = null;
-            data = await axios
-                .get(`https://web-info-tech-group-3.herokuapp.com/orders/${vendorId}/rating`)
-                .then((data) => {
-                    if (data.data) {
-                        return data.data;
-                    }
-                    return [{ rating: 0, count: 0 }];
-                })
-                .catch((err) => {
-                    console.log(err);
-                });
-            let rating = Math.round(data[0].rating * 2) / 2;
-            let flr = Math.floor(data[0].rating);
-            let dec = data[0].rating;
-            if (!dec.toString().includes(".")) {
-                dec = dec.toString() + ".0";
-            }
-            let count = data[0].count;
-            let ratingDisplay = `<div class="flex rating">`;
-            let half = false;
-            if (rating > 0) {
-                ratingDisplay += `<span>${dec}</span>`;
-                ratingDisplay += (`<i class="fas fa-star"></i>`).repeat(flr);
-                if (rating > flr) {
-                    ratingDisplay += (`<i class="fas fa-star-half-alt"></i>`);
-                    half = true;
-                }
-                ratingDisplay += half ? (`<i class="far fa-star"></i>`).repeat(5 - flr - 1) : 
-                (`<i class="far fa-star"></i>`).repeat(5 - flr);
-                ratingDisplay += `<span>(${count})</span>`;
-            } else {
-                ratingDisplay += `<p>no reviews</p>`;
-            }
-            ratingDisplay += `</div>`;
-            document.getElementById(vendorId).innerHTML = ratingDisplay;
-        }
         function latLongStr(val) {
             return val.toString().split(",");
         }

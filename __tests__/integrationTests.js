@@ -54,7 +54,8 @@ describe("Integration Test: vendor changes their van status", () => {
         );
       });
   });
-  test("Test 3: Vendor 1 (6075878024b5d615b324ee1d) updates the status of their van without latitude coordinate", async () => {
+  test(`Test 3: Vendor 1 (6075878024b5d615b324ee1d) updates the status
+  of their van with missing latitude coordinate`, async () => {
     return await agent
       .post("/vendors/setActive")
       .set("Cookie", cookie)
@@ -69,5 +70,16 @@ describe("Integration Test: vendor changes their van status", () => {
           expect.stringContaining("<h2>CurrentStatus:</h2><h3>Off</h3>")
         );
       });
+  });
+  test(`Test 4: Vendor 1 (6075878024b5d615b324ee1d) sets the status of 
+  their van to offline without login credentials`, async () => {
+    await agent.get("/vendors/logout").then((res) => {
+      cookie = null;
+      expect(res.statusCode).toBe(302);
+    });
+    return await agent.get("/vendors/setoff").then((response) => {
+      expect(response.statusCode).toBe(302);
+      expect(response.text).toEqual("Found. Redirecting to /vendors/login");
+    });
   });
 });

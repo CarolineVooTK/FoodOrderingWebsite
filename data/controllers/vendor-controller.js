@@ -91,6 +91,7 @@ const getVendorById = async (req, res) => {
       res.render("vendor", { vendor: data[0], orderitems: req.session.orderlist });
     })
     .catch((error) => {
+      res.redirect("/vendors");
       res.status(500).json({
         error: error,
       });

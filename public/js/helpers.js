@@ -41,60 +41,6 @@ let register = (Handlebars) => {
       }
       return menuitem + `</div>`;
     },
-    vendorList: (data) => {
-      let vendors = `<div id="vendorList">`;
-      for (let i = 0; i < data.length; i++) {
-        if (data[i].active) {
-          let ratingDisplay = `<div class="flex rating">`;
-          if (data[i].rating && data[i].count && data[i].rating > 0) {
-            let rating = Math.round(data[i].rating * 2) / 2;
-            let flr = Math.floor(data[i].rating);
-            let dec = data[i].rating;
-            if (!dec.toString().includes(".")) {
-              dec = dec.toString() + ".0";
-            } else {
-              dec = dec.toString().slice(0, 4);
-            }
-            let count = data[i].count;
-            let half = false;
-            if (rating > 0) {
-              ratingDisplay += `<span>${dec}</span>`;
-              ratingDisplay += `<i class="fas fa-star"></i>`.repeat(flr);
-              if (rating > flr) {
-                ratingDisplay += `<i class="fas fa-star-half-alt"></i>`;
-                half = true;
-              }
-              ratingDisplay += half
-                ? `<i class="far fa-star"></i>`.repeat(5 - flr - 1)
-                : `<i class="far fa-star"></i>`.repeat(5 - flr);
-              ratingDisplay += `<span>(${count})</span></div>`;
-            }
-          } else {
-            ratingDisplay += `<p>no reviews</p></div>`;
-          }
-          vendors += `<div class="vendor col">
-            <div class="colStart title">
-                <div class="flexBetween stretch"
-                  <h2 style="text-transform:uppercase;color:#3df2ff;font-weight:bold;font-size:25px;">${data[i].name}</h2>
-                  <div id="${data[i]._id}-distance" class="distance" style="color:white;font-size:18px;">
-                    <script type="text/javascript">
-                      getDistance('${data[i]._id}');
-                    </script>
-                  </div>
-                </div>
-                <p>${data[i].textlocation}</p>
-                <div class="ratingContainer colMiddle">
-                    <div class="rate">${ratingDisplay}</div>
-                </div>
-            </div>
-            <div class="flex">
-                <button class="flexMiddle" onclick="location.href='/vendors/${data[i]._id}'" type="button">View Van Menu</button>
-            </div>
-        </div>`;
-        }
-      }
-      return vendors + `</div>`;
-    },
     singleVendorRatingDisplay: (data) => {
       let ratingDisplay = `<div class="rate"><div class="flex rating">`;
       if (data.rating && data.count && data.rating > 0) {
@@ -124,6 +70,36 @@ let register = (Handlebars) => {
         ratingDisplay += `<p>no reviews</p></div></div>`;
       }
       return ratingDisplay;
+    },
+    vendorList: (data) => {
+      let vendors = `<div id="vendorList">`;
+      for (let i = 0; i < data.length; i++) {
+        if (data[i].active) {
+          vendors += `<div class="vendor col">
+            <div class="colStart title">
+                <div class="flexBetween stretch"
+                  <h2 style="text-transform:uppercase;color:#3df2ff;font-weight:bold;font-size:25px;">${
+                    data[i].name
+                  }</h2>
+                  <div id="${
+                    data[i]._id
+                  }-distance" class="distance" style="color:white;font-size:18px;">
+                  </div>
+                </div>
+                <p>${data[i].textlocation}</p>
+                <div class="ratingContainer colMiddle">
+                    ${this.helpers.singleVendorRatingDisplay(data[i])}
+                </div>
+            </div>
+            <div class="flex">
+                <button class="flexMiddle" onclick="location.href='/vendors/${
+                  data[i]._id
+                }'" type="button">View Van Menu</button>
+            </div>
+        </div>`;
+        }
+      }
+      return vendors + `</div>`;
     },
     priceDisplay: (p) => {
       if (p) {
@@ -206,32 +182,24 @@ let register = (Handlebars) => {
               '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
           }).addTo(map);
           map.zoomControl.setPosition("topright");
-          d = 100;
-          v = "";
-          window.minVendor = [d, v];
-          window.vendorDistances = [];
           window.map = map;
           map.locate({ setView: true, watch: true, maxZoom: 16 }).on("locationfound", (e) => {
-            window.currentLocation = [e.latitude, e.longitude];
             icon = L.divIcon({
               html: '<img style="height: 60px" src="/images/location.svg"/>',
             });
             L.marker(([e.latitude, e.longitude]), { icon: icon }).addTo(window.map)
             .bindPopup("<div class='popup'>You are here</div>")
             .openPopup();
-                
         `;
       for (var k = 0; k < vendors.length; k++) {
         vMap += `
         from = turf.point([e.latitude, e.longitude]); // should be location of user
         to = turf.point([${vendors[k].location.coordinates}]);
         distance = Math.round(turf.distance(from, to) * 100) / 100;
-        window.vendorDistances.push({distance: distance, vendorId: "${vendors[k]._id}"});
-        if (distance < d) {
-          d = distance;
-          v = "${vendors[k]._id}";
-          window.minVendor = [d, v];
-        }
+        updateVendorDistance({
+          distance: distance,
+          vendorId: "${vendors[k]._id}",
+        })
         `;
       }
       return vMap + `}); </script>`;

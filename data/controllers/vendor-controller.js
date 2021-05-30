@@ -97,6 +97,7 @@ const getVendorById = async (req, res) => {
     });
 };
 
+// saving new vendor details to database
 const addNewVendor = async (req, res) => {
   let vendor = new vendors({
     name: req.body.name,
@@ -114,7 +115,6 @@ const addNewVendor = async (req, res) => {
       res.status(200).json(data);
     })
     .catch((error) => {
-      // console.log(error)
       res.status(500).json({
         error: error,
       });
@@ -196,6 +196,7 @@ const setVendorActive = async (req, res) => {
   });
 };
 
+// get the current status of a vendor
 const getStatus = async (req, res) => {
   let rating_ = 0;
   let count_ = 0;
@@ -242,6 +243,7 @@ const getStatus = async (req, res) => {
   });
 };
 
+// Changing Status of Vendor to Off when they would like to go offline (stop their business of the day)
 const setVendorOff = async (req, res) => {
   let rating_ = 0;
   let count_ = 0;
@@ -287,7 +289,6 @@ const setVendorOff = async (req, res) => {
           message: "Vendor not updated",
         });
       }
-      // res.render("vendorProfile", { vendor_status: "Off", vendor: vendor_, rating: rating_, count: count_});
     })
     .catch((error) => {
       res.status(500).json({
@@ -353,7 +354,7 @@ const getOutstandingOrders = async (req, res) => {
     });
 };
 
-// get outstanding orders of a specific vendor
+// get outstanding orders from a specific vendor
 const getOutsOrdersByVendor = async (req, res) => {
   await orders
     .aggregate([
@@ -508,6 +509,7 @@ const getPastOrdersByVendor = async (req, res) => {
     });
 };
 
+// update the vendor rating
 const updateVendorRating = async (vendorId, rating, count) => {
   await vendors
     .findOneAndUpdate(

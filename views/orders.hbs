@@ -6,6 +6,33 @@
             date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
             return date.toString();
         }
+        const getFullDate = (dateString) => {
+            return "Time of Order: " + dateString.slice(0,dateString.indexOf("GMT"));
+        }
+        let count = 0;
+        const getOrderNumber = (num) => {
+            count += 1;
+            if (num == 0) {
+                return "Order number: " + count;
+            }
+            return "";
+        }
+        const getTimeDiff = (dateString) => {
+            let date = new Date(dateString);
+            let now = Date.now();
+            let diff = now - date;
+
+            let days = Math.floor(diff / 1000 / 60 / (60 * 24));
+            diff = new Date(diff);
+            let hours = diff.getHours() - 10;
+            let minutes = diff.getMinutes();
+            let seconds = diff.getSeconds();
+            let result = "";
+            days = days > 0 ? days + " Days, " : "";
+            hours = hours > 0 ? hours + " Hours, " : "";
+            minutes = minutes > 0 ? minutes + " Minutes, " : "";
+            return days + hours + minutes + seconds + " Seconds ago";
+        }
     </script>
     <div class="container ordersContainer">
         <h1>Your Orders</h1>
@@ -16,8 +43,16 @@
             {{!-- <button class="doneButton" onclick="location.href='/orders/{{orders._id}}/setOrderCancelled'">Yes</button> --}}
             <div style="width: 60%; float:left">
             <div class="order col" >  
-                <h3>Date and Time: {{this.time}}</h3>
-                <h3>Order Number: {{this._id}}</h3>
+                <h3 id="time-{{this._id}}">Date and Time: {{this.time}}</h3>
+                <h3 id="timer-{{this._id}}"></h3>
+                <script>
+                    document.getElementById("time-{{this._id}}").innerHTML = getFullDate('{{this.time}}');
+                    document.getElementById("timer-{{this._id}}").innerHTML = getTimeDiff('{{this.time}}');
+                </script>
+                <h3 id="order-{{this._id}}"></h3>
+                <script>
+                    document.getElementById("order-{{this._id}}").innerHTML = getOrderNumber({{this.orderNumber}});
+                </script>
                 <h3>Status: {{this.status}}</h3>
                 <div class="orderItems colStart">
                     <h3>items:</h3>

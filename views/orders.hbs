@@ -47,7 +47,7 @@
                             {{!-- <button class="doneButton" onclick="location.href='/orders/{{this._id}}/setOrderCancelled'">Yes</button> --}}
                             <button class="changeButton" onclick="location.href='/vendors/6075878024b5d615b324ee1d'">Change</button>
                             <button class="doneButton" onclick="showCancelPopup('{{this._id}}')">Cancel</button>
-                            <button class="changeButton" onclick="showRatePopup()">RateTest</button>
+                            <button class="changeButton" onclick="showRatePopup('{{this._id}}')">RateTest</button>
                             
                         </div>                   
                     </div>
@@ -93,8 +93,9 @@
             </div>
             <div class="popupButtons flexMiddle stretch">
                 {{!-- hide cancel button after 10 minutes --}}
-                 <h4>{{this._id}}></h4> {{!--testing purpose --}}
-                <button class="doneButton" onclick="location.href='/{{this._id}}/setOrderRating'">Submit</button>
+                <form target = "_blank" id="ratePopupForm" method="post" action="/orders/{{this._id}}/setOrderRating?_method=PATCH".redirect>
+                    <button name="Yes" value="PATCH" class="doneButton" onclick="showRateSucPopup()">Submit</button>
+                </form>
 
             </div>
         </div>
@@ -111,8 +112,8 @@
             <div class="popupButtons flexMiddle stretch">
                 <button class="changeButton" onclick="hideCancelPopup()">No</button>
                 
-                <form id="cancelPopupForm" method="post" action="/orders/{{this._id}}/setOrderCancelled?_method=PATCH">
-                    <button name="Yes" value="PATCH" class="doneButton" onclick="location.href='/orders/customer/{{customer_id}}'">Yes</button>
+                <form target = "_blank" id="cancelPopupForm" method="post" action="/orders/{{this._id}}/setOrderCancelled?_method=PATCH">
+                    <button name="Yes" value="PATCH" class="doneButton" onclick="showCancelSucPopup()">Yes</button>
                 </form>
                 {{!-- now the done button will redirect the page to vendors page, 
                 to make it different from the change button --}}
@@ -121,15 +122,46 @@
         
         </div>  
         
+        <div id="cancelSucPopup" class="colMiddle" style="display: none;">
+        <div id="cancelPopupModal">
+            <div class="flexBetween exitModal">
+                <i onclick="hideCancelSucPopup()" class="fas fa-times"></i>
+            </div>
+            <h4>Your Order has been Successfully Cancelled</h4>
+            <div class="popupButtons flexMiddle stretch">
+                <button class="changeButton" onclick="hideCancelSucPopup()">Done</button>
+            </div>
+        </div>
+        
+        </div> 
+
+        <div id="rateSucPopup" class="colMiddle" style="display: none;">
+        <div id="cancelPopupModal">
+            <div class="flexBetween exitModal">
+                <i onclick="hideRateSucPopup()" class="fas fa-times"></i>
+            </div>
+            <div class="card-body text-center"> <img src=" https://i.imgur.com/d2dKtI7.png" height="100" width="100">
+            <h4>Your Rate Has Been Received</h4>
+            </div>
+            <div class="popupButtons flexMiddle stretch">
+                <button class="changeButton" onclick="hideRateSucPopup()">Done</button>
+            </div>
+        </div>
+        
+        </div> 
+
+        
         
 
         
         
     
     <script>
-            const showRatePopup = () => {
+            const showRatePopup = (id) => {
                 let popup = document.getElementById("ratePopup");
                 popup.style.display = "flex";
+                let form = document.getElementById("ratePopupForm");
+                form.action = `/orders/${id}/setOrderRating?_method=PATCH`;
             }
             const hideRatePopup = () => {
                 let popup = document.getElementById("ratePopup");
@@ -143,7 +175,31 @@
             }
             const hideCancelPopup = () => {
                 let cancelPopup = document.getElementById("cancelPopup");
-                cancelPopup.style.display = "none";}
+                cancelPopup.style.display = "none";
+                }
+            
+            const showCancelSucPopup = () => {
+                hideCancelPopup();
+                let cancelSucPopup = document.getElementById("cancelSucPopup");
+                cancelSucPopup.style.display = "flex";
+                }
+            const hideCancelSucPopup = () => {
+                let cancelSucPopup = document.getElementById("cancelSucPopup");
+                cancelSucPopup.style.display = "none";
+                }
+            const showRateSucPopup = () => {
+                hideRatePopup();
+                let rateSucPopup = document.getElementById("rateSucPopup");
+                rateSucPopup.style.display = "flex";
+                }
+            const hideRateSucPopup = () => {
+                let rateSucPopup = document.getElementById("rateSucPopup");
+                rateSucPopup.style.display = "none";
+                }
+
+
+            
+            
             function refreshPage() {
                 window.location.reload(); 
         }

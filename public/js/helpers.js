@@ -190,17 +190,17 @@ let register = (Handlebars) => {
             L.marker(([e.latitude, e.longitude]), { icon: icon }).addTo(window.map)
             .bindPopup("<div class='popup'>You are here</div>")
             .openPopup();
+            
         `;
       for (var k = 0; k < vendors.length; k++) {
-        vMap += `
+        if (vendors[k].active) {
+          vMap += `
         from = turf.point([e.latitude, e.longitude]); // should be location of user
         to = turf.point([${vendors[k].location.coordinates}]);
         distance = Math.round(turf.distance(from, to) * 100) / 100;
-        updateVendorDistance({
-          distance: distance,
-          vendorId: "${vendors[k]._id}",
-        })
+        updateVendors({distance: distance, vendorId: "${vendors[k]._id}",});
         `;
+        }
       }
       return vMap + `}); </script>`;
     },

@@ -4,20 +4,27 @@
         function latLongStr(val) {
             return val.toString().split(",");
         }
-        distances = []
-        const updateVendorDistance = (data) => {
-            let found = false
-            for (let i = 0; i < distances.length; i++) {
-                if (distances[i].vendorId === data.vendorId) {
-                    distances[i].distance = data.distance;
+        vendors = []
+        const updateVendors = (data) => {
+            let found = false;
+            for (let i = 0; i < vendors.length; i++) {
+                if (vendors[i].vendorId == data.vendorId) {
                     found = true;
-                } 
+                    vendors[i].distance = data.distance;
+                    break;
+                }
             }
             if (!found) {
-                distances.push({distance: data.distance, vendorId: data.vendorId })
+                vendors.push(data)
             }
-            let distanceDisplay = `${data.distance} km`;
-            document.getElementById(data.vendorId + "-distance").innerHTML = distanceDisplay;
+            setTimeout(() => {
+                for (let k = 0; k < vendors.length; k++) {
+                    if (vendors[k].vendorId == data.vendorId) {
+                        let distanceDisplay = `${data.distance} km`;
+                        document.getElementById(data.vendorId + "-distance").innerHTML = distanceDisplay;
+                    }
+                }
+            }, 3000)
         }
     </script>
 

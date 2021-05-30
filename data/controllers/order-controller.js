@@ -75,12 +75,11 @@ const changeOrder = async (req, res) => {
     newMenuItem.price = menu.price;
     let found = 0;
     for (index = 0; index < req.session.orderlist.length; index++) {
-      let sessionitem = req.session.orderlist[index];
       if (
-        sessionitem.menuitem == newMenuItem.menuitem &&
-        sessionitem.vendorid == newMenuItem.vendorid
+        req.session.orderlist[index].menuitem == newMenuItem.menuitem &&
+        req.session.orderlist[index].vendorid == newMenuItem.vendorid
       ) {
-        sessionitem.quantity += 1;
+        req.session.orderlist[index].quantity += 1;
         found = 1;
       }
     }
@@ -89,8 +88,11 @@ const changeOrder = async (req, res) => {
     }
   }
   let totalprice = 0;
+  for (let z = 0; z < req.session.orderlist.length; z++) {
+    totalprice += req.session.orderlist[z].quantity * req.session.orderlist[z].price;
+  }
   req.session.fromVendor = data.vendor[0];
-
+  req.session.orderChanged = true;
   res.redirect(`/vendors/${vendorId}`);
 };
 
@@ -151,6 +153,10 @@ const getAllCustomerOrders = async (req, res) => {
 // creates a new order and saves it to the database when
 // passed the required values in req.body
 const placeOrder = async (req, res) => {
+  if (req.session.orderChanged) {
+    // update the order in the database
+  }
+  req.session.orderChanged = false;
   let totalprice = 0;
   for (index = 0; index < req.session.orderlist.length; index++) {
     if (req.params.vendorid == req.session.orderlist[index].vendorid) {

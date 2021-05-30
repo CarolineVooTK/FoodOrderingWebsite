@@ -1,7 +1,6 @@
 require("dotenv").config();
 // MongoDB connection
 const mongoose = require("mongoose");
-mongoose.set("debug", true);
 
 mongoose
   .connect(process.env.CONNECTION_URI, {

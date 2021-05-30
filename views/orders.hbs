@@ -82,19 +82,21 @@
             <div class="card-body text-center"> <img src=" https://i.imgur.com/d2dKtI7.png" height="100" width="100">
                 <div class="comment-box text-center">
                     <h4>Rate Your Order</h4>
-                    <div class="rating"> 
-                        <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label> 
-                        <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label> 
-                        <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label> 
-                        <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label> 
-                        <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label> 
+                    <div class="rating">
+                        <input type="radio" name="rating" value="5" id="5" onclick="setRating(5)"><label for="5">☆</label> 
+                        <input type="radio" name="rating" value="4" id="4" onclick="setRating(4)"><label for="4">☆</label> 
+                        <input type="radio" name="rating" value="3" id="3" onclick="setRating(3)"><label for="3">☆</label> 
+                        <input type="radio" name="rating" value="2" id="2" onclick="setRating(2)"><label for="2">☆</label> 
+                        <input type="radio" name="rating" value="1" id="1" onclick="setRating(1)"><label for="1">☆</label> 
+                        <input type="button" onclick="postToController()" value="Submit">                   
                     </div>
                 </div>
             </div>
+            <h4>{{this.value}}</h4>
             <div class="popupButtons flexMiddle stretch">
                 {{!-- hide cancel button after 10 minutes --}}
-                <form target = "_blank" id="ratePopupForm" method="post" action="/orders/{{this._id}}/setOrderRating?_method=PATCH".redirect>
-                    <button name="Yes" value="PATCH" class="doneButton" onclick="showRateSucPopup()">Submit</button>
+                <form target = "_blank" id="ratePopupForm" method="post" action="/orders/{{this._id}}/setOrderRating?_method=PATCH">
+                    <button id="ratePopupButton" name="rating" value="0" class="doneButton" onclick="showRateSucPopup()">Submit</button>
                 </form>
 
             </div>
@@ -198,6 +200,14 @@
                 rateSucPopup.style.display = "none";
                 refreshPage();
                 }
+            const ratingvalue = () => {
+                let ratingvalue = document.getElementById("")
+            }
+            const setRating = (num) => {
+                let rating = document.getElementById("ratePopupButton");
+                rating.value = num;
+
+            }
 
 
             

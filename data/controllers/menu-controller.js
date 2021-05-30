@@ -4,7 +4,6 @@ const MenuModel = require("../models/MenuItem");
 const menuitems = MenuModel.menuitems;
 let ObjectId = require("mongoose").Types.ObjectId;
 
-
 // get all snacks
 const getAllSnacks = async (req, res) => {
   await menuitems

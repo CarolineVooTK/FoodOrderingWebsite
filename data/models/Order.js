@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+// Ordered Item Schema (related item id and quantity ordered by a customer)
 const OrderItemSchema = new mongoose.Schema(
   {
     menuitem: { type: mongoose.Schema.Types.ObjectId, required: true },

@@ -6,7 +6,6 @@ require("../../config/passport")(passport);
 const CustomerModel = require("../models/customerModel");
 const { check, validationResult } = require('express-validator');
 
-
 // the validator for checking customer password and email
 // when doing customer registration 
 const validation = [
@@ -79,9 +78,6 @@ router.get("/signup", (req, res, next) => {
   });
 });
 
-router.get("/addNewItemInOrder/:snackid/:vendorid",redirectToLogin, customerController.addNewOrderItem);
-router.get("/deleteOrderItem/:snackid/:vendorid",redirectToLogin, customerController.deleteOrderItem);
-
 router.get("/logout", (req, res, next) => {
   res.locals.customer_name = null;
   res.locals.vendor_id = null;
@@ -91,9 +87,6 @@ router.get("/logout", (req, res, next) => {
     res.redirect("/");
   });
 });
-
-router.get("/profile", redirectToLogin, customerController.getCustDetails);
-router.post("/profile", redirectToLogin, customerController.changeCustDetails);
 
 router.post(
   "/login",
@@ -119,6 +112,9 @@ router.post(
   }
 );
 
-
+router.get("/profile", redirectToLogin, customerController.getCustDetails);
+router.post("/profile", redirectToLogin, customerController.changeCustDetails);
+router.get("/addNewItemInOrder/:snackid/:vendorid",redirectToLogin, customerController.addNewOrderItem);
+router.get("/deleteOrderItem/:snackid/:vendorid",redirectToLogin, customerController.deleteOrderItem);
 
 module.exports = router;

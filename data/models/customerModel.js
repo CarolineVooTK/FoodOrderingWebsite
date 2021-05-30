@@ -1,10 +1,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require('bcrypt-nodejs');
 
-// const pointSchema = require("../../vendor/models/Vendor");
-
-
-// Menu item schema
+// Point Schema to update the geolocation of customer
 const pointSchema = new mongoose.Schema(
     {
       type: {
@@ -21,7 +18,7 @@ const pointSchema = new mongoose.Schema(
   );
   
   
-  // Vendor schema
+  // Customer schema
   const CustomerSchema = new mongoose.Schema(
     {
       familyName: { type: String, required: true },
@@ -43,7 +40,6 @@ CustomerSchema.methods.validPassword = function(password) {
   return bcrypt.compareSync(password, this.password);
 }
 
-  module.exports = {
-    customer: mongoose.model("customer", CustomerSchema),
-  };
-  
+module.exports = {
+  customer: mongoose.model("customer", CustomerSchema),
+};

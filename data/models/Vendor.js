@@ -4,6 +4,7 @@ const { menuitems } = require("./MenuItem");
 const bcrypt = require("bcrypt-nodejs");
 let ObjectId = require("mongoose").Types.ObjectId;
 
+// Point Schema is used for the geolocation of Vendor 
 const pointSchema = new mongoose.Schema(
   {
     type: {
@@ -19,6 +20,7 @@ const pointSchema = new mongoose.Schema(
   { _id: false }
 );
 
+// menu Schema (a menu contains numbers of snacks with related menuitem id and quantity available)
 const menuItemsSchema = new mongoose.Schema(
   {
     menuitem: {

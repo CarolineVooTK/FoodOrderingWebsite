@@ -6,7 +6,6 @@ let ObjectId = require("mongoose").Types.ObjectId;
 const customer = CustomerModel.customer;
 const point = CustomerModel.point;
 const bcrypt = require("bcrypt-nodejs");
-// let ObjectId = require("mongoose").Types.ObjectId;
 
 const getCustDetails = async (req, res) => {
   let customers = await customer.findById({ _id: req.session.passport.user });

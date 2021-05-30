@@ -10,7 +10,9 @@ MongoDB Link = "mongodb+srv://admin:g_3_pass@cluster0.nvrgb.mongodb.net/snacks?r
 
 .env file:<br/>
 CONNECTION_URI=mongodb+srv://admin:g_3_pass@cluster0.nvrgb.mongodb.net/snacks?retryWrites=true&w=majority
+
 PASSPORT_KEY=secret
+
 
 # Group 3 Project Repository
 

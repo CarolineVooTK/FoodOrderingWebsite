@@ -3,7 +3,6 @@ const vendorController = require("../data/controllers/vendor-controller.js")
 const VendorModel = require("../data/models/Vendor");
 const OrderModel = require("../data/models/Order");
 const vendors = VendorModel.vendors;
-const point = VendorModel.point;
 const orders = OrderModel.orders;
 
 describe("Unit testing setVendorActive vendorController.js with valid information", () => {
@@ -12,7 +11,6 @@ describe("Unit testing setVendorActive vendorController.js with valid informatio
         // assuming the vendor is logined with session.passport.user = "6075878024b5d615b324ee1d"
         session:{passport:{user:"6075878024b5d615b324ee1d"}},
     };
-
     // response object with render and status
     // in vendorController it is called by res.status(200).render
     const res = {
@@ -49,6 +47,7 @@ describe("Unit testing setVendorActive vendorController.js with valid informatio
             _id: null, rating: 2, count: 2
         }])
 
+        // mock data for vendors
         vendors.findOneAndUpdate = jest.fn().mockResolvedValue([{
             orders: [ "607b912c24b5d615b324ee2b" ],
             _id: "6075878024b5d615b324ee1d",
@@ -92,10 +91,13 @@ describe("Unit testing setVendorActive vendorController.js with valid informatio
                 textlocation: 'jest test location'
             }),
             }));
+        // testing setVendorActive
         vendorController.setVendorActive(req,res)
       });
       test("Test case 1: using valid vendor id with valid location to set active", () => {    
         expect(res.render ).toHaveBeenCalledTimes(1);
+        expect(res.status).toHaveBeenCalledTimes(1);
+        expect(res.status).toHaveBeenCalledWith(200);
         expect(res.render).toHaveBeenCalledWith("vendorProfile", {
             vendor_status: "Active", vendor: {
                 orders: [ "607b912c24b5d615b324ee2b" ],
@@ -122,12 +124,12 @@ describe("Unit testing setVendorActive vendorController.js with valid informatio
 
 
 
-  describe("Unit testing setVendorActive vendorController.js with missing location", () => {
+  describe("Unit testing setVendorActive vendorController.js with invalid location information(missing textlocation)", () => {
+    // missing textlocation
     const req = {
         body:{longitude:99, latitude:99},
         session:{passport:{user:"6075878024b5d615b324ee1d"}},
     };
-
     // response object with render and status
     // in vendorController it is called by res.status(200).render
     const res = {
@@ -209,8 +211,11 @@ describe("Unit testing setVendorActive vendorController.js with valid informatio
             }));
         vendorController.setVendorActive(req,res)
       });
-      test("Test case 1: using valid vendor id with invalid location(Missing information) to set active", () => {    
+
+      test("Test case 1: using valid vendor id with invalid location(Missing textlocation) to set active", () => {    
         expect(res.render ).toHaveBeenCalledTimes(1);
+        expect(res.status).toHaveBeenCalledTimes(1);
+        expect(res.status).toHaveBeenCalledWith(400);
         expect(res.render).toHaveBeenCalledWith("vendorProfile", {
             vendor_error: "Error wrong data",
             vendor_status: "Off",
@@ -223,14 +228,12 @@ describe("Unit testing setVendorOff vendorController.js with valid information",
       // assuming the vendor is logined with session.passport.user = "6075878024b5d615b324ee1d"
       session:{passport:{user:"6075878024b5d615b324ee1d"}},
   };
-
   // response object with render and status
   // in vendorController it is called by res.status(200).render
   const res = {
       render: jest.fn(),
       status: jest.fn(() => res)
   }; 
-
   beforeAll(() => {
       res.render.mockClear();
       // mock data for vendor
@@ -307,6 +310,8 @@ describe("Unit testing setVendorOff vendorController.js with valid information",
     });
     test("Test case 1: using valid vendor id with valid location to set active", () => {    
       expect(res.render ).toHaveBeenCalledTimes(1);
+      expect(res.status).toHaveBeenCalledTimes(1);
+      expect(res.status).toHaveBeenCalledWith(200);
       expect(res.render).toHaveBeenCalledWith("vendorProfile", {
           vendor_status: "Off", vendor: {
               orders: [ "607b912c24b5d615b324ee2b" ],

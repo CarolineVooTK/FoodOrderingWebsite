@@ -43,6 +43,7 @@ const VendorSchema = new mongoose.Schema(
     active: { type: Boolean, required: false },
     description: { type: String, required: false },
     rating: { type: Number, required: false },
+    count: { type: Number, required: false },
     orders: { type: [mongoose.Schema.Types.ObjectId], required: false },
     menu: { type: [menuItemsSchema], required: false },
   },

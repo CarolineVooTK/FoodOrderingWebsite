@@ -45,6 +45,33 @@ let register = (Handlebars) => {
       let vendors = `<div id="vendorList">`;
       for (let i = 0; i < data.length; i++) {
         if (data[i].active) {
+          let ratingDisplay = `<div class="flex rating">`;
+          if (data[i].rating && data[i].count && data[i].rating > 0) {
+            let rating = Math.round(data[i].rating * 2) / 2;
+            let flr = Math.floor(data[i].rating);
+            let dec = data[i].rating;
+            if (!dec.toString().includes(".")) {
+              dec = dec.toString() + ".0";
+            } else {
+              dec = dec.toString().slice(0, 4);
+            }
+            let count = data[i].count;
+            let half = false;
+            if (rating > 0) {
+              ratingDisplay += `<span>${dec}</span>`;
+              ratingDisplay += `<i class="fas fa-star"></i>`.repeat(flr);
+              if (rating > flr) {
+                ratingDisplay += `<i class="fas fa-star-half-alt"></i>`;
+                half = true;
+              }
+              ratingDisplay += half
+                ? `<i class="far fa-star"></i>`.repeat(5 - flr - 1)
+                : `<i class="far fa-star"></i>`.repeat(5 - flr);
+              ratingDisplay += `<span>(${count})</span></div>`;
+            }
+          } else {
+            ratingDisplay += `<p>no reviews</p></div>`;
+          }
           vendors += `<div class="vendor col">
             <div class="colStart title">
                 <div class="flexBetween stretch"
@@ -57,10 +84,7 @@ let register = (Handlebars) => {
                 </div>
                 <p>${data[i].textlocation}</p>
                 <div class="ratingContainer colMiddle">
-                    <script type="text/javascript">
-                        load_rating('${data[i]._id}');
-                    </script>
-                    <div id="${data[i]._id}" class="rate"></div>
+                    <div class="rate">${ratingDisplay}</div>
                 </div>
             </div>
             <div class="flex">
@@ -70,6 +94,36 @@ let register = (Handlebars) => {
         }
       }
       return vendors + `</div>`;
+    },
+    singleVendorRatingDisplay: (data) => {
+      let ratingDisplay = `<div class="rate"><div class="flex rating">`;
+      if (data.rating && data.count && data.rating > 0) {
+        let rating = Math.round(data.rating * 2) / 2;
+        let flr = Math.floor(data.rating);
+        let dec = data.rating;
+        if (!dec.toString().includes(".")) {
+          dec = dec.toString() + ".0";
+        } else {
+          dec = dec.toString().slice(0, 4);
+        }
+        let count = data.count;
+        let half = false;
+        if (rating > 0) {
+          ratingDisplay += `<span>${dec}</span>`;
+          ratingDisplay += `<i class="fas fa-star"></i>`.repeat(flr);
+          if (rating > flr) {
+            ratingDisplay += `<i class="fas fa-star-half-alt"></i>`;
+            half = true;
+          }
+          ratingDisplay += half
+            ? `<i class="far fa-star"></i>`.repeat(5 - flr - 1)
+            : `<i class="far fa-star"></i>`.repeat(5 - flr);
+          ratingDisplay += `<span>(${count})</span></div></div>`;
+        }
+      } else {
+        ratingDisplay += `<p>no reviews</p></div></div>`;
+      }
+      return ratingDisplay;
     },
     priceDisplay: (p) => {
       if (p) {

@@ -123,7 +123,9 @@
   margin-top: -10px;
   margin-bottom: 20px;
 }
-
+.rate {
+  direction: rtl;
+}
 .rate span {
   margin: 0 8px;
   color: white;

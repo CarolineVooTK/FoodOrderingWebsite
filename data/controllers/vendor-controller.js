@@ -508,6 +508,26 @@ const getPastOrdersByVendor = async (req, res) => {
     });
 };
 
+const updateVendorRating = async (vendorId, rating, count) => {
+  await vendors
+    .findOneAndUpdate(
+      { _id: vendorId },
+      {
+        rating: rating,
+        count: count,
+      },
+      { returnNewDocument: true }
+    )
+    .then((data) => {
+      if (!data) {
+        console.log("error updating vendor rating");
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
 module.exports = {
   getAll,
   getVendorById,
@@ -518,4 +538,5 @@ module.exports = {
   setVendorOff,
   getOutsOrdersByVendor,
   getPastOrdersByVendor,
+  updateVendorRating,
 };

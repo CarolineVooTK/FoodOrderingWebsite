@@ -44,7 +44,7 @@
                     <div class="order col" >
                         <div style="vertical-align: middle">
                             {{!-- <button class="doneButton" onclick="location.href='/orders/{{this._id}}/setOrderCancelled'">Yes</button> --}}
-                            <button class="changeButton" onclick="location.href='/vendors/6075878024b5d615b324ee1d'">Change</button>
+                            <button class="doneButton" onclick="showChangePopup('{{this._id}}')">Change</button>
                             <button class="doneButton" onclick="showCancelPopup('{{this._id}}')">Cancel</button>
                             <button class="changeButton" onclick="showRatePopup('{{this._id}}')">RateTest</button>
                             
@@ -151,6 +151,25 @@
         
         </div> 
 
+        <div id="changePopup" class="colMiddle" style="display: none;">
+        <div id="cancelPopupModal">
+            <div class="flexBetween exitModal">
+                <i onclick="hideChangePopup()" class="fas fa-times"></i>
+            </div>
+            <h4>Are you sure you want to change your order?</h4>
+            <div class="popupButtons flexMiddle stretch">
+                <button class="changeButton" onclick="hideChangePopup()">No</button>
+                
+                
+                <button class="doneButton" onclick="location.href='/vendors/6075878024b5d615b324ee1d';hideChangePopup()">Yes</button>
+                
+                {{!-- now the done button will redirect the page to vendors page, 
+                to make it different from the change button --}}
+            </div>
+        </div>
+        
+        </div>
+
     <script>
             const showRatePopup = (id) => {
                 let popup = document.getElementById("ratePopup");
@@ -200,6 +219,14 @@
                 let rating = document.getElementById("ratePopupButton");
                 rating.value = num;
 
+            }
+            const showChangePopup = (id) => {
+                let changePopup = document.getElementById("changePopup");
+                changePopup.style.display = "flex";
+            }
+            const hideChangePopup = () => {
+                let changePopup = document.getElementById("changePopup");
+                changePopup.style.display = "none";
             }
 
             function refreshPage() {

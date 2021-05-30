@@ -74,6 +74,7 @@
 #rateSucPopup,
 #fulPopup,
 #colPopup,
+#changePopup,
 #orderSuccessPopup {
   position: fixed;
   top: 0;

@@ -215,7 +215,7 @@ const setOrderCollected = async (req, res) => {
     .then((data) => {
       if (!data) {
         return res.status(404).json({
-          message: "Orders cannot be Fulfilled.",
+          message: "Error occurs when Collected button is pressed.",
         });
       }
       res.status(200).json(data);
@@ -226,6 +226,7 @@ const setOrderCollected = async (req, res) => {
       });
     });
 };
+
 //sets a single order status to cancelled
 const setOrderCancelled = async (req, res) => {
   await orders
@@ -236,7 +237,7 @@ const setOrderCancelled = async (req, res) => {
   .then((data) => {
     if (!data) {
       return res.status(404).json({
-        message: "Orders cannot be Fulfilled.",
+        message: "Error Occurs when trying to cancel an order.",
       });
     }
     res.status(200).json(data);
@@ -248,11 +249,6 @@ const setOrderCancelled = async (req, res) => {
     });
   });
 };
-
-
-
-
-
 
 // sets a single order's rating by matching its id to the req.params id value
 const setOrderRating = async (req, res) => {
@@ -266,7 +262,7 @@ const setOrderRating = async (req, res) => {
     .then((data) => {
       if (!data) {
         return res.status(404).json({
-          message: "Orders cannot be Fulfilled.",
+          message: "Error Occurs when trying to rate the order.",
         });
       }
       res.status(200).json(data);

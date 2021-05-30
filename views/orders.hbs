@@ -40,7 +40,7 @@
 
             let days = Math.floor(diff / 1000 / 60 / (60 * 24));
             diff = new Date(diff);
-            let hours = diff.getHours() - 10;
+            let hours = diff.getHours();
             let minutes = diff.getMinutes();
             let seconds = diff.getSeconds();
             if (days > 0 || hours > 0 || minutes > 10) {

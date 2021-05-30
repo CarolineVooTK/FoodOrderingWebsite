@@ -186,7 +186,10 @@ const getVendorRating = async (req, res) => {
 // sets a single order's status to fulfilled by matching its id to the req.params id value
 const setOrderFulfilled = async (req, res) => {
   await orders
-    .findOneAndUpdate({ _id: new ObjectId(`${req.params.id}`) }, { status: "Fulfilled" },{returnOriginal:false})
+    .findOneAndUpdate({ _id: new ObjectId(`${req.params.id}`) }, 
+    { status: "Fulfilled" },
+    {returnOriginal:false}
+    )
     .then((data) => {
       if (!data) {
         return res.status(404).json({
@@ -205,7 +208,10 @@ const setOrderFulfilled = async (req, res) => {
 // sets a single order's status to collected by matching its id to the req.params id value
 const setOrderCollected = async (req, res) => {
   await orders
-    .findOneAndUpdate({ _id: new ObjectId(`${req.params.id}` )}, { status: "Collected" },{upsert: true},{returnOriginal:false})
+    .findOneAndUpdate({ _id: new ObjectId(`${req.params.id}` )}, 
+    { status: "Collected" },
+    {upsert: true, returnOriginal:false}
+    )
     .then((data) => {
       if (!data) {
         return res.status(404).json({
@@ -223,7 +229,10 @@ const setOrderCollected = async (req, res) => {
 //sets a single order status to cancelled
 const setOrderCancelled = async (req, res) => {
   await orders
-  .findOneAndUpdate({ _id: new ObjectId(`${req.params.id}` )}, { status: "Cancelled" },{upsert: true},{returnOriginal:false})
+  .findOneAndUpdate(
+  { _id: new ObjectId(`${req.params.id}` )}, 
+  { status: "Cancelled" },
+  {upsert: true, returnOriginal:false})
   .then((data) => {
     if (!data) {
       return res.status(404).json({
@@ -231,6 +240,7 @@ const setOrderCancelled = async (req, res) => {
       });
     }
     res.status(200).json(data);
+   
   })
   .catch((error) => {
     res.status(500).json({

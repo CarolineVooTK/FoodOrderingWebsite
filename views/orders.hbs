@@ -46,14 +46,34 @@
                         <div style="vertical-align: middle">
                             {{!-- <button class="doneButton" onclick="location.href='/orders/{{this._id}}/setOrderCancelled'">Yes</button> --}}
                             <button class="changeButton" onclick="location.href='/vendors/6075878024b5d615b324ee1d'">Change</button>
-                            <button class="doneButton" onclick="showCancelPopup()">Cancel</button>
+                            <button class="doneButton" onclick="showCancelPopup('{{this._id}}')">Cancel</button>
                             <button class="changeButton" onclick="showRatePopup()">RateTest</button>
+                            
                         </div>                   
                     </div>
                 </div>
+                    
                 <hr style="width:100%", size="3", color=white> 
-               
-        {{!rating popup}}
+        {{/each}}     
+        
+            {{#unless orders}}
+            {{#if customer_id}}
+            <div class="col">
+                <h2>You have no orders to show</h2>
+                <h2>Find a van near you to make an order</h2>
+                <button class="lightButton" onclick="location.href='/vendors'" type="button"
+                    style="margin: 0 auto;">Find a Van</button>
+            </div>
+            {{#else}}
+            <h2>You must login to see your orders</h2>
+            {{/else}}
+            {{/if}}
+            {{/unless}}
+        </div>
+        </div>
+    
+    
+    {{!rating popup}}
         <div id="ratePopup" class="colMiddle" style="display: none;">
         <div id="orderPopupModal">
             <div class="flexBetween exitModal">
@@ -88,33 +108,18 @@
                 <i onclick="hideCancelPopup()" class="fas fa-times"></i>
             </div>
             <h4>Are you sure you want to cancel your order?</h4>
-            <h4>{{this._id}}></h4> {{!--testing purpose --}}
             <div class="popupButtons flexMiddle stretch">
                 <button class="changeButton" onclick="hideCancelPopup()">No</button>
-                <button class="doneButton" onclick="location.href='/orders/{{this._id}}/setOrderCancelled';refreshPage()">Yes</button>
+                
+                <form id="cancelPopupForm" method="post" action="/orders/{{this._id}}/setOrderCancelled?_method=PATCH">
+                    <button name="Yes" value="PATCH" class="doneButton" onclick="location.href='/orders/customer/{{customer_id}}'">Yes</button>
+                </form>
                 {{!-- now the done button will redirect the page to vendors page, 
                 to make it different from the change button --}}
             </div>
         </div>
         
         </div>  
-        {{/each}}     
-        
-            {{#unless orders}}
-            {{#if customer_id}}
-            <div class="col">
-                <h2>You have no orders to show</h2>
-                <h2>Find a van near you to make an order</h2>
-                <button class="lightButton" onclick="location.href='/vendors'" type="button"
-                    style="margin: 0 auto;">Find a Van</button>
-            </div>
-            {{#else}}
-            <h2>You must login to see your orders</h2>
-            {{/else}}
-            {{/if}}
-            {{/unless}}
-        </div>
-        </div>
         
         
 
@@ -130,9 +135,11 @@
                 let popup = document.getElementById("ratePopup");
                 popup.style.display = "none";
             }
-            const showCancelPopup = () => {
+            const showCancelPopup = (id) => {
                 let cancelPopup = document.getElementById("cancelPopup");
                 cancelPopup.style.display = "flex";
+                let form = document.getElementById("cancelPopupForm");
+                form.action = `/orders/${id}/setOrderCancelled?_method=PATCH`;
             }
             const hideCancelPopup = () => {
                 let cancelPopup = document.getElementById("cancelPopup");

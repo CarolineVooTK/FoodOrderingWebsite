@@ -29,6 +29,9 @@ const cookieParser = require("cookie-parser");
 const flash = require("connect-flash");
 const morgan = require("morgan");
 
+var methodOverride = require("method-override");
+app.use(methodOverride("_method"));
+
 app.set("views", path.join(__dirname, "./views"));
 app.engine(
   "hbs",

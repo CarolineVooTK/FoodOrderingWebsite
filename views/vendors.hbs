@@ -4,33 +4,23 @@
         function latLongStr(val) {
             return val.toString().split(",");
         }
-        function getDistance(vendorId) {
-            document.addEventListener("DOMContentLoaded", () => {
-                if (window.vendorDistances) {
-                    for (let j = 0; j < window.vendorDistances.length; j++) {
-                        if (window.vendorDistances[j].vendorId == vendorId) {
-                            let distanceDisplay = `${window.vendorDistances[j].distance} km`;
-                            setTimeout(() => {
-                                document.getElementById(vendorId + "-distance").innerHTML = distanceDisplay;
-                                let id = "60815fb5fe5b8a7ee5b17ea7";
-                                if (window.minVendor && window.minVendor[1] != "") {
-                                    id = window.minVendor[1];
-                                }
-                                console.log(window.minVendor)
-                                let links = document.getElementsByClassName("linkToClosestVendor");
-                                for (let i = 0; i < links.length; i++) {
-                                    links[i].href = `/vendors/${id}`;
-                                }
-                            }, 2000)
-                        }
-                    }
-                    return "";
-                }
-            })
-
-            return "";
+        distances = []
+        const updateVendorDistance = (data) => {
+            let found = false
+            for (let i = 0; i < distances.length; i++) {
+                if (distances[i].vendorId === data.vendorId) {
+                    distances[i].distance = data.distance;
+                    found = true;
+                } 
+            }
+            if (!found) {
+                distances.push({distance: data.distance, vendorId: data.vendorId })
+            }
+            let distanceDisplay = `${data.distance} km`;
+            document.getElementById(data.vendorId + "-distance").innerHTML = distanceDisplay;
         }
     </script>
+
     <div class="container relative height">
         <h1>Vendors Near You</h1>
         <div id="vendorMap" class="flexMiddle">
@@ -39,7 +29,7 @@
             {{#if this.active}}
             {{#with location}}
             {{#with coordinates}}
-            <script typr="text/javascript">
+            <script type="text/javascript">
                 vanIcon = L.divIcon({
                         html: `<img style="height: 35px" src="/images/food-truck.ico"/>`,
                     });

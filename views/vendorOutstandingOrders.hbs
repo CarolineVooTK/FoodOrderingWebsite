@@ -70,8 +70,12 @@
                                 </div>
                                 {{! Two buttons for vendors to set the orders status}}
                                 <div class="flex">
-                                        <button onclick = "location.href='/orders/{{this._id}}/setOrderFulfilled';refreshPage()" type="button">Order Fulfilled</button>
-                                        <button onclick="location.href='/orders/{{this._id}}/setOrderCollected'; refreshPage()" type="button">Order Collected</button>
+                                        <form target = "_blank" method="post" action="/orders/{{this._id}}/setOrderFulfilled?_method=PATCH">
+                                                <button name="Yes" value="PATCH" class="doneButton" onclick="showFulSucPopup()">Order Fulfilled</button>
+                                        </form>
+                                        <form target = "_blank" method="post" action="/orders/{{this._id}}/setOrderCollected?_method=PATCH">
+                                                <button name="Yes" value="PATCH" class="doneButton" onclick="showColSucPopup()">Order Collected</button>
+                                        </form>
                                 </div>
                         </div>
                         <hr style="width:100%", size="3", color=white>  
@@ -80,4 +84,54 @@
                         {{/each}}
                 </div>
         </div>
+        
+        <div id="fulPopup" class="colMiddle" style="display: none;">
+        <div id="cancelPopupModal">
+            <div class="flexBetween exitModal">
+                <i onclick="hideFulSucPopup()" class="fas fa-times"></i>
+            </div>
+            <div class="card-body text-center"> <img src=" https://i.imgur.com/d2dKtI7.png" height="100" width="100">
+            <h4>Order Has Been Fulfilled</h4>
+            </div>
+            <div class="popupButtons flexMiddle stretch">
+                <button class="changeButton" onclick="hideFulSucPopup()">Done</button>
+            </div>
+        </div>
+        </div> 
+
+        <div id="colPopup" class="colMiddle" style="display: none;">
+        <div id="cancelPopupModal">
+            <div class="flexBetween exitModal">
+                <i onclick="hideFulSucPopup()" class="fas fa-times"></i>
+            </div>
+            <div class="card-body text-center"> <img src=" https://i.imgur.com/d2dKtI7.png" height="100" width="100">
+            <h4>Order Has Been Collected</h4>
+            </div>
+            <div class="popupButtons flexMiddle stretch">
+                <button class="changeButton" onclick="hideColSucPopup()">Done</button>
+            </div>
+        </div>
+        </div>
+
+        <script>
+                const showFulSucPopup = () => {
+                let fulSucPopup = document.getElementById("fulPopup");
+                fulSucPopup.style.display = "flex";
+                }
+            const hideFulSucPopup = () => {
+                let fulSucPopup = document.getElementById("fulPopup");
+                fulSucPopup.style.display = "none";
+                refreshPage();
+                }
+                const showColSucPopup = () => {
+                let colSucPopup = document.getElementById("colPopup");
+                colSucPopup.style.display = "flex";
+                }
+                const hideColSucPopup = () => {
+                let colSucPopup = document.getElementById("colPopup");
+                colSucPopup.style.display = "none";
+                refreshPage();
+                }
+
+        </script>
 </section>

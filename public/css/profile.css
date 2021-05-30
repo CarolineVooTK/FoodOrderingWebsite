@@ -72,6 +72,8 @@
 #ratePopup,
 #cancelSucPopup,
 #rateSucPopup,
+#fulPopup,
+#colPopup,
 #orderSuccessPopup {
   position: fixed;
   top: 0;

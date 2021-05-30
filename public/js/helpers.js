@@ -210,6 +210,69 @@ let register = (Handlebars) => {
       }
       return "6075878024b5d615b324ee1d";
     },
+    customerOrderList: (orders) => {
+      let result = [];
+      for (let i = 0; i < orders.length; i++) {
+        let display = "";
+        display += `<div style="width: 60%; float:left">
+            <div class="order col" >  
+                <h1 id="order-${orders[i]._id}"></h1>
+                <h3 id="time-${orders[i]._id}">Date and Time: ${orders[i].time}</h3>
+                <h3 id="timer-${orders[i]._id}"></h3>
+                <script>
+                    document.getElementById("time-${orders[i]._id}").innerHTML = getFullDate('${orders[i].time}');
+                    document.getElementById("timer-${orders[i]._id}").innerHTML = getTimeDiff('${orders[i].time}');
+                </script>
+                <script>
+                    document.getElementById("order-${orders[i]._id}").innerHTML = getOrderNumber(${orders[i].orderNumber});
+                </script>
+                <h3>Status: ${orders[i].status}</h3>
+                <div class="orderItems colStart">
+                    <h3>items:</h3>`;
+        for (let k = 0; k < orders[i].order.length; k++) {
+          display += `
+                  <div class="flex orderItem">
+                        <img src=${orders[i].order[k].photo} alt="food" />
+                        <div class="colStart">
+                            <p>${orders[i].order[k].name}</p>
+                            <p>Quantity: ${orders[i].order[k].quantity}</p>
+                            <p>Price: ${orders[i].order[k].price}</p>
+                        </div>
+                    </div>
+                    `;
+        }
+        display += `
+                </div>
+
+                <div class="flex">
+                    <p>Total Price: ${orders[i].price}</p>
+                    <p>Your rating: ${orders[i].customerRating}</p>
+                </div>
+                </div>
+                </div>
+                <div class="order col" >
+                    <div style="vertical-align: middle">
+                        <button id="change-${orders[i]._id}" class="doneButton" onclick="showChangePopup('${orders[i]._id}')">Change</button>
+                        <button id="cancel-${orders[i]._id}" class="doneButton" onclick="showCancelPopup('${orders[i]._id}')">Cancel</button>
+                        <script>
+                            showOrHideButtons('${orders[i].time}', '${orders[i]._id}');
+                        </script>
+                        <button class="changeButton" onclick="showRatePopup('${orders[i]._id}')">Rate this order</button>
+                        
+                    </div>                   
+                </div>
+                    
+                <hr style="width:100%", size="3", color=white>`;
+        result.push(display);
+      }
+      let sortedDisplay = "";
+      if (result.length > 0) {
+        for (let j = result.length - 1; j >= 0; j--) {
+          sortedDisplay += result[j];
+        }
+      }
+      return sortedDisplay;
+    },
   };
 
   if (

@@ -55,7 +55,7 @@ Project is created with:
 - Axios 0.21.1
 - connect-flash 0.1.1
 - cookie-parser 1.4.5
-
+- Express-validator 6.11.1
 
 
 ## Code Implementation

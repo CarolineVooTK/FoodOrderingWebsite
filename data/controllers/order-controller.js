@@ -9,6 +9,91 @@ const cancelSessionOrder = async (req, res) => {
   res.redirect(`/vendors`);
 };
 
+const changeOrder = async (req, res) => {
+  let orderdetails = [];
+  await orders
+    .aggregate([
+      { $match: { _id: new ObjectId(`${req.params.id}`) } },
+      {
+        $lookup: {
+          from: "customers",
+          localField: "customerId",
+          foreignField: "_id",
+          as: "customer",
+        },
+      },
+      {
+        $lookup: {
+          from: "vendors",
+          localField: "vendorId",
+          foreignField: "_id",
+          as: "vendor",
+        },
+      },
+      {
+        $lookup: {
+          from: "menuitems",
+          localField: "orderitems.menuitem",
+          foreignField: "_id",
+          as: "orderitems",
+        },
+      },
+      {
+        $project: {
+          "customer._id": 0,
+          "customer.password": 0,
+          "customer.familyName": 0,
+          "vendor.password": 0,
+          "customer.location": 0,
+          "vendor.orders": 0,
+          "vendor.menu": 0,
+          customerId: 0,
+          vendorId: 0,
+        },
+      },
+    ])
+    .then((data) => {
+      orderdetails = data;
+      // res.json(data);
+    })
+    .catch((error) => {
+      res.status(500).json({
+        error: error,
+      });
+    });
+
+  req.session.orderlist = [];
+  let data = orderdetails[0];
+  let vendorId = data.vendor[0]._id;
+  for (let i = 0; i < data.orderitems.length; i++) {
+    let menu = data.orderitems[i];
+    var newMenuItem = {};
+    newMenuItem.menuitem = new ObjectId(`${menu._id}`);
+    newMenuItem.quantity = 1;
+    newMenuItem.name = menu.name;
+    newMenuItem.vendorid = new ObjectId(`${vendorId}`);
+    newMenuItem.price = menu.price;
+    let found = 0;
+    for (index = 0; index < req.session.orderlist.length; index++) {
+      let sessionitem = req.session.orderlist[index];
+      if (
+        sessionitem.menuitem == newMenuItem.menuitem &&
+        sessionitem.vendorid == newMenuItem.vendorid
+      ) {
+        sessionitem.quantity += 1;
+        found = 1;
+      }
+    }
+    if (found == 0) {
+      req.session.orderlist.push(newMenuItem);
+    }
+  }
+  let totalprice = 0;
+  req.session.fromVendor = data.vendor[0];
+
+  res.redirect(`/vendors/${vendorId}`);
+};
+
 // gets all orders from a single customer
 const getAllCustomerOrders = async (req, res) => {
   await orders
@@ -140,7 +225,9 @@ const getOrderById = async (req, res) => {
         },
       },
     ])
-    .then((data) => {})
+    .then((data) => {
+      return data;
+    })
     .catch((error) => {
       res.status(500).json({
         error: error,
@@ -323,4 +410,5 @@ module.exports = {
   getVendorRating,
   cancelSessionOrder,
   placeOrder,
+  changeOrder,
 };

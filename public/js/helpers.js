@@ -25,7 +25,7 @@ let register = (Handlebars) => {
     vendorMenu: (data, vendorid) => {
       let menuitem = `<div class="row row-cols-3">`;
       let p = "";
-      for (let i = 0; i < data.length; i++) {
+      for (let i = 0; data && i < data.length; i++) {
         p = "";
         p = data[i].price.toString();
         p += p.includes(".") ? (p.indexOf(".") + 2 == p.length ? "0" : "") : ".00";

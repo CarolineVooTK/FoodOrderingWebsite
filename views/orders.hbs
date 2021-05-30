@@ -54,8 +54,7 @@
         {{!-- sort this eventually --}}
         <div id="orderList" class="flex">
             {{!-- put number in hbs template --}}
-            {{#customerOrderList orders}}           
-        {{/customerOrderList}}     
+            {{#customerOrderList orders}}{{/customerOrderList}}     
         
             {{#unless orders}}
             {{#if customer_id}}
@@ -162,11 +161,8 @@
             <div class="popupButtons flexMiddle stretch">
                 <button class="changeButton" onclick="hideChangePopup()">No</button>
                 
-                
-                <button class="doneButton" onclick="location.href='/vendors/609f555c68aeb30015395196';hideChangePopup()">Yes</button>
-                
-                {{!-- now the done button will redirect the page to vendors page, 
-                to make it different from the change button --}}
+                <button id="changeOrder" class="doneButton" onclick="location.href='/orders/id/changeOrder';hideChangePopup()">Yes</button>
+
             </div>
         </div>
         
@@ -225,6 +221,11 @@
             const showChangePopup = (id) => {
                 let changePopup = document.getElementById("changePopup");
                 changePopup.style.display = "flex";
+                
+                let changeOrder = document.getElementById("changeOrder");
+                console.log(changeOrder.onclick)
+                changeOrder.onclick = function onclick(event) {
+                location.href=`/orders/${id}/changeOrder`;hideChangePopup();}
             }
             const hideChangePopup = () => {
                 let changePopup = document.getElementById("changePopup");
